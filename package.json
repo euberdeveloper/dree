@@ -1,0 +1,36 @@
+{
+  "name": "dree",
+  "version": "1.0.0",
+  "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test",
+    "transpile": "tsc --p source"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/euberdeveloper/dree"
+  },
+  "bugs": {
+    "url": "https://github.com/euberdeveloper/dree/issues"
+  },
+  "homepage": "https://github.com/euberdeveloper/dree#readme",
+  "keywords": [
+    "dir",
+    "directory",
+    "tree",
+    "folder",
+    "structure",
+    "directory-tree",
+    "dir-tree",
+    "folder-tree",
+    "dir-structure"
+  ],
+  "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^10.12.21",
+    "crypto": "^1.0.1",
+    "path": "^0.12.7"
+  }
+}
