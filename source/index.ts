@@ -61,6 +61,9 @@ function mergeOptions(options?: Options): Options {
         for(const key in DEFAULT_OPTIONS) {
             result[key] = (options[key] != undefined) ? options[key] : DEFAULT_OPTIONS[key];
         }
+        if(result.depth as number < 0) {
+            result.depth = 0;
+        }
     }
     else {
         result = DEFAULT_OPTIONS;
