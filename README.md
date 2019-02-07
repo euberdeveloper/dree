@@ -86,7 +86,54 @@ const options = {
 The result will be:
 
 ```json
-TODO
+{
+  "name": "sample",
+  "path": "D:/Github/dree/test/sample",
+  "relativePath": ".",
+  "type": "directory",
+  "isSymbolicLink": false,
+  "size": "1.786077 MB",
+  "children": [
+    {
+      "name": "backend",
+      "path": "D:/Github/dree/test/sample/backend",
+      "relativePath": "backend",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "size": "1.786077 MB",
+      "children": [
+        {
+          "name": "firebase.json",
+          "path": "D:/Github/dree/test/sample/backend/firebase.json",
+          "relativePath": "backend/firebase.json",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "json",
+          "size": "29 B"
+        }, 
+        {
+          "name": "server",
+          "path": "D:/Github/dree/test/sample/backend/server",
+          "relativePath": "backend/server",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "size": "1.786048 MB",
+          "children": [
+            {
+              "name": "server.ts",
+              "path": "D:/Github/dree/test/sample/backend/server/server.ts",
+              "relativePath": "backend/server/server.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "size": "1.786048 MB"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 ```
 ## Documentation
 
