@@ -1,3 +1,4 @@
+import { HexBase64Latin1Encoding } from 'crypto';
 import { Stats } from 'fs';
 export declare enum Type {
     DIRECTORY = "directory",
@@ -8,10 +9,27 @@ export interface Dree {
     path: string;
     relativePath: string;
     type: Type;
-    size: string;
-    hash: string;
+    size?: string;
+    hash?: string;
     extension?: string;
     stat?: Stats;
     children?: Dree[];
 }
-export declare function dree(root: string): Dree;
+export interface Options {
+    stat?: boolean;
+    normalize?: boolean;
+    size?: boolean;
+    hash?: boolean;
+    hashAlgorithm?: 'md5' | 'sha1';
+    hashEncoding?: HexBase64Latin1Encoding;
+    depth?: number;
+    exclude?: RegExp | RegExp[];
+    extensions?: string[];
+}
+/**
+ * Retrurns the Directory Tree of a given path
+ * @param  {string} path The path wich you want to inspect
+ * @param  {object} options An object used as options of the function
+ * @return {object} The directory tree as a Dree object
+ */
+export declare function dree(path: string, options?: Options): Dree;
