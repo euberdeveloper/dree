@@ -16,7 +16,7 @@ const dir = (dree, stat) => {
     console.log("dree dir " + dree.name + " created at " + stat.ctime);
 }
 
-const data = JSON.stringify(dree.dree('test/sample', options, file, dir));
+const data = JSON.stringify(dree.scan('test/sample', options, file, dir));
 
 fs.writeFile('test/output.json', data, error => {
     if(error) {
