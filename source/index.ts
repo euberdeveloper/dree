@@ -1,6 +1,6 @@
 import { resolve, basename, extname, relative } from 'path';
 import { createHash, HexBase64Latin1Encoding } from 'crypto';
-import { Stats, statSync, readdirSync, readFileSync } from 'fs';
+import { Stats, statSync, readdirSync, readFileSync, lstatSync } from 'fs';
 
 export enum Type {
     DIRECTORY = 'directory',
@@ -12,6 +12,8 @@ export interface Dree {
     path: string;
     relativePath: string;
     type: Type;
+    isSymbolicLink: boolean;
+    sizeInBytes?: number;
     size?: string;
     hash?: string;
     extension?: string;
@@ -22,10 +24,14 @@ export interface Dree {
 export interface Options {
     stat?: boolean;
     normalize?: boolean;
+    symbolicLinks?: boolean;
+    followLinks?: boolean;
+    sizeInBytes?: boolean;
     size?: boolean;
     hash?: boolean;
     hashAlgorithm?: 'md5' | 'sha1';
     hashEncoding?: HexBase64Latin1Encoding;
+    showHidden?: boolean;
     depth?: number;
     exclude?: RegExp | RegExp[];
     extensions?: string[];
@@ -34,10 +40,14 @@ export interface Options {
 const DEFAULT_OPTIONS: Options = {
     stat: false,
     normalize: false,
+    symbolicLinks: false,
+    followLinks: false,
+    sizeInBytes: true,
     size: true,
     hash: true,
     hashAlgorithm: 'md5',
     hashEncoding: 'hex',
+    showHidden: true,
     depth: undefined,
     exclude: undefined,
     extensions: undefined
@@ -56,15 +66,13 @@ function mergeOptions(options?: Options): Options {
     return result;
 }
 
-function parseSize(size?: string): number {
-    let result: number;
-    if(size) {
-        result = +size.replace('B', '');
+function parseSize(size: number): string {
+    const units = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
+    let i: number;
+    for(i = 0; i < units.length && size > 1000; i++) {
+        size /= 1000;
     }
-    else {
-        result = 0;
-    }
-    return result;
+    return size + ' ' + units[i];
 }
 
 function _dree(root: string, path: string, depth: number, options: Options): Dree | null {
@@ -83,7 +91,16 @@ function _dree(root: string, path: string, depth: number, options: Options): Dre
     const relativePath = (root == path) ? '.' : relative(root, path);
     const name = basename(path);
     const stat = statSync(path);
+    const lstat = lstatSync(path);
+    const symbolicLink = lstat.isSymbolicLink();
     const type = stat.isFile() ? Type.FILE : Type.DIRECTORY;
+
+    if(!options.showHidden && name.charAt(0) === '.') {
+        return null;
+    }
+    if(!options.symbolicLinks && symbolicLink) {
+        return null;
+    }
     
     let hash: any;
     if(options.hash){
@@ -95,9 +112,10 @@ function _dree(root: string, path: string, depth: number, options: Options): Dre
     const dirTree: Dree = {
         name: name,
         path: options.normalize ? path.replace(/\\/g, '/') : path,
-        relativePath: relativePath,
+        relativePath: options.normalize ? relativePath.replace(/\\/g, '/') : relativePath,
         type: type,
-        stat: options.stat ? stat : undefined
+        isSymbolicLink: symbolicLink,
+        stat: options.stat ? (options.followLinks ? stat : lstat) : undefined
     };
 
     switch(type) {
@@ -112,8 +130,10 @@ function _dree(root: string, path: string, depth: number, options: Options): Dre
             if(children.length) {
                 dirTree.children = children;
             }
-            if(options.size) {
-                dirTree.size = children.reduce((previous, current) => previous + parseSize(current.size), 0) + 'B';
+            if(options.sizeInBytes || options.size) {
+                const size = children.reduce((previous, current) => previous + (current.sizeInBytes as number), 0);
+                dirTree.sizeInBytes = options.sizeInBytes ? size : undefined;
+                dirTree.size = options.size ? parseSize(size) : undefined;
             }
             break;
         case Type.FILE:
@@ -121,8 +141,10 @@ function _dree(root: string, path: string, depth: number, options: Options): Dre
             if(options.extensions && options.extensions.indexOf(dirTree.extension) == -1) {
                 return null;
             }
-            if(options.size) {
-                dirTree.size = stat.size + 'B';
+            if(options.sizeInBytes || options.size) {
+                const size = (options.followLinks ? stat.size : lstat.size);
+                dirTree.sizeInBytes = options.sizeInBytes ? size : undefined;
+                dirTree.size = options.size ? parseSize(size) : undefined;
             }
             if(options.hash) {
                 const data = readFileSync(path);

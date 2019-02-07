@@ -9,6 +9,8 @@ export interface Dree {
     path: string;
     relativePath: string;
     type: Type;
+    isSymbolicLink: boolean;
+    sizeInBytes?: number;
     size?: string;
     hash?: string;
     extension?: string;
@@ -18,10 +20,14 @@ export interface Dree {
 export interface Options {
     stat?: boolean;
     normalize?: boolean;
+    symbolicLinks?: boolean;
+    followLinks?: boolean;
+    sizeInBytes?: boolean;
     size?: boolean;
     hash?: boolean;
     hashAlgorithm?: 'md5' | 'sha1';
     hashEncoding?: HexBase64Latin1Encoding;
+    showHidden?: boolean;
     depth?: number;
     exclude?: RegExp | RegExp[];
     extensions?: string[];

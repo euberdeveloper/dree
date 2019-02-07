@@ -1,11 +1,12 @@
-const fs = require('fs');
 const dree = require('../lib/index');
+const fs = require('fs');
 
 const options = {
     stat: false,
     hash: true,
+    sizeInBytes: true,
     size: true,
-    depth: 1
+    normalize: true
 };
 
 fs.writeFile('test/output.json', JSON.stringify(dree.dree('test/sample', options)), error => {
