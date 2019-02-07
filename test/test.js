@@ -3,10 +3,11 @@ const fs = require('fs');
 
 const options = {
     stat: false,
-    hash: true,
+    hash: false,
     sizeInBytes: false,
     size: true,
-    normalize: true
+    normalize: true,
+    extensions: [ 'ts', 'json' ]
 };
 
 const file = (dree, stat) => {

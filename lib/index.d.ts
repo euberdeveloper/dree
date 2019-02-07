@@ -1,11 +1,9 @@
 import { HexBase64Latin1Encoding } from 'crypto';
 import { Stats } from 'fs';
-
 export declare enum Type {
     DIRECTORY = "directory",
     FILE = "file"
 }
-
 export interface Dree {
     name: string;
     path: string;
@@ -19,7 +17,6 @@ export interface Dree {
     stat?: Stats;
     children?: Dree[];
 }
-
 export interface Options {
     stat?: boolean;
     normalize?: boolean;
@@ -35,7 +32,6 @@ export interface Options {
     exclude?: RegExp | RegExp[];
     extensions?: string[];
 }
-
 export declare type Callback = (dirTree: Dree, stat: Stats) => void;
 /**
  * Retrurns the Directory Tree of a given path

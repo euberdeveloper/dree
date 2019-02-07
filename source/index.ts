@@ -132,13 +132,20 @@ function _scan(root: string, path: string, depth: number, options: Options, onFi
                     children.push(child);
                 }
             });
-            if(children.length) {
-                dirTree.children = children;
-            }
             if(options.sizeInBytes || options.size) {
                 const size = children.reduce((previous, current) => previous + (current.sizeInBytes as number), 0);
-                dirTree.sizeInBytes = options.sizeInBytes ? size : undefined;
+                dirTree.sizeInBytes = size;
                 dirTree.size = options.size ? parseSize(size) : undefined;
+                if(!options.sizeInBytes) {
+                    children.forEach(child => child.sizeInBytes = undefined);
+                }
+            }
+            if(options.hash) {
+                const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
+                dirTree.hash = hash.digest(hashEncoding);
+            }
+            if(children.length) {
+                dirTree.children = children;
             }
             break;
         case Type.FILE:
@@ -148,22 +155,19 @@ function _scan(root: string, path: string, depth: number, options: Options, onFi
             }
             if(options.sizeInBytes || options.size) {
                 const size = (options.followLinks ? stat.size : lstat.size);
-                dirTree.sizeInBytes = options.sizeInBytes ? size : undefined;
+                dirTree.sizeInBytes = size;
                 dirTree.size = options.size ? parseSize(size) : undefined;
             }
             if(options.hash) {
                 const data = readFileSync(path);
                 hash.update(data);
+                const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
+                dirTree.hash = hash.digest(hashEncoding);
             }
             break;
         default:
             return null;
     } 
-
-    if(options.hash) {
-        const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
-        dirTree.hash = hash.digest(hashEncoding);
-    }
 
     if(onFile && type == Type.FILE) {
         onFile(dirTree, options.followLinks ? stat : lstat);
@@ -185,5 +189,8 @@ function _scan(root: string, path: string, depth: number, options: Options, onFi
  */
 export function scan(path: string, options?: Options, onFile?: Callback, onDir?: Callback): Dree {
     const root = resolve(path);
-    return _scan(root, root, 0, mergeOptions(options), onFile, onDir) as Dree;
+    const opt = mergeOptions(options);
+    const result = _scan(root, root, 0, opt, onFile, onDir) as Dree;
+    result.sizeInBytes = opt.sizeInBytes ? result.sizeInBytes : undefined;
+    return result;
 }
