@@ -42,7 +42,7 @@ export type Callback = (dirTree: Dree, stat: Stats) => void;
 const DEFAULT_OPTIONS: Options = {
     stat: false,
     normalize: false,
-    symbolicLinks: false,
+    symbolicLinks: true,
     followLinks: false,
     sizeInBytes: true,
     size: true,
