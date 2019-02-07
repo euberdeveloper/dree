@@ -77,7 +77,7 @@ function parseSize(size: number): string {
     for(i = 0; i < units.length && size > 1000; i++) {
         size /= 1000;
     }
-    return size + ' ' + units[i];
+    return Math.round(size * 100) / 100 + ' ' + units[i];
 }
 
 function _scan(root: string, path: string, depth: number, options: Options, onFile?: Callback, onDir?: Callback): Dree | null {
