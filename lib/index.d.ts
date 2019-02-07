@@ -32,10 +32,11 @@ export interface Options {
     exclude?: RegExp | RegExp[];
     extensions?: string[];
 }
+export declare type Callback = (dirTree: Dree, stat: Stats) => void;
 /**
  * Retrurns the Directory Tree of a given path
  * @param  {string} path The path wich you want to inspect
  * @param  {object} options An object used as options of the function
  * @return {object} The directory tree as a Dree object
  */
-export declare function dree(path: string, options?: Options): Dree;
+export declare function dree(path: string, options?: Options, onFile?: Callback, onDir?: Callback): Dree;

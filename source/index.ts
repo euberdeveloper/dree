@@ -37,6 +37,8 @@ export interface Options {
     extensions?: string[];
 }
 
+export type Callback = (dirTree: Dree, stat: Stats) => void;
+
 const DEFAULT_OPTIONS: Options = {
     stat: false,
     normalize: false,
@@ -75,7 +77,7 @@ function parseSize(size: number): string {
     return size + ' ' + units[i];
 }
 
-function _dree(root: string, path: string, depth: number, options: Options): Dree | null {
+function _dree(root: string, path: string, depth: number, options: Options, onFile?: Callback, onDir?: Callback): Dree | null {
 
     if(options.depth && depth > options.depth) {
         return null;
@@ -122,7 +124,7 @@ function _dree(root: string, path: string, depth: number, options: Options): Dre
         case Type.DIRECTORY:
             const children: Dree[] = [];
             readdirSync(path).forEach(file => {
-                const child: Dree | null = _dree(root, resolve(path, file), depth + 1, options);
+                const child: Dree | null = _dree(root, resolve(path, file), depth + 1, options, onFile, onDir);
                 if(child != null) {
                     children.push(child);
                 }
@@ -159,7 +161,14 @@ function _dree(root: string, path: string, depth: number, options: Options): Dre
         const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
         dirTree.hash = hash.digest(hashEncoding);
     }
-    
+
+    if(onFile && type == Type.FILE) {
+        onFile(dirTree, options.followLinks ? stat : lstat);
+    }
+    else if(onDir && type == Type.DIRECTORY) {
+        onDir(dirTree, options.followLinks ? stat : lstat);
+    }
+
     return dirTree;
 }
 
@@ -169,7 +178,7 @@ function _dree(root: string, path: string, depth: number, options: Options): Dre
  * @param  {object} options An object used as options of the function
  * @return {object} The directory tree as a Dree object
  */
-export function dree(path: string, options?: Options): Dree {
+export function dree(path: string, options?: Options, onFile?: Callback, onDir?: Callback): Dree {
     const root = resolve(path);
-    return _dree(root, root, 0, mergeOptions(options)) as Dree;
+    return _dree(root, root, 0, mergeOptions(options), onFile, onDir) as Dree;
 }
