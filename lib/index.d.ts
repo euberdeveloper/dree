@@ -1,9 +1,11 @@
 import { HexBase64Latin1Encoding } from 'crypto';
 import { Stats } from 'fs';
+
 export declare enum Type {
     DIRECTORY = "directory",
     FILE = "file"
 }
+
 export interface Dree {
     name: string;
     path: string;
@@ -17,6 +19,7 @@ export interface Dree {
     stat?: Stats;
     children?: Dree[];
 }
+
 export interface Options {
     stat?: boolean;
     normalize?: boolean;
@@ -32,11 +35,14 @@ export interface Options {
     exclude?: RegExp | RegExp[];
     extensions?: string[];
 }
+
 export declare type Callback = (dirTree: Dree, stat: Stats) => void;
 /**
  * Retrurns the Directory Tree of a given path
  * @param  {string} path The path wich you want to inspect
  * @param  {object} options An object used as options of the function
+ * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
+ * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
  * @return {object} The directory tree as a Dree object
  */
-export declare function dree(path: string, options?: Options, onFile?: Callback, onDir?: Callback): Dree;
+export declare function scan(path: string, options?: Options, onFile?: Callback, onDir?: Callback): Dree;

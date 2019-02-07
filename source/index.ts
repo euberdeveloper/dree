@@ -80,7 +80,7 @@ function parseSize(size: number): string {
     return size + ' ' + units[i];
 }
 
-function _dree(root: string, path: string, depth: number, options: Options, onFile?: Callback, onDir?: Callback): Dree | null {
+function _scan(root: string, path: string, depth: number, options: Options, onFile?: Callback, onDir?: Callback): Dree | null {
 
     if(options.depth && depth > options.depth) {
         return null;
@@ -127,7 +127,7 @@ function _dree(root: string, path: string, depth: number, options: Options, onFi
         case Type.DIRECTORY:
             const children: Dree[] = [];
             readdirSync(path).forEach(file => {
-                const child: Dree | null = _dree(root, resolve(path, file), depth + 1, options, onFile, onDir);
+                const child: Dree | null = _scan(root, resolve(path, file), depth + 1, options, onFile, onDir);
                 if(child != null) {
                     children.push(child);
                 }
@@ -179,9 +179,11 @@ function _dree(root: string, path: string, depth: number, options: Options, onFi
  * Retrurns the Directory Tree of a given path
  * @param  {string} path The path wich you want to inspect
  * @param  {object} options An object used as options of the function
+ * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
+ * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
  * @return {object} The directory tree as a Dree object
  */
-export function dree(path: string, options?: Options, onFile?: Callback, onDir?: Callback): Dree {
+export function scan(path: string, options?: Options, onFile?: Callback, onDir?: Callback): Dree {
     const root = resolve(path);
-    return _dree(root, root, 0, mergeOptions(options), onFile, onDir) as Dree;
+    return _scan(root, root, 0, mergeOptions(options), onFile, onDir) as Dree;
 }
