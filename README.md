@@ -92,7 +92,7 @@ The result will be:
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
-  "size": "1.786077 MB",
+  "size": "1.79 MB",
   "children": [
     {
       "name": "backend",
@@ -100,7 +100,7 @@ The result will be:
       "relativePath": "backend",
       "type": "directory",
       "isSymbolicLink": false,
-      "size": "1.786077 MB",
+      "size": "1.79 MB",
       "children": [
         {
           "name": "firebase.json",
@@ -117,7 +117,7 @@ The result will be:
           "relativePath": "backend/server",
           "type": "directory",
           "isSymbolicLink": false,
-          "size": "1.786048 MB",
+          "size": "1.79 MB",
           "children": [
             {
               "name": "server.ts",
@@ -126,7 +126,7 @@ The result will be:
               "type": "file",
               "isSymbolicLink": false,
               "extension": "ts",
-              "size": "1.786048 MB"
+              "size": "1.79 MB"
             }
           ]
         }
