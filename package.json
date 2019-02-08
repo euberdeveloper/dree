@@ -29,8 +29,7 @@
   ],
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "@types/node": "^10.12.21",
-    "path": "^0.12.7"
+  "devDependencies": {
+    "@types/node": "^10.12.23"
   }
 }

@@ -1,6 +1,39 @@
 import { resolve, basename, extname, relative } from 'path';
-import { createHash, HexBase64Latin1Encoding } from 'crypto';
-import { Stats, statSync, readdirSync, readFileSync, lstatSync } from 'fs';
+import { createHash } from 'crypto';
+import { statSync, readdirSync, readFileSync, lstatSync } from 'fs';
+
+/* DECLARATION OF @types/crypto AND @types/fs NEEDED TO AVOID @types/node DEPENDENCY */
+
+declare type HexBase64Latin1Encoding = "latin1" | "hex" | "base64";
+declare class Stats {
+    isFile(): boolean;
+    isDirectory(): boolean;
+    isBlockDevice(): boolean;
+    isCharacterDevice(): boolean;
+    isSymbolicLink(): boolean;
+    isFIFO(): boolean;
+    isSocket(): boolean;
+    dev: number;
+    ino: number;
+    mode: number;
+    nlink: number;
+    uid: number;
+    gid: number;
+    rdev: number;
+    size: number;
+    blksize: number;
+    blocks: number;
+    atimeMs: number;
+    mtimeMs: number;
+    ctimeMs: number;
+    birthtimeMs: number;
+    atime: Date;
+    mtime: Date;
+    ctime: Date;
+    birthtime: Date;
+}
+
+/* DREE TYPES */
 
 export enum Type {
     DIRECTORY = 'directory',
@@ -39,6 +72,8 @@ export interface Options {
 
 export type Callback = (dirTree: Dree, stat: Stats) => void;
 
+/* DEFAULT OPTIONS */
+
 const DEFAULT_OPTIONS: Options = {
     stat: false,
     normalize: false,
@@ -54,6 +89,8 @@ const DEFAULT_OPTIONS: Options = {
     exclude: undefined,
     extensions: undefined
 };
+
+/* SUPPORT FUNCTIONS */
 
 function mergeOptions(options?: Options): Options {
     let result: Options = {};
@@ -178,6 +215,8 @@ function _scan(root: string, path: string, depth: number, options: Options, onFi
 
     return dirTree;
 }
+
+/* EXPORTED FUNCTIONS */
 
 /**
  * Retrurns the Directory Tree of a given path
