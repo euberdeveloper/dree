@@ -1,5 +1,31 @@
-import { HexBase64Latin1Encoding } from 'crypto';
-import { Stats } from 'fs';
+declare type HexBase64Latin1Encoding = "latin1" | "hex" | "base64";
+declare class Stats {
+    isFile(): boolean;
+    isDirectory(): boolean;
+    isBlockDevice(): boolean;
+    isCharacterDevice(): boolean;
+    isSymbolicLink(): boolean;
+    isFIFO(): boolean;
+    isSocket(): boolean;
+    dev: number;
+    ino: number;
+    mode: number;
+    nlink: number;
+    uid: number;
+    gid: number;
+    rdev: number;
+    size: number;
+    blksize: number;
+    blocks: number;
+    atimeMs: number;
+    mtimeMs: number;
+    ctimeMs: number;
+    birthtimeMs: number;
+    atime: Date;
+    mtime: Date;
+    ctime: Date;
+    birthtime: Date;
+}
 export declare enum Type {
     DIRECTORY = "directory",
     FILE = "file"
@@ -42,3 +68,4 @@ export declare type Callback = (dirTree: Dree, stat: Stats) => void;
  * @return {object} The directory tree as a Dree object
  */
 export declare function scan(path: string, options?: Options, onFile?: Callback, onDir?: Callback): Dree;
+export {};
