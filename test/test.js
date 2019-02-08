@@ -5,25 +5,27 @@ const options = {
     stat: false,
     hash: false,
     sizeInBytes: false,
-    size: true,
-    normalize: true,
-    extensions: [ 'ts', 'json' ]
+    size: false,
+    normalize: true
 };
 
 const file = (dree, stat) => {
-    console.log("dree file " + dree.name + " created at " + stat.ctime);
+    console.log("found file " + dree.name + " created at " + stat.ctime);
 }
 const dir = (dree, stat) => {
-    console.log("dree dir " + dree.name + " created at " + stat.ctime);
+    console.log("found dir " + dree.name + " created at " + stat.ctime);
 }
 
-const data = JSON.stringify(dree.scan('test/sample', options, file, dir));
+const tree = dree.scan('test/sample', options, file, dir);
 
+const data = JSON.stringify(tree);
 fs.writeFile('test/output.json', data, error => {
     if(error) {
-        console.error('error in witing output', error);
+        console.error('\n\n\nerror in witing output', error);
     }
     else {
-        console.log('file written');
+        console.log('\n\n\nfile written');
     }
 });
+
+console.log('\n\n\n' + dree.parse(tree, { showHidden: false }));

@@ -54,7 +54,7 @@ export interface Dree {
     children?: Dree[];
 }
 
-export interface Options {
+export interface ScanOptions {
     stat?: boolean;
     normalize?: boolean;
     symbolicLinks?: boolean;
@@ -70,11 +70,20 @@ export interface Options {
     extensions?: string[];
 }
 
+export interface ParseOptions {
+    symbolicLinks?: boolean;
+    followLinks?: boolean;
+    showHidden?: boolean;
+    depth?: number;
+    exclude?: RegExp | RegExp[];
+    extensions?: string[];
+}
+
 export type Callback = (dirTree: Dree, stat: Stats) => void;
 
 /* DEFAULT OPTIONS */
 
-const DEFAULT_OPTIONS: Options = {
+const SCAN_DEFAULT_OPTIONS: ScanOptions = {
     stat: false,
     normalize: false,
     symbolicLinks: true,
@@ -90,20 +99,45 @@ const DEFAULT_OPTIONS: Options = {
     extensions: undefined
 };
 
+const PARSE_DEFAULT_OPTIONS: ParseOptions = {
+    symbolicLinks: true,
+    followLinks: false,
+    showHidden: true,
+    depth: undefined,
+    exclude: undefined,
+    extensions: undefined
+};
+
 /* SUPPORT FUNCTIONS */
 
-function mergeOptions(options?: Options): Options {
-    let result: Options = {};
+function mergeScanOptions(options?: ScanOptions): ScanOptions {
+    let result: ScanOptions = {};
     if(options) {
-        for(const key in DEFAULT_OPTIONS) {
-            result[key] = (options[key] != undefined) ? options[key] : DEFAULT_OPTIONS[key];
+        for(const key in SCAN_DEFAULT_OPTIONS) {
+            result[key] = (options[key] !== undefined) ? options[key] : SCAN_DEFAULT_OPTIONS[key];
         }
         if(result.depth as number < 0) {
             result.depth = 0;
         }
     }
     else {
-        result = DEFAULT_OPTIONS;
+        result = SCAN_DEFAULT_OPTIONS;
+    }
+    return result;
+}
+
+function mergeParseOptions(options?: ParseOptions): ParseOptions {
+    let result: ParseOptions = {};
+    if(options) {
+        for(const key in PARSE_DEFAULT_OPTIONS) {
+            result[key] = (options[key] !== undefined) ? options[key] : PARSE_DEFAULT_OPTIONS[key];
+        }
+        if(result.depth as number < 0) {
+            result.depth = 0;
+        }
+    }
+    else {
+        result = PARSE_DEFAULT_OPTIONS;
     }
     return result;
 }
@@ -117,20 +151,20 @@ function parseSize(size: number): string {
     return Math.round(size * 100) / 100 + ' ' + units[i];
 }
 
-function _scan(root: string, path: string, depth: number, options: Options, onFile?: Callback, onDir?: Callback): Dree | null {
+function _scan(root: string, path: string, depth: number, options: ScanOptions, onFile?: Callback, onDir?: Callback): Dree | null {
 
-    if(options.depth && depth > options.depth) {
+    if(options.depth !== undefined && depth > options.depth) {
         return null;
     }
 
-    if(options.exclude && root != path) {
+    if(options.exclude && root !== path) {
         const excludes = (options.exclude instanceof RegExp) ? [options.exclude] : options.exclude;
         if(excludes.some(pattern => pattern.test(path))) {
             return null;
         }
     }
 
-    const relativePath = (root == path) ? '.' : relative(root, path);
+    const relativePath = (root === path) ? '.' : relative(root, path);
     const name = basename(path);
     const stat = statSync(path);
     const lstat = lstatSync(path);
@@ -165,7 +199,7 @@ function _scan(root: string, path: string, depth: number, options: Options, onFi
             const children: Dree[] = [];
             readdirSync(path).forEach(file => {
                 const child: Dree | null = _scan(root, resolve(path, file), depth + 1, options, onFile, onDir);
-                if(child != null) {
+                if(child !== null) {
                     children.push(child);
                 }
             });
@@ -187,7 +221,7 @@ function _scan(root: string, path: string, depth: number, options: Options, onFi
             break;
         case Type.FILE:
             dirTree.extension = extname(path).replace('.', '');
-            if(options.extensions && options.extensions.indexOf(dirTree.extension) == -1) {
+            if(options.extensions && options.extensions.indexOf(dirTree.extension) === -1) {
                 return null;
             }
             if(options.sizeInBytes || options.size) {
@@ -206,14 +240,38 @@ function _scan(root: string, path: string, depth: number, options: Options, onFi
             return null;
     } 
 
-    if(onFile && type == Type.FILE) {
+    if(onFile && type === Type.FILE) {
         onFile(dirTree, options.followLinks ? stat : lstat);
     }
-    else if(onDir && type == Type.DIRECTORY) {
+    else if(onDir && type === Type.DIRECTORY) {
         onDir(dirTree, options.followLinks ? stat : lstat);
     }
 
     return dirTree;
+}
+
+function skip(child: Dree, options: ParseOptions, depth: number): boolean {
+    return (!options.symbolicLinks && child.isSymbolicLink)
+        || (!options.showHidden && child.name.charAt(0) === '.')
+        || (options.extensions && child.type === Type.DIRECTORY 
+            && (options.extensions.indexOf(child.extension as string) === -1))
+        || (options.exclude instanceof RegExp && options.exclude.test(child.path))
+        || (Array.isArray(options.exclude) && options.exclude.find(pattern => pattern.test(child.path)) !== undefined)
+        || (options.depth !== undefined && depth > options.depth); 
+}
+
+function _parse(children: Dree[], prefix: string, options: ParseOptions, depth: number): string {
+    let result = '';
+    children.forEach((child, index) => {
+        if(!skip(child, options, depth)) {
+            const last = child.isSymbolicLink ? '>>' : (child.type === Type.DIRECTORY ? '─> ' : '── ');
+            const line = (index === children.length - 1 || index === children.length - 2 && skip(children[index + 1], options, depth)) ? '└' + last : '├' + last;
+            const newPrefix = prefix + (index === children.length - 1 ?  '    ' : '│   ');
+            result += prefix + line + child.name;
+            result += (child.children && (options.followLinks || !child.isSymbolicLink) ? _parse(child.children, newPrefix, options, depth + 1) : '');
+        }
+    });
+    return result;
 }
 
 /* EXPORTED FUNCTIONS */
@@ -226,10 +284,24 @@ function _scan(root: string, path: string, depth: number, options: Options, onFi
  * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
  * @return {object} The directory tree as a Dree object
  */
-export function scan(path: string, options?: Options, onFile?: Callback, onDir?: Callback): Dree {
+export function scan(path: string, options?: ScanOptions, onFile?: Callback, onDir?: Callback): Dree {
     const root = resolve(path);
-    const opt = mergeOptions(options);
+    const opt = mergeScanOptions(options);
     const result = _scan(root, root, 0, opt, onFile, onDir) as Dree;
     result.sizeInBytes = opt.sizeInBytes ? result.sizeInBytes : undefined;
+    return result;
+}
+
+/**
+ * Retrurns a string representation of a Directory Tree given an object returned from scan
+ * @param  {object} dirTree The object returned from scan, wich will be parsed
+ * @param  {object} options An object used as options of the function
+ * @return {string} A string representing the object given as first parameter
+ */
+export function parse(dirTree: Dree, options?: ParseOptions): string {
+    let result = '';
+    const opt = mergeParseOptions(options);
+    result += dirTree ? dirTree.name : '';
+    result += (dirTree.children ? _parse(dirTree.children, '\n ', opt, 1) : '');
     return result;
 }

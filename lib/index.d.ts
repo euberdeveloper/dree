@@ -43,7 +43,7 @@ export interface Dree {
     stat?: Stats;
     children?: Dree[];
 }
-export interface Options {
+export interface ScanOptions {
     stat?: boolean;
     normalize?: boolean;
     symbolicLinks?: boolean;
@@ -58,6 +58,14 @@ export interface Options {
     exclude?: RegExp | RegExp[];
     extensions?: string[];
 }
+export interface ParseOptions {
+    symbolicLinks?: boolean;
+    followLinks?: boolean;
+    showHidden?: boolean;
+    depth?: number;
+    exclude?: RegExp | RegExp[];
+    extensions?: string[];
+}
 export declare type Callback = (dirTree: Dree, stat: Stats) => void;
 /**
  * Retrurns the Directory Tree of a given path
@@ -67,5 +75,12 @@ export declare type Callback = (dirTree: Dree, stat: Stats) => void;
  * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
  * @return {object} The directory tree as a Dree object
  */
-export declare function scan(path: string, options?: Options, onFile?: Callback, onDir?: Callback): Dree;
+export declare function scan(path: string, options?: ScanOptions, onFile?: Callback, onDir?: Callback): Dree;
+/**
+ * Retrurns a string representation of a Directory Tree given an object returned from scan
+ * @param  {object} dirTree The object returned from scan, wich will be parsed
+ * @param  {object} options An object used as options of the function
+ * @return {string} A string representing the object given as first parameter
+ */
+export declare function parse(dirTree: Dree, options?: ParseOptions): string;
 export {};
