@@ -6,6 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "mocha --reporter spec",
+    "full-test": "mocha --reporter spec test/test.js --scan",
     "transpile": "tsc"
   },
   "repository": {
