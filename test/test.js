@@ -1,6 +1,8 @@
 const dree = require('../lib/index');
 const fs = require('fs');
 
+const path = 'test/sample';
+
 const options = {
     stat: false,
     hash: false,
@@ -16,7 +18,7 @@ const dir = (dree, stat) => {
     console.log("found dir " + dree.name + " created at " + stat.ctime);
 }
 
-const tree = dree.scan('test/sample', options, file, dir);
+const tree = dree.scan(path, options, file, dir);
 
 const data = JSON.stringify(tree);
 fs.writeFile('test/output.json', data, error => {
@@ -28,4 +30,9 @@ fs.writeFile('test/output.json', data, error => {
     }
 });
 
-console.log('\n\n\n' + dree.parse(tree, { showHidden: false }));
+const opt = {
+    systemLinks: false
+}
+
+console.log('\n\n\n\n\n\n\n\n' + dree.parseTree(tree, opt));
+console.log('\n\n\n\n\n\n\n\n' + dree.parse(path, opt));

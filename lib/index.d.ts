@@ -77,10 +77,17 @@ export declare type Callback = (dirTree: Dree, stat: Stats) => void;
  */
 export declare function scan(path: string, options?: ScanOptions, onFile?: Callback, onDir?: Callback): Dree;
 /**
+ * Retrurns a string representation of a Directory Tree given a path to a directory or file
+ * @param  {string} dirTree The path wich you want to inspect
+ * @param  {object} options An object used as options of the function
+ * @return {string} A string representing the Directory Tree of the given path
+ */
+export declare function parse(path: string, options?: ParseOptions): string;
+/**
  * Retrurns a string representation of a Directory Tree given an object returned from scan
  * @param  {object} dirTree The object returned from scan, wich will be parsed
  * @param  {object} options An object used as options of the function
  * @return {string} A string representing the object given as first parameter
  */
-export declare function parse(dirTree: Dree, options?: ParseOptions): string;
+export declare function parseTree(dirTree: Dree, options?: ParseOptions): string;
 export {};

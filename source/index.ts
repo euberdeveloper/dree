@@ -251,25 +251,73 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
 }
 
 function skip(child: Dree, options: ParseOptions, depth: number): boolean {
-    return (!options.symbolicLinks && child.isSymbolicLink)
-        || (!options.showHidden && child.name.charAt(0) === '.')
-        || (options.extensions && child.type === Type.DIRECTORY 
-            && (options.extensions.indexOf(child.extension as string) === -1))
-        || (options.exclude instanceof RegExp && options.exclude.test(child.path))
-        || (Array.isArray(options.exclude) && options.exclude.find(pattern => pattern.test(child.path)) !== undefined)
-        || (options.depth !== undefined && depth > options.depth); 
+    return (!options.symbolicLinks && child.isSymbolicLink) 
+    || (!options.showHidden && child.name.charAt(0) === '.') 
+    || (options.extensions !== undefined && child.type === Type.FILE
+        && (options.extensions.indexOf(child.extension as string) === -1)) 
+    || (options.exclude instanceof RegExp && options.exclude.test(child.path)) 
+    || (Array.isArray(options.exclude) && options.exclude.some(pattern => pattern.test(child.path))) 
+    || (options.depth !== undefined && depth > options.depth); 
 }
 
-function _parse(children: Dree[], prefix: string, options: ParseOptions, depth: number): string {
+function _parse(children: string[], prefix: string, options: ParseOptions, depth: number): string {
     let result = '';
-    children.forEach((child, index) => {
-        if(!skip(child, options, depth)) {
+    const lines = children.map((child, index) => {
+        let result = '';
+
+        if(options.depth !== undefined && depth > options.depth) {
+            return '';
+        }
+    
+        if(options.exclude) {
+            const excludes = (options.exclude instanceof RegExp) ? [options.exclude] : options.exclude;
+            if(excludes.some(pattern => pattern.test(child))) {
+                return '';
+            }
+        }
+    
+        const name = basename(child);
+        const stat = statSync(child);
+        const lstat = lstatSync(child);
+        const symbolicLink = lstat.isSymbolicLink();
+        const type = stat.isFile() ? Type.FILE : Type.DIRECTORY;
+    
+        if(!options.showHidden && name.charAt(0) === '.') {
+            return '';
+        }
+        if(!options.symbolicLinks && symbolicLink) {
+            return '';
+        }
+        const extension = extname(child).replace('.', '');
+        if(options.extensions && type === Type.FILE && options.extensions.indexOf(extension) === -1) {
+            return '';
+        }
+
+        const last = symbolicLink ? '>>' : (type === Type.DIRECTORY ? '─> ' : '── ');
+        const newPrefix = prefix + (index === children.length - 1 ?  '    ' : '│   ');
+        result += last + name;
+
+        if((options.followLinks || !symbolicLink) && type === Type.DIRECTORY) {
+            const children = readdirSync(child).map(file => resolve(child, file));
+            result += children.length ? _parse(children, newPrefix, options, depth + 1) : '';
+        }
+
+        return result;
+    });
+    lines.filter(line => !!line).forEach((line, index, lines) => {
+        result += prefix + (index === lines.length - 1 ? '└' + line : '├' + line);
+    });
+    return result;
+}
+
+function _parseTree(children: Dree[], prefix: string, options: ParseOptions, depth: number): string {
+    let result = '';
+    children.filter(child => !skip(child, options, depth)).forEach((child, index, children) => {
             const last = child.isSymbolicLink ? '>>' : (child.type === Type.DIRECTORY ? '─> ' : '── ');
-            const line = (index === children.length - 1 || index === children.length - 2 && skip(children[index + 1], options, depth)) ? '└' + last : '├' + last;
+            const line = (index === children.length - 1) ? '└' + last : '├' + last;
             const newPrefix = prefix + (index === children.length - 1 ?  '    ' : '│   ');
             result += prefix + line + child.name;
-            result += (child.children && (options.followLinks || !child.isSymbolicLink) ? _parse(child.children, newPrefix, options, depth + 1) : '');
-        }
+            result += (child.children && (options.followLinks || !child.isSymbolicLink) ? _parseTree(child.children, newPrefix, options, depth + 1) : '');
     });
     return result;
 }
@@ -293,15 +341,41 @@ export function scan(path: string, options?: ScanOptions, onFile?: Callback, onD
 }
 
 /**
+ * Retrurns a string representation of a Directory Tree given a path to a directory or file
+ * @param  {string} dirTree The path wich you want to inspect
+ * @param  {object} options An object used as options of the function
+ * @return {string} A string representing the Directory Tree of the given path
+ */
+export function parse(path: string, options?: ParseOptions): string {
+    let result = '';
+
+    const root = resolve(path);
+    const opt = mergeParseOptions(options);
+    const name = basename(root);
+    result += name;
+
+    const stat = statSync(path);
+    const lstat = lstatSync(path);
+    const symbolicLink = lstat.isSymbolicLink();
+
+    if((opt.followLinks || !symbolicLink) && stat.isDirectory()) {
+        const children = readdirSync(root).map(file => resolve(root, file));
+        result += children.length ? _parse(children, '\n ', opt, 1) : '';
+    }
+
+    return result;
+}
+
+/**
  * Retrurns a string representation of a Directory Tree given an object returned from scan
  * @param  {object} dirTree The object returned from scan, wich will be parsed
  * @param  {object} options An object used as options of the function
  * @return {string} A string representing the object given as first parameter
  */
-export function parse(dirTree: Dree, options?: ParseOptions): string {
+export function parseTree(dirTree: Dree, options?: ParseOptions): string {
     let result = '';
     const opt = mergeParseOptions(options);
     result += dirTree ? dirTree.name : '';
-    result += (dirTree.children ? _parse(dirTree.children, '\n ', opt, 1) : '');
+    result += (dirTree.children ? _parseTree(dirTree.children, '\n ', opt, 1) : '');
     return result;
 }
