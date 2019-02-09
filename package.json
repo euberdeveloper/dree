@@ -1,6 +1,6 @@
 {
   "name": "dree",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -33,12 +33,10 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^10.12.23",
+    "chai": "^4.2.0",
     "coveralls": "^3.0.2",
     "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
     "typescript": "^3.3.3"
-  },
-  "dependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^5.2.0"
   }
 }
