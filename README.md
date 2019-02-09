@@ -1,5 +1,5 @@
 # dree
-A nodejs module wich helps you handle a directory tree. It provides you an object of a directory tree with custom configuration and optional callback method when a file or dir is scanned. With Typescript support.
+A nodejs module wich helps you handle a directory tree. It provides you an object of a directory tree with custom configuration and optional callback method when a file or dir is scanned. You will also be able to turn the tree into a string representation. With Typescript support.
 
 ## Install
 
@@ -8,6 +8,8 @@ $ npm install dree
 ```
 
 ## Usage
+
+### Get an object
 
 Simple:
 
@@ -54,6 +56,46 @@ const dirCallback = function (element, stat) {
 const tree = dree.scan('./folder', options, fileCallback, dirCallback);
 ```
 
+### Get a string
+
+Simple:
+
+```js
+const dree = require('dree');
+const string = dree.parse('./folder');
+```
+
+With custom configuration:
+
+```js
+const dree = require('dree');
+
+const options = {
+  followLinks: true,
+  depth: 5,
+  exclude: /nofetchdir/g,
+  extensions: [ 'txt', 'jpg' ]
+};
+
+const string = dree.parse('./folder', options);
+```
+
+Get a string from an object:
+
+```js
+const dree = require('dree');
+const tree = dree.scan('./folder');
+
+const options = {
+  followLinks: true,
+  depth: 5,
+  exclude: /nofetchdir/g,
+  extensions: [ 'txt', 'jpg' ]
+};
+
+const string = dree.parseTree(tree, options);
+```
+
 ## Result
 
 Given a directory structured like this:
@@ -62,12 +104,9 @@ Given a directory structured like this:
 sample
 ├── backend
 │   └── firebase.json
+│   └── notes.txt
 │   └── server
 │       └── server.ts
-└── frontend
-│    └── angular
-│       ├── app.ts
-│       └── index.html
 └── .gitignore
 ```
 With this configurations:
@@ -83,7 +122,7 @@ const options = {
 };
 ```
 
-The result will be:
+The object returned from scan will be:
 
 ```json
 {
@@ -135,6 +174,16 @@ The result will be:
   ]
 }
 ```
+With similar configurations, parse will return:
+
+```
+sample
+ └─> backend
+     ├── firebase.json
+     ├── hello.txt
+     └─> server
+         └── server.ts
+```
 ## API
 
 ### scan
@@ -150,7 +199,7 @@ Given a path, returns an object representing its directory tree. The result coul
 **Parameters:**
 
 * `path`: Is of type `string`, and is the relative or absolute path the file or directory that you want to scan
-* `options`: Optional. Is of type `object` and allows you to have customize the function behaviour.
+* `options`: Optional. Is of type `object` and allows you to customize the function behaviour.
 * `fileCallback`: Optional. Called each time a file is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled).
 * `dirCallback`: Optional. Called each time a directory is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled).
 
@@ -169,6 +218,7 @@ Given a path, returns an object representing its directory tree. The result coul
 * `depth`: Default value: `undefined`. It is a number wich says the max depth the algorithm can reach scanning the given path. All files and dirs wich are beyound the max depth will not be considered by the algorithm.
 * `exclude`: Default value: `undefined`. It is a regex or array of regex and all the matched paths will not be considered by the algorithm.
 * `extensions`: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
+* `skipErrors`: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored. Considere
 
 **Result object parameters:**
 
@@ -185,6 +235,57 @@ Given a path, returns an object representing its directory tree. The result coul
 * `children`: An array of object structured like this one, containing all the children of the node.
 
 This is also the structure of the callbacks first parameter.
+
+### parse
+
+**Syntax:**
+
+`dree.parse(path, options)`
+
+**Description:**
+
+Given a path, returns a string representing its directory tree. The result could be customized with options. Executed syncronously. See __Usage__ to have an example.
+
+**Parameters:**
+
+* `path`: Is of type `string`, and is the relative or absolute path the file or directory that you want to parse
+* `options`: Optional. Is of type `object` and allows you to customize the function behaviour.
+
+**Options parameters:**
+
+* `symbolicLinks`: Default value: `true`. If true, all symbolic links found will be included in the result. Could not work on Windows.
+* `followLinks`: Default value: `false`. If true, all symbolic links will be followed, including even their content if they link to a folder. Could not work on Windows.
+* `showHidden`: Default value: `true`. If true, all hidden files and dirs will be included in the result. A hidden file or a directory has a name wich starts with a dot and in some systems like Linux are hidden.
+* `depth`: Default value: `undefined`. It is a number wich says the max depth the algorithm can reach scanning the given path. All files and dirs wich are beyound the max depth will not be considered by the algorithm.
+* `exclude`: Default value: `undefined`. It is a regex or array of regex and all the matched paths will not be considered by the algorithm.
+* `extensions`: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
+
+**Result string:**
+
+The result will be a string representing the Directory Tree of the path given as first parameter. Folders will be preceded by `>` and symbolic links by `>>`.
+
+### parseTree
+
+**Syntax:**
+
+`dree.parse(dirTree, options)`
+
+**Description:**
+
+The same as `parse`, but the first parameter is an object returned by `scan` function.
+
+**Parameters:**
+
+* `dirTree`: Is of type `object`, and is the object representing a Directory Tree that you want to parse into a string.
+* `options`: Optional. Is of type `object` and allows you to customize the function behaviour. 
+
+**Options parameters:**
+
+Same parameters of `parse`, with one more parameter, `skipErrors`: is the same parameter in `scan` options.
+
+**Result string:**
+
+The result will be a string representing the Directory Tree of the object given as first parameter. Folders will be preceded by `>` and symbolic links by `>>`.
 
 ## Note
 
