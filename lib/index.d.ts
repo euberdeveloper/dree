@@ -1,4 +1,5 @@
 declare type HexBase64Latin1Encoding = "latin1" | "hex" | "base64";
+
 declare class Stats {
     isFile(): boolean;
     isDirectory(): boolean;
@@ -26,6 +27,7 @@ declare class Stats {
     ctime: Date;
     birthtime: Date;
 }
+
 /**
  * Enum whose values are DIRECTORY or FILE
  */
@@ -33,6 +35,7 @@ export declare enum Type {
     DIRECTORY = "directory",
     FILE = "file"
 }
+
 /**
  * Interface of an object representing a Directory Tree
  */
@@ -82,6 +85,7 @@ export interface Dree {
      */
     children?: Dree[];
 }
+
 /**
  * Interface of the options object used with "scan" function
  */
@@ -151,6 +155,7 @@ export interface ScanOptions {
      */
     skipErrors?: boolean;
 }
+
 /**
  * Interface of the options object used with "parse" or "parseTree" functions
  */
@@ -189,7 +194,9 @@ export interface ParseOptions {
      */
     skipErrors?: boolean;
 }
+
 export declare type Callback = (dirTree: Dree, stat: Stats) => void;
+
 /**
  * Retrurns the Directory Tree of a given path
  * @param  {string} path The path wich you want to inspect
@@ -199,6 +206,7 @@ export declare type Callback = (dirTree: Dree, stat: Stats) => void;
  * @return {object} The directory tree as a Dree object
  */
 export declare function scan(path: string, options?: ScanOptions, onFile?: Callback, onDir?: Callback): Dree;
+
 /**
  * Retrurns a string representation of a Directory Tree given a path to a directory or file
  * @param  {string} dirTree The path wich you want to inspect
@@ -212,5 +220,7 @@ export declare function parse(path: string, options?: ParseOptions): string;
  * @param  {object} options An object used as options of the function
  * @return {string} A string representing the object given as first parameter
  */
+
 export declare function parseTree(dirTree: Dree, options?: ParseOptions): string;
+
 export {};
