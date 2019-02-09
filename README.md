@@ -268,7 +268,7 @@ The result will be a string representing the Directory Tree of the path given as
 
 **Syntax:**
 
-`dree.parse(dirTree, options)`
+`dree.parseTree(dirTree, options)`
 
 **Description:**
 
