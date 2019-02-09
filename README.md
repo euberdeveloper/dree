@@ -305,3 +305,5 @@ To run tests go to the package root in your CLI and run
 $ npm test
 ```
 Make sure you have the dev dependencies installed.
+
+Note: There is also the script `npm run test-full`, wich contains also the tests for the scan function, but it is not a default choice, because results as absolute paths, file sizes and hash can be different with different systems and users.
