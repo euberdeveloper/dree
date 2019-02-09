@@ -542,7 +542,7 @@ export function scan(path: string, options?: ScanOptions, onFile?: Callback, onD
     const root = resolve(path);
     const opt = mergeScanOptions(options);
     const result = _scan(root, root, 0, opt, onFile, onDir) as Dree;
-    result.sizeInBytes = opt.sizeInBytes ? result.sizeInBytes : undefined;
+    result.sizeInBytes = result && opt.sizeInBytes ? result.sizeInBytes : undefined;
     return result;
 }
 
