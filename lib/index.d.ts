@@ -145,6 +145,11 @@ export interface ScanOptions {
      * If value is undefined, all file extensions will be considered, if it is [], no files will be included
      */
     extensions?: string[];
+    /**
+     * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
+     * error thrown by fs calls will be ignored
+     */
+    skipErrors?: boolean;
 }
 /**
  * Interface of the options object used with "parse" or "parseTree" functions
@@ -178,6 +183,11 @@ export interface ParseOptions {
      * If value is undefined, all file extensions will be considered, if it is [], no files will be included
      */
     extensions?: string[];
+    /**
+     * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
+     * error thrown by fs calls will be ignored
+     */
+    skipErrors?: boolean;
 }
 export declare type Callback = (dirTree: Dree, stat: Stats) => void;
 /**

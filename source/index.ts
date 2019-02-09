@@ -156,6 +156,11 @@ export interface ScanOptions {
      * If value is undefined, all file extensions will be considered, if it is [], no files will be included
      */
     extensions?: string[];
+    /**
+     * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
+     * error thrown by fs calls will be ignored
+     */
+    skipErrors?: boolean;
 }
 
 /**
@@ -190,6 +195,11 @@ export interface ParseOptions {
      * If value is undefined, all file extensions will be considered, if it is [], no files will be included
      */
     extensions?: string[];
+    /**
+     * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
+     * error thrown by fs calls will be ignored
+     */
+    skipErrors?: boolean;
 }
 
 export type Callback = (dirTree: Dree, stat: Stats) => void;
@@ -209,7 +219,8 @@ const SCAN_DEFAULT_OPTIONS: ScanOptions = {
     showHidden: true,
     depth: undefined,
     exclude: undefined,
-    extensions: undefined
+    extensions: undefined,
+    skipErrors: true
 };
 
 const PARSE_DEFAULT_OPTIONS: ParseOptions = {
@@ -218,7 +229,8 @@ const PARSE_DEFAULT_OPTIONS: ParseOptions = {
     showHidden: true,
     depth: undefined,
     exclude: undefined,
-    extensions: undefined
+    extensions: undefined,
+    skipErrors: true
 };
 
 /* SUPPORT FUNCTIONS */
@@ -279,8 +291,30 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
 
     const relativePath = (root === path) ? '.' : relative(root, path);
     const name = basename(path);
-    const stat = statSync(path);
-    const lstat = lstatSync(path);
+    let stat: Stats;
+    try {
+        stat = statSync(path);
+    }
+    catch(exception) {
+        if(options.skipErrors) {
+            return null;
+        }
+        else {
+            throw exception;
+        }
+    }
+    let lstat: Stats;
+    try {
+        lstat = lstatSync(path);
+    }
+    catch(exception) {
+        if(options.skipErrors) {
+            return null;
+        }
+        else {
+            throw exception;
+        }
+    }
     const symbolicLink = lstat.isSymbolicLink();
     const type = stat.isFile() ? Type.FILE : Type.DIRECTORY;
 
@@ -310,7 +344,19 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
     switch(type) {
         case Type.DIRECTORY:
             const children: Dree[] = [];
-            readdirSync(path).forEach(file => {
+            let files: string[];
+            try {
+                files = readdirSync(path);
+            }
+            catch(exception) {
+                if(options.skipErrors) {
+                    return null;
+                }
+                else {
+                    throw exception;
+                }
+            }
+            files.forEach(file => {
                 const child: Dree | null = _scan(root, resolve(path, file), depth + 1, options, onFile, onDir);
                 if(child !== null) {
                     children.push(child);
@@ -325,6 +371,9 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                 }
             }
             if(options.hash) {
+                children.forEach(child => {
+                    hash.update(child.hash);
+                });
                 const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
                 dirTree.hash = hash.digest(hashEncoding);
             }
@@ -343,7 +392,18 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                 dirTree.size = options.size ? parseSize(size) : undefined;
             }
             if(options.hash) {
-                const data = readFileSync(path);
+                let data: Buffer;
+                try {
+                    data = readFileSync(path);
+                }
+                catch(exception) {
+                    if(options.skipErrors) {
+                        return null;
+                    }
+                    else {
+                        throw exception;
+                    }
+                }
                 hash.update(data);
                 const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
                 dirTree.hash = hash.digest(hashEncoding);
@@ -390,8 +450,30 @@ function _parse(children: string[], prefix: string, options: ParseOptions, depth
         }
     
         const name = basename(child);
-        const stat = statSync(child);
-        const lstat = lstatSync(child);
+        let stat: Stats;
+        try {
+            stat = statSync(child);
+        }
+        catch(exception) {
+            if(options.skipErrors) {
+                return null;
+            }
+            else {
+                throw exception;
+            }
+        }
+        let lstat: Stats;
+        try {
+            lstat = lstatSync(child);
+        }
+        catch(exception) {
+            if(options.skipErrors) {
+                return null;
+            }
+            else {
+                throw exception;
+            }
+        }
         const symbolicLink = lstat.isSymbolicLink();
         const type = stat.isFile() ? Type.FILE : Type.DIRECTORY;
     
@@ -411,7 +493,18 @@ function _parse(children: string[], prefix: string, options: ParseOptions, depth
         result += last + name;
 
         if((options.followLinks || !symbolicLink) && type === Type.DIRECTORY) {
-            const children = readdirSync(child).map(file => resolve(child, file));
+            let children: string[];
+            try {
+                children = readdirSync(child).map(file => resolve(child, file));
+            }
+            catch(exception) {
+                if(options.skipErrors) {
+                    return null;
+                }
+                else {
+                    throw exception;
+                }
+            }
             result += children.length ? _parse(children, newPrefix, options, depth + 1) : '';
         }
 
@@ -467,12 +560,45 @@ export function parse(path: string, options?: ParseOptions): string {
     const name = basename(root);
     result += name;
 
-    const stat = statSync(path);
-    const lstat = lstatSync(path);
+    let stat: Stats;
+    try {
+        stat = statSync(path);
+    }
+    catch(exception) {
+        if(options.skipErrors) {
+            return null;
+        }
+        else {
+            throw exception;
+        }
+    }
+    let lstat: Stats;
+    try {
+        lstat = lstatSync(path);
+    }
+    catch(exception) {
+        if(options.skipErrors) {
+            return null;
+        }
+        else {
+            throw exception;
+        }
+    }
     const symbolicLink = lstat.isSymbolicLink();
 
     if((opt.followLinks || !symbolicLink) && stat.isDirectory()) {
-        const children = readdirSync(root).map(file => resolve(root, file));
+        let children;
+        try {
+            children = readdirSync(root).map(file => resolve(root, file));
+        }
+        catch(exception) {
+            if(options.skipErrors) {
+                return null;
+            }
+            else {
+                throw exception;
+            }
+        }
         result += children.length ? _parse(children, '\n ', opt, 1) : '';
     }
 
