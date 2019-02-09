@@ -1,38 +1,14 @@
-const dree = require('../lib/index');
+'use strict';
+const expect = require('chai').expect;
 const fs = require('fs');
+const dree = require('../lib/index');
 
-const path = 'test/sample';
+describe('Dree module tests', () => {
 
-const options = {
-    stat: false,
-    hash: false,
-    sizeInBytes: false,
-    size: false,
-    normalize: true
-};
-
-const file = (dree, stat) => {
-    console.log("found file " + dree.name + " created at " + stat.ctime);
-}
-const dir = (dree, stat) => {
-    console.log("found dir " + dree.name + " created at " + stat.ctime);
-}
-
-const tree = dree.scan(path, options, file, dir);
-
-const data = JSON.stringify(tree);
-fs.writeFile('test/output.json', data, error => {
-    if(error) {
-        console.error('\n\n\nerror in witing output', error);
-    }
-    else {
-        console.log('\n\n\nfile written');
-    }
+    const path = 'test/sample';
+    require('./scan/scan.test')(expect, fs, dree, path);
+    require('./parse/parse.test')(expect, dree, path);
+    require('./parseTree/parseTree.test')(expect, dree, path);
 });
 
-const opt = {
-    systemLinks: false
-}
 
-console.log('\n\n\n\n\n\n\n\n' + dree.parseTree(tree, opt));
-console.log('\n\n\n\n\n\n\n\n' + dree.parse(path, opt));
