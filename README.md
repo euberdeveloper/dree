@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/euberdeveloper/dree.svg?branch=master)](https://travis-ci.org/euberdeveloper/dree)
+[![Coverage Status](https://coveralls.io/repos/github/euberdeveloper/dree/badge.svg?branch=master)](https://coveralls.io/github/euberdeveloper/dree?branch=master)
 
 # dree
 A nodejs module wich helps you handle a directory tree. It provides you an object of a directory tree with custom configuration and optional callback method when a file or dir is scanned. You will also be able to turn the tree into a string representation. With Typescript support.
@@ -308,4 +309,4 @@ $ npm test
 ```
 Make sure you have the dev dependencies installed.
 
-Note: There is also the script `npm run test-full`, wich contains also the tests for the scan function, but it is not a default choice, because results as absolute paths, file sizes and hash can be different with different systems and users.
+Note: There is also the script `npm run test-full`, wich contains also the tests for the scan function, but it is not a default choice, because results as absolute paths, file sizes and hash can be different with different systems and users. This is also the reason coveralls says not all code is covered form tests.
