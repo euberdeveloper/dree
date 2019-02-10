@@ -8,7 +8,8 @@
     "test": "mocha --reporter spec",
     "full-test": "mocha --reporter spec test/test.js --scan",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha test/test.js - - -R spec",
-    "transpile": "tsc"
+    "transpile": "tsc",
+    "commit": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -35,8 +36,14 @@
     "@types/node": "^10.12.23",
     "chai": "^4.2.0",
     "coveralls": "^3.0.2",
+    "cz-conventional-changelog": "^2.1.0",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "typescript": "^3.3.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

@@ -1,16 +1,22 @@
-module.exports = (expect, fs, dree, path, check) => {
+module.exports = (expect, fs, dree, path) => {
 
     describe('Test: scan function', () => {
 
-        it('Should return the content of "test/scan/first".test.json', () => {
+        before('Checking if should run scan tests', function() {
+            if(!process.argv.find(arg => arg === '--scan')) {
+                this.skip();
+            }
+        });
+
+        it('Should return the content of "test/scan/first.test.json"', () => {
 
             const result = JSON.stringify(dree.scan(path));
             const expected = fs.readFileSync('test/scan/first.test.json', 'utf8');
-            if(check) expect(result).to.equal(expected);
+            expect(result).to.equal(expected);
 
         });
 
-        it('Should return the content of "test/scan/second".test.json', () => {
+        it('Should return the content of "test/scan/second.test.json"', () => {
 
             const options = {
                 extensions: [ '', 'ts', 'json' ]
@@ -18,11 +24,11 @@ module.exports = (expect, fs, dree, path, check) => {
 
             const result = JSON.stringify(dree.scan(path, options));
             const expected = fs.readFileSync('test/scan/second.test.json', 'utf8');
-            if(check) expect(result).to.equal(expected);
+            expect(result).to.equal(expected);
 
         });
 
-        it('Should return the content of "test/scan/third".test.json', () => {
+        it('Should return the content of "test/scan/third.test.json"', () => {
 
             const options = {
                 extensions: [ '', 'ts', 'json' ],
@@ -31,11 +37,11 @@ module.exports = (expect, fs, dree, path, check) => {
 
             const result = JSON.stringify(dree.scan(path, options));
             const expected = fs.readFileSync('test/scan/third.test.json', 'utf8');
-            if(check) expect(result).to.equal(expected);
+            expect(result).to.equal(expected);
 
         });
 
-        it('Should return the content of "test/scan/fourth".test.json', () => {
+        it('Should return the content of "test/scan/fourth.test.json"', () => {
 
             const options = {
                 stat: false,
@@ -50,11 +56,11 @@ module.exports = (expect, fs, dree, path, check) => {
 
             const result = JSON.stringify(dree.scan(path, options));
             const expected = fs.readFileSync('test/scan/fourth.test.json', 'utf8');
-            if(check) expect(result).to.equal(expected);
+            expect(result).to.equal(expected);
 
         });
 
-        it('Should return the content of "test/scan/fifth".test.json and compute folders and files sizes', () => {
+        it('Should return the content of "test/scan/fifth.test.json" and compute folders and files sizes', () => {
 
             const options = {
                 depth: 2,
@@ -71,9 +77,9 @@ module.exports = (expect, fs, dree, path, check) => {
 
             const result = JSON.stringify(dree.scan(path, options, filesCallback, foldersCallback));
             const expected = fs.readFileSync('test/scan/fifth.test.json', 'utf8');
-            if(check) expect(result).to.equal(expected);
-            if(check) expect(filesSize).to.equal(5);
-            if(check) expect(foldersSize).to.equal(10);
+            expect(result).to.equal(expected);
+            expect(filesSize).to.equal(5);
+            expect(foldersSize).to.equal(10);
 
         });
 
