@@ -300,6 +300,16 @@ Properties as **hash** or **size** are computed considering only the **not filte
 
 The **hash** of two nodes with the same content could be **different**, because also the **name** is take in consideration.
 
+## Build
+
+To build the module make sure you have Typescript installed or install the dev dependencies. After this, run:
+
+```bash
+$ npm run transpile
+```
+
+The `source` folder will be compiled in the `lib` folder.
+
 ## Dev
 
 To run tests go to the package root in your CLI and run
