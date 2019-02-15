@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/euberdeveloper/dree.svg?branch=master)](https://travis-ci.org/euberdeveloper/dree)
+[![CircleCI](https://circleci.com/gh/euberdeveloper/dree.svg?style=svg)](https://circleci.com/gh/euberdeveloper/dree)
 [![Coverage Status](https://coveralls.io/repos/github/euberdeveloper/dree/badge.svg?branch=master)](https://coveralls.io/github/euberdeveloper/dree?branch=master)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
