@@ -1,8 +1,9 @@
 version: 2
 jobs:
   build:
-    machine: true
-    working_directory: ~/mern-starter
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/dree
     steps:
       - checkout
       - run:
