@@ -1,6 +1,8 @@
 version: 2
 jobs:
   build:
+    build:
+      machine: true
     working_directory: ~/mern-starter # directory where steps will run
     steps:
       - checkout
