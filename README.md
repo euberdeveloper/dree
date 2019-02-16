@@ -8,11 +8,19 @@ A nodejs module wich helps you handle a directory tree. It provides you an objec
 
 ## Install
 
+To install dree as a local module:
+
 ```bash
 $ npm install dree
 ```
 
-## Usage
+To install dree as a global module:
+
+```bash
+$ npm install -g dree
+```
+
+## Usage (local module)
 
 ### Get an object
 
@@ -35,7 +43,7 @@ const options = {
   size: true,
   hash: true,
   depth: 5,
-  exclude: /nofetchdir/g,
+  exclude: /dir_to_exclude/,
   extensions: [ 'txt', 'jpg' ]
 };
 
@@ -78,7 +86,7 @@ const dree = require('dree');
 const options = {
   followLinks: true,
   depth: 5,
-  exclude: /nofetchdir/g,
+  exclude: /dir_to_exclude/,
   extensions: [ 'txt', 'jpg' ]
 };
 
@@ -101,6 +109,39 @@ const options = {
 const string = dree.parseTree(tree, options);
 ```
 
+## Usage (global module)
+
+### Get an object
+
+```bash
+$ npm dree scan <source> --dest ./output --name result
+```
+
+This way the result will be saved in `./output/result.json`
+
+### Get a string
+
+```bash
+$ npm dree parse <source> --dest ./output --name result
+```
+
+This way the result will be saved in `./output/result.txt`
+
+### Log the result
+
+```bash
+$ npm dree scan|parse <source> --dest ./output --name result --show
+```
+With `--show` option, the result will also be printed with `console.log()`
+
+### See all options
+
+`scan` and `parse` accept the same options of their analog local functions. The options can be specified both as command arguments and json file.
+
+```bash
+$ npm dree --help --all-options
+```
+
 ## Result
 
 Given a directory structured like this:
@@ -114,6 +155,7 @@ sample
 │       └── server.ts
 └── .gitignore
 ```
+
 With this configurations:
 
 ```js
@@ -203,41 +245,41 @@ Given a path, returns an object representing its directory tree. The result coul
 
 **Parameters:**
 
-* `path`: Is of type `string`, and is the relative or absolute path the file or directory that you want to scan
-* `options`: Optional. Is of type `object` and allows you to customize the function behaviour.
-* `fileCallback`: Optional. Called each time a file is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled).
-* `dirCallback`: Optional. Called each time a directory is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled).
+* __path__: Is of type `string`, and is the relative or absolute path the file or directory that you want to scan
+* __options__: Optional. Is of type `object` and allows you to customize the function behaviour.
+* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled).
+* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled).
 
 **Options parameters:**
 
-* `stat`: Default value: `false`. If true every node of the result will contain `stat` property, provided by `fs.lstat` or `fs.stat`.
-* `normalize`: Default value: `false`. If true, on windows, normalize each path replacing each backslash `\\` with a slash `/`.
-* `symbolicLinks`: Default value: `true`. If true, all symbolic links found will be included in the result. Could not work on Windows.
-* `followLinks`: Default value: `false`. If true, all symbolic links will be followed, including even their content if they link to a folder. Could not work on Windows.
-* `sizeInBytes`: Default value: `true`. If true, every node in the result will contain `sizeInBytes` property as the number of bytes of the content. If a node is a folder, only its considered inner files will be computed to have this size.
-* `size`: Default value: `true`. If true, every node in the result will contain `size` property. Same as `sizeInBytes`, but it is a string rounded to the second decimal digit and with an appropriate unit.
-* `hash`: Default value: `true`. If true, every node in the result will contain `hash` property, computed by taking in consideration the name and the content of the node. If the node is a folder, all his considered inner files will be used by the algorithm.
-* `hashAlgorithm`: Values: `md5`(default) and `sha1`. Hash algorithm used by `cryptojs` to return the hash.
-* `hashEncoding`: Values: `hex`(default), `latin1` and `base64`. Hash encoding used by `cryptojs` to return the hash.
-* `showHidden`: Default value: `true`. If true, all hidden files and dirs will be included in the result. A hidden file or a directory has a name wich starts with a dot and in some systems like Linux are hidden.
-* `depth`: Default value: `undefined`. It is a number wich says the max depth the algorithm can reach scanning the given path. All files and dirs wich are beyound the max depth will not be considered by the algorithm.
-* `exclude`: Default value: `undefined`. It is a regex or array of regex and all the matched paths will not be considered by the algorithm.
-* `extensions`: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
-* `skipErrors`: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored. Considere
+* __stat__: Default value: `false`. If true every node of the result will contain `stat` property, provided by `fs.lstat` or `fs.stat`.
+* __normalize__: Default value: `false`. If true, on windows, normalize each path replacing each backslash `\\` with a slash `/`.
+* __symbolicLinks__: Default value: `true`. If true, all symbolic links found will be included in the result. Could not work on Windows.
+* __followLinks__: Default value: `false`. If true, all symbolic links will be followed, including even their content if they link to a folder. Could not work on Windows.
+* __sizeInBytes__: Default value: `true`. If true, every node in the result will contain `sizeInBytes` property as the number of bytes of the content. If a node is a folder, only its considered inner files will be computed to have this size.
+* __size__: Default value: `true`. If true, every node in the result will contain `size` property. Same as `sizeInBytes`, but it is a string rounded to the second decimal digit and with an appropriate unit.
+* __hash__: Default value: `true`. If true, every node in the result will contain `hash` property, computed by taking in consideration the name and the content of the node. If the node is a folder, all his considered inner files will be used by the algorithm.
+* __hashAlgorithm__: Values: `md5`(default) and `sha1`. Hash algorithm used by `cryptojs` to return the hash.
+* __hashEncoding__: Values: `hex`(default), `latin1` and `base64`. Hash encoding used by `cryptojs` to return the hash.
+* __showHidden__: Default value: `true`. If true, all hidden files and dirs will be included in the result. A hidden file or a directory has a name wich starts with a dot and in some systems like Linux are hidden.
+* __depth__: Default value: `undefined`. It is a number wich says the max depth the algorithm can reach scanning the given path. All files and dirs wich are beyound the max depth will not be considered by the algorithm.
+* __exclude__: Default value: `undefined`. It is a regex or array of regex and all the matched paths will not be considered by the algorithm.
+* __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
+* __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored. Considere
 
 **Result object parameters:**
 
-* `name`: Always returned. The name of the node as a string.
-* `path`: Always returned. The absolute path of the node.
-* `relativePath`: Always returned. The relative path from the root of the node.
-* `type`: Always returned. Values: `file` or `directory`.
-* `isSymbolicLink`: Always returned. A boolean with true value if the node is a symbolic link.
-* `sizeInBytes`: The size in bytes of the node, returned as a number.
-* `size`: The size of the node, returned as a string rounded to two decimals and appropriate unit.
-* `hash`: The hash of the node.
-* `extension`: The extension (without dot) of the node. Returned only if the node is a file.
-* `stat`: The `fs.lstat` or `fs.fstat` of the node.
-* `children`: An array of object structured like this one, containing all the children of the node.
+* __name__: Always returned. The name of the node as a string.
+* __path__: Always returned. The absolute path of the node.
+* __relativePath__: Always returned. The relative path from the root of the node.
+* __type__: Always returned. Values: `file` or `directory`.
+* __isSymbolicLink__: Always returned. A boolean with true value if the node is a symbolic link.
+* __sizeInBytes__: The size in bytes of the node, returned as a number.
+* __size__: The size of the node, returned as a string rounded to two decimals and appropriate unit.
+* __hash__: The hash of the node.
+* __extension__: The extension (without dot) of the node. Returned only if the node is a file.
+* __stat__: The `fs.lstat` or `fs.fstat` of the node.
+* __children__: An array of object structured like this one, containing all the children of the node.
 
 This is also the structure of the callbacks first parameter.
 
@@ -253,17 +295,17 @@ Given a path, returns a string representing its directory tree. The result could
 
 **Parameters:**
 
-* `path`: Is of type `string`, and is the relative or absolute path the file or directory that you want to parse
-* `options`: Optional. Is of type `object` and allows you to customize the function behaviour.
+* __path__: Is of type `string`, and is the relative or absolute path the file or directory that you want to parse
+* __options__: Optional. Is of type `object` and allows you to customize the function behaviour.
 
 **Options parameters:**
 
-* `symbolicLinks`: Default value: `true`. If true, all symbolic links found will be included in the result. Could not work on Windows.
-* `followLinks`: Default value: `false`. If true, all symbolic links will be followed, including even their content if they link to a folder. Could not work on Windows.
-* `showHidden`: Default value: `true`. If true, all hidden files and dirs will be included in the result. A hidden file or a directory has a name wich starts with a dot and in some systems like Linux are hidden.
-* `depth`: Default value: `undefined`. It is a number wich says the max depth the algorithm can reach scanning the given path. All files and dirs wich are beyound the max depth will not be considered by the algorithm.
-* `exclude`: Default value: `undefined`. It is a regex or array of regex and all the matched paths will not be considered by the algorithm.
-* `extensions`: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
+* __symbolicLinks__: Default value: `true`. If true, all symbolic links found will be included in the result. Could not work on Windows.
+* __followLinks__: Default value: `false`. If true, all symbolic links will be followed, including even their content if they link to a folder. Could not work on Windows.
+* __showHidden__: Default value: `true`. If true, all hidden files and dirs will be included in the result. A hidden file or a directory has a name wich starts with a dot and in some systems like Linux are hidden.
+* __depth__: Default value: `undefined`. It is a number wich says the max depth the algorithm can reach scanning the given path. All files and dirs wich are beyound the max depth will not be considered by the algorithm.
+* __exclude__: Default value: `undefined`. It is a regex or array of regex and all the matched paths will not be considered by the algorithm.
+* __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
 
 **Result string:**
 
@@ -281,8 +323,8 @@ The same as `parse`, but the first parameter is an object returned by `scan` fun
 
 **Parameters:**
 
-* `dirTree`: Is of type `object`, and is the object representing a Directory Tree that you want to parse into a string.
-* `options`: Optional. Is of type `object` and allows you to customize the function behaviour. 
+* __dirTree__: Is of type `object`, and is the object representing a Directory Tree that you want to parse into a string.
+* __options__: Optional. Is of type `object` and allows you to customize the function behaviour. 
 
 **Options parameters:**
 
@@ -301,6 +343,8 @@ The **callbacks** have a tree representation of the node and its stat as paramet
 Properties as **hash** or **size** are computed considering only the **not filtered** nodes. For instance, the result size of a folder could be different from its actual size, if some of its inner files have not been considered due to filters as `exclude`.
 
 The **hash** of two nodes with the same content could be **different**, because also the **name** is take in consideration.
+
+In the **global** usage, if an option is given both in the command **args** and in the **options** json file, the **args** one is considered.
 
 ## Build
 
