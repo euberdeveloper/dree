@@ -4,6 +4,16 @@ import  { join } from 'path';
 import { writeFileSync } from 'fs';
 import { parse, scan, ParseOptions, ScanOptions } from '../lib/index';
 
+function parseRegExp(patterns: string[]): RegExp[] {
+    let result: RegExp[] = [];
+    if(patterns && patterns.length) {
+        for(const pattern of patterns) {
+            result.push(new RegExp(pattern));
+        }
+    }
+    return result;
+}
+
 yargs
 .scriptName('dree')
 .command(
@@ -22,7 +32,7 @@ yargs
             followLinks: args.followLinks,
             showHidden: args.showHidden,
             depth: args.depth,
-            exclude: args.exclude,
+            exclude: parseRegExp(args.exclude),
             extensions: args.extensions,
             skipErrors: args.skipErrors
         }
@@ -60,7 +70,7 @@ yargs
             hashEncoding: args.hashEncoding,
             showHidden: args.showHidden,
             depth: args.depth,
-            exclude: args.exclude,
+            exclude: parseRegExp(args.exclude),
             extensions: args.extensions,
             skipErrors: args.skipErrors
         }
