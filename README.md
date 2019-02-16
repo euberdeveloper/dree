@@ -102,7 +102,7 @@ const tree = dree.scan('./folder');
 const options = {
   followLinks: true,
   depth: 5,
-  exclude: /nofetchdir/g,
+  exclude: /dir_to_exclude/,
   extensions: [ 'txt', 'jpg' ]
 };
 
