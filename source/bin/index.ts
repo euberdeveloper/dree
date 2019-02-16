@@ -87,7 +87,7 @@ yargs
     'name': {
         alias: 'n',
         default: 'tree',
-        describe: 'The output file name',
+        describe: 'The output file name, without file extension',
         type: 'string'
     },
     'show': {
