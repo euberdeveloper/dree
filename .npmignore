@@ -3,3 +3,7 @@ source/
 test/
 coverage/
 tsconfig.json
+README.md
+LICENSE
+.travis.yml
+.circleci/

@@ -1,12 +1,15 @@
 {
   "name": "dree",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
+  "bin": {
+    "dree": "dist/bin/index.js"
+  },
   "scripts": {
     "test": "mocha --reporter spec",
-    "full-test": "mocha --reporter spec test/test.js --scan",
+    "test:full": "mocha --reporter spec test/test.js --scan",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha test/test.js - - -R spec",
     "transpile": "tsc",
     "commit": "git-cz"
@@ -34,6 +37,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^10.12.23",
+    "@types/yargs": "^12.0.9",
     "chai": "^4.2.0",
     "commitizen": "^3.0.5",
     "coveralls": "^3.0.2",
@@ -46,5 +50,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "yargs": "^13.2.0"
   }
 }

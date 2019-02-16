@@ -4,11 +4,9 @@
     "module": "commonjs",
     "target": "es5",
     "lib": [ "es2015", "dom" ],
-    "outDir": "lib",
+    "outDir": "dist",
     "sourceMap": false,
     "declaration": true
   },
-  "files": [
-    "./source/index.ts"
-  ]
+  "include": [ "source"]
 }
