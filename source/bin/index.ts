@@ -8,7 +8,7 @@ function parseRegExp(patterns: string[]): RegExp[] {
     let result: RegExp[] = [];
     if(patterns && patterns.length) {
         for(const pattern of patterns) {
-            result.push(new RegExp(pattern));
+            result.push(new RegExp(pattern.replace('/\\/g', '\\\\')));
         }
     }
     return result;
