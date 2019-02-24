@@ -11,7 +11,7 @@ module.exports = (expect, fs, dree, path) => {
         it('Should return the content of "test/scan/first.test.json"', () => {
 
             const result = JSON.stringify(dree.scan(path));
-            const expected = fs.readFileSync('test/scan/first.test.json', 'utf8');
+            const expected = fs.readFileSync('test/scan/first.test.json', 'utf8').replace(/PATH/g, process.cwd().replace(/\\/g, '\\\\'));
             expect(result).to.equal(expected);
 
         });
@@ -23,7 +23,7 @@ module.exports = (expect, fs, dree, path) => {
             };
 
             const result = JSON.stringify(dree.scan(path, options));
-            const expected = fs.readFileSync('test/scan/second.test.json', 'utf8');
+            const expected = fs.readFileSync('test/scan/second.test.json', 'utf8').replace(/PATH/g, process.cwd().replace(/\\/g, '\\\\'));
             expect(result).to.equal(expected);
 
         });
@@ -36,7 +36,7 @@ module.exports = (expect, fs, dree, path) => {
             };
 
             const result = JSON.stringify(dree.scan(path, options));
-            const expected = fs.readFileSync('test/scan/third.test.json', 'utf8');
+            const expected = fs.readFileSync('test/scan/third.test.json', 'utf8').replace(/PATH/g, process.cwd().replace(/\\/g, '\\\\'));
             expect(result).to.equal(expected);
 
         });
@@ -55,7 +55,7 @@ module.exports = (expect, fs, dree, path) => {
             };
 
             const result = JSON.stringify(dree.scan(path, options));
-            const expected = fs.readFileSync('test/scan/fourth.test.json', 'utf8');
+            const expected = fs.readFileSync('test/scan/fourth.test.json', 'utf8').replace(/NORMALIZED_PATH/g, process.cwd().replace(/\\/g, '/'));
             expect(result).to.equal(expected);
 
         });
@@ -76,7 +76,7 @@ module.exports = (expect, fs, dree, path) => {
             }
 
             const result = JSON.stringify(dree.scan(path, options, filesCallback, foldersCallback));
-            const expected = fs.readFileSync('test/scan/fifth.test.json', 'utf8');
+            const expected = fs.readFileSync('test/scan/fifth.test.json', 'utf8').replace(/PATH/g, process.cwd().replace(/\\/g, '\\\\'));
             expect(result).to.equal(expected);
             expect(filesSize).to.equal(5);
             expect(foldersSize).to.equal(10);
