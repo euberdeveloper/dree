@@ -9,6 +9,6 @@ install:
 before_script:
  - npm run transpile
 script:
- - npm test
+ - npm run test:full
 # Send coverage data to Coveralls
 after_script: "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
