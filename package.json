@@ -9,7 +9,6 @@
   },
   "scripts": {
     "test": "mocha --reporter spec",
-    "test:full": "mocha --reporter spec test/test.js --scan",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha test/test.js - - -R spec",
     "transpile": "tsc",
     "commit": "git-cz"

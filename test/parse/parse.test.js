@@ -1,8 +1,8 @@
 module.exports = (expect, dree, path) => {
 
-    describe('Test: parse function', () => {
+    describe('Test: parse function', function() {
 
-        it('Should return the exported content of "test/parse/first.test.js"', () => {
+        it('Should return the exported content of "test/parse/first.test.js"', function() {
 
             const result = dree.parse(path);
             const expected = require('./first.test');
@@ -10,7 +10,7 @@ module.exports = (expect, dree, path) => {
 
         });
 
-        it('Should return the exported content of "test/parse/second.test.js"', () => {
+        it('Should return the exported content of "test/parse/second.test.js"', function() {
 
             const options = {
                 extensions: [ '', 'ts', 'txt' ],
@@ -23,7 +23,7 @@ module.exports = (expect, dree, path) => {
 
         });
 
-        it('Should return the exported content of "test/parse/second.test.js"', () => {
+        it('Should return the exported content of "test/parse/second.test.js"', function() {
 
             const options = {
                 depth: 2,
