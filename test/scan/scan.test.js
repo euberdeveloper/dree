@@ -14,7 +14,7 @@ module.exports = (expect, fs, dree, path) => {
                 }
             } 
             else {
-                expected = expected.replace(/PATH/g, process.cwd()).replace(/\\/g, '/');
+                expected = expected.replace(/PATH/g, process.cwd()).replace(/\\\\/g, '\\').replace(/\\/g, '/');
             }
             return expected;
         } 
