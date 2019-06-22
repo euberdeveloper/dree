@@ -90,7 +90,7 @@ module.exports = (expect, fs, dree, path) => {
                 hash: true,
                 hashAlgorithm: 'sha1',
                 hashEncoding: 'base64',
-                showHidden: 'false'
+                showHidden: false
             };
 
             const result = getResult(dree.scan(path, options), true);
@@ -114,13 +114,38 @@ module.exports = (expect, fs, dree, path) => {
                 foldersSize += stat.size;
             }
 
-            const result = getResult(dree.scan(path, options, filesCallback, foldersCallback), true);
+            const result = getResult(dree.scan(path, options, filesCallback, foldersCallback), true);            
             const expected = getExpected('test/scan/fifth.test.json', false, true);
             expect(result).to.equal(expected);
             if(isWin) {
                 expect(filesSize).to.equal(5);
                 expect(foldersSize).to.equal(0);
             }
+        });
+
+        it('Should return the content of "test/scan/sixth.test.json"', function() {
+
+            const options = {
+                depth: -1
+            };
+
+            const result = getResult(dree.scan(path, options), true);
+            const expected = getExpected('test/scan/sixth.test.json', false, true);
+
+            expect(result).to.equal(expected);
+        });
+
+        it('Should return the content of "test/scan/seventh.test.json"', function() {
+
+            const options = {
+                depth: 2,
+                exclude: [/firebase/]
+            };
+
+            const result = getResult(dree.scan(path, options), true);
+            const expected = getExpected('test/scan/seventh.test.json', false, true);
+
+            expect(result).to.equal(expected);
         });
 
     });

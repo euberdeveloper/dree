@@ -36,6 +36,18 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it('Should return the exported content of "test/parse/fourth.test.js"', function() {
+
+            const options = {
+                depth: -1,
+                exclude: [/firebase/]
+            };
+
+            const result = dree.parse(path, options);
+            const expected = require('./fourth.test');
+            expect(result).to.equal(expected);
+        });
+
     });
 
 }

@@ -36,6 +36,30 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it('Should return the exported content of "test/parseTree/fourth.test.js"', function() {
+
+            const options = {
+                depth: -1
+            };
+
+            const result = dree.parseTree(dree.scan(path), options);
+            const expected = require('./fourth.test');
+            expect(result).to.equal(expected);
+        });
+
+        it('Should return the exported content of "test/parseTree/fifth.test.js"', function() {
+
+            const options = {
+                depth: 2,
+                exclude: [/firebase/],
+                showHidden: 'false'
+            };
+
+            const result = dree.parseTree(dree.scan(path), options);
+            const expected = require('./fifth.test');
+            expect(result).to.equal(expected);
+        });
+
     });
 
 }
