@@ -2,6 +2,7 @@ node_modules/
 source/
 test/
 coverage/
+.nyc_output/
 tsconfig.json
 README.md
 LICENSE
