@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "mocha --reporter spec",
-    "cover": "istanbul cover node_modules/mocha/bin/_mocha test/test.js - - -R spec",
+    "nyc": "nyc --reporter=html --reporter=text --reporter=lcov npm run test",
+    "cover": "nyc report --reporter=text-lcov | coveralls",
     "transpile": "tsc",
     "commit": "git-cz"
   },
@@ -35,15 +36,15 @@
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^10.12.23",
-    "@types/yargs": "^12.0.9",
+    "@types/node": "^10.14.10",
+    "@types/yargs": "^12.0.12",
     "chai": "^4.2.0",
-    "commitizen": "^3.0.5",
-    "coveralls": "^3.0.2",
+    "commitizen": "^3.1.1",
+    "coveralls": "^3.0.4",
     "cz-conventional-changelog": "^2.1.0",
-    "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
-    "typescript": "^3.3.3"
+    "nyc": "^14.1.1",
+    "typescript": "^3.5.2"
   },
   "config": {
     "commitizen": {
@@ -51,6 +52,6 @@
     }
   },
   "dependencies": {
-    "yargs": "^13.2.0"
+    "yargs": "^13.2.4"
   }
 }
