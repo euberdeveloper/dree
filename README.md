@@ -2,7 +2,7 @@
 [![CircleCI](https://circleci.com/gh/euberdeveloper/dree.svg?style=svg)](https://circleci.com/gh/euberdeveloper/dree)
 [![Coverage Status](https://coveralls.io/repos/github/euberdeveloper/dree/badge.svg?branch=master)](https://coveralls.io/github/euberdeveloper/dree?branch=master)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![NPM](https://img.shields.io/npm/l/dree.svg)](https://github.com/euberdeveloper/dree/blob/master/LICENSE.md)
+[![License](https://img.shields.io/npm/l/dree.svg)](https://github.com/euberdeveloper/dree/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/euberdeveloper/dree.svg)](https://github.com/euberdeveloper/dree/issues)
 [![GitHub stars](https://img.shields.io/github/stars/euberdeveloper/dree.svg)](https://github.com/euberdeveloper/dree/stargazers)
 ![npm](https://img.shields.io/npm/v/dree.svg)
