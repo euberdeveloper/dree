@@ -1,6 +1,6 @@
 {
   "name": "dree",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -39,7 +39,7 @@
     "@types/node": "^10.14.10",
     "@types/yargs": "^12.0.12",
     "chai": "^4.2.0",
-    "commitizen": "^3.1.1",
+    "commitizen": "^4.0.3",
     "coveralls": "^3.0.4",
     "cz-conventional-changelog": "^2.1.0",
     "mocha": "^5.2.0",
