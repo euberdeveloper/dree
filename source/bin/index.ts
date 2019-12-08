@@ -71,6 +71,8 @@ yargs
             showHidden: args.showHidden,
             depth: args.depth,
             exclude: parseRegExp(args.exclude),
+            emptyDirectory: args.emptyDirectory,
+            excludeEmptyDirectories: args.excludeEmptyDirectories,
             extensions: args.extensions,
             skipErrors: args.skipErrors
         }
@@ -182,6 +184,18 @@ yargs
     'extensions': {
         describe: 'An array of strings containing all the extensions wich will be considered',
         type: 'array',
+        hidden: true
+    },
+    'empty-directory': {
+        default: false,
+        describe: 'Wheter you want to include the property isEmpty in the result',
+        type: 'boolean',
+        hidden: true
+    },
+    'exclude-empty-directories': {
+        default: false,
+        describe: 'Wheter you want to exclude all the empty directories from the result, even if they contains nodes excluded by other options',
+        type: 'boolean',
         hidden: true
     },
     'skip-errors': {

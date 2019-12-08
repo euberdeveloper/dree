@@ -84,6 +84,10 @@ export interface Dree {
      */
     extension?: string;
     /**
+     * Optional. True if the node is a directory and contains no files and no directories
+     */
+    isEmpty?: boolean;
+    /**
      * Optional. The fs.lstat or fs.fstat of the node
      */
     stat?: Stats;
@@ -157,6 +161,16 @@ export interface ScanOptions {
      */
     extensions?: string[];
     /**
+     * If true, every node of type directory in the result will contain isEmpty property, which will be true if the folder contains 
+     * no files and no directories
+     */
+    emptyDirectory?: boolean;
+    /**
+     * If true, every empty directory will be excluded from the result. If the directory is not empty but all the contained files 
+     * and directories are excluded by other options such as exclude or extensions, the directory will not be included in the result
+     */
+    excludeEmptyDirectories?: boolean;
+    /**
      * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
      * error thrown by fs calls will be ignored
      */
@@ -220,6 +234,8 @@ const SCAN_DEFAULT_OPTIONS: ScanOptions = {
     depth: undefined,
     exclude: undefined,
     extensions: undefined,
+    emptyDirectory: false,
+    excludeEmptyDirectories: false,
     skipErrors: true
 };
 
@@ -356,12 +372,18 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                     throw exception;
                 }
             }
+            if (options.emptyDirectory) {
+                dirTree.isEmpty = !files.length
+            }
             files.forEach(file => {
                 const child: Dree | null = _scan(root, resolve(path, file), depth + 1, options, onFile, onDir);
                 if(child !== null) {
                     children.push(child);
                 }
             });
+            if (options.excludeEmptyDirectories && !children.length) {
+                return null;
+            }
             if(options.sizeInBytes || options.size) {
                 const size = children.reduce((previous, current) => previous + (current.sizeInBytes as number), 0);
                 dirTree.sizeInBytes = size;

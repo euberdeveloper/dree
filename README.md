@@ -269,6 +269,8 @@ Given a path, returns an object representing its directory tree. The result coul
 * __depth__: Default value: `undefined`. It is a number wich says the max depth the algorithm can reach scanning the given path. All files and dirs wich are beyound the max depth will not be considered by the algorithm.
 * __exclude__: Default value: `undefined`. It is a regex or array of regex and all the matched paths will not be considered by the algorithm.
 * __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
+* __emptyDirectory__: Default value: `false`. If value is `true`, the `isEmpty` property will be added in all the directory nodes in the result. Its value will be `true` if the directory contains no files and no directories, `false` otherwise.
+* __excludeEmptyDirectories__: Default value: `false`. If value is `true`, all empty directories will be excluded from the result. Even directories which are not empty but all their children are excluded are excluded from the result because of other options will be considered empty.
 * __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored. Considere
 
 **Result object parameters:**
@@ -282,10 +284,11 @@ Given a path, returns an object representing its directory tree. The result coul
 * __size__: The size of the node, returned as a string rounded to two decimals and appropriate unit.
 * __hash__: The hash of the node.
 * __extension__: The extension (without dot) of the node. Returned only if the node is a file.
+* __isEmpty__: A boolean with true value if the node is a directory containig no files and no directories.
 * __stat__: The `fs.lstat` or `fs.fstat` of the node.
 * __children__: An array of object structured like this one, containing all the children of the node.
 
-This is also the structure of the callbacks first parameter.
+This is also the structure of the callbacks' first parameter.
 
 ### parse
 
