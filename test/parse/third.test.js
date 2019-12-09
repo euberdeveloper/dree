@@ -6,7 +6,6 @@ module.exports =
  │   ├── notes.txt
  │   └─> server
  ├─> empty
- │   ├─> empty
  │   └─> tsempty
  └─> linked
      └── linked.txt`;

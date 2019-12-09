@@ -6,7 +6,7 @@
   "isSymbolicLink": false,
   "sizeInBytes": 1714683,
   "size": "1.71 MB",
-  "hash": "g2IZ+udd4s0I8tfrBxFTZ51FBaU=",
+  "hash": "18JX3XDnlJmljZzpm+YZo6Tys6s=",
   "children": [
     {
       "name": "backend",
@@ -94,18 +94,8 @@
       "isSymbolicLink": false,
       "sizeInBytes": 0,
       "size": "0 B",
-      "hash": "A9DGKeO1DaGlxnhcKf+4oHbMZww=",
+      "hash": "fbcNmvRxss58uuQmTkWK0yUvFxA=",
       "children": [
-        {
-          "name": "empty",
-          "path": "PATH/test/sample/empty/empty",
-          "relativePath": "empty/empty",
-          "type": "directory",
-          "isSymbolicLink": false,
-          "sizeInBytes": 0,
-          "size": "0 B",
-          "hash": "rYcQm//wdl9N2M9JQ7BNFqQHD+o="
-        },
         {
           "name": "tsempty",
           "path": "PATH/test/sample/empty/tsempty",

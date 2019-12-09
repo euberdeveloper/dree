@@ -10,7 +10,6 @@ module.exports =
  │   └─> server
  │       └── server.ts
  ├─> empty
- │   ├─> empty
  │   └─> tsempty
  │       └── file.ts
  └─> linked

@@ -6,7 +6,7 @@
   "isSymbolicLink": false,
   "sizeInBytes": 1714683,
   "size": "1.71 MB",
-  "hash": "7dc0f1cd38d485f700d1e686702ce3f7",
+  "hash": "c7c3449e2257f9412df74b8aaeecb8a7",
   "children": [
     {
       "name": ".gitignore",
@@ -105,18 +105,8 @@
       "isSymbolicLink": false,
       "sizeInBytes": 0,
       "size": "0 B",
-      "hash": "475126b96dfa8704fab8baa000cb79b7",
+      "hash": "5395826f5e679ee75097a49101d8af75",
       "children": [
-        {
-          "name": "empty",
-          "path": "PATH/test/sample/empty/empty",
-          "relativePath": "empty/empty",
-          "type": "directory",
-          "isSymbolicLink": false,
-          "sizeInBytes": 0,
-          "size": "0 B",
-          "hash": "a2e4822a98337283e39f7b60acf85ec9"
-        },
         {
           "name": "tsempty",
           "path": "PATH/test/sample/empty/tsempty",

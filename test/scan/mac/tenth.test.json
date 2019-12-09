@@ -4,9 +4,9 @@
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
-  "sizeInBytes": 1714663,
+  "sizeInBytes": 1714711,
   "size": "1.71 MB",
-  "hash": "a8d295b598853b71e44481cf6fee1646",
+  "hash": "cc8d87a0c0aa03ca0af25224fcaec65f",
   "children": [
     {
       "name": ".gitignore",
@@ -25,9 +25,9 @@
       "relativePath": "backend",
       "type": "directory",
       "isSymbolicLink": false,
-      "sizeInBytes": 1714639,
+      "sizeInBytes": 1714687,
       "size": "1.71 MB",
-      "hash": "12d19cd30fcdb57b2138e04fcd618655",
+      "hash": "60e3317d8783b936a2fa6f78be893d94",
       "children": [
         {
           "name": "firebase.json",
@@ -39,6 +39,40 @@
           "sizeInBytes": 27,
           "size": "27 B",
           "hash": "bafc664309b11a828c0adf99ed9e8516"
+        },
+        {
+          "name": "linked.link",
+          "path": "PATH/test/sample/backend/linked.link",
+          "relativePath": "backend/linked.link",
+          "type": "directory",
+          "isSymbolicLink": true,
+          "sizeInBytes": 24,
+          "size": "24 B",
+          "hash": "15a770c15aa48f311895483b0e2e6a84",
+          "children": [
+            {
+              "name": "linked.txt",
+              "path": "PATH/test/sample/backend/linked.link/linked.txt",
+              "relativePath": "backend/linked.link/linked.txt",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "txt",
+              "sizeInBytes": 24,
+              "size": "24 B",
+              "hash": "23a5f0582f74abfb7f5d3b545a2d59ca"
+            }
+          ]
+        },
+        {
+          "name": "linkedtxt.link",
+          "path": "PATH/test/sample/backend/linkedtxt.link",
+          "relativePath": "backend/linkedtxt.link",
+          "type": "file",
+          "isSymbolicLink": true,
+          "extension": "link",
+          "sizeInBytes": 24,
+          "size": "24 B",
+          "hash": "8ac875af9057830ddfb1c7fb9046f680"
         },
         {
           "name": "notes.txt",
@@ -84,18 +118,8 @@
       "isSymbolicLink": false,
       "sizeInBytes": 0,
       "size": "0 B",
-      "hash": "475126b96dfa8704fab8baa000cb79b7",
+      "hash": "5395826f5e679ee75097a49101d8af75",
       "children": [
-        {
-          "name": "empty",
-          "path": "PATH/test/sample/empty/empty",
-          "relativePath": "empty/empty",
-          "type": "directory",
-          "isSymbolicLink": false,
-          "sizeInBytes": 0,
-          "size": "0 B",
-          "hash": "a2e4822a98337283e39f7b60acf85ec9"
-        },
         {
           "name": "tsempty",
           "path": "PATH/test/sample/empty/tsempty",
