@@ -117,7 +117,7 @@ module.exports = (expect, fs, dree, path) => {
                     break;
                 case 'linux':
                     expect(filesSize).to.equal(49);
-                    expect(foldersSize).to.equal(28682);
+                    expect(foldersSize).to.equal(24586);
                     break;
             }
         });
