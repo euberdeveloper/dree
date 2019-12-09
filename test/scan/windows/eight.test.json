@@ -1,6 +1,6 @@
 {
   "name": "sample",
-  "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample",
+  "path": "PATH\\test\\sample",
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
@@ -11,7 +11,7 @@
   "children": [
     {
       "name": ".gitignore",
-      "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\.gitignore",
+      "path": "PATH\\test\\sample\\.gitignore",
       "relativePath": ".gitignore",
       "type": "file",
       "isSymbolicLink": false,
@@ -22,7 +22,7 @@
     },
     {
       "name": "backend",
-      "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\backend",
+      "path": "PATH\\test\\sample\\backend",
       "relativePath": "backend",
       "type": "directory",
       "isSymbolicLink": false,
@@ -33,7 +33,7 @@
       "children": [
         {
           "name": "firebase.json",
-          "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\backend\\firebase.json",
+          "path": "PATH\\test\\sample\\backend\\firebase.json",
           "relativePath": "backend\\firebase.json",
           "type": "file",
           "isSymbolicLink": false,
@@ -44,7 +44,7 @@
         },
         {
           "name": "linked.link",
-          "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\backend\\linked.link",
+          "path": "PATH\\test\\sample\\backend\\linked.link",
           "relativePath": "backend\\linked.link",
           "type": "file",
           "isSymbolicLink": false,
@@ -55,7 +55,7 @@
         },
         {
           "name": "linkedtxt.link",
-          "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\backend\\linkedtxt.link",
+          "path": "PATH\\test\\sample\\backend\\linkedtxt.link",
           "relativePath": "backend\\linkedtxt.link",
           "type": "file",
           "isSymbolicLink": false,
@@ -66,7 +66,7 @@
         },
         {
           "name": "notes.txt",
-          "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\backend\\notes.txt",
+          "path": "PATH\\test\\sample\\backend\\notes.txt",
           "relativePath": "backend\\notes.txt",
           "type": "file",
           "isSymbolicLink": false,
@@ -79,7 +79,7 @@
     },
     {
       "name": "linked",
-      "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\linked",
+      "path": "PATH\\test\\sample\\linked",
       "relativePath": "linked",
       "type": "directory",
       "isSymbolicLink": false,
@@ -90,7 +90,7 @@
       "children": [
         {
           "name": "linked.txt",
-          "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\linked\\linked.txt",
+          "path": "PATH\\test\\sample\\linked\\linked.txt",
           "relativePath": "linked\\linked.txt",
           "type": "file",
           "isSymbolicLink": false,

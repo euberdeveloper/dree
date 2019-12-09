@@ -1,6 +1,6 @@
 {
   "name": "sample",
-  "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample",
+  "path": "PATH\\test\\sample",
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
@@ -10,7 +10,7 @@
   "children": [
     {
       "name": ".gitignore",
-      "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\.gitignore",
+      "path": "PATH\\test\\sample\\.gitignore",
       "relativePath": ".gitignore",
       "type": "file",
       "isSymbolicLink": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "backend",
-      "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\backend",
+      "path": "PATH\\test\\sample\\backend",
       "relativePath": "backend",
       "type": "directory",
       "isSymbolicLink": false,
@@ -31,7 +31,7 @@
       "children": [
         {
           "name": "firebase.json",
-          "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\backend\\firebase.json",
+          "path": "PATH\\test\\sample\\backend\\firebase.json",
           "relativePath": "backend\\firebase.json",
           "type": "file",
           "isSymbolicLink": false,
@@ -42,7 +42,7 @@
         },
         {
           "name": "server",
-          "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\backend\\server",
+          "path": "PATH\\test\\sample\\backend\\server",
           "relativePath": "backend\\server",
           "type": "directory",
           "isSymbolicLink": false,
@@ -52,7 +52,7 @@
           "children": [
             {
               "name": "server.ts",
-              "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\backend\\server\\server.ts",
+              "path": "PATH\\test\\sample\\backend\\server\\server.ts",
               "relativePath": "backend\\server\\server.ts",
               "type": "file",
               "isSymbolicLink": false,
@@ -67,7 +67,7 @@
     },
     {
       "name": "empty",
-      "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\empty",
+      "path": "PATH\\test\\sample\\empty",
       "relativePath": "empty",
       "type": "directory",
       "isSymbolicLink": false,
@@ -77,7 +77,7 @@
       "children": [
         {
           "name": "tsempty",
-          "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\empty\\tsempty",
+          "path": "PATH\\test\\sample\\empty\\tsempty",
           "relativePath": "empty\\tsempty",
           "type": "directory",
           "isSymbolicLink": false,
@@ -87,7 +87,7 @@
           "children": [
             {
               "name": "file.ts",
-              "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\empty\\tsempty\\file.ts",
+              "path": "PATH\\test\\sample\\empty\\tsempty\\file.ts",
               "relativePath": "empty\\tsempty\\file.ts",
               "type": "file",
               "isSymbolicLink": false,
@@ -102,7 +102,7 @@
     },
     {
       "name": "linked",
-      "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample\\linked",
+      "path": "PATH\\test\\sample\\linked",
       "relativePath": "linked",
       "type": "directory",
       "isSymbolicLink": false,
