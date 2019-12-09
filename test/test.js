@@ -9,5 +9,3 @@ describe('Dree module tests', function() {
     require('./parse/parse.test')(expect, dree, path);
     require('./parseTree/parseTree.test')(expect, dree, path);
 });
-
-
