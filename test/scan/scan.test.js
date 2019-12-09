@@ -10,10 +10,30 @@ module.exports = (expect, fs, dree, path) => {
             case 'linux':
                 platform = 'linux';
                 break;
+            case 'darwin':
+                platform = 'mac';
+                break;
         }
 
-        function getExpected(path) {
-            return fs.readFileSync(path, 'utf8');
+        function parsePath(expected, normalize) {
+            if(platform === 'windows') {
+                if(normalize) {
+                    expected = expected.replace(/PATH/g, process.cwd().replace(/\\/g, '/'));
+                }
+                else {
+                    expected = expected.replace(/PATH/g, process.cwd().replace(/\\/g, '\\\\'));
+                }
+            } 
+            else {
+                expected = expected.replace(/PATH/g, process.cwd()).replace(/\\\\/g, '\\').replace(/\\/g, '/');
+            }
+            return expected;
+        } 
+
+        function getExpected(path, normalize) {
+            let expected =  fs.readFileSync(path, 'utf8');
+            expected = parsePath(expected, normalize);
+            return expected;
         }
 
         function getResult(tree) {
@@ -67,7 +87,7 @@ module.exports = (expect, fs, dree, path) => {
             };
 
             const result = getResult(dree.scan(path, options));
-            const expected = getExpected(`test/scan/${platform}/fourth.test.json`);
+            const expected = getExpected(`test/scan/${platform}/fourth.test.json`, true);
             expect(result).to.equal(expected);
 
         });
