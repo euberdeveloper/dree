@@ -1,86 +1,59 @@
 module.exports = (expect, fs, dree, path) => {
 
-    describe('Test: scan function', function() {
+    describe('Test: scan function', function () {
 
-        const isWin = process.platform === 'win32'
-
-        function parsePath(expected, normalize) {
-            if(isWin) {
-                if(normalize) {
-                    expected = expected.replace(/PATH/g, process.cwd().replace(/\\/g, '/'));
-                }
-                else {
-                    expected = expected.replace(/PATH/g, process.cwd().replace(/\\/g, '\\\\'));
-                }
-            } 
-            else {
-                expected = expected.replace(/PATH/g, process.cwd()).replace(/\\\\/g, '\\').replace(/\\/g, '/');
-            }
-            return expected;
-        } 
-
-        function removeUndeterminedProperties(tree) {
-            if(tree) {
-                delete tree.hash;
-                delete tree.sizeInBytes;
-                delete tree.size;
-                if(isWin) delete tree.isSymbolicLink;
-                if(tree.children) {
-                    for(const child of tree.children) {
-                        removeUndeterminedProperties(child);
-                    }
-                }
-            }
-            return tree;
+        let platform = null;
+        switch (process.platform) {
+            case 'win32':
+                platform = 'windows';
+                break;
+            case 'linux':
+                platform = 'linux';
+                break;
         }
 
-        function getExpected(path, normalize, undetermined) {
-            let expected = fs.readFileSync(path, 'utf8');
-            expected = parsePath(expected, normalize);
-            if(undetermined) {
-                expected = JSON.stringify(removeUndeterminedProperties(JSON.parse(expected)));
-            }
-            return expected;
+        function getExpected(path) {
+            return fs.readFileSync(path, 'utf8');
         }
 
-        function getResult(tree, remove) {
-            return JSON.stringify(remove ? removeUndeterminedProperties(tree) : tree);
+        function getResult(tree) {
+            return JSON.stringify(tree);
         }
 
-        it('Should return the content of "test/scan/first.test.json"', function() {
+        it(`Should return the content of "test/scan/${platform}/first.test.json"`, function () {
 
-            const result = getResult(dree.scan(path), true);
-            const expected = getExpected('test/scan/first.test.json', false, true);
+            const result = getResult(dree.scan(path));
+            const expected = getExpected(`test/scan/${platform}/first.test.json`);
             expect(result).to.equal(expected);
 
         });
 
-        it('Should return the content of "test/scan/second.test.json"', function() {
+        it(`Should return the content of "test/scan/${platform}/second.test.json"`, function () {
 
             const options = {
-                extensions: [ '', 'ts', 'json' ]
+                extensions: ['', 'ts', 'json']
             };
 
-            const result = getResult(dree.scan(path, options), true);
-            const expected = getExpected('test/scan/second.test.json', false, true);
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/second.test.json`);
             expect(result).to.equal(expected);
 
         });
 
-        it('Should return the content of "test/scan/third.test.json"', function() {
+        it(`Should return the content of "test/scan/${platform}/third.test.json"`, function () {
 
             const options = {
-                extensions: [ '', 'ts', 'json' ],
+                extensions: ['', 'ts', 'json'],
                 symbolicLinks: false
             };
 
-            const result = getResult(dree.scan(path, options), true);
-            const expected = getExpected('test/scan/third.test.json', false, true);
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/third.test.json`);
             expect(result).to.equal(expected);
 
         });
 
-        it('Should return the content of "test/scan/fourth.test.json"', function() {
+        it(`Should return the content of "test/scan/${platform}/fourth.test.json"`, function () {
 
             const options = {
                 stat: false,
@@ -93,13 +66,13 @@ module.exports = (expect, fs, dree, path) => {
                 showHidden: false
             };
 
-            const result = getResult(dree.scan(path, options), true);
-            const expected = getExpected('test/scan/fourth.test.json', true, true);
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/fourth.test.json`);
             expect(result).to.equal(expected);
 
         });
 
-        it('Should return the content of "test/scan/fifth.test.json" and compute folders and files sizes', function() {
+        it(`Should return the content of "test/scan/${platform}/fifth.test.json" and compute folders and files sizes`, function () {
 
             const options = {
                 depth: 2,
@@ -114,36 +87,42 @@ module.exports = (expect, fs, dree, path) => {
                 foldersSize += stat.size;
             }
 
-            const result = getResult(dree.scan(path, options, filesCallback, foldersCallback), true);            
-            const expected = getExpected('test/scan/fifth.test.json', false, true);
+            const result = getResult(dree.scan(path, options, filesCallback, foldersCallback));
+            const expected = getExpected(`test/scan/${platform}/fifth.test.json`);
             expect(result).to.equal(expected);
-            if(isWin) {
-                expect(filesSize).to.equal(5);
-                expect(foldersSize).to.equal(0);
+            switch (platform) {
+                case 'windows':
+                    expect(filesSize).to.equal(5);
+                    expect(foldersSize).to.equal(0);
+                    break;
+                case 'linux':
+                    expect(filesSize).to.equal(5);
+                    expect(foldersSize).to.equal(12288);
+                    break;
             }
         });
 
-        it('Should return the content of "test/scan/sixth.test.json"', function() {
+        it(`Should return the content of "test/scan/${platform}/sixth.test.json"`, function () {
 
             const options = {
                 depth: -1
             };
 
-            const result = getResult(dree.scan(path, options), true);
-            const expected = getExpected('test/scan/sixth.test.json', false, true);
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/sixth.test.json`);
 
             expect(result).to.equal(expected);
         });
 
-        it('Should return the content of "test/scan/seventh.test.json"', function() {
+        it(`Should return the content of "test/scan/${platform}/seventh.test.json"`, function () {
 
             const options = {
                 depth: 2,
                 exclude: [/firebase/]
             };
 
-            const result = getResult(dree.scan(path, options), true);
-            const expected = getExpected('test/scan/seventh.test.json', false, true);
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/seventh.test.json`);
 
             expect(result).to.equal(expected);
         });
