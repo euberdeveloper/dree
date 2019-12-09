@@ -112,7 +112,7 @@ module.exports = (expect, fs, dree, path) => {
             expect(result).to.equal(expected);
             switch (platform) {
                 case 'windows':
-                    expect(filesSize).to.equal(60);
+                    expect(filesSize).to.equal(5);
                     expect(foldersSize).to.equal(0);
                     break;
                 case 'linux':
