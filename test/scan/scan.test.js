@@ -33,10 +33,18 @@ module.exports = (expect, fs, dree, path) => {
         function getExpected(path, normalize) {
             let expected =  fs.readFileSync(path, 'utf8');
             expected = parsePath(expected, normalize);
+            if (platform === 'windows') {
+                const tree = JSON.parse(expected);
+                delete tree.hash;
+                expected = JSON.stringify(tree, null, 2);
+            }
             return expected;
         }
 
         function getResult(tree) {
+            if (platform === 'windows') {
+                delete tree.hash;
+            }
             return JSON.stringify(tree, null, 2);
         }
 
