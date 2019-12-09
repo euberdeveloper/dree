@@ -1,1 +1,10 @@
-{"name":"sample","path":"PATH\\test\\sample","relativePath":".","type":"directory","isSymbolicLink":false}
+{
+  "name": "sample",
+  "path": "C:\\Users\\eugen\\Github\\dree\\test\\sample",
+  "relativePath": ".",
+  "type": "directory",
+  "isSymbolicLink": false,
+  "sizeInBytes": 0,
+  "size": "0 B",
+  "hash": "5e8ff9bf55ba3508199d22e984129be6"
+}
