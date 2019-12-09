@@ -3,9 +3,8 @@ module.exports =
  ├── .gitignore
  ├─> backend
  │   ├── firebase.json
- │   ├>>linked.link
- │   │   └── linked.txt
- │   ├>>linkedtxt.link
+ │   ├── linked.link
+ │   ├── linkedtxt.link
  │   ├── notes.txt
  │   └─> server
  │       └── server.ts

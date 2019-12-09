@@ -4,7 +4,6 @@
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
-  "sizeInBytes": 1786137,
   "size": "1.79 MB",
   "hash": "dbd31821920011a93d3f273d47e11d23",
   "children": [
@@ -15,7 +14,6 @@
       "type": "file",
       "isSymbolicLink": false,
       "extension": "",
-      "sizeInBytes": 0,
       "size": "0 B",
       "hash": "a084b794bc0759e7a6b77810e01874f2"
     },
@@ -25,7 +23,6 @@
       "relativePath": "backend",
       "type": "directory",
       "isSymbolicLink": false,
-      "sizeInBytes": 1786112,
       "size": "1.79 MB",
       "hash": "0f8df97a3dac4257154e426df7a88e1c",
       "children": [
@@ -36,7 +33,6 @@
           "type": "file",
           "isSymbolicLink": false,
           "extension": "json",
-          "sizeInBytes": 29,
           "size": "29 B",
           "hash": "c1e70f77340f3cc187a58193805eb86a"
         },
@@ -47,7 +43,6 @@
           "type": "file",
           "isSymbolicLink": false,
           "extension": "link",
-          "sizeInBytes": 10,
           "size": "10 B",
           "hash": "51a5f5d294d9f70c3166582957b89efd"
         },
@@ -58,7 +53,6 @@
           "type": "file",
           "isSymbolicLink": false,
           "extension": "link",
-          "sizeInBytes": 20,
           "size": "20 B",
           "hash": "f949fb5c67f32f3164d165517ec7afce"
         },
@@ -69,7 +63,6 @@
           "type": "file",
           "isSymbolicLink": false,
           "extension": "txt",
-          "sizeInBytes": 5,
           "size": "5 B",
           "hash": "3a4033aa4b341d086c0e76d99db8b82d"
         },
@@ -79,7 +72,6 @@
           "relativePath": "backend\\server",
           "type": "directory",
           "isSymbolicLink": false,
-          "sizeInBytes": 1786048,
           "size": "1.79 MB",
           "hash": "571bf3154c32aa7569e77dfe7b90721c",
           "children": [
@@ -90,7 +82,6 @@
               "type": "file",
               "isSymbolicLink": false,
               "extension": "ts",
-              "sizeInBytes": 1786048,
               "size": "1.79 MB",
               "hash": "48d3586783d80c1f222b6a62a947e74d"
             }
@@ -104,7 +95,6 @@
       "relativePath": "empty",
       "type": "directory",
       "isSymbolicLink": false,
-      "sizeInBytes": 0,
       "size": "0 B",
       "hash": "5395826f5e679ee75097a49101d8af75",
       "children": [
@@ -114,7 +104,6 @@
           "relativePath": "empty\\tsempty",
           "type": "directory",
           "isSymbolicLink": false,
-          "sizeInBytes": 0,
           "size": "0 B",
           "hash": "01ae4baddc925931f374f0f212896d30",
           "children": [
@@ -125,7 +114,6 @@
               "type": "file",
               "isSymbolicLink": false,
               "extension": "ts",
-              "sizeInBytes": 0,
               "size": "0 B",
               "hash": "db3e286db4b574d6ebfdca5804df63cf"
             }
@@ -139,7 +127,6 @@
       "relativePath": "linked",
       "type": "directory",
       "isSymbolicLink": false,
-      "sizeInBytes": 25,
       "size": "25 B",
       "hash": "9897b591904f5aaf66a6c538136f3d04",
       "children": [
@@ -150,7 +137,6 @@
           "type": "file",
           "isSymbolicLink": false,
           "extension": "txt",
-          "sizeInBytes": 25,
           "size": "25 B",
           "hash": "451d51dfceec7956e60421b6f4dbdd39"
         }
