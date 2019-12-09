@@ -361,28 +361,30 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
         case Type.DIRECTORY:
             const children: Dree[] = [];
             let files: string[];
-            try {
-                files = readdirSync(path);
-            }
-            catch(exception) {
-                if(options.skipErrors) {
+            if (options.followLinks || !symbolicLink) {
+                try {
+                    files = readdirSync(path);
+                }
+                catch(exception) {
+                    if(options.skipErrors) {
+                        return null;
+                    }
+                    else {
+                        throw exception;
+                    }
+                }
+                if (options.emptyDirectory) {
+                    dirTree.isEmpty = !files.length
+                }
+                files.forEach(file => {
+                    const child: Dree | null = _scan(root, resolve(path, file), depth + 1, options, onFile, onDir);
+                    if(child !== null) {
+                        children.push(child);
+                    }
+                });
+                if (options.excludeEmptyDirectories && !children.length) {
                     return null;
                 }
-                else {
-                    throw exception;
-                }
-            }
-            if (options.emptyDirectory) {
-                dirTree.isEmpty = !files.length
-            }
-            files.forEach(file => {
-                const child: Dree | null = _scan(root, resolve(path, file), depth + 1, options, onFile, onDir);
-                if(child !== null) {
-                    children.push(child);
-                }
-            });
-            if (options.excludeEmptyDirectories && !children.length) {
-                return null;
             }
             if(options.sizeInBytes || options.size) {
                 const size = children.reduce((previous, current) => previous + (current.sizeInBytes as number), 0);

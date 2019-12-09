@@ -66,7 +66,7 @@ module.exports = (expect, dree, path) => {
                 followLinks: true
             };
 
-            const result = dree.parseTree(dree.scan(path), options);
+            const result = dree.parseTree(dree.scan(path, options), options);
             const expected = require('./sixth.test');
             expect(result).to.equal(expected);
         });

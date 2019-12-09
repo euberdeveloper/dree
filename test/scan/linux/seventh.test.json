@@ -4,9 +4,9 @@
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
-  "sizeInBytes": 29,
-  "size": "29 B",
-  "hash": "916e9d9bda78f888e04f77c8487cb494",
+  "sizeInBytes": 49,
+  "size": "49 B",
+  "hash": "6b2b160ce67c6b136f6342ac993fa22b",
   "children": [
     {
       "name": ".gitignore",
@@ -25,10 +25,31 @@
       "relativePath": "backend",
       "type": "directory",
       "isSymbolicLink": false,
-      "sizeInBytes": 5,
-      "size": "5 B",
-      "hash": "5aab02a54af1e5252aeee9ffd14c557b",
+      "sizeInBytes": 25,
+      "size": "25 B",
+      "hash": "2f438cee14fb57840234f1e472606710",
       "children": [
+        {
+          "name": "linked.link",
+          "path": "PATH/test/sample/backend/linked.link",
+          "relativePath": "backend/linked.link",
+          "type": "directory",
+          "isSymbolicLink": true,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "13dfcaee429e99fa969199e7240a597a"
+        },
+        {
+          "name": "linkedtxt.link",
+          "path": "PATH/test/sample/backend/linkedtxt.link",
+          "relativePath": "backend/linkedtxt.link",
+          "type": "file",
+          "isSymbolicLink": true,
+          "extension": "link",
+          "sizeInBytes": 20,
+          "size": "20 B",
+          "hash": "8ac875af9057830ddfb1c7fb9046f680"
+        },
         {
           "name": "notes.txt",
           "path": "PATH/test/sample/backend/notes.txt",

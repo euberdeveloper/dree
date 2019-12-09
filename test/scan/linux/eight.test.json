@@ -5,9 +5,9 @@
   "type": "directory",
   "isSymbolicLink": false,
   "isEmpty": false,
-  "sizeInBytes": 56,
-  "size": "56 B",
-  "hash": "56acd84215a848fd6ea0d583d2d26721",
+  "sizeInBytes": 76,
+  "size": "76 B",
+  "hash": "2ee42f8e4e250ef344b806e990d3c8f9",
   "children": [
     {
       "name": ".gitignore",
@@ -27,9 +27,9 @@
       "type": "directory",
       "isSymbolicLink": false,
       "isEmpty": false,
-      "sizeInBytes": 32,
-      "size": "32 B",
-      "hash": "948e557dfbbb04f0730359033639a57e",
+      "sizeInBytes": 52,
+      "size": "52 B",
+      "hash": "6f3a1e2d41b245d5ce265ede42fcc8b5",
       "children": [
         {
           "name": "firebase.json",
@@ -41,6 +41,27 @@
           "sizeInBytes": 27,
           "size": "27 B",
           "hash": "bafc664309b11a828c0adf99ed9e8516"
+        },
+        {
+          "name": "linked.link",
+          "path": "PATH/test/sample/backend/linked.link",
+          "relativePath": "backend/linked.link",
+          "type": "directory",
+          "isSymbolicLink": true,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "13dfcaee429e99fa969199e7240a597a"
+        },
+        {
+          "name": "linkedtxt.link",
+          "path": "PATH/test/sample/backend/linkedtxt.link",
+          "relativePath": "backend/linkedtxt.link",
+          "type": "file",
+          "isSymbolicLink": true,
+          "extension": "link",
+          "sizeInBytes": 20,
+          "size": "20 B",
+          "hash": "8ac875af9057830ddfb1c7fb9046f680"
         },
         {
           "name": "notes.txt",

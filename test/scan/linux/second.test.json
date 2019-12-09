@@ -6,7 +6,7 @@
   "isSymbolicLink": false,
   "sizeInBytes": 1714634,
   "size": "1.71 MB",
-  "hash": "84449a5bb5ce952b6a8e7eaa6ccd72c8",
+  "hash": "626c9f1f05761d4a5c2a5bd24f703953",
   "children": [
     {
       "name": ".gitignore",
@@ -27,7 +27,7 @@
       "isSymbolicLink": false,
       "sizeInBytes": 1714634,
       "size": "1.71 MB",
-      "hash": "3d7be60e1040728292610c557c20feb4",
+      "hash": "c5b271ce906d44860e0d6cf313167036",
       "children": [
         {
           "name": "firebase.json",
@@ -39,6 +39,16 @@
           "sizeInBytes": 27,
           "size": "27 B",
           "hash": "bafc664309b11a828c0adf99ed9e8516"
+        },
+        {
+          "name": "linked.link",
+          "path": "PATH/test/sample/backend/linked.link",
+          "relativePath": "backend/linked.link",
+          "type": "directory",
+          "isSymbolicLink": true,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "13dfcaee429e99fa969199e7240a597a"
         },
         {
           "name": "server",
