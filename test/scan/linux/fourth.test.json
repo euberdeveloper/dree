@@ -1,1 +1,137 @@
-{"name":"sample","path":"PATH/test/sample","relativePath":".","type":"directory","isSymbolicLink":false,"sizeInBytes":1714639,"size":"1.71 MB","hash":"rCklrm9bc4iStBK9wZp9Zu64GLY=","children":[{"name":"backend","path":"PATH/test/sample/backend","relativePath":"backend","type":"directory","isSymbolicLink":false,"sizeInBytes":1714639,"size":"1.71 MB","hash":"AWNX2+3HumpEhrxLK0NJ0jptTxk=","children":[{"name":"firebase.json","path":"PATH/test/sample/backend/firebase.json","relativePath":"backend/firebase.json","type":"file","isSymbolicLink":false,"extension":"json","sizeInBytes":27,"size":"27 B","hash":"yp5sqsL0ABNmvwHg9ElA+4mmXNE="},{"name":"notes.txt","path":"PATH/test/sample/backend/notes.txt","relativePath":"backend/notes.txt","type":"file","isSymbolicLink":false,"extension":"txt","sizeInBytes":5,"size":"5 B","hash":"Td+fE16fqGmowEg594C95OqpuhU="},{"name":"server","path":"PATH/test/sample/backend/server","relativePath":"backend/server","type":"directory","isSymbolicLink":false,"sizeInBytes":1714607,"size":"1.71 MB","hash":"aWyBQBDovHWniMEAIdXWfleTHr0=","children":[{"name":"server.ts","path":"PATH/test/sample/backend/server/server.ts","relativePath":"backend/server/server.ts","type":"file","isSymbolicLink":false,"extension":"ts","sizeInBytes":1714607,"size":"1.71 MB","hash":"j6VTQJlViOoTR8u3zWrUGBzM/9s="}]}]}]}
+{
+  "name": "sample",
+  "path": "PATH/test/sample",
+  "relativePath": ".",
+  "type": "directory",
+  "isSymbolicLink": false,
+  "sizeInBytes": 1714663,
+  "size": "1.71 MB",
+  "hash": "HNDflmQNetS0RDTLfgNoJRmlME0=",
+  "children": [
+    {
+      "name": "backend",
+      "path": "PATH/test/sample/backend",
+      "relativePath": "backend",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 1714639,
+      "size": "1.71 MB",
+      "hash": "AWNX2+3HumpEhrxLK0NJ0jptTxk=",
+      "children": [
+        {
+          "name": "firebase.json",
+          "path": "PATH/test/sample/backend/firebase.json",
+          "relativePath": "backend/firebase.json",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "json",
+          "sizeInBytes": 27,
+          "size": "27 B",
+          "hash": "yp5sqsL0ABNmvwHg9ElA+4mmXNE="
+        },
+        {
+          "name": "notes.txt",
+          "path": "PATH/test/sample/backend/notes.txt",
+          "relativePath": "backend/notes.txt",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "txt",
+          "sizeInBytes": 5,
+          "size": "5 B",
+          "hash": "Td+fE16fqGmowEg594C95OqpuhU="
+        },
+        {
+          "name": "server",
+          "path": "PATH/test/sample/backend/server",
+          "relativePath": "backend/server",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 1714607,
+          "size": "1.71 MB",
+          "hash": "aWyBQBDovHWniMEAIdXWfleTHr0=",
+          "children": [
+            {
+              "name": "server.ts",
+              "path": "PATH/test/sample/backend/server/server.ts",
+              "relativePath": "backend/server/server.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 1714607,
+              "size": "1.71 MB",
+              "hash": "j6VTQJlViOoTR8u3zWrUGBzM/9s="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "path": "PATH/test/sample/empty",
+      "relativePath": "empty",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 0,
+      "size": "0 B",
+      "hash": "A9DGKeO1DaGlxnhcKf+4oHbMZww=",
+      "children": [
+        {
+          "name": "empty",
+          "path": "PATH/test/sample/empty/empty",
+          "relativePath": "empty/empty",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "rYcQm//wdl9N2M9JQ7BNFqQHD+o="
+        },
+        {
+          "name": "tsempty",
+          "path": "PATH/test/sample/empty/tsempty",
+          "relativePath": "empty/tsempty",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "TRBupHZitYvW4cBDUHD6OZKZkkc=",
+          "children": [
+            {
+              "name": "file.ts",
+              "path": "PATH/test/sample/empty/tsempty/file.ts",
+              "relativePath": "empty/tsempty/file.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 0,
+              "size": "0 B",
+              "hash": "R49paiTOtSygfgYqpnuJewEZQXI="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "linked",
+      "path": "PATH/test/sample/linked",
+      "relativePath": "linked",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 24,
+      "size": "24 B",
+      "hash": "nUOs7i/VNPkiFSTuIaS1TWxWfQ0=",
+      "children": [
+        {
+          "name": "linked.txt",
+          "path": "PATH/test/sample/linked/linked.txt",
+          "relativePath": "linked/linked.txt",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "txt",
+          "sizeInBytes": 24,
+          "size": "24 B",
+          "hash": "NFDL/u63fh1k5SsVfxHvWKAEUII="
+        }
+      ]
+    }
+  ]
+}

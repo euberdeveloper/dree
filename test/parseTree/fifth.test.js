@@ -1,6 +1,10 @@
 module.exports =
 `sample
- ├── .gitignore
- └─> backend
-     ├── notes.txt
-     └─> server`;
+ ├─> backend
+ │   ├── notes.txt
+ │   └─> server
+ ├─> empty
+ │   ├─> empty
+ │   └─> tsempty
+ └─> linked
+     └── linked.txt`;

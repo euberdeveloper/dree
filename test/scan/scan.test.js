@@ -37,7 +37,7 @@ module.exports = (expect, fs, dree, path) => {
         }
 
         function getResult(tree) {
-            return JSON.stringify(tree);
+            return JSON.stringify(tree, null, 2);
         }
 
         it(`Should return the content of "test/scan/${platform}/first.test.json"`, function () {
@@ -116,8 +116,8 @@ module.exports = (expect, fs, dree, path) => {
                     expect(foldersSize).to.equal(0);
                     break;
                 case 'linux':
-                    expect(filesSize).to.equal(5);
-                    expect(foldersSize).to.equal(12288);
+                    expect(filesSize).to.equal(29);
+                    expect(foldersSize).to.equal(28672);
                     break;
             }
         });
@@ -143,6 +143,45 @@ module.exports = (expect, fs, dree, path) => {
 
             const result = getResult(dree.scan(path, options));
             const expected = getExpected(`test/scan/${platform}/seventh.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
+        it(`Should return the content of "test/scan/${platform}/eight.test.json"`, function () {
+
+            const options = {
+                emptyDirectory: true,
+                excludeEmptyDirectories: true,
+                exclude: /.ts/
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/eight.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
+        it(`Should return the content of "test/scan/${platform}/ninth.test.json"`, function () {
+
+            const options = {
+                sizeInBytes: false,
+                size: true
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/ninth.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
+        it(`Should return the content of "test/scan/${platform}/tenth.test.json"`, function () {
+
+            const options = {
+                followLinks: true
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/tenth.test.json`);
 
             expect(result).to.equal(expected);
         });

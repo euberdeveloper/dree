@@ -23,12 +23,12 @@ module.exports = (expect, dree, path) => {
 
         });
 
-        it('Should return the exported content of "test/parse/second.test.js"', function() {
+        it('Should return the exported content of "test/parse/third.test.js"', function() {
 
             const options = {
                 depth: 2,
                 exclude: /firebase/,
-                showHidden: 'false'
+                showHidden: false
             };
 
             const result = dree.parse(path, options);
@@ -45,6 +45,17 @@ module.exports = (expect, dree, path) => {
 
             const result = dree.parse(path, options);
             const expected = require('./fourth.test');
+            expect(result).to.equal(expected);
+        });
+
+        it('Should return the exported content of "test/parse/fifth.test.js"', function() {
+
+            const options = {
+                followLinks: true
+            };
+
+            const result = dree.parse(path, options);
+            const expected = require('./fifth.test');
             expect(result).to.equal(expected);
         });
 
