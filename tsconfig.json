@@ -8,7 +8,7 @@
       "dom"
     ],
     "outDir": "dist",
-    "sourceMap": false,
+    "sourceMap": true,
     "declaration": true
   },
   "include": [
