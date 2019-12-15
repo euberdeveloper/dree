@@ -12,6 +12,7 @@
     "nyc": "nyc --extension=ts --reporter=html --reporter=text --reporter=lcov npm run test",
     "cover:coveralls": "nyc report --extension=ts --reporter=text-lcov | coveralls",
     "cover:codecov": "nyc report --extension=ts --reporter=text-lcov > coverage.lcov && codecov",
+    "cover": "npm run cover:coveralls && npm run cover:codecov",
     "transpile": "tsc",
     "commit": "git-cz"
   },
