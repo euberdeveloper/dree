@@ -10,7 +10,8 @@
   "scripts": {
     "test": "mocha --reporter spec",
     "nyc": "nyc --extension=ts --reporter=html --reporter=text --reporter=lcov npm run test",
-    "cover": "nyc report --extension=ts --reporter=text-lcov | coveralls",
+    "cover:coveralls": "nyc report --extension=ts --reporter=text-lcov | coveralls",
+    "cover:codecov": "nyc report --extension=ts --reporter=text-lcov > coverage.lcov && codecov",
     "transpile": "tsc",
     "commit": "git-cz"
   },
@@ -39,6 +40,7 @@
     "@types/node": "^12.12.14",
     "@types/yargs": "^13.0.3",
     "chai": "^4.2.0",
+    "codecov": "^3.6.1",
     "commitizen": "^4.0.3",
     "coveralls": "^3.0.9",
     "cz-conventional-changelog": "^3.0.2",
