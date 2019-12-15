@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/euberdeveloper/dree.svg?branch=master)](https://travis-ci.org/euberdeveloper/dree)
 [![CircleCI](https://circleci.com/gh/euberdeveloper/dree.svg?style=svg)](https://circleci.com/gh/euberdeveloper/dree)
 [![Coverage Status](https://coveralls.io/repos/github/euberdeveloper/dree/badge.svg?branch=master)](https://coveralls.io/github/euberdeveloper/dree?branch=master)
-[![Codecov Status](https://codecov.io/gh/euberdeveloper/dree/branch/master/graph/badge.svg)](https://codecov.io/gh/euberdeveloper/dree/branch/master/graph/badge.svg)
+[![Codecov Status](https://codecov.io/gh/euberdeveloper/dree/branch/master/graph/badge.svg)](https://codecov.io/gh/euberdeveloper/dree)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![License](https://img.shields.io/npm/l/dree.svg)](https://github.com/euberdeveloper/dree/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/euberdeveloper/dree.svg)](https://github.com/euberdeveloper/dree/issues)
