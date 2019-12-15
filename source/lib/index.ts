@@ -1,6 +1,12 @@
 import { resolve, basename, extname, relative } from 'path';
 import { createHash } from 'crypto';
-import { statSync, readdirSync, readFileSync, lstatSync } from 'fs';
+import { statSync, readdirSync, readFileSync, lstatSync, stat, readdir, readFile, lstat } from 'fs';
+import { promisify } from 'util';
+
+const statAsync = promisify(stat);
+const readdirAsync = promisify(readdir);
+const readFileAsync = promisify(readFile);
+const lstatAsync = promisify(lstat);
 
 /* DECLARATION OF @types/crypto AND @types/fs NEEDED TO AVOID @types/node DEPENDENCY */
 
@@ -447,6 +453,161 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
     return dirTree;
 }
 
+async function _scanAsync(root: string, path: string, depth: number, options: ScanOptions, onFile?: Callback, onDir?: Callback): Promise<Dree | null> {
+
+    if(options.depth !== undefined && depth > options.depth) {
+        return null;
+    }
+
+    if(options.exclude && root !== path) {
+        const excludes = (options.exclude instanceof RegExp) ? [options.exclude] : options.exclude;
+        if(excludes.some(pattern => pattern.test(path))) {
+            return null;
+        }
+    }
+
+    const relativePath = (root === path) ? '.' : relative(root, path);
+    const name = basename(path);
+    let stat: Stats;
+    try {
+        stat = await statAsync(path);
+    }
+    catch(exception) {
+        if(options.skipErrors) {
+            return null;
+        }
+        else {
+            throw exception;
+        }
+    }
+    let lstat: Stats;
+    try {
+        lstat = await lstatAsync(path);
+    }
+    catch(exception) {
+        if(options.skipErrors) {
+            return null;
+        }
+        else {
+            throw exception;
+        }
+    }
+    const symbolicLink = lstat.isSymbolicLink();
+    const type = stat.isFile() ? Type.FILE : Type.DIRECTORY;
+
+    if(!options.showHidden && name.charAt(0) === '.') {
+        return null;
+    }
+    if(!options.symbolicLinks && symbolicLink) {
+        return null;
+    }
+    
+    let hash: any;
+    if(options.hash){
+        const hashAlgorithm = options.hashAlgorithm as string;
+        hash = createHash(hashAlgorithm);
+        hash.update(name);
+    }
+
+    const dirTree: Dree = {
+        name: name,
+        path: options.normalize ? path.replace(/\\/g, '/') : path,
+        relativePath: options.normalize ? relativePath.replace(/\\/g, '/') : relativePath,
+        type: type,
+        isSymbolicLink: symbolicLink,
+        stat: options.stat ? (options.followLinks ? stat : lstat) : undefined
+    };
+
+    switch(type) {
+        case Type.DIRECTORY:
+            const children: Dree[] = [];
+            let files: string[];
+            if (options.followLinks || !symbolicLink) {
+                try {
+                    files = await readdirAsync(path);
+                }
+                catch(exception) {
+                    if(options.skipErrors) {
+                        return null;
+                    }
+                    else {
+                        throw exception;
+                    }
+                }
+                if (options.emptyDirectory) {
+                    dirTree.isEmpty = !files.length
+                }
+                await Promise.all(files.map(async file => {
+                    const child: Dree | null = await _scanAsync(root, resolve(path, file), depth + 1, options, onFile, onDir);
+                    if(child !== null) {
+                        children.push(child);
+                    }
+                }));
+                if (options.excludeEmptyDirectories && !children.length) {
+                    return null;
+                }
+            }
+            if(options.sizeInBytes || options.size) {
+                const size = children.reduce((previous, current) => previous + (current.sizeInBytes as number), 0);
+                dirTree.sizeInBytes = size;
+                dirTree.size = options.size ? parseSize(size) : undefined;
+                if(!options.sizeInBytes) {
+                    children.forEach(child => child.sizeInBytes = undefined);
+                }
+            }
+            if(options.hash) {
+                children.forEach(child => {
+                    hash.update(child.hash);
+                });
+                const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
+                dirTree.hash = hash.digest(hashEncoding);
+            }
+            if(children.length) {
+                dirTree.children = children;
+            }
+            break;
+        case Type.FILE:
+            dirTree.extension = extname(path).replace('.', '');
+            if(options.extensions && options.extensions.indexOf(dirTree.extension) === -1) {
+                return null;
+            }
+            if(options.sizeInBytes || options.size) {
+                const size = (options.followLinks ? stat.size : lstat.size);
+                dirTree.sizeInBytes = size;
+                dirTree.size = options.size ? parseSize(size) : undefined;
+            }
+            if(options.hash) {
+                let data: Buffer;
+                try {
+                    data = await readFileAsync(path);
+                }
+                catch(exception) {
+                    if(options.skipErrors) {
+                        return null;
+                    }
+                    else {
+                        throw exception;
+                    }
+                }
+                hash.update(data);
+                const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
+                dirTree.hash = hash.digest(hashEncoding);
+            }
+            break;
+        default:
+            return null;
+    } 
+
+    if(onFile && type === Type.FILE) {
+        onFile(dirTree, options.followLinks ? stat : lstat);
+    }
+    else if(onDir && type === Type.DIRECTORY) {
+        onDir(dirTree, options.followLinks ? stat : lstat);
+    }
+
+    return dirTree;
+}
+
 function skip(child: Dree, options: ParseOptions, depth: number): boolean {
     return (!options.symbolicLinks && child.isSymbolicLink) 
     || (!options.showHidden && child.name.charAt(0) === '.') 
@@ -555,7 +716,7 @@ function _parseTree(children: Dree[], prefix: string, options: ParseOptions, dep
 /* EXPORTED FUNCTIONS */
 
 /**
- * Retrurns the Directory Tree of a given path
+ * Retrurns the Directory Tree of a given path. This function in synchronous.
  * @param  {string} path The path wich you want to inspect
  * @param  {object} options An object used as options of the function
  * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
@@ -566,6 +727,22 @@ export function scan(path: string, options?: ScanOptions, onFile?: Callback, onD
     const root = resolve(path);
     const opt = mergeScanOptions(options);
     const result = _scan(root, root, 0, opt, onFile, onDir) as Dree;
+    result.sizeInBytes = result && opt.sizeInBytes ? result.sizeInBytes : undefined;
+    return result;
+}
+
+/**
+ * Retrurns in a promise the Directory Tree of a given path. This function is asynchronous.
+ * @param  {string} path The path wich you want to inspect
+ * @param  {object} options An object used as options of the function
+ * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
+ * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
+ * @return {object} The directory tree as a Dree object
+ */
+export async function scanAsync(path: string, options?: ScanOptions, onFile?: Callback, onDir?: Callback): Promise<Dree> {
+    const root = resolve(path);
+    const opt = mergeScanOptions(options);
+    const result = await _scanAsync(root, root, 0, opt, onFile, onDir) as Dree;
     result.sizeInBytes = result && opt.sizeInBytes ? result.sizeInBytes : undefined;
     return result;
 }
