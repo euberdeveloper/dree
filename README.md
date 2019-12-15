@@ -8,7 +8,7 @@
 ![npm](https://img.shields.io/npm/v/dree.svg)
 
 # dree
-A nodejs module wich helps you handle a directory tree. It provides you an object of a directory tree with custom configuration and optional callback method when a file or dir is scanned. You will also be able to turn the tree into a string representation. With Typescript support.
+A nodejs module wich helps you handle a directory tree. It provides you an object of a directory tree with custom configuration and optional callback method when a file or dir is scanned. You will also be able to turn the tree into a string representation. With Typescript support and both sync and async support.
 
 ## Install
 
@@ -71,6 +71,28 @@ const dirCallback = function (element, stat) {
 };
 
 const tree = dree.scan('./folder', options, fileCallback, dirCallback);
+```
+
+With the asynchronous version:
+
+```js
+const dree = require('dree');
+
+const options = {
+  stat: false,
+  normalize: true,
+  followLinks: true,
+  size: true,
+  hash: true,
+  depth: 5,
+  exclude: /dir_to_exclude/,
+  extensions: [ 'txt', 'jpg' ]
+};
+
+dree.scanAsync('./folder', options)
+  .then(function (tree) {
+    console.log(tree);
+  });
 ```
 
 ### Get a string
@@ -245,7 +267,7 @@ sample
 
 **Description:**
 
-Given a path, returns an object representing its directory tree. The result could be customized with options and a callback for either each file and each directory is provided. Executed syncronously. See __Usage__ to have an example.
+Given a path, returns an object representing its directory tree. The result could be customized with options and a callback for either each file and each directory is provided. Executed synchronously. See __Usage__ to have an example.
 
 **Parameters:**
 
@@ -290,6 +312,45 @@ Given a path, returns an object representing its directory tree. The result coul
 
 This is also the structure of the callbacks' first parameter.
 
+### scanAsync
+
+**Syntax:**
+
+`dree.scanAsync(path, options, fileCallback, dirCallback)`
+
+**Description:**
+
+Given a path, returns a promise to an object representing its directory tree. The result could be customized with options and a callback for either each file and each directory is provided. Executed asynchronously, it is the asynchronous analog of the `scan` function. See __Usage__ to have an example.
+
+**Parameters:**
+
+* __path__: Is of type `string`, and is the relative or absolute path the file or directory that you want to scan
+* __options__: Optional. Is of type `object` and allows you to customize the function behaviour.
+* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled).
+* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled).
+
+**Options parameters:**
+
+They are exactly the same of the `scan`'s function option parameters.
+
+**Result object parameters:**
+
+* __name__: Always returned. The name of the node as a string.
+* __path__: Always returned. The absolute path of the node.
+* __relativePath__: Always returned. The relative path from the root of the node.
+* __type__: Always returned. Values: `file` or `directory`.
+* __isSymbolicLink__: Always returned. A boolean with true value if the node is a symbolic link.
+* __sizeInBytes__: The size in bytes of the node, returned as a number.
+* __size__: The size of the node, returned as a string rounded to two decimals and appropriate unit.
+* __hash__: The hash of the node.
+* __extension__: The extension (without dot) of the node. Returned only if the node is a file.
+* __isEmpty__: A boolean with true value if the node is a directory containig no files and no directories.
+* __stat__: The `fs.lstat` or `fs.fstat` of the node.
+* __children__: An array of object structured like this one, containing all the children of the node.
+
+This is also the structure of the callbacks' first parameter.
+
+
 ### parse
 
 **Syntax:**
@@ -298,7 +359,7 @@ This is also the structure of the callbacks' first parameter.
 
 **Description:**
 
-Given a path, returns a string representing its directory tree. The result could be customized with options. Executed syncronously. See __Usage__ to have an example.
+Given a path, returns a string representing its directory tree. The result could be customized with options. Executed synchronously. See __Usage__ to have an example.
 
 **Parameters:**
 
