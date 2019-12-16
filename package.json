@@ -49,12 +49,12 @@
     "nyc": "^14.1.1",
     "typescript": "^3.7.3"
   },
+  "dependencies": {
+    "yargs": "^15.0.2"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "yargs": "^15.0.2"
   }
 }
