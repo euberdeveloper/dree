@@ -802,13 +802,29 @@ async function _parseAsync(children: string[], prefix: string, options: ParseOpt
 
 function _parseTree(children: Dree[], prefix: string, options: ParseOptions, depth: number): string {
     let result = '';
-    children.filter(child => !skip(child, options, depth)).forEach((child, index, children) => {
+    children
+        .filter(child => !skip(child, options, depth))
+        .forEach((child, index, children) => {
+            const last = child.isSymbolicLink ? '>>' : (child.type === Type.DIRECTORY ? '─> ' : '── ');
+            const line = (index === children.length - 1) ? '└' + last : '├' + last;
+            const newPrefix = prefix + (index === children.length - 1 ? '    ' : '│   ');
+            result += prefix + line + child.name;
+            result += (child.children && (options.followLinks || !child.isSymbolicLink) ? _parseTree(child.children, newPrefix, options, depth + 1) : '');
+        });
+    return result;
+}
+
+async function _parseTreeAsync(children: Dree[], prefix: string, options: ParseOptions, depth: number): Promise<string> {
+    let result = '';
+    const filteredChildren = children.filter(child => !skip(child, options, depth));
+    for (let index = 0; index < filteredChildren.length; index++) {
+        const child = filteredChildren[index];
         const last = child.isSymbolicLink ? '>>' : (child.type === Type.DIRECTORY ? '─> ' : '── ');
-        const line = (index === children.length - 1) ? '└' + last : '├' + last;
-        const newPrefix = prefix + (index === children.length - 1 ? '    ' : '│   ');
+        const line = (index === filteredChildren.length - 1) ? '└' + last : '├' + last;
+        const newPrefix = prefix + (index === filteredChildren.length - 1 ? '    ' : '│   ');
         result += prefix + line + child.name;
-        result += (child.children && (options.followLinks || !child.isSymbolicLink) ? _parseTree(child.children, newPrefix, options, depth + 1) : '');
-    });
+        result += (child.children && (options.followLinks || !child.isSymbolicLink) ? (await _parseTreeAsync(child.children, newPrefix, options, depth + 1)) : '');
+    }
     return result;
 }
 
@@ -981,5 +997,19 @@ export function parseTree(dirTree: Dree, options?: ParseOptions): string {
     const opt = mergeParseOptions(options);
     result += dirTree ? dirTree.name : '';
     result += (dirTree.children ? _parseTree(dirTree.children, '\n ', opt, 1) : '');
+    return result;
+}
+
+/**
+ * Retrurns a promise to a string representation of a Directory Tree given an object returned from scan
+ * @param  {object} dirTree The object returned from scan, which will be parsed
+ * @param  {object} options An object used as options of the function
+ * @return {Promise<string>} A promise to a string representing the object given as first parameter
+ */
+export async function parseTreeAsync(dirTree: Dree, options?: ParseOptions): Promise<string> {
+    let result = '';
+    const opt = mergeParseOptions(options);
+    result += dirTree ? dirTree.name : '';
+    result += (dirTree.children ? (await _parseTreeAsync(dirTree.children, '\n ', opt, 1)) : '');
     return result;
 }

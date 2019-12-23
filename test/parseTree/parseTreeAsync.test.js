@@ -13,30 +13,30 @@ module.exports = (expect, dree, path) => {
             break;
     }
 
-    describe('Test: parseTree function', function() {
+    describe('Test: parseTreeAsync function', async function() {
 
-        it('Should return the exported content of "test/parseTree/first.test.js"', function() {
+        it('Should return the exported content of "test/parseTree/first.test.js"', async function() {
 
-            const result = dree.parseTree(dree.scan(path));
+            const result = await dree.parseTreeAsync(dree.scan(path));
             const expected = require(`./${platform}/first.test`);
             expect(result).to.equal(expected);
 
         });
 
-        it('Should return the exported content of "test/parseTree/second.test.js"', function() {
+        it('Should return the exported content of "test/parseTree/second.test.js"', async function() {
 
             const options = {
                 extensions: [ '', 'ts', 'txt' ],
                 symbolicLinks: false
             };
 
-            const result = dree.parseTree(dree.scan(path), options);
+            const result = await dree.parseTreeAsync(dree.scan(path), options);
             const expected = require(`./${platform}/second.test`);
             expect(result).to.equal(expected);
 
         });
 
-        it('Should return the exported content of "test/parseTree/third.test.js"', function() {
+        it('Should return the exported content of "test/parseTree/third.test.js"', async function() {
 
             const options = {
                 depth: 2,
@@ -44,23 +44,23 @@ module.exports = (expect, dree, path) => {
                 showHidden: false
             };
 
-            const result = dree.parseTree(dree.scan(path), options);
+            const result = await dree.parseTreeAsync(dree.scan(path), options);
             const expected = require(`./${platform}/third.test`);
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parseTree/fourth.test.js"', function() {
+        it('Should return the exported content of "test/parseTree/fourth.test.js"', async function() {
 
             const options = {
                 depth: -1
             };
 
-            const result = dree.parseTree(dree.scan(path), options);
+            const result = await dree.parseTreeAsync(dree.scan(path), options);
             const expected = require(`./${platform}/fourth.test`);
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parseTree/fifth.test.js"', function() {
+        it('Should return the exported content of "test/parseTree/fifth.test.js"', async function() {
 
             const options = {
                 depth: 2,
@@ -68,18 +68,18 @@ module.exports = (expect, dree, path) => {
                 showHidden: false
             };
 
-            const result = dree.parseTree(dree.scan(path), options);
+            const result = await dree.parseTreeAsync(dree.scan(path), options);
             const expected = require(`./${platform}/fifth.test`);
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parseTree/sixth.test.js"', function() {
+        it('Should return the exported content of "test/parseTree/sixth.test.js"', async function() {
 
             const options = {
                 followLinks: true
             };
 
-            const result = dree.parseTree(dree.scan(path, options), options);
+            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
             const expected = require(`./${platform}/sixth.test`);
             expect(result).to.equal(expected);
         });
