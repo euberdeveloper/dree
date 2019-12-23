@@ -11,7 +11,7 @@
 ![npm](https://img.shields.io/npm/v/dree.svg)
 
 # dree
-A nodejs module wich helps you handle a directory tree. It provides you an object of a directory tree with custom configuration and optional callback method when a file or dir is scanned. You will also be able to turn the tree into a string representation. With Typescript support and both sync and async support.
+A nodejs module which helps you handle a directory tree. It provides you an object of a directory tree with custom configuration and optional callback method when a file or dir is scanned. You will also be able to turn the tree into a string representation. With Typescript support and both sync and async support.
 
 ## Install
 
@@ -136,6 +136,24 @@ const options = {
 };
 
 const string = dree.parseTree(tree, options);
+```
+
+With the asynchronous version:
+
+```js
+const dree = require('dree');
+
+const options = {
+  followLinks: true,
+  depth: 5,
+  exclude: /dir_to_exclude/,
+  extensions: [ 'txt', 'jpg' ]
+};
+
+dree.parseAsync('./folder', options)
+  .then(function (string) {
+    console.log(string);
+  });
 ```
 
 ## Usage (global module)
@@ -276,8 +294,8 @@ Given a path, returns an object representing its directory tree. The result coul
 
 * __path__: Is of type `string`, and is the relative or absolute path the file or directory that you want to scan
 * __options__: Optional. Is of type `object` and allows you to customize the function behaviour.
-* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled).
-* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled).
+* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled).
+* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled).
 
 **Options parameters:**
 
@@ -290,8 +308,8 @@ Given a path, returns an object representing its directory tree. The result coul
 * __hash__: Default value: `true`. If true, every node in the result will contain `hash` property, computed by taking in consideration the name and the content of the node. If the node is a folder, all his considered inner files will be used by the algorithm.
 * __hashAlgorithm__: Values: `md5`(default) and `sha1`. Hash algorithm used by `cryptojs` to return the hash.
 * __hashEncoding__: Values: `hex`(default), `latin1` and `base64`. Hash encoding used by `cryptojs` to return the hash.
-* __showHidden__: Default value: `true`. If true, all hidden files and dirs will be included in the result. A hidden file or a directory has a name wich starts with a dot and in some systems like Linux are hidden.
-* __depth__: Default value: `undefined`. It is a number wich says the max depth the algorithm can reach scanning the given path. All files and dirs wich are beyound the max depth will not be considered by the algorithm.
+* __showHidden__: Default value: `true`. If true, all hidden files and dirs will be included in the result. A hidden file or a directory has a name which starts with a dot and in some systems like Linux are hidden.
+* __depth__: Default value: `undefined`. It is a number which says the max depth the algorithm can reach scanning the given path. All files and dirs which are beyound the max depth will not be considered by the algorithm.
 * __exclude__: Default value: `undefined`. It is a regex or array of regex and all the matched paths will not be considered by the algorithm.
 * __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
 * __emptyDirectory__: Default value: `false`. If value is `true`, the `isEmpty` property will be added in all the directory nodes in the result. Its value will be `true` if the directory contains no files and no directories, `false` otherwise.
@@ -329,8 +347,8 @@ Given a path, returns a promise to an object representing its directory tree. Th
 
 * __path__: Is of type `string`, and is the relative or absolute path the file or directory that you want to scan
 * __options__: Optional. Is of type `object` and allows you to customize the function behaviour.
-* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled).
-* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, wich **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled).
+* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled).
+* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled).
 
 **Options parameters:**
 
@@ -373,14 +391,35 @@ Given a path, returns a string representing its directory tree. The result could
 
 * __symbolicLinks__: Default value: `true`. If true, all symbolic links found will be included in the result. Could not work on Windows.
 * __followLinks__: Default value: `false`. If true, all symbolic links will be followed, including even their content if they link to a folder. Could not work on Windows.
-* __showHidden__: Default value: `true`. If true, all hidden files and dirs will be included in the result. A hidden file or a directory has a name wich starts with a dot and in some systems like Linux are hidden.
-* __depth__: Default value: `undefined`. It is a number wich says the max depth the algorithm can reach scanning the given path. All files and dirs wich are beyound the max depth will not be considered by the algorithm.
+* __showHidden__: Default value: `true`. If true, all hidden files and dirs will be included in the result. A hidden file or a directory has a name which starts with a dot and in some systems like Linux are hidden.
+* __depth__: Default value: `undefined`. It is a number which says the max depth the algorithm can reach scanning the given path. All files and dirs which are beyound the max depth will not be considered by the algorithm.
 * __exclude__: Default value: `undefined`. It is a regex or array of regex and all the matched paths will not be considered by the algorithm.
 * __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
 
 **Result string:**
 
 The result will be a string representing the Directory Tree of the path given as first parameter. Folders will be preceded by `>` and symbolic links by `>>`.
+
+**Syntax:**
+
+`dree.parseAsync(path, options)`
+
+**Description:**
+
+Given a path, returns a promise to a string representing its directory tree. The result could be customized with options. Executed asynchronously. See __Usage__ to have an example.
+
+**Parameters:**
+
+* __path__: Is of type `string`, and is the relative or absolute path the file or directory that you want to parse
+* __options__: Optional. Is of type `object` and allows you to customize the function behaviour.
+
+**Options parameters:**
+
+They are exactly the same of the `parse`'s function options parameters.
+
+**Result string:**
+
+The result will be a promise to string representing the Directory Tree of the path given as first parameter. Folders will be preceded by `>` and symbolic links by `>>`.
 
 ### parseTree
 
@@ -390,7 +429,7 @@ The result will be a string representing the Directory Tree of the path given as
 
 **Description:**
 
-The same as `parse`, but the first parameter is an object returned by `scan` function.
+The same as `parse`, but the first parameter is an object returned by `scan` function. Executed synchronously.
 
 **Parameters:**
 
@@ -405,6 +444,29 @@ Same parameters of `parse`, with one more parameter, `skipErrors`: is the same p
 
 The result will be a string representing the Directory Tree of the object given as first parameter. Folders will be preceded by `>` and symbolic links by `>>`.
 
+### parseTreeAsync
+
+**Syntax:**
+
+`dree.parseTreeAsync(dirTree, options)`
+
+**Description:**
+
+The same as `parseAsync`, but the first parameter is an object returned by `scan` function. Executed asynchronously.
+
+**Parameters:**
+
+* __dirTree__: Is of type `object`, and is the object representing a Directory Tree that you want to parse into a string.
+* __options__: Optional. Is of type `object` and allows you to customize the function behaviour. 
+
+**Options parameters:**
+
+Same parameters of `parse`, with one more parameter, `skipErrors`: is the same parameter in `scan` options.
+
+**Result string:**
+
+The result will be a promise to string representing the Directory Tree of the object given as first parameter. Folders will be preceded by `>` and symbolic links by `>>`.
+
 ## Note
 
 On **Windows** it could be possible that symbolic links are not detected, due to a problem with node fs module. If `symbolicLinks` is set to true, then `isSymbolicLink` could result `false` for al the tree nodes. In addition, if `followLinks` is set to true, it could be possible that links will not be followed instead.
@@ -416,6 +478,8 @@ Properties as **hash** or **size** are computed considering only the **not filte
 The **hash** of two nodes with the same content could be **different**, because also the **name** is take in consideration.
 
 In the **global** usage, if an option is given both in the command **args** and in the **options** json file, the **args** one is considered.
+
+Executing the **asynchronous** version of `scan` could return a different object to the one returned by the synchronous one. This is why the asynchronous and synchronous versions read the directory in a **different** order.
 
 ## Build
 
