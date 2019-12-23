@@ -842,7 +842,9 @@ export function scan(path: string, options?: ScanOptions, onFile?: Callback, onD
     const root = resolve(path);
     const opt = mergeScanOptions(options);
     const result = _scan(root, root, 0, opt, onFile, onDir) as Dree;
-    result.sizeInBytes = result && opt.sizeInBytes ? result.sizeInBytes : undefined;
+    if (result) {
+        result.sizeInBytes = opt.sizeInBytes ? result.sizeInBytes : undefined;
+    }
     return result;
 }
 
@@ -858,7 +860,9 @@ export async function scanAsync(path: string, options?: ScanOptions, onFile?: Ca
     const root = resolve(path);
     const opt = mergeScanOptions(options);
     const result = await _scanAsync(root, root, 0, opt, onFile, onDir) as Dree;
-    result.sizeInBytes = result && opt.sizeInBytes ? result.sizeInBytes : undefined;
+    if (result) {
+        result.sizeInBytes = opt.sizeInBytes ? result.sizeInBytes : undefined;
+    }
     return result;
 }
 
