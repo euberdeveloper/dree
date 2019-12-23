@@ -149,12 +149,12 @@ export interface ScanOptions {
     hashEncoding?: HexBase64Latin1Encoding;
     /**
      * If true, all hidden files and dirs will be included in the result. A hidden file or a directory 
-     * has a name wich starts with a dot and in some systems like Linux are hidden
+     * has a name which starts with a dot and in some systems like Linux are hidden
      */
     showHidden?: boolean;
     /**
-     * It is a number wich says the max depth the algorithm can reach scanning the given path. 
-     * All files and dirs wich are beyound the max depth will not be considered by the algorithm
+     * It is a number which says the max depth the algorithm can reach scanning the given path. 
+     * All files and dirs which are beyound the max depth will not be considered by the algorithm
      */
     depth?: number;
     /**
@@ -198,12 +198,12 @@ export interface ParseOptions {
     followLinks?: boolean;
     /**
      * If true, all hidden files and dirs will be included in the result. A hidden file or a directory 
-     * has a name wich starts with a dot and in some systems like Linux are hidden
+     * has a name which starts with a dot and in some systems like Linux are hidden
      */
     showHidden?: boolean;
     /**
-     * It is a number wich says the max depth the algorithm can reach scanning the given path. 
-     * All files and dirs wich are beyound the max depth will not be considered by the algorithm
+     * It is a number which says the max depth the algorithm can reach scanning the given path. 
+     * All files and dirs which are beyound the max depth will not be considered by the algorithm
      */
     depth?: number;
     /**
@@ -714,6 +714,92 @@ function _parse(children: string[], prefix: string, options: ParseOptions, depth
     return result;
 }
 
+async function _parseAsync(children: string[], prefix: string, options: ParseOptions, depth: number): Promise<string> {
+    let result = '';
+    const lines = await Promise.all(children.map(async (child, index) => {
+        let result = '';
+
+        if (options.depth !== undefined && depth > options.depth) {
+            return '';
+        }
+
+        if (options.exclude) {
+            const excludes = (options.exclude instanceof RegExp) ? [options.exclude] : options.exclude;
+            if (excludes.some(pattern => pattern.test(child))) {
+                return '';
+            }
+        }
+
+        const name = basename(child);
+        let stat: Stats;
+        try {
+            stat = await statAsync(child);
+        }
+        catch (exception) {
+            /* istanbul ignore next */
+            if (options.skipErrors) {
+                return null;
+            }
+            else {
+                throw exception;
+            }
+        }
+        let lstat: Stats;
+        try {
+            lstat = await lstatAsync(child);
+        }
+        catch (exception) {
+            /* istanbul ignore next */
+            if (options.skipErrors) {
+                return null;
+            }
+            else {
+                throw exception;
+            }
+        }
+        const symbolicLink = lstat.isSymbolicLink();
+        const type = stat.isFile() ? Type.FILE : Type.DIRECTORY;
+
+        if (!options.showHidden && name.charAt(0) === '.') {
+            return '';
+        }
+        if (!options.symbolicLinks && symbolicLink) {
+            return '';
+        }
+        const extension = extname(child).replace('.', '');
+        if (options.extensions && type === Type.FILE && options.extensions.indexOf(extension) === -1) {
+            return '';
+        }
+
+        const last = symbolicLink ? '>>' : (type === Type.DIRECTORY ? '─> ' : '── ');
+        const newPrefix = prefix + (index === children.length - 1 ? '    ' : '│   ');
+        result += last + name;
+
+        if ((options.followLinks || !symbolicLink) && type === Type.DIRECTORY) {
+            let children: string[];
+            try {
+                children = (await readdirAsync(child)).map(file => resolve(child, file));
+            }
+            catch (exception) {
+                /* istanbul ignore next */
+                if (options.skipErrors) {
+                    return null;
+                }
+                else {
+                    throw exception;
+                }
+            }
+            result += children.length ? (await _parseAsync(children, newPrefix, options, depth + 1)) : '';
+        }
+
+        return result;
+    }));
+    lines.filter(line => !!line).forEach((line, index, lines) => {
+        result += prefix + (index === lines.length - 1 ? '└' + line : '├' + line);
+    });
+    return result;
+}
+
 function _parseTree(children: Dree[], prefix: string, options: ParseOptions, depth: number): string {
     let result = '';
     children.filter(child => !skip(child, options, depth)).forEach((child, index, children) => {
@@ -730,7 +816,7 @@ function _parseTree(children: Dree[], prefix: string, options: ParseOptions, dep
 
 /**
  * Retrurns the Directory Tree of a given path. This function in synchronous.
- * @param  {string} path The path wich you want to inspect
+ * @param  {string} path The path which you want to inspect
  * @param  {object} options An object used as options of the function
  * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
  * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
@@ -746,11 +832,11 @@ export function scan(path: string, options?: ScanOptions, onFile?: Callback, onD
 
 /**
  * Retrurns in a promise the Directory Tree of a given path. This function is asynchronous.
- * @param  {string} path The path wich you want to inspect
+ * @param  {string} path The path which you want to inspect
  * @param  {object} options An object used as options of the function
  * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
  * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
- * @return {object} The directory tree as a Dree object
+ * @return {Promise<object>} A promise to the directory tree as a Dree object
  */
 export async function scanAsync(path: string, options?: ScanOptions, onFile?: Callback, onDir?: Callback): Promise<Dree> {
     const root = resolve(path);
@@ -762,7 +848,7 @@ export async function scanAsync(path: string, options?: ScanOptions, onFile?: Ca
 
 /**
  * Retrurns a string representation of a Directory Tree given a path to a directory or file
- * @param  {string} dirTree The path wich you want to inspect
+ * @param  {string} dirTree The path which you want to inspect
  * @param  {object} options An object used as options of the function
  * @return {string} A string representing the Directory Tree of the given path
  */
@@ -823,8 +909,70 @@ export function parse(path: string, options?: ParseOptions): string {
 }
 
 /**
+ * Retrurns a promise to a string representation of a Directory Tree given a path to a directory or file
+ * @param  {string} dirTree The path which you want to inspect
+ * @param  {object} options An object used as options of the function
+ * @return {Promise<string}> A promise to a string representing the Directory Tree of the given path
+ */
+export async function parseAsync(path: string, options?: ParseOptions): Promise<string> {
+    let result = '';
+
+    const root = resolve(path);
+    const opt = mergeParseOptions(options);
+    const name = basename(root);
+    result += name;
+
+    let stat: Stats;
+    try {
+        stat = await statAsync(path);
+    }
+    catch (exception) {
+        /* istanbul ignore next */
+        if (options.skipErrors) {
+            return null;
+        }
+        else {
+            throw exception;
+        }
+    }
+    let lstat: Stats;
+    try {
+        lstat = await lstatAsync(path);
+    }
+    catch (exception) {
+        /* istanbul ignore next */
+        if (options.skipErrors) {
+            return null;
+        }
+        else {
+            throw exception;
+        }
+    }
+    const symbolicLink = lstat.isSymbolicLink();
+
+    if ((opt.followLinks || !symbolicLink) && stat.isDirectory()) {
+        let children: string[];
+        try {
+            children = (await readdirAsync(root)).map(file => resolve(root, file));
+        }
+        catch (exception) {
+            /* istanbul ignore next */
+            if (options.skipErrors) {
+                return null;
+            }
+            else {
+                throw exception;
+            }
+        }
+        result += children.length ? (await _parseAsync(children, '\n ', opt, 1)) : '';
+    }
+
+    return result;
+}
+
+/**
  * Retrurns a string representation of a Directory Tree given an object returned from scan
- * @param  {object} dirTree The object returned from scan, wich will be parsed
+ * @param  {object} dirTree The object returned from scan, which will be parsed
  * @param  {object} options An object used as options of the function
  * @return {string} A string representing the object given as first parameter
  */

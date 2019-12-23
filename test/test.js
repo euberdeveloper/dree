@@ -8,5 +8,6 @@ describe('Dree module tests', function() {
     require('./scan/scan.test')(expect, fs, dree, path);
     require('./scan/scanAsync.test')(expect, fs, dree, path);
     require('./parse/parse.test')(expect, dree, path);
+    require('./parse/parseAsync.test')(expect, dree, path);
     require('./parseTree/parseTree.test')(expect, dree, path);
 });
