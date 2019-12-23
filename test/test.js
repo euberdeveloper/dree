@@ -1,7 +1,13 @@
 'use strict';
-const expect = require('chai').expect;
 const fs = require('fs');
 const dree = require('../dist/lib/index');
+
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
+
+const expect = require('chai').expect;
+
 
 describe('Dree module tests', function() {
     const path = 'test/sample';

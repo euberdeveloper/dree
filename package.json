@@ -38,16 +38,17 @@
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^12.12.14",
-    "@types/yargs": "^13.0.3",
+    "@types/node": "^12.12.22",
+    "@types/yargs": "^13.0.4",
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "codecov": "^3.6.1",
     "commitizen": "^4.0.3",
     "coveralls": "^3.0.9",
     "cz-conventional-changelog": "^3.0.2",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.4"
   },
   "dependencies": {
     "yargs": "^15.0.2"

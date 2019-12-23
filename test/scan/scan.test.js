@@ -194,6 +194,30 @@ module.exports = (expect, fs, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it(`Should return null`, function () {
+
+            const wrongPath = 'wrong';
+
+            const result = dree.scan(wrongPath);
+            const expected = null;
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should throw an error`, function () {
+
+            const wrongPath = 'wrong';
+            const options = {
+                skipErrors: false
+            }; 
+
+            const willThrow = () => dree.scan(wrongPath, options);
+
+            expect(willThrow).to.throw();
+
+        });
+
     });
 
 }

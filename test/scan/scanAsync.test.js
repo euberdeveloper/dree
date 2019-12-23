@@ -217,6 +217,30 @@ module.exports = (expect, fs, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it(`Should return null`, async function () {
+
+            const wrongPath = 'wrong';
+
+            const result = await dree.scanAsync(wrongPath);
+            const expected = null;
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should throw an error`, async function () {
+
+            const wrongPath = 'wrong';
+            const options = {
+                skipErrors: false
+            }; 
+
+            const willThrow = async () => await dree.scanAsync(wrongPath, options);
+
+            expect(willThrow()).to.eventually.throw();
+
+        });
+
     });
 
 }
