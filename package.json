@@ -16,7 +16,7 @@
     "cover": "npm run cover:coveralls && npm run cover:codecov",
     "docs:html": "typedoc --out docs/html source/lib --plugin none --excludeNotExported --mode file",
     "docs:markdown": "typedoc --out docs/markdown source/lib --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --mode file",
-    "docs:deploy": "now docs/html --name dree --prod --version 2 --token $NOW_TOKEN",
+    "docs:deploy": "now docs/html --name dree --prod --version --token $NOW_TOKEN",
     "docs": "npm run docs:html && npm run docs:markdown && npm run docs:deploy",
     "commit": "git-cz"
   },
@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/euberdeveloper/dree/issues"
   },
-  "homepage": "https://github.com/euberdeveloper/dree#readme",
+  "homepage": "https://dree.euberdeveloper.now.sh",
   "keywords": [
     "dir",
     "directory",
