@@ -280,6 +280,10 @@ sample
 ```
 ## API
 
+### online documentation
+
+The documentation generated with **TypeDoc** is available in this **[site](https://dree.euberdeveloper.now.sh/globals.html)**.
+
 ### scan
 
 **Syntax:**
