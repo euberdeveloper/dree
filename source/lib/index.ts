@@ -831,7 +831,7 @@ async function _parseTreeAsync(children: Dree[], prefix: string, options: ParseO
 /* EXPORTED FUNCTIONS */
 
 /**
- * Retrurns the Directory Tree of a given path. This function in synchronous.
+ * Returns the Directory Tree of a given path. This function in synchronous.
  * @param  {string} path The path which you want to inspect
  * @param  {object} options An object used as options of the function
  * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
@@ -849,7 +849,7 @@ export function scan(path: string, options?: ScanOptions, onFile?: Callback, onD
 }
 
 /**
- * Retrurns in a promise the Directory Tree of a given path. This function is asynchronous.
+ * Returns in a promise the Directory Tree of a given path. This function is asynchronous.
  * @param  {string} path The path which you want to inspect
  * @param  {object} options An object used as options of the function
  * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
@@ -867,7 +867,7 @@ export async function scanAsync(path: string, options?: ScanOptions, onFile?: Ca
 }
 
 /**
- * Retrurns a string representation of a Directory Tree given a path to a directory or file
+ * Returns a string representation of a Directory Tree given a path to a directory or file
  * @param  {string} dirTree The path which you want to inspect
  * @param  {object} options An object used as options of the function
  * @return {string} A string representing the Directory Tree of the given path
@@ -929,7 +929,7 @@ export function parse(path: string, options?: ParseOptions): string {
 }
 
 /**
- * Retrurns a promise to a string representation of a Directory Tree given a path to a directory or file
+ * Returns a promise to a string representation of a Directory Tree given a path to a directory or file
  * @param  {string} dirTree The path which you want to inspect
  * @param  {object} options An object used as options of the function
  * @return {Promise<string}> A promise to a string representing the Directory Tree of the given path
@@ -991,7 +991,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
 }
 
 /**
- * Retrurns a string representation of a Directory Tree given an object returned from scan
+ * Returns a string representation of a Directory Tree given an object returned from scan
  * @param  {object} dirTree The object returned from scan, which will be parsed
  * @param  {object} options An object used as options of the function
  * @return {string} A string representing the object given as first parameter
@@ -1005,7 +1005,7 @@ export function parseTree(dirTree: Dree, options?: ParseOptions): string {
 }
 
 /**
- * Retrurns a promise to a string representation of a Directory Tree given an object returned from scan
+ * Returns a promise to a string representation of a Directory Tree given an object returned from scan
  * @param  {object} dirTree The object returned from scan, which will be parsed
  * @param  {object} options An object used as options of the function
  * @return {Promise<string>} A promise to a string representing the object given as first parameter
