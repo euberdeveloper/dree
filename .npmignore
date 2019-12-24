@@ -8,5 +8,6 @@ README.md
 LICENSE
 .travis.yml
 .circleci/
+docs/
 coverage.lcov
 generateTestsOutputs.js

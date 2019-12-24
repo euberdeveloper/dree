@@ -8,12 +8,16 @@
     "dree": "dist/bin/index.js"
   },
   "scripts": {
+    "transpile": "tsc",
     "test": "mocha --reporter spec",
     "nyc": "nyc --extension=ts --reporter=html --reporter=text --reporter=lcov npm run test",
     "cover:coveralls": "nyc report --extension=ts --reporter=text-lcov | coveralls",
     "cover:codecov": "nyc report --extension=ts --reporter=text-lcov > coverage.lcov && codecov",
     "cover": "npm run cover:coveralls && npm run cover:codecov",
-    "transpile": "tsc",
+    "docs:html": "typedoc --out docs/html source/lib --plugin none --excludeNotExported --mode file",
+    "docs:markdown": "typedoc --out docs/markdown source/lib --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --mode file",
+    "docs:deploy": "now docs/html --name dree --prod --version 2 --token $NOW_TOKENS",
+    "docs": "npm run docs:html && npm run docs:markdown && npm run docs:deploy",
     "commit": "git-cz"
   },
   "repository": {
@@ -47,7 +51,10 @@
     "coveralls": "^3.0.9",
     "cz-conventional-changelog": "^3.0.2",
     "mocha": "^6.2.2",
+    "now": "^16.7.0",
     "nyc": "^14.1.1",
+    "typedoc": "^0.15.5",
+    "typedoc-plugin-markdown": "^2.2.14",
     "typescript": "^3.7.4"
   },
   "dependencies": {

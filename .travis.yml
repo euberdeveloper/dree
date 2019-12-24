@@ -11,5 +11,6 @@ before_script:
  - npm run transpile
 script:
  - npm run nyc
-# Send coverage data to Coveralls
-after_script: "npm run cover"
+after_script:
+ - npm run cover
+ - npm run docs
