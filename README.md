@@ -6,7 +6,7 @@
 [![dependencies Status](https://david-dm.org/euberdeveloper/dree/status.svg)](https://david-dm.org/euberdeveloper/dree)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![License](https://img.shields.io/npm/l/dree.svg)](https://github.com/euberdeveloper/dree/blob/master/LICENSE)
-[![Uptime Robot Day](https://badgen.net/uptime-robot/day/m784048696-57a1270a68a79b45e7e693d2)](https://badgen.net/uptime-robot/day/m784048696-57a1270a68a79b45e7e693d2.svg)
+[![Uptime Robot Day](https://badgen.net/uptime-robot/day/m784048696-57a1270a68a79b45e7e693d2)](https://badgen.net/uptime-robot/day/m784048696-57a1270a68a79b45e7e693d2)
 [![GitHub issues](https://img.shields.io/github/issues/euberdeveloper/dree.svg)](https://github.com/euberdeveloper/dree/issues)
 [![GitHub stars](https://img.shields.io/github/stars/euberdeveloper/dree.svg)](https://github.com/euberdeveloper/dree/stargazers)
 ![npm](https://img.shields.io/npm/v/dree.svg)
