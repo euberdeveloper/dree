@@ -162,7 +162,7 @@ dree.parseAsync('./folder', options)
 ### Get an object
 
 ```bash
-$ npm dree scan <source> --dest ./output --name result
+$ dree scan <source> --dest ./output --name result
 ```
 
 This way the result will be saved in `./output/result.json`
@@ -170,7 +170,7 @@ This way the result will be saved in `./output/result.json`
 ### Get a string
 
 ```bash
-$ npm dree parse <source> --dest ./output --name result
+$ dree parse <source> --dest ./output --name result
 ```
 
 This way the result will be saved in `./output/result.txt`
@@ -178,7 +178,7 @@ This way the result will be saved in `./output/result.txt`
 ### Log the result
 
 ```bash
-$ npm dree scan|parse <source> --dest ./output --name result --show
+$ dree scan|parse <source> --dest ./output --name result --show
 ```
 With `--show` option, the result will also be printed with `console.log()`
 
@@ -187,7 +187,7 @@ With `--show` option, the result will also be printed with `console.log()`
 `scan` and `parse` accept the same options of their analog local functions. The options can be specified both as command arguments and json file.
 
 ```bash
-$ npm dree --help --all-options
+$ dree --help --all-options
 ```
 
 ## Result
@@ -494,7 +494,7 @@ To build the module make sure you have Typescript installed or install the dev d
 $ npm run transpile
 ```
 
-The `source` folder will be compiled in the `lib` folder.
+The `source` folder will be compiled in the `dist` folder.
 
 ## Dev
 
