@@ -18,8 +18,7 @@
     "docs:markdown": "typedoc --out docs/markdown source/lib --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --mode file",
     "docs:deploy": "now docs/html --name dree --prod --token $NOW_TOKEN",
     "docs": "npm run docs:html && npm run docs:markdown && npm run docs:deploy",
-    "commit": "git-cz",
-    "publish": "npm run transpile && npm publish"
+    "commit": "git-cz"
   },
   "repository": {
     "type": "git",
