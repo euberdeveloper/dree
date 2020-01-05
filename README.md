@@ -10,6 +10,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/euberdeveloper/dree.svg)](https://github.com/euberdeveloper/dree/issues)
 [![GitHub stars](https://img.shields.io/github/stars/euberdeveloper/dree.svg)](https://github.com/euberdeveloper/dree/stargazers)
 ![npm](https://img.shields.io/npm/v/dree.svg)
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/euberdeveloper/dree.svg)](https://isitmaintained.com/project/euberdeveloper/dree)
 
 # dree
 A nodejs module which helps you handle a directory tree. It provides you an object of a directory tree with custom configuration and optional callback method when a file or dir is scanned. You will also be able to turn the tree into a string representation. With Typescript support and both sync and async support.
