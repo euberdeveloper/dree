@@ -16,7 +16,7 @@
     "cover": "npm run cover:coveralls && npm run cover:codecov",
     "docs:html": "typedoc --out docs/html source/lib --plugin none --excludeNotExported --mode file --gaID $GA_TOKEN",
     "docs:markdown": "typedoc --out docs/markdown source/lib --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --mode file",
-    "docs:deploy": "now docs/html --name dree --prod --token $NOW_TOKEN",
+    "docs:deploy": "now docs/html --name dree --confirm --prod --token $NOW_TOKEN",
     "docs": "npm run docs:html && npm run docs:markdown && npm run docs:deploy",
     "commit": "git-cz"
   },
