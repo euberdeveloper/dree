@@ -1,6 +1,6 @@
 {
   "name": "dree",
-  "version": "2.4.11",
+  "version": "2.4.12",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -42,20 +42,20 @@
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^13.1.4",
-    "@types/yargs": "^13.0.4",
+    "@types/node": "^13.7.6",
+    "@types/yargs": "^15.0.4",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "codecov": "^3.6.1",
+    "codecov": "^3.6.5",
     "commitizen": "^4.0.3",
     "coveralls": "^3.0.9",
-    "cz-conventional-changelog": "^3.0.2",
-    "mocha": "^7.0.0",
-    "now": "^16.7.1",
+    "cz-conventional-changelog": "^3.1.0",
+    "mocha": "^7.1.0",
+    "now": "^17.0.4",
     "nyc": "^15.0.0",
-    "typedoc": "^0.15.6",
-    "typedoc-plugin-markdown": "^2.2.14",
-    "typescript": "^3.7.4"
+    "typedoc": "^0.16.10",
+    "typedoc-plugin-markdown": "^2.2.17",
+    "typescript": "^3.8.2"
   },
   "dependencies": {
     "yargs": "^15.1.0"

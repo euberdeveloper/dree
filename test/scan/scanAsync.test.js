@@ -235,9 +235,11 @@ module.exports = (expect, fs, dree, path) => {
                 skipErrors: false
             }; 
 
-            const willThrow = async () => await dree.scanAsync(wrongPath, options);
+            const willThrow = async function() {
+                await dree.scanAsync(wrongPath, options);
+            }
 
-            expect(willThrow()).to.eventually.throw();
+            expect(willThrow()).to.be.rejected;
 
         });
 
