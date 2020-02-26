@@ -14,8 +14,8 @@
     "cover:coveralls": "nyc report --extension=ts --reporter=text-lcov | coveralls",
     "cover:codecov": "nyc report --extension=ts --reporter=text-lcov > coverage.lcov && codecov",
     "cover": "npm run cover:coveralls && npm run cover:codecov",
-    "docs:html": "typedoc --out docs/html --mode file --plugin none --excludeNotExported --includeVersion --gaID $GA_TOKEN source/lib",
-    "docs:markdown": "typedoc --out docs/markdown --mode file --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --includeVersion source/lib",
+    "docs:html": "typedoc --out docs/html --plugin none --externalPattern '**/bin/**' --excludeNotExported --excludeExternals --includeVersion --gaID $GA_TOKEN source/lib",
+    "docs:markdown": "typedoc --out docs/markdown --plugin typedoc-plugin-markdown --theme markdown --externalPattern '**/bin/**' --excludeNotExported --excludeExternals --includeVersion source/lib",
     "docs:deploy": "now docs/html --name dree --confirm --prod --token $NOW_TOKEN",
     "docs": "npm run docs:html && npm run docs:markdown && npm run docs:deploy",
     "commit": "git-cz"
