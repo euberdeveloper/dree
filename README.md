@@ -499,7 +499,7 @@ The `source` folder will be compiled in the `dist` folder.
 
 ## Dev
 
-To run tests go to the package root in your CLI and run
+To run tests go to the repositoryroot using your CLI and run
 
 ```bash
 $ npm test
