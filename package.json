@@ -58,7 +58,7 @@
     "typescript": "^3.8.2"
   },
   "dependencies": {
-    "yargs": "^15.1.0"
+    "yargs": "^15.3.0"
   },
   "config": {
     "commitizen": {
