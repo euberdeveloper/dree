@@ -1,6 +1,6 @@
 {
   "name": "dree",
-  "version": "2.4.12",
+  "version": "2.4.14",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -14,8 +14,8 @@
     "cover:coveralls": "nyc report --extension=ts --reporter=text-lcov | coveralls",
     "cover:codecov": "nyc report --extension=ts --reporter=text-lcov > coverage.lcov && codecov",
     "cover": "npm run cover:coveralls && npm run cover:codecov",
-    "docs:html": "typedoc --out docs/html --plugin none --externalPattern '**/bin/**' --excludeNotExported --excludeExternals --includeVersion --gaID $GA_TOKEN source/lib",
-    "docs:markdown": "typedoc --out docs/markdown --plugin typedoc-plugin-markdown --theme markdown --externalPattern '**/bin/**' --excludeNotExported --excludeExternals --includeVersion source/lib",
+    "docs:html": "typedoc --out docs/html --mode library --inputFiles source/lib/index.ts --plugin none --excludeNotExported --excludeExternals --includeVersion --gaID $GA_TOKEN source/lib",
+    "docs:markdown": "typedoc --out docs/markdown --mode library --inputFiles source/lib/index.ts --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --excludeExternals --includeVersion source/lib",
     "docs:deploy": "now docs/html --name dree --confirm --prod --token $NOW_TOKEN",
     "docs": "npm run docs:html && npm run docs:markdown && npm run docs:deploy",
     "commit": "git-cz"
@@ -41,8 +41,16 @@
   ],
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "yargs": "^15.3.1"
+  },
   "devDependencies": {
-    "@types/node": "^13.7.6",
+    "@types/node": "^13.9.1",
     "@types/yargs": "^15.0.4",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
@@ -53,16 +61,8 @@
     "mocha": "^7.1.0",
     "now": "^17.0.4",
     "nyc": "^15.0.0",
-    "typedoc": "^0.16.10",
+    "typedoc": "^0.17.0",
     "typedoc-plugin-markdown": "^2.2.17",
-    "typescript": "^3.8.2"
-  },
-  "dependencies": {
-    "yargs": "^15.1.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+    "typescript": "^3.8.3"
   }
 }
