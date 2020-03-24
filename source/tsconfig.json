@@ -7,11 +7,12 @@
       "es2015",
       "dom"
     ],
-    "outDir": "dist",
+    "outDir": "../dist",
     "sourceMap": true,
     "declaration": true
   },
   "include": [
-    "source"
+    "bin",
+    "lib"
   ]
 }

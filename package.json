@@ -8,14 +8,14 @@
     "dree": "dist/bin/index.js"
   },
   "scripts": {
-    "transpile": "tsc",
+    "transpile": "tsc -p source",
     "test": "mocha --reporter spec",
     "nyc": "nyc --extension=ts --reporter=html --reporter=text --reporter=lcov npm run test",
     "cover:coveralls": "nyc report --extension=ts --reporter=text-lcov | coveralls",
     "cover:codecov": "nyc report --extension=ts --reporter=text-lcov > coverage.lcov && codecov",
     "cover": "npm run cover:coveralls && npm run cover:codecov",
-    "docs:html": "typedoc --mode library --inputFiles source/lib/index.ts --excludeExternals --excludeNotExported --includeVersion --tsconfig source/tsconfig.json --out docs/documentation/html",
-    "docs:html-dev": "typedoc --mode module --name 'eagletrt-code-generator - DEV' --includeVersion --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
+    "docs:html": "typedoc --mode library --inputFiles source/lib/index.ts --excludeExternals --excludeNotExported --includeVersion --plugin none --tsconfig source/tsconfig.json --gaID $GA_TOKEN source/lib --out docs/documentation/html",
+    "docs:html-dev": "typedoc --mode module --name 'dree - DEV' --includeVersion --plugin none --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
     "docs:markdown": "typedoc --out docs/documentation/markdown --mode library --inputFiles source/lib/index.ts --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --excludeExternals --includeVersion source/lib",
     "docs:deploy:html": "now docs/documentation/html --name dree --confirm --prod --token $NOW_TOKEN",
     "docs:deploy:html-dev": "now docs/documentation/html-dev --name dree-dev --confirm --prod --token $NOW_TOKEN",
@@ -64,7 +64,7 @@
     "mocha": "^7.1.0",
     "now": "^17.0.4",
     "nyc": "^15.0.0",
-    "typedoc": "^0.17.0",
+    "typedoc": "^0.17.0-3",
     "typedoc-plugin-markdown": "^2.2.17",
     "typescript": "^3.8.3"
   }
