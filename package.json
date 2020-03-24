@@ -14,10 +14,13 @@
     "cover:coveralls": "nyc report --extension=ts --reporter=text-lcov | coveralls",
     "cover:codecov": "nyc report --extension=ts --reporter=text-lcov > coverage.lcov && codecov",
     "cover": "npm run cover:coveralls && npm run cover:codecov",
-    "docs:html": "typedoc --out docs/html --mode library --inputFiles source/lib/index.ts --plugin none --excludeNotExported --excludeExternals --includeVersion --gaID $GA_TOKEN source/lib",
-    "docs:markdown": "typedoc --out docs/markdown --mode library --inputFiles source/lib/index.ts --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --excludeExternals --includeVersion source/lib",
-    "docs:deploy": "now docs/html --name dree --confirm --prod --token $NOW_TOKEN",
-    "docs": "npm run docs:html && npm run docs:markdown && npm run docs:deploy",
+    "docs:html": "typedoc --mode library --inputFiles source/lib/index.ts --excludeExternals --excludeNotExported --includeVersion --tsconfig source/tsconfig.json --out docs/documentation/html",
+    "docs:html-dev": "typedoc --mode module --name 'eagletrt-code-generator - DEV' --includeVersion --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
+    "docs:markdown": "typedoc --out docs/documentation/markdown --mode library --inputFiles source/lib/index.ts --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --excludeExternals --includeVersion source/lib",
+    "docs:deploy:html": "now docs/documentation/html --name dree --confirm --prod --token $NOW_TOKEN",
+    "docs:deploy:html-dev": "now docs/documentation/html-dev --name dree-dev --confirm --prod --token $NOW_TOKEN",
+    "docs:deploy": "npm run docs:html && npm run docs:html-dev",
+    "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:markdown && npm run docs:deploy",
     "commit": "git-cz"
   },
   "repository": {
