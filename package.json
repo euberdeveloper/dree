@@ -19,7 +19,7 @@
     "docs:markdown": "typedoc --out docs/documentation/markdown --mode library --inputFiles source/lib/index.ts --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --excludeExternals --includeVersion source/lib",
     "docs:deploy:html": "now docs/documentation/html --name dree --confirm --prod --token $NOW_TOKEN",
     "docs:deploy:html-dev": "now docs/documentation/html-dev --name dree-dev --confirm --prod --token $NOW_TOKEN",
-    "docs:deploy": "npm run docs:html && npm run docs:html-dev",
+    "docs:deploy": "npm run docs:deploy:html && npm run docs:deploy:html-dev",
     "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:markdown && npm run docs:deploy",
     "commit": "git-cz"
   },
