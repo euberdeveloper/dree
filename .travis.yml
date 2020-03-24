@@ -13,5 +13,4 @@ script:
  - npm run nyc
 after_script:
  - npm run cover
- - npx typedoc --version
  - npm run docs
