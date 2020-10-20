@@ -1,0 +1,70 @@
+{
+  "name": "sample",
+  "path": "PATH/test/sample",
+  "relativePath": ".",
+  "type": "directory",
+  "isSymbolicLink": false,
+  "sizeInBytes": 27,
+  "size": "27 B",
+  "hash": "deee40f01bb621c3834b13a5cdaec5b2",
+  "children": [
+    {
+      "name": "backend",
+      "path": "PATH/test/sample/backend",
+      "relativePath": "backend",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 27,
+      "size": "27 B",
+      "hash": "ecac5bedd0870a0272aef4e67ee92578",
+      "children": [
+        {
+          "name": "firebase.json",
+          "path": "PATH/test/sample/backend/firebase.json",
+          "relativePath": "backend/firebase.json",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "json",
+          "sizeInBytes": 27,
+          "size": "27 B",
+          "hash": "bafc664309b11a828c0adf99ed9e8516"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "path": "PATH/test/sample/empty",
+      "relativePath": "empty",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 0,
+      "size": "0 B",
+      "hash": "5395826f5e679ee75097a49101d8af75",
+      "children": [
+        {
+          "name": "tsempty",
+          "path": "PATH/test/sample/empty/tsempty",
+          "relativePath": "empty/tsempty",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "01ae4baddc925931f374f0f212896d30",
+          "children": [
+            {
+              "name": "file.ts",
+              "path": "PATH/test/sample/empty/tsempty/file.ts",
+              "relativePath": "empty/tsempty/file.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 0,
+              "size": "0 B",
+              "hash": "db3e286db4b574d6ebfdca5804df63cf"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

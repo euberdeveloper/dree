@@ -10,7 +10,7 @@ const lstatAsync = promisify(lstat);
 
 /* DECLARATION OF @types/crypto AND @types/fs NEEDED TO AVOID @types/node DEPENDENCY */
 
-declare type HexBase64Latin1Encoding = "latin1" | "hex" | "base64";
+declare type HexBase64Latin1Encoding = 'latin1' | 'hex' | 'base64';
 declare class Stats {
     isFile(): boolean;
     isDirectory(): boolean;
@@ -158,9 +158,14 @@ export interface ScanOptions {
      */
     depth?: number;
     /**
-     * It is a regex or array of regex and all the matched paths will not be considered by the algorithm
+     * It is a regex or array of regex and all the matching paths will not be considered by the algorithm
      */
     exclude?: RegExp | RegExp[];
+    /**
+     * It is a regex or array of regex and all the non-matching paths will not be considered by the algorithm. Note: All the
+     * ancestors of a matching node will be added.
+     */
+    matches?: RegExp | RegExp[];
     /**
      * It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. 
      * If value is undefined, all file extensions will be considered, if it is [], no files will be included
@@ -239,6 +244,7 @@ const SCAN_DEFAULT_OPTIONS: ScanOptions = {
     showHidden: true,
     depth: undefined,
     exclude: undefined,
+    matches: undefined,
     extensions: undefined,
     emptyDirectory: false,
     excludeEmptyDirectories: false,
@@ -395,6 +401,12 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                     return null;
                 }
             }
+            if (options.matches && root !== path) {
+                const handledMatches = (options.matches instanceof RegExp) ? [options.matches] : options.matches;
+                if (!children.length && handledMatches.some(pattern => !pattern.test(path))) {
+                    return null;
+                }
+            }
             if (options.sizeInBytes || options.size) {
                 const size = children.reduce((previous, current) => previous + (current.sizeInBytes as number), 0);
                 dirTree.sizeInBytes = size;
@@ -418,6 +430,12 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
             dirTree.extension = extname(path).replace('.', '');
             if (options.extensions && options.extensions.indexOf(dirTree.extension) === -1) {
                 return null;
+            }
+            if (options.matches && root !== path) {
+                const handledMatches = (options.matches instanceof RegExp) ? [options.matches] : options.matches;
+                if (handledMatches.some(pattern => !pattern.test(path))) {
+                    return null;
+                }
             }
             if (options.sizeInBytes || options.size) {
                 const size = (options.followLinks ? stat.size : lstat.size);
@@ -555,6 +573,12 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
                     return null;
                 }
             }
+            if (options.matches && root !== path) {
+                const handledMatches = (options.matches instanceof RegExp) ? [options.matches] : options.matches;
+                if (!children.length && handledMatches.some(pattern => !pattern.test(path))) {
+                    return null;
+                }
+            }
             if (options.sizeInBytes || options.size) {
                 const size = children.reduce((previous, current) => previous + (current.sizeInBytes as number), 0);
                 dirTree.sizeInBytes = size;
@@ -578,6 +602,12 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
             dirTree.extension = extname(path).replace('.', '');
             if (options.extensions && options.extensions.indexOf(dirTree.extension) === -1) {
                 return null;
+            }
+            if (options.matches && root !== path) {
+                const handledMatches = (options.matches instanceof RegExp) ? [options.matches] : options.matches;
+                if (handledMatches.some(pattern => !pattern.test(path))) {
+                    return null;
+                }
             }
             if (options.sizeInBytes || options.size) {
                 const size = (options.followLinks ? stat.size : lstat.size);

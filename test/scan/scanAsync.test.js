@@ -217,6 +217,30 @@ module.exports = (expect, fs, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it(`Should return the content of "test/scan/${platform}/eleventh.test.json"`, async function () {
+
+            const options = {
+                matches: /^.*\/f\w+(\.\w+)?$/
+            };
+
+            const result = getResult(await dree.scanAsync(path, options));
+            const expected = getExpected(`test/scan/${platform}/eleventh.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twelfth.test.json"`, async function () {
+
+            const options = {
+                matches: [/^.*\/f\w+(\.\w+)?$/, /^.*\/\w+s\w(\.\w+)?$/]
+            };
+
+            const result = getResult(await dree.scanAsync(path, options));
+            const expected = getExpected(`test/scan/${platform}/twelfth.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
         it(`Should return null`, async function () {
 
             const wrongPath = 'wrong';

@@ -1,6 +1,7 @@
 node_modules/
 source/
 test/
+scripts/
 coverage/
 .nyc_output/
 tsconfig.json

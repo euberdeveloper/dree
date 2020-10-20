@@ -1,6 +1,6 @@
 {
   "name": "dree",
-  "version": "2.4.16",
+  "version": "2.5.0",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -9,16 +9,19 @@
   },
   "scripts": {
     "transpile": "tsc -p source",
+    "script:getr:linux": "node scripts/generate-expected-tests-results linux",
+    "script:getr:mac": "node scripts/generate-expected-tests-results mac",
+    "script:getr:windows": "node scripts/generate-expected-tests-results windows",
     "test": "mocha --reporter spec",
     "nyc": "nyc --extension=ts --reporter=html --reporter=text --reporter=lcov npm run test",
     "cover:coveralls": "nyc report --extension=ts --reporter=text-lcov | coveralls",
     "cover:codecov": "nyc report --extension=ts --reporter=text-lcov > coverage.lcov && codecov",
     "cover": "npm run cover:coveralls && npm run cover:codecov",
-    "docs:html": "typedoc --mode library --inputFiles source/lib/index.ts --excludeExternals --excludeNotExported --includeVersion --plugin none --tsconfig source/tsconfig.json --gaID $GA_TOKEN source/lib --out docs/documentation/html",
-    "docs:html-dev": "typedoc --mode module --name 'dree - DEV' --includeVersion --plugin none --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
+    "docs:html": "typedoc --mode modules --inputFiles source/lib/index.ts --excludeExternals --excludeNotExported --includeVersion --plugin none --tsconfig source/tsconfig.json --gaID $GA_TOKEN source/lib --out docs/documentation/html",
+    "docs:html-dev": "typedoc --mode modules --name 'dree - DEV' --includeVersion --plugin none --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
     "docs:markdown": "typedoc --out docs/documentation/markdown --mode library --inputFiles source/lib/index.ts --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --excludeExternals --includeVersion source/lib",
-    "docs:deploy:html": "now docs/documentation/html --name dree --confirm --prod --token $NOW_TOKEN",
-    "docs:deploy:html-dev": "now docs/documentation/html-dev --name dree-dev --confirm --prod --token $NOW_TOKEN",
+    "docs:deploy:html": "vercel docs/documentation/html --name dree --confirm --prod --token $VERCEL_TOKEN",
+    "docs:deploy:html-dev": "vercel docs/documentation/html-dev --name dree-dev --confirm --prod --token $VERCEL_TOKEN",
     "docs:deploy": "npm run docs:deploy:html && npm run docs:deploy:html-dev",
     "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:markdown && npm run docs:deploy",
     "commit": "git-cz"
@@ -50,22 +53,22 @@
     }
   },
   "dependencies": {
-    "yargs": "^16.0.3"
+    "yargs": "^16.1.0"
   },
   "devDependencies": {
-    "@types/node": "^14.10.0",
-    "@types/yargs": "^15.0.5",
+    "@types/node": "^14.14.0",
+    "@types/yargs": "^15.0.9",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "codecov": "^3.7.2",
-    "commitizen": "^4.2.1",
+    "codecov": "^3.8.0",
+    "commitizen": "^4.2.2",
     "coveralls": "^3.1.0",
     "cz-conventional-changelog": "^3.3.0",
-    "mocha": "^8.1.3",
-    "now": "^20.1.0",
+    "mocha": "^8.2.0",
     "nyc": "^15.1.0",
-    "typedoc": "^0.19.1",
-    "typedoc-plugin-markdown": "^2.4.2",
-    "typescript": "^4.0.2"
+    "typedoc": "^0.19.2",
+    "typedoc-plugin-markdown": "^3.0.10",
+    "typescript": "^4.0.3",
+    "vercel": "^20.1.2"
   }
 }

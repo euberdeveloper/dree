@@ -194,6 +194,30 @@ module.exports = (expect, fs, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it(`Should return the content of "test/scan/${platform}/eleventh.test.json"`, function () {
+
+            const options = {
+                matches: /^.*\/f\w+(\.\w+)?$/
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/eleventh.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twelfth.test.json"`, function () {
+
+            const options = {
+                matches: [/^.*\/f\w+(\.\w+)?$/, /^.*\/\w+s\w(\.\w+)?$/]
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/twelfth.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
         it(`Should return null`, function () {
 
             const wrongPath = 'wrong';

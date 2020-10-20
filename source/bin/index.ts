@@ -71,6 +71,7 @@ yargs
             showHidden: args.showHidden,
             depth: args.depth,
             exclude: parseRegExp(args.exclude),
+            matches: parseRegExp(args.matches),
             emptyDirectory: args.emptyDirectory,
             excludeEmptyDirectories: args.excludeEmptyDirectories,
             extensions: args.extensions,
@@ -178,6 +179,11 @@ yargs
     },
     'exclude': {
         describe: 'An array of regex whose all matched path will not be considered during the elaboration',
+        type: 'array',
+        hidden: true
+    },
+    'matches': {
+        describe: 'It is a regex or array of regex and all the non-matching paths will not be considered by the algorithm. Note: All the ancestors of a matching node will be added',
         type: 'array',
         hidden: true
     },
