@@ -88,18 +88,27 @@ const scanOptions = [
     {
         name: 'eleventh',
         opt: {
-            incmatcheslude: /^.*\/f\w+(\.\w+)?$/
+            matches: platform === 'windows' ? /^.*\\f\w+(\.\w+)?$/ : /^.*\/f\w+(\.\w+)?$/
         }
     },
     {
         name: 'twelfth',
         opt: {
-            matches: [/^.*\/f\w+(\.\w+)?$/, /^.*\/\w+s\w(\.\w+)?$/]
+            matches: platform === 'windows' ? [/^.*\\f\w+(\.\w+)?$/, /^.*\\\w+s\w(\.\w+)?$/] : [/^.*\/f\w+(\.\w+)?$/, /^.*\/\w+s\w(\.\w+)?$/]
         }
     },
 ];
+
+function purgePath(data) {
+    data.path = 'PATH' + data.path.slice(process.cwd().length);
+    if (data.type === 'directory' && data.children) {
+        data.children.forEach(child => purgePath(child));
+    }
+    return data;
+}
+
 function generateScan(option) {
-    const text = JSON.stringify(dree.scan(path.join(process.cwd(), 'test', 'sample'), option.opt), null, 2).replace(new RegExp(process.cwd(), 'g'), 'PATH');
+    const text = JSON.stringify(purgePath(dree.scan(path.join(process.cwd(), 'test', 'sample'), option.opt)), null, 2);
     fs.writeFileSync(path.join(process.cwd(), 'test', 'scan', platform, `${option.name}.test.json`), text);
 }
 scanOptions.forEach(option => {
