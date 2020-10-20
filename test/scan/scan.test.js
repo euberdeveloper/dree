@@ -197,7 +197,7 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/eleventh.test.json"`, function () {
 
             const options = {
-                matches: /^.*\/f\w+(\.\w+)?$/
+                matches: process.platform === 'win32' ? /^.*\\f\w+(\.\w+)?$/ : /^.*\/f\w+(\.\w+)?$/
             };
 
             const result = getResult(dree.scan(path, options));
@@ -209,7 +209,7 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/twelfth.test.json"`, function () {
 
             const options = {
-                matches: [/^.*\/f\w+(\.\w+)?$/, /^.*\/\w+s\w(\.\w+)?$/]
+                matches: process.platform === 'win32' ? [/^.*\\f\w+(\.\w+)?$/, /^.*\\\w+s\w(\.\w+)?$/] : [/^.*\/f\w+(\.\w+)?$/, /^.*\/\w+s\w(\.\w+)?$/]
             };
 
             const result = getResult(dree.scan(path, options));
