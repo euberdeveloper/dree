@@ -20,10 +20,7 @@
     "docs:html": "typedoc --mode modules --inputFiles source/lib/index.ts --excludeExternals --excludeNotExported --includeVersion --plugin none --tsconfig source/tsconfig.json --gaID $GA_TOKEN source/lib --out docs/documentation/html",
     "docs:html-dev": "typedoc --mode modules --name 'dree - DEV' --includeVersion --plugin none --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
     "docs:markdown": "typedoc --out docs/documentation/markdown --mode modules --inputFiles source/lib/index.ts --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --excludeExternals --includeVersion source/lib",
-    "docs:deploy:html": "vercel docs/documentation/html --name dree --confirm --prod --token $VERCEL_TOKEN",
-    "docs:deploy:html-dev": "vercel docs/documentation/html-dev --name dree-dev --confirm --prod --token $VERCEL_TOKEN",
-    "docs:deploy": "npm run docs:deploy:html && npm run docs:deploy:html-dev",
-    "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:markdown && npm run docs:deploy",
+    "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:markdown",
     "commit": "git-cz"
   },
   "repository": {
