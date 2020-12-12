@@ -1,12 +1,19 @@
 {
   "name": "dree",
-  "version": "2.5.1",
+  "version": "2.5.3",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
   "bin": {
     "dree": "dist/bin/index.js"
   },
+  "files": [
+    "package.json",
+    "package-lock.json",
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "transpile": "tsc -p source",
     "script:getr:linux": "node scripts/generate-expected-tests-results linux",
