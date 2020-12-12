@@ -1,3 +1,4 @@
+[![Github Actions](https://github.com/euberdeveloper/dree/workflows/Test/badge.svg)](https://github.com/euberdeveloper/dree/actions)
 [![Build Status](https://travis-ci.org/euberdeveloper/dree.svg?branch=master)](https://travis-ci.org/euberdeveloper/dree)
 [![Coverage Status](https://coveralls.io/repos/github/euberdeveloper/dree/badge.svg?branch=master)](https://coveralls.io/github/euberdeveloper/dree?branch=master)
 [![Codecov Status](https://codecov.io/gh/euberdeveloper/dree/branch/master/graph/badge.svg)](https://codecov.io/gh/euberdeveloper/dree)
