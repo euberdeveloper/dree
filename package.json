@@ -22,7 +22,7 @@
     "docs:markdown": "typedoc --out docs/documentation/markdown --mode modules --inputFiles source/lib/index.ts --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --excludeExternals --includeVersion source/lib",
     "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:markdown",
     "commit": "git-cz",
-    "commit:signed": "git-cz -S"
+    "commit:sign": "git-cz -S"
   },
   "repository": {
     "type": "git",
@@ -45,11 +45,6 @@
   ],
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "dependencies": {
     "yargs": "^16.2.0"
   },
