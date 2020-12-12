@@ -282,9 +282,10 @@ sample
 ```
 ## API
 
-### online documentation
+### Online documentation
 
-The documentation generated with **TypeDoc** is available in this **[site](https://dree.euberdeveloper.now.sh/globals.html)**.
+The documentation generated with **TypeDoc** is available in this **[site](https://dree.euberdeveloper.vercel.app/globals.html)**.
+There is also a more specific version for development in this **[site](https://dree-dev.euberdeveloper.vercel.app/globals.html)**.
 
 ### scan
 
