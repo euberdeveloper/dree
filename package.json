@@ -21,7 +21,8 @@
     "docs:html-dev": "typedoc --mode modules --name 'dree - DEV' --includeVersion --plugin none --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
     "docs:markdown": "typedoc --out docs/documentation/markdown --mode modules --inputFiles source/lib/index.ts --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --excludeExternals --includeVersion source/lib",
     "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:markdown",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "commit:signed": "git-cz -S"
   },
   "repository": {
     "type": "git",
