@@ -33,7 +33,7 @@
     "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:markdown",
     "commit": "git-cz",
     "commit:sign": "git-cz -S",
-    "prepublish": "npm run bundle"
+    "prepublishOnly": "npm run bundle"
   },
   "repository": {
     "type": "git",
