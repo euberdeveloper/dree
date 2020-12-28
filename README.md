@@ -1,4 +1,5 @@
-[![Github Actions](https://github.com/euberdeveloper/dree/workflows/Test/badge.svg)](https://github.com/euberdeveloper/dree/actions)
+![Test](https://github.com/euberdeveloper/dree/workflows/Test/badge.svg)
+![Build](https://github.com/euberdeveloper/dree/workflows/Build/badge.svg)
 [![Build Status](https://travis-ci.org/euberdeveloper/dree.svg?branch=master)](https://travis-ci.org/euberdeveloper/dree)
 [![Coverage Status](https://coveralls.io/repos/github/euberdeveloper/dree/badge.svg?branch=master)](https://coveralls.io/github/euberdeveloper/dree?branch=master)
 [![Codecov Status](https://codecov.io/gh/euberdeveloper/dree/branch/master/graph/badge.svg)](https://codecov.io/gh/euberdeveloper/dree)
@@ -490,21 +491,36 @@ In the **global** usage, if an option is given both in the command **args** and 
 
 Executing the **asynchronous** version of `scan` could return a different object to the one returned by the synchronous one. This is why the asynchronous and synchronous versions read the directory in a **different** order.
 
-## Build
+## Development
 
-To build the module make sure you have Typescript installed or install the dev dependencies. After this, run:
+Make sure that you have all the dependencies installed
+
+### Transpile
+
+To transpile the typescript code
 
 ```bash
 $ npm run transpile
 ```
 
-The `source` folder will be compiled in the `dist` folder.
+The transpiled code will be in the `dist` folder.
 
-## Dev
+### Bundle
 
-To run tests go to the repository root using your CLI and run
+To bundle the library with webpack:
+
+```bash
+$ npm run bundle
+```
+
+The bundled code will be in the `bundled` folder.
+
+### Test
+
+After having transpiled the code:
 
 ```bash
 $ npm test
 ```
-Make sure you have the dev dependencies installed.
+
+The tests with mocha will be run.
