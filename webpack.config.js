@@ -67,6 +67,9 @@ const binConfig = {
                 use: [
                     {
                         loader: 'ts-loader'
+                    },
+                    {
+                        loader: 'shebang-loader'
                     }
                 ]
             }

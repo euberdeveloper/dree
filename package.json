@@ -1,6 +1,6 @@
 {
   "name": "dree",
-  "version": "2.5.6",
+  "version": "2.5.7",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
   "main": "bundled/lib/index.js",
   "types": "bundled/lib/index.d.ts",
@@ -71,6 +71,7 @@
     "dts-bundle-webpack": "^1.0.2",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
+    "shebang-loader": "0.0.1",
     "shx": "^0.3.3",
     "terser-webpack-plugin": "^5.0.3",
     "ts-loader": "^8.0.12",
