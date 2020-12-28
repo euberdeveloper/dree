@@ -1,0 +1,101 @@
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
+const TerserPlugin = require('terser-webpack-plugin');
+const DtsBundleWebpack = require('dts-bundle-webpack');
+
+const libConfig = {
+    target: 'node',
+    mode: 'production',
+    // devtool: 'source-map',
+    entry: {
+        index: './source/lib/index.ts',
+    },
+    resolve: {
+        extensions: ['.ts', '.js']
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts?$/,
+                include: path.resolve(__dirname, 'source', 'lib'),
+                use: [
+                    {
+                        loader: 'ts-loader'
+                    }
+                ]
+            }
+        ]
+    },
+    plugins: [
+        new DtsBundleWebpack({
+            name: 'dree',
+            main: 'dist/lib/index.d.ts',
+            out: '../../bundled/lib/index.d.ts'
+        })
+    ],
+    externals: [nodeExternals()],
+    optimization: {
+        minimizer: [
+            new TerserPlugin(),
+        ]
+    },
+    output: {
+        path: path.resolve(__dirname, 'bundled', 'lib'),
+        filename: 'index.js',
+        library: 'dree',
+        libraryTarget: 'umd',
+        globalObject: 'this',
+        umdNamedDefine: true,
+    }
+};
+
+const binConfig = {
+    target: 'node',
+    mode: 'production',
+    // devtool: 'source-map',
+    entry: {
+        index: './source/bin/index.ts',
+    },
+    resolve: {
+        extensions: ['.ts', '.js']
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts?$/,
+                include: path.resolve(__dirname, 'source'),
+                use: [
+                    {
+                        loader: 'ts-loader'
+                    }
+                ]
+            }
+        ]
+    },
+    externals: [{
+        '../lib/index': {
+            amd: '../lib/index',
+            root: 'dree',
+            commonjs: '../lib/index',
+            commonjs2: '../lib/index'
+        }
+    }, nodeExternals()],
+    optimization: {
+        minimizer: [
+            new TerserPlugin(),
+        ]
+    },
+    output: {
+        path: path.resolve(__dirname, 'bundled', 'bin'),
+        filename: 'index.js',
+        library: 'dree',
+        libraryTarget: 'umd',
+        globalObject: 'this',
+        umdNamedDefine: true,
+    }
+};
+
+module.exports = [
+    libConfig,
+    binConfig
+];

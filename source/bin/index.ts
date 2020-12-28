@@ -1,8 +1,10 @@
-#!/usr/bin/env node
+//#!/usr/bin/env node
 import * as yargs from 'yargs';
 import  { join } from 'path';
 import { writeFileSync } from 'fs';
-import { parse, scan, ParseOptions, ScanOptions } from '../lib/index';
+
+import * as dree from '../lib/index';
+import { ParseOptions, ScanOptions } from '../lib/index';
 
 function parseRegExp(patterns: string[]): RegExp[] {
     let result: RegExp[] = [];
@@ -40,7 +42,7 @@ yargs
         const dest = args.dest;
         const name = args.name;
         const show = args.show;
-        const tree = parse(source, options);
+        const tree = dree.parse(source, options);
         if(show) {
             console.log(tree);
         }
@@ -81,7 +83,7 @@ yargs
         const dest = args.dest;
         const name = args.name;
         const show = args.show;
-        const tree = JSON.stringify(scan(source, options));
+        const tree = JSON.stringify(dree.scan(source, options));
         if(show) {
             console.log(tree);
         }

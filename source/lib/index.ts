@@ -10,8 +10,8 @@ const lstatAsync = promisify(lstat);
 
 /* DECLARATION OF @types/crypto AND @types/fs NEEDED TO AVOID @types/node DEPENDENCY */
 
-declare type HexBase64Latin1Encoding = 'latin1' | 'hex' | 'base64';
-declare class Stats {
+type HexBase64Latin1Encoding = 'latin1' | 'hex' | 'base64';
+interface Stats {
     isFile(): boolean;
     isDirectory(): boolean;
     isBlockDevice(): boolean;
