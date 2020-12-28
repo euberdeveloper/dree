@@ -15,6 +15,7 @@
     "LICENSE"
   ],
   "scripts": {
+    "pretranspile": "shx rm -rf dist",
     "transpile": "tsc -p source",
     "script:getr:linux": "node scripts/generate-expected-tests-results linux",
     "script:getr:mac": "node scripts/generate-expected-tests-results mac",
@@ -27,6 +28,7 @@
     "docs:html": "typedoc --mode modules --inputFiles source/lib/index.ts --excludeExternals --excludeNotExported --includeVersion --plugin none --tsconfig source/tsconfig.json --gaID $GA_TOKEN source/lib --out docs/documentation/html",
     "docs:html-dev": "typedoc --mode modules --name 'dree - DEV' --includeVersion --plugin none --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
     "docs:markdown": "typedoc --out docs/documentation/markdown --mode modules --inputFiles source/lib/index.ts --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --excludeExternals --includeVersion source/lib",
+    "predocs": "shx rm -rf docs/documentation",
     "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:markdown",
     "commit": "git-cz",
     "commit:sign": "git-cz -S"
@@ -64,11 +66,16 @@
     "commitizen": "^4.2.2",
     "coveralls": "^3.1.0",
     "cz-conventional-changelog": "^3.3.0",
+    "dts-bundle-webpack": "^1.0.2",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
-    "typedoc": "^0.20.0-beta.32",
+    "shx": "^0.3.3",
+    "terser-webpack-plugin": "^5.0.3",
+    "typedoc": "^0.19.2",
     "typedoc-plugin-markdown": "^3.1.1",
     "typescript": "^4.1.3",
-    "vercel": "^21.0.1"
+    "vercel": "^21.0.1",
+    "webpack": "^5.11.0",
+    "webpack-node-externals": "^2.5.2"
   }
 }
