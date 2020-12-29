@@ -10,4 +10,4 @@ install:
 before_script:
  - npm run transpile
 script:
- - npm run nyc
+ - npm test
