@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
-const TerserPlugin = require('terser-webpack-plugin');
 const DtsBundleWebpack = require('dts-bundle-webpack');
 
 const libConfig = {
@@ -35,11 +34,6 @@ const libConfig = {
         })
     ],
     externals: [nodeExternals()],
-    optimization: {
-        minimizer: [
-            new TerserPlugin(),
-        ]
-    },
     output: {
         path: path.resolve(__dirname, 'bundled', 'lib'),
         filename: 'index.js',
@@ -87,11 +81,6 @@ const binConfig = {
             commonjs2: '../lib/index'
         }
     }, nodeExternals()],
-    optimization: {
-        minimizer: [
-            new TerserPlugin(),
-        ]
-    },
     output: {
         path: path.resolve(__dirname, 'bundled', 'bin'),
         filename: 'index.js',
