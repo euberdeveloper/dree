@@ -8,7 +8,7 @@ const libConfig = {
     mode: 'production',
     // devtool: 'source-map',
     entry: {
-        index: './source/lib/index.ts',
+        index: './source/lib/index.ts'
     },
     resolve: {
         extensions: ['.ts', '.js']
