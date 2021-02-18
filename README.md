@@ -358,8 +358,8 @@ Given a path, returns a promise to an object representing its directory tree. Th
 
 * __path__: Is of type `string`, and is the relative or absolute path the file or directory that you want to scan
 * __options__: Optional. Is of type `object` and allows you to customize the function behaviour.
-* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled).
-* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled).
+* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled). The callback can be an **async function**.
+* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled). The callback can be an **async function**.
 
 **Options parameters:**
 
@@ -483,6 +483,8 @@ The result will be a promise to string representing the Directory Tree of the ob
 On **Windows** it could be possible that symbolic links are not detected, due to a problem with node fs module. If `symbolicLinks` is set to true, then `isSymbolicLink` could result `false` for al the tree nodes. In addition, if `followLinks` is set to true, it could be possible that links will not be followed instead.
 
 The **callbacks** have a tree representation of the node and its stat as parameters. The tree parameter **reflects** the options given to `scan`. For example, if you set `hash` to `false`, then the tree parameter of a callback will not have the hash value. The stat parameter **depends** on the `followLinks` option. If it is true it will be the result of `fs.stat`, otherwise it will be the result of `fs.lstat`.
+
+The **callbacks** for `scanAsync` can return a promise, hence **async callbacks** are supported.
 
 Properties as **hash** or **size** are computed considering only the **not filtered** nodes. For instance, the result size of a folder could be different from its actual size, if some of its inner files have not been considered due to filters as `exclude`.
 
