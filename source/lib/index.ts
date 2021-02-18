@@ -368,8 +368,11 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
         relativePath: options.normalize ? relativePath.replace(/\\/g, '/') : relativePath,
         type: type,
         isSymbolicLink: symbolicLink,
-        stat: options.stat ? (options.followLinks ? stat : lstat) : undefined
+        stat: options.followLinks ? stat : lstat
     };
+    if (!options.stat) {
+        delete dirTree.stat;
+    }
 
     switch (type) {
         case Type.DIRECTORY:
