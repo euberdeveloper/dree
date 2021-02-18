@@ -47,7 +47,6 @@ const libConfig = {
 const binConfig = {
     target: 'node',
     mode: 'production',
-    // devtool: 'source-map',
     entry: {
         index: './source/bin/index.ts',
     },
