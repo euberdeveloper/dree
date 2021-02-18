@@ -153,6 +153,38 @@ module.exports = (expect, fs, dree, path) => {
             }
         });
 
+        it(`Should return the content of "test/scan/${platform}/fifth.test.json" and compute folders and files sizes by using promises callbacks`, async function () {
+
+            const options = {
+                depth: 2,
+                exclude: /firebase/
+            };
+
+            let filesSize = 0, foldersSize = 0;
+            const filesCallback = async (_dirTree, stat) => new Promise((resolve, _reject) => {
+                filesSize += stat.size;
+                setTimeout(resolve(), 10);
+            });
+            const foldersCallback = async (_dirTree, stat) => new Promise((resolve, _reject) => {
+                foldersSize += stat.size;
+                setTimeout(resolve(), 10);
+            });
+
+            const result = getResult(await dree.scanAsync(path, options, filesCallback, foldersCallback));
+            const expected = getExpected(`test/scan/${platform}/fifth.test.json`);
+            expect(result).to.equal(expected);
+            switch (platform) {
+                case 'windows':
+                    expect(filesSize).to.equal(60);
+                    expect(foldersSize).to.equal(0);
+                    break;
+                case 'linux':
+                    expect(filesSize).to.equal(49);
+                    expect(foldersSize).to.equal(24586);
+                    break;
+            }
+        });
+
         it(`Should return the content of "test/scan/${platform}/sixth.test.json"`, async function () {
 
             const options = {
