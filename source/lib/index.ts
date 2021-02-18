@@ -228,6 +228,7 @@ export interface ParseOptions {
 }
 
 export type Callback = (dirTree: Dree, stat: Stats) => void;
+export type CallbackAsync = (dirTree: Dree, stat: Stats) => void | Promise<void>;
 
 /* DEFAULT OPTIONS */
 
@@ -479,7 +480,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
     return dirTree;
 }
 
-async function _scanAsync(root: string, path: string, depth: number, options: ScanOptions, onFile?: Callback, onDir?: Callback): Promise<Dree | null> {
+async function _scanAsync(root: string, path: string, depth: number, options: ScanOptions, onFile?: CallbackAsync, onDir?: CallbackAsync): Promise<Dree | null> {
 
     if (options.depth !== undefined && depth > options.depth) {
         return null;
@@ -645,10 +646,10 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
     }
 
     if (onFile && type === Type.FILE) {
-        onFile(dirTree, options.followLinks ? stat : lstat);
+        await onFile(dirTree, options.followLinks ? stat : lstat);
     }
     else if (onDir && type === Type.DIRECTORY) {
-        onDir(dirTree, options.followLinks ? stat : lstat);
+        await onDir(dirTree, options.followLinks ? stat : lstat);
     }
 
     return dirTree;
@@ -892,7 +893,7 @@ export function scan(path: string, options?: ScanOptions, onFile?: Callback, onD
  * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
  * @return {Promise<object>} A promise to the directory tree as a Dree object
  */
-export async function scanAsync(path: string, options?: ScanOptions, onFile?: Callback, onDir?: Callback): Promise<Dree> {
+export async function scanAsync(path: string, options?: ScanOptions, onFile?: CallbackAsync, onDir?: CallbackAsync): Promise<Dree> {
     const root = resolve(path);
     const opt = mergeScanOptions(options);
     const result = await _scanAsync(root, root, 0, opt, onFile, onDir) as Dree;
