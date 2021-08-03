@@ -50,6 +50,20 @@ export enum Type {
 }
 
 /**
+ * Callback used by [[scan]] when a file or dir is encountered
+ */
+export type Callback = (dirTree: Dree, stat: Stats) => void;
+/**
+ * Callback used by [[asyncScan]] when a file or dir is encountered
+ */
+export type CallbackAsync = (dirTree: Dree, stat: Stats) => void | Promise<void>;
+
+/**
+ * Function used to sort paths
+ */
+export type SortDiscriminator = (x: string, y: string) => number;
+
+/**
  * Interface of an object representing a Directory Tree
  */
 export interface Dree {
@@ -182,6 +196,11 @@ export interface ScanOptions {
      */
     excludeEmptyDirectories?: boolean;
     /**
+     * If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order or a 
+     * custom sorting function
+     */
+    sorted?: boolean | SortDiscriminator;
+    /**
      * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
      * error thrown by fs calls will be ignored
      */
@@ -227,9 +246,6 @@ export interface ParseOptions {
     skipErrors?: boolean;
 }
 
-export type Callback = (dirTree: Dree, stat: Stats) => void;
-export type CallbackAsync = (dirTree: Dree, stat: Stats) => void | Promise<void>;
-
 /* DEFAULT OPTIONS */
 
 const SCAN_DEFAULT_OPTIONS: ScanOptions = {
@@ -249,6 +265,7 @@ const SCAN_DEFAULT_OPTIONS: ScanOptions = {
     extensions: undefined,
     emptyDirectory: false,
     excludeEmptyDirectories: false,
+    sorted: false,
     skipErrors: true
 };
 
@@ -382,6 +399,9 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
             if (options.followLinks || !symbolicLink) {
                 try {
                     files = readdirSync(path);
+                    if (options.sorted) {
+                        files = typeof options.sorted === 'boolean' ? files.sort() : files.sort(options.sorted);
+                    }
                 }
                 catch (exception) {
                     /* istanbul ignore next */
@@ -552,11 +572,14 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
 
     switch (type) {
         case Type.DIRECTORY:
-            const children: Dree[] = [];
+            let children: Dree[] = [];
             let files: string[];
             if (options.followLinks || !symbolicLink) {
                 try {
                     files = await readdirAsync(path);
+                    if (options.sorted) {
+                        files = typeof options.sorted === 'boolean' ? files.sort() : files.sort(options.sorted);
+                    }
                 }
                 catch (exception) {
                     /* istanbul ignore next */
@@ -570,12 +593,11 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
                 if (options.emptyDirectory) {
                     dirTree.isEmpty = !files.length
                 }
-                await Promise.all(files.map(async file => {
+                children = await Promise.all(files.map(async file => {
                     const child: Dree | null = await _scanAsync(root, resolve(path, file), depth + 1, options, onFile, onDir);
-                    if (child !== null) {
-                        children.push(child);
-                    }
+                    return child;
                 }));
+                children = children.filter(ch => ch !== null);
                 if (options.excludeEmptyDirectories && !children.length) {
                     return null;
                 }
