@@ -240,6 +240,11 @@ export interface ParseOptions {
      */
     extensions?: string[];
     /**
+     * If true, directories and files will be parsed ordered by path. The value can be both boolean for default alphabetical order or a 
+     * custom sorting function
+     */
+    sorted?: boolean | SortDiscriminator;
+    /**
      * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
      * error thrown by fs calls will be ignored
      */
@@ -276,6 +281,7 @@ const PARSE_DEFAULT_OPTIONS: ParseOptions = {
     depth: undefined,
     exclude: undefined,
     extensions: undefined,
+    sorted: false,
     skipErrors: true
 };
 
@@ -945,7 +951,7 @@ export function parse(path: string, options?: ParseOptions): string {
     }
     catch (exception) {
         /* istanbul ignore next */
-        if (options.skipErrors) {
+        if (opt.skipErrors) {
             return null;
         }
         else {
@@ -958,7 +964,7 @@ export function parse(path: string, options?: ParseOptions): string {
     }
     catch (exception) {
         /* istanbul ignore next */
-        if (options.skipErrors) {
+        if (opt.skipErrors) {
             return null;
         }
         else {
@@ -971,10 +977,11 @@ export function parse(path: string, options?: ParseOptions): string {
         let children: string[];
         try {
             children = readdirSync(root).map(file => resolve(root, file));
+            
         }
         catch (exception) {
             /* istanbul ignore next */
-            if (options.skipErrors) {
+            if (opt.skipErrors) {
                 return null;
             }
             else {
@@ -1007,7 +1014,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
     }
     catch (exception) {
         /* istanbul ignore next */
-        if (options.skipErrors) {
+        if (opt.skipErrors) {
             return null;
         }
         else {
@@ -1020,7 +1027,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
     }
     catch (exception) {
         /* istanbul ignore next */
-        if (options.skipErrors) {
+        if (opt.skipErrors) {
             return null;
         }
         else {
@@ -1036,7 +1043,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
         }
         catch (exception) {
             /* istanbul ignore next */
-            if (options.skipErrors) {
+            if (opt.skipErrors) {
                 return null;
             }
             else {
