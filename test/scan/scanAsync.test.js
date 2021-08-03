@@ -38,6 +38,15 @@ module.exports = (expect, fs, dree, path) => {
             }
         }
 
+        function purgeHash(node) {
+            if (node.type === 'directory') {
+                delete node.hash;
+                if (node.children !== undefined) {
+                    node.children.forEach(child => purgeHash(child));
+                }
+            }
+        }
+
         function parsePath(expected, normalize) {
             if (platform === 'windows') {
                 if (normalize) {
@@ -53,29 +62,37 @@ module.exports = (expect, fs, dree, path) => {
             return expected;
         }
 
-        function getExpected(path, normalize) {
+        function getExpected(path, normalize = false, order = true) {
             let expected = fs.readFileSync(path, 'utf8');
             expected = parsePath(expected, normalize);
             const tree = JSON.parse(expected);
-            orderTree(tree);
+            if (order) {
+                orderTree(tree);
+            }
+            else {
+                purgeHash(tree);
+            }
             expected = JSON.stringify(tree, null, 2);
             return expected;
         }
 
-        function getResult(tree) {
-            //console.log('before', JSON.stringify(tree, null, 2))
-
-            orderTree(tree);
-            //console.log('after', JSON.stringify(tree, null, 2))
-
+        function getResult(tree, order = true) {
+            if (order) {
+                orderTree(tree);
+            }
+            else {
+                purgeHash(tree);
+            }
             return JSON.stringify(tree, null, 2);
         }
 
         it(`Should return the content of "test/scan/${platform}/first.test.json"`, async function () {
-
+            const a = Date.now();
             const result = getResult(await dree.scanAsync(path));
             const expected = getExpected(`test/scan/${platform}/first.test.json`);
             expect(result).to.equal(expected);
+            const b = Date.now();
+            console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', b - a);
 
         });
 
@@ -273,6 +290,34 @@ module.exports = (expect, fs, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it(`Should return the content of "test/scan/${platform}/thirteenth.test.json"`, async function () {
+
+            const options = {
+                sorted: true
+            };
+
+            const result = getResult(await dree.scanAsync(path, options), false);
+            const expected = getExpected(`test/scan/${platform}/thirteenth.test.json`, false, false);
+
+            const fs = require('fs');
+            fs.writeFileSync('result.json', result);
+            fs.writeFileSync('expected.json', expected);
+
+            expect(result).to.equal(expected);
+        });
+
+        it(`Should return the content of "test/scan/${platform}/fourteenth.test.json"`, async function () {
+
+            const options = {
+                sorted: (x, y) => y.localeCompare(x)
+            };
+
+            const result = getResult(await dree.scanAsync(path, options), false);
+            const expected = getExpected(`test/scan/${platform}/fourteenth.test.json`, false, false);
+
+            expect(result).to.equal(expected);
+        });
+
         it(`Should return null`, async function () {
 
             const wrongPath = 'wrong';
@@ -289,9 +334,9 @@ module.exports = (expect, fs, dree, path) => {
             const wrongPath = 'wrong';
             const options = {
                 skipErrors: false
-            }; 
+            };
 
-            const willThrow = async function() {
+            const willThrow = async function () {
                 await dree.scanAsync(wrongPath, options);
             }
 

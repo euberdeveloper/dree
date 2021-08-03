@@ -67,10 +67,10 @@ const scanOptions = [
     {
         name: 'eight',
         opt: {
-                emptyDirectory: true,
-                excludeEmptyDirectories: true,
-                exclude: /.ts/
-            }
+            emptyDirectory: true,
+            excludeEmptyDirectories: true,
+            exclude: /.ts/
+        }
     },
     {
         name: 'ninth',
@@ -97,6 +97,18 @@ const scanOptions = [
             matches: platform === 'windows' ? [/^.*\\f\w+(\.\w+)?$/, /^.*\\\w+s\w(\.\w+)?$/] : [/^.*\/f\w+(\.\w+)?$/, /^.*\/\w+s\w(\.\w+)?$/]
         }
     },
+    {
+        name: 'thirteenth',
+        opt: {
+            sorted: true
+        }
+    },
+    {
+        name: 'fourteenth',
+        opt: {
+            sorted: (x, y) => y.localeCompare(x)
+        }
+    }
 ];
 
 function purgePath(data) {

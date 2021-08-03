@@ -1,0 +1,159 @@
+{
+  "name": "sample",
+  "path": "PATH/test/sample",
+  "relativePath": ".",
+  "type": "directory",
+  "isSymbolicLink": false,
+  "sizeInBytes": 1714683,
+  "size": "1.71 MB",
+  "hash": "a64815e793b4806786ce1b6d11caae47",
+  "children": [
+    {
+      "name": "linked",
+      "path": "PATH/test/sample/linked",
+      "relativePath": "linked",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 24,
+      "size": "24 B",
+      "hash": "c8d60d99c3f102305a8cbbf55c1519e7",
+      "children": [
+        {
+          "name": "linked.txt",
+          "path": "PATH/test/sample/linked/linked.txt",
+          "relativePath": "linked/linked.txt",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "txt",
+          "sizeInBytes": 24,
+          "size": "24 B",
+          "hash": "23a5f0582f74abfb7f5d3b545a2d59ca"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "path": "PATH/test/sample/empty",
+      "relativePath": "empty",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 0,
+      "size": "0 B",
+      "hash": "5395826f5e679ee75097a49101d8af75",
+      "children": [
+        {
+          "name": "tsempty",
+          "path": "PATH/test/sample/empty/tsempty",
+          "relativePath": "empty/tsempty",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "01ae4baddc925931f374f0f212896d30",
+          "children": [
+            {
+              "name": "file.ts",
+              "path": "PATH/test/sample/empty/tsempty/file.ts",
+              "relativePath": "empty/tsempty/file.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 0,
+              "size": "0 B",
+              "hash": "db3e286db4b574d6ebfdca5804df63cf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "backend",
+      "path": "PATH/test/sample/backend",
+      "relativePath": "backend",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 1714659,
+      "size": "1.71 MB",
+      "hash": "0e23da4c348710be4f93e78639879a83",
+      "children": [
+        {
+          "name": "server",
+          "path": "PATH/test/sample/backend/server",
+          "relativePath": "backend/server",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 1714607,
+          "size": "1.71 MB",
+          "hash": "3878a15abd9a42dd0986c556dd2e5b37",
+          "children": [
+            {
+              "name": "server.ts",
+              "path": "PATH/test/sample/backend/server/server.ts",
+              "relativePath": "backend/server/server.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 1714607,
+              "size": "1.71 MB",
+              "hash": "30a21c7e293056bc3a7f2103cf81c7d4"
+            }
+          ]
+        },
+        {
+          "name": "notes.txt",
+          "path": "PATH/test/sample/backend/notes.txt",
+          "relativePath": "backend/notes.txt",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "txt",
+          "sizeInBytes": 5,
+          "size": "5 B",
+          "hash": "3a4033aa4b341d086c0e76d99db8b82d"
+        },
+        {
+          "name": "linkedtxt.link",
+          "path": "PATH/test/sample/backend/linkedtxt.link",
+          "relativePath": "backend/linkedtxt.link",
+          "type": "file",
+          "isSymbolicLink": true,
+          "extension": "link",
+          "sizeInBytes": 20,
+          "size": "20 B",
+          "hash": "8ac875af9057830ddfb1c7fb9046f680"
+        },
+        {
+          "name": "linked.link",
+          "path": "PATH/test/sample/backend/linked.link",
+          "relativePath": "backend/linked.link",
+          "type": "directory",
+          "isSymbolicLink": true,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "13dfcaee429e99fa969199e7240a597a"
+        },
+        {
+          "name": "firebase.json",
+          "path": "PATH/test/sample/backend/firebase.json",
+          "relativePath": "backend/firebase.json",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "json",
+          "sizeInBytes": 27,
+          "size": "27 B",
+          "hash": "bafc664309b11a828c0adf99ed9e8516"
+        }
+      ]
+    },
+    {
+      "name": ".gitignore",
+      "path": "PATH/test/sample/.gitignore",
+      "relativePath": ".gitignore",
+      "type": "file",
+      "isSymbolicLink": false,
+      "extension": "",
+      "sizeInBytes": 0,
+      "size": "0 B",
+      "hash": "a084b794bc0759e7a6b77810e01874f2"
+    }
+  ]
+}

@@ -218,6 +218,30 @@ module.exports = (expect, fs, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it(`Should return the content of "test/scan/${platform}/thirteenth.test.json"`, function () {
+
+            const options = {
+                sorted: true
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/thirteenth.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
+        it(`Should return the content of "test/scan/${platform}/fourteenth.test.json"`, function () {
+
+            const options = {
+                sorted: (x, y) => y.localeCompare(x)
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/fourteenth.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
         it(`Should return null`, function () {
 
             const wrongPath = 'wrong';

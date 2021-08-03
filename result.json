@@ -1,0 +1,152 @@
+{
+  "name": "sample",
+  "path": "/home/euber/Github/dree/test/sample",
+  "relativePath": ".",
+  "type": "directory",
+  "isSymbolicLink": false,
+  "sizeInBytes": 1714683,
+  "size": "1.71 MB",
+  "children": [
+    {
+      "name": ".gitignore",
+      "path": "/home/euber/Github/dree/test/sample/.gitignore",
+      "relativePath": ".gitignore",
+      "type": "file",
+      "isSymbolicLink": false,
+      "extension": "",
+      "sizeInBytes": 0,
+      "size": "0 B",
+      "hash": "a084b794bc0759e7a6b77810e01874f2"
+    },
+    {
+      "name": "backend",
+      "path": "/home/euber/Github/dree/test/sample/backend",
+      "relativePath": "backend",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 1714659,
+      "size": "1.71 MB",
+      "children": [
+        {
+          "name": "firebase.json",
+          "path": "/home/euber/Github/dree/test/sample/backend/firebase.json",
+          "relativePath": "backend/firebase.json",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "json",
+          "sizeInBytes": 27,
+          "size": "27 B",
+          "hash": "bafc664309b11a828c0adf99ed9e8516"
+        },
+        {
+          "name": "linked.link",
+          "path": "/home/euber/Github/dree/test/sample/backend/linked.link",
+          "relativePath": "backend/linked.link",
+          "type": "directory",
+          "isSymbolicLink": true,
+          "sizeInBytes": 0,
+          "size": "0 B"
+        },
+        {
+          "name": "linkedtxt.link",
+          "path": "/home/euber/Github/dree/test/sample/backend/linkedtxt.link",
+          "relativePath": "backend/linkedtxt.link",
+          "type": "file",
+          "isSymbolicLink": true,
+          "extension": "link",
+          "sizeInBytes": 20,
+          "size": "20 B",
+          "hash": "8ac875af9057830ddfb1c7fb9046f680"
+        },
+        {
+          "name": "notes.txt",
+          "path": "/home/euber/Github/dree/test/sample/backend/notes.txt",
+          "relativePath": "backend/notes.txt",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "txt",
+          "sizeInBytes": 5,
+          "size": "5 B",
+          "hash": "3a4033aa4b341d086c0e76d99db8b82d"
+        },
+        {
+          "name": "server",
+          "path": "/home/euber/Github/dree/test/sample/backend/server",
+          "relativePath": "backend/server",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 1714607,
+          "size": "1.71 MB",
+          "children": [
+            {
+              "name": "server.ts",
+              "path": "/home/euber/Github/dree/test/sample/backend/server/server.ts",
+              "relativePath": "backend/server/server.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 1714607,
+              "size": "1.71 MB",
+              "hash": "30a21c7e293056bc3a7f2103cf81c7d4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "path": "/home/euber/Github/dree/test/sample/empty",
+      "relativePath": "empty",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 0,
+      "size": "0 B",
+      "children": [
+        {
+          "name": "tsempty",
+          "path": "/home/euber/Github/dree/test/sample/empty/tsempty",
+          "relativePath": "empty/tsempty",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "children": [
+            {
+              "name": "file.ts",
+              "path": "/home/euber/Github/dree/test/sample/empty/tsempty/file.ts",
+              "relativePath": "empty/tsempty/file.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 0,
+              "size": "0 B",
+              "hash": "db3e286db4b574d6ebfdca5804df63cf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "linked",
+      "path": "/home/euber/Github/dree/test/sample/linked",
+      "relativePath": "linked",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 24,
+      "size": "24 B",
+      "children": [
+        {
+          "name": "linked.txt",
+          "path": "/home/euber/Github/dree/test/sample/linked/linked.txt",
+          "relativePath": "linked/linked.txt",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "txt",
+          "sizeInBytes": 24,
+          "size": "24 B",
+          "hash": "23a5f0582f74abfb7f5d3b545a2d59ca"
+        }
+      ]
+    }
+  ]
+}
