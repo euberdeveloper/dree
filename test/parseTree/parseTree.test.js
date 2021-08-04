@@ -84,6 +84,28 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it('Should return the exported content of "test/parseTree/seventh.test.js"', function() {
+
+            const options = {
+                sorted: true
+            };
+
+            const result = dree.parseTree(dree.scan(path, options), options);
+            const expected = require(`./${platform}/seventh.test`);
+            expect(result).to.equal(expected);
+        });
+
+        it('Should return the exported content of "test/parseTree/eighth.test.js"', function() {
+
+            const options = {
+                sorted: (x, y) => y.localeCompare(x)
+            };
+
+            const result = dree.parseTree(dree.scan(path, options), options);
+            const expected = require(`./${platform}/eighth.test`);
+            expect(result).to.equal(expected);
+        });
+
     });
 
 }

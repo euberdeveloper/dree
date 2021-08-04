@@ -161,6 +161,18 @@ const parseOptions = [
         opt: {
             followLinks: true
         }
+    },
+    {
+        name: 'sixth',
+        opt: {
+            sorted: true
+        }
+    },
+    {
+        name: 'seventh',
+        opt: {
+            sorted: (x, y) => y.localeCompare(x)
+        }
     }
 ];
 function generateParse(option) {
@@ -211,6 +223,18 @@ const parseTreeOptions = [
         name: 'sixth',
         opt: {
             followLinks: true
+        }
+    },
+    {
+        name: 'seventh',
+        opt: {
+            sorted: true
+        }
+    },
+    {
+        name: 'eighth',
+        opt: {
+            sorted: (x, y) => y.localeCompare(x)
         }
     }
 ];

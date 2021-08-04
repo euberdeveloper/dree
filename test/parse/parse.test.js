@@ -72,6 +72,27 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it('Should return the exported content of "test/parse/sixth.test.js"', function() {
+            
+            const options = {
+                sorted: true
+            };
+
+            const result = dree.parse(path, options);
+            const expected = require(`./${platform}/sixth.test`);
+            expect(result).to.equal(expected);
+        });
+
+        it('Should return the exported content of "test/parse/seventh.test.js"', function() {
+            
+            const options = {
+                sorted: (x, y) => y.localeCompare(x)
+            };
+
+            const result = dree.parse(path, options);
+            const expected = require(`./${platform}/seventh.test`);
+            expect(result).to.equal(expected);
+        });
     });
 
 }
