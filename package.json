@@ -1,6 +1,6 @@
 {
   "name": "dree",
-  "version": "2.8.1",
+  "version": "2.8.2",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
   "main": "bundled/lib/index.js",
   "types": "bundled/lib/index.d.ts",
@@ -55,9 +55,6 @@
   ],
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "yargs": "^16.2.0"
-  },
   "devDependencies": {
     "@types/node": "^16.4.10",
     "@types/yargs": "^17.0.2",
@@ -79,5 +76,8 @@
     "webpack": "^5.48.0",
     "webpack-cli": "^4.7.2",
     "webpack-node-externals": "^3.0.0"
+  },
+  "dependencies": {
+    "yargs": "^17.0.1"
   }
 }
