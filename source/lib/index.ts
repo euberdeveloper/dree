@@ -54,7 +54,7 @@ export enum Type {
  */
 export type Callback = (dirTree: Dree, stat: Stats) => void;
 /**
- * Callback used by [[asyncScan]] when a file or dir is encountered
+ * Callback used by [[scanAsync]] when a file or dir is encountered
  */
 export type CallbackAsync = (dirTree: Dree, stat: Stats) => void | Promise<void>;
 
