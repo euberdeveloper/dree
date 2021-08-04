@@ -758,6 +758,9 @@ function _parse(children: string[], prefix: string, options: ParseOptions, depth
             let children: string[];
             try {
                 children = readdirSync(child).map(file => resolve(child, file));
+                if (options.sorted) {
+                    children = typeof options.sorted === 'boolean' ? children.sort() : children.sort(options.sorted);
+                }
             }
             catch (exception) {
                 /* istanbul ignore next */
@@ -844,6 +847,9 @@ async function _parseAsync(children: string[], prefix: string, options: ParseOpt
             let children: string[];
             try {
                 children = (await readdirAsync(child)).map(file => resolve(child, file));
+                if (options.sorted) {
+                    children = typeof options.sorted === 'boolean' ? children.sort() : children.sort(options.sorted);
+                }
             }
             catch (exception) {
                 /* istanbul ignore next */
@@ -867,6 +873,9 @@ async function _parseAsync(children: string[], prefix: string, options: ParseOpt
 
 function _parseTree(children: Dree[], prefix: string, options: ParseOptions, depth: number): string {
     let result = '';
+    if (options.sorted) {
+        children = children.sort((x, y) => typeof options.sorted === 'boolean' ? x.relativePath.localeCompare(y.relativePath) : options.sorted(x.relativePath, y.relativePath));
+    }
     children
         .filter(child => !skip(child, options, depth))
         .forEach((child, index, children) => {
@@ -881,6 +890,9 @@ function _parseTree(children: Dree[], prefix: string, options: ParseOptions, dep
 
 async function _parseTreeAsync(children: Dree[], prefix: string, options: ParseOptions, depth: number): Promise<string> {
     let result = '';
+    if (options.sorted) {
+        children = children.sort((x, y) => typeof options.sorted === 'boolean' ? x.relativePath.localeCompare(y.relativePath) : options.sorted(x.relativePath, y.relativePath));
+    }
     const filteredChildren = children.filter(child => !skip(child, options, depth));
     for (let index = 0; index < filteredChildren.length; index++) {
         const child = filteredChildren[index];
@@ -977,7 +989,9 @@ export function parse(path: string, options?: ParseOptions): string {
         let children: string[];
         try {
             children = readdirSync(root).map(file => resolve(root, file));
-            
+            if (opt.sorted) {
+                children = typeof opt.sorted === 'boolean' ? children.sort() : children.sort(opt.sorted);
+            }
         }
         catch (exception) {
             /* istanbul ignore next */
@@ -1040,6 +1054,9 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
         let children: string[];
         try {
             children = (await readdirAsync(root)).map(file => resolve(root, file));
+            if (opt.sorted) {
+                children = typeof opt.sorted === 'boolean' ? children.sort() : children.sort(opt.sorted);
+            }
         }
         catch (exception) {
             /* istanbul ignore next */
