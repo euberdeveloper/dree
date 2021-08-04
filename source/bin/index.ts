@@ -4,7 +4,7 @@ import  { join } from 'path';
 import { writeFileSync } from 'fs';
 
 import * as dree from '../lib/index';
-import { ParseOptions, ScanOptions } from '../lib/index';
+import { ParseOptions, ScanOptions, SortDiscriminator } from '../lib/index';
 
 function parseRegExp(patterns: string[]): RegExp[] {
     let result: RegExp[] = [];
@@ -14,6 +14,14 @@ function parseRegExp(patterns: string[]): RegExp[] {
         }
     }
     return result;
+}
+
+function parseSorted(sorted?: 'ascending' | 'descending'): SortDiscriminator | boolean | undefined {
+    if (!sorted) {
+        return undefined;
+    }
+
+    return sorted === 'ascending' ? true : (x, y) => y.localeCompare(x);
 }
 
 yargs
@@ -36,6 +44,7 @@ yargs
             depth: args.depth,
             exclude: parseRegExp(args.exclude),
             extensions: args.extensions,
+            sorted: parseSorted(args.sorted),
             skipErrors: args.skipErrors
         }
         const source = args.source;
@@ -77,8 +86,10 @@ yargs
             emptyDirectory: args.emptyDirectory,
             excludeEmptyDirectories: args.excludeEmptyDirectories,
             extensions: args.extensions,
+            sorted: parseSorted(args.sorted),
             skipErrors: args.skipErrors
         }
+        console.log(options.sorted);
         const source = args.source;
         const dest = args.dest;
         const name = args.name;
@@ -108,48 +119,48 @@ yargs
     'show': {
         alias: 's',
         default: false,
-        describe: 'Wheter you want to print the result on the command line',
+        describe: 'Whether you want to print the result on the command line',
         type: 'boolean'
     },
     'stat': {
         default: false,
-        describe: 'Wheter you want the fs.stat included in the json result',
+        describe: 'Whether you want the fs.stat included in the json result',
         type: 'boolean',
         hidden: true
     },
     'normalize': {
         default: false,
-        describe: 'Wheter you want to normalize the path in the json result',
+        describe: 'Whether you want to normalize the path in the json result',
         type: 'boolean',
         hidden: true
     },
     'symbolic-links': {
         default: true,
-        describe: 'Wheter you want to consider symbolic links during the elaboration, could not work on windows',
+        describe: 'Whether you want to consider symbolic links during the elaboration, could not work on windows',
         type: 'boolean',
         hidden: true
     },
     'follow-links': {
         default: false,
-        describe: 'Wheter you want to follow symbolic links during the elaboration, could not work on windows',
+        describe: 'Whether you want to follow symbolic links during the elaboration, could not work on windows',
         type: 'boolean',
         hidden: true
     },
     'size-in-bytes': {
         default: true,
-        describe: 'Wheter you want to include the size in bytes in the json result',
+        describe: 'Whether you want to include the size in bytes in the json result',
         type: 'boolean',
         hidden: true
     },
     'size': {
         default: true,
-        describe: 'Wheter you want to include the size in a proper unit in the json result',
+        describe: 'Whether you want to include the size in a proper unit in the json result',
         type: 'boolean',
         hidden: true
     },
     'hash': {
         default: true,
-        describe: 'Wheter you want to include the hash in the json result',
+        describe: 'Whether you want to include the hash in the json result',
         type: 'boolean',
         hidden: true
     },
@@ -169,7 +180,7 @@ yargs
     },
     'show-hidden': {
         default: true,
-        describe: 'Wheter you want to consider hidden files during the elaboration',
+        describe: 'Whether you want to consider hidden files during the elaboration',
         type: 'boolean',
         hidden: true
     },
@@ -196,19 +207,26 @@ yargs
     },
     'empty-directory': {
         default: false,
-        describe: 'Wheter you want to include the property isEmpty in the result',
+        describe: 'Whether you want to include the property isEmpty in the result',
         type: 'boolean',
         hidden: true
     },
     'exclude-empty-directories': {
         default: false,
-        describe: 'Wheter you want to exclude all the empty directories from the result, even if they contains nodes excluded by other options',
+        describe: 'Whether you want to exclude all the empty directories from the result, even if they contains nodes excluded by other options',
         type: 'boolean',
         hidden: true
     },
+    'sorted': {
+        default: undefined,
+        describe: 'Whether you want the result to contain values sorted in ascending or descending order. If not specified, the result values are not ordered.',
+        type: 'string',
+        choices: ['ascending', 'descending'],
+        hidden: true,
+    },
     'skip-errors': {
         default: true,
-        describe: 'Wheter you want to skip folders and files wich give errors during the execution',
+        describe: 'Whether you want to skip folders and files wich give errors during the execution',
         type: 'boolean',
         hidden: true
     },

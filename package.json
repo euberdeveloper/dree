@@ -1,6 +1,6 @@
 {
   "name": "dree",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
   "main": "bundled/lib/index.js",
   "types": "bundled/lib/index.d.ts",
