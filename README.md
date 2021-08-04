@@ -325,7 +325,8 @@ Given a path, returns an object representing its directory tree. The result coul
 * __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
 * __emptyDirectory__: Default value: `false`. If value is `true`, the `isEmpty` property will be added in all the directory nodes in the result. Its value will be `true` if the directory contains no files and no directories, `false` otherwise.
 * __excludeEmptyDirectories__: Default value: `false`. If value is `true`, all empty directories will be excluded from the result. Even directories which are not empty but all their children are excluded are excluded from the result because of other options will be considered empty.
-* __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored. Considere
+* __sorted__: Default value: `undefined`. If specified, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order or a custom sorting function.
+* __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
 
 **Result object parameters:**
 
@@ -406,6 +407,8 @@ Given a path, returns a string representing its directory tree. The result could
 * __depth__: Default value: `undefined`. It is a number which says the max depth the algorithm can reach scanning the given path. All files and dirs which are beyound the max depth will not be considered by the algorithm.
 * __exclude__: Default value: `undefined`. It is a regex or array of regex and all the matched paths will not be considered by the algorithm.
 * __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
+* __sorted__: Default value: `undefined`. If specified, directories and files will be parsed ordered by path. The value can be both boolean for default alphabetical order or a custom sorting function.
+* __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
 
 **Result string:**
 
