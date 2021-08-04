@@ -89,7 +89,6 @@ yargs
             sorted: parseSorted(args.sorted),
             skipErrors: args.skipErrors
         }
-        console.log(options.sorted);
         const source = args.source;
         const dest = args.dest;
         const name = args.name;
