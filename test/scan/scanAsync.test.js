@@ -87,12 +87,9 @@ module.exports = (expect, fs, dree, path) => {
         }
 
         it(`Should return the content of "test/scan/${platform}/first.test.json"`, async function () {
-            const a = Date.now();
             const result = getResult(await dree.scanAsync(path));
             const expected = getExpected(`test/scan/${platform}/first.test.json`);
             expect(result).to.equal(expected);
-            const b = Date.now();
-            console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', b - a);
 
         });
 
