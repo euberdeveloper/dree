@@ -467,7 +467,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                 dirTree.hash = hash.digest(hashEncoding);
             }
             if (options.descendants) {
-                dirTree.descendants = children.reduce((acc, child) => acc + (options.descendantsIgnoreDirectories ? 0 : 1) + (child.descendants ?? 0), 0);
+                dirTree.descendants = children.reduce((acc, child) => acc + (child.type === Type.DIRECTORY && options.descendantsIgnoreDirectories ? 0 : 1) + (child.descendants ?? 0), 0);
             }
             if (children.length) {
                 dirTree.children = children;
@@ -647,7 +647,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
                 dirTree.hash = hash.digest(hashEncoding);
             }
             if (options.descendants) {
-                dirTree.descendants = children.reduce((acc, child) => acc + (options.descendantsIgnoreDirectories ? 0 : 1) + (child.descendants ?? 0), 0);
+                dirTree.descendants = children.reduce((acc, child) => acc + (child.type === Type.DIRECTORY && options.descendantsIgnoreDirectories ? 0 : 1) + (child.descendants ?? 0), 0);
             }
             if (children.length) {
                 dirTree.children = children;
