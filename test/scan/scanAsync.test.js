@@ -311,6 +311,32 @@ module.exports = (expect, fs, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it(`Should return the content of "test/scan/${platform}/fifteenth.test.json"`, async function () {
+
+            const options = {
+                descendants: true
+            };
+
+            const result = getResult(await dree.scanAsync(path, options), false);
+            const expected = getExpected(`test/scan/${platform}/fifteenth.test.json`, false, false);
+
+            expect(result).to.equal(expected);
+        });
+
+        it(`Should return the content of "test/scan/${platform}/sixteenth.test.json"`, async function () {
+
+            const options = {
+                descendants: true,
+                descendantsIgnoreDirectories: true,
+                exclude: [/firebase/]
+            };
+
+            const result = getResult(await dree.scanAsync(path, options), false);
+            const expected = getExpected(`test/scan/${platform}/sixteenth.test.json`, false, false);
+
+            expect(result).to.equal(expected);
+        });
+
         it(`Should return null`, async function () {
 
             const wrongPath = 'wrong';

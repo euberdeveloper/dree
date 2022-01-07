@@ -242,6 +242,32 @@ module.exports = (expect, fs, dree, path) => {
             expect(result).to.equal(expected);
         });
 
+        it(`Should return the content of "test/scan/${platform}/fifteenth.test.json"`, function () {
+
+            const options = {
+                descendants: true
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/fifteenth.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
+        it(`Should return the content of "test/scan/${platform}/sixteenth.test.json"`, function () {
+
+            const options = {
+                descendants: true,
+                descendantsIgnoreDirectories: true,
+                exclude: [/firebase/]
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/sixteenth.test.json`);
+
+            expect(result).to.equal(expected);
+        });
+
         it(`Should return null`, function () {
 
             const wrongPath = 'wrong';
