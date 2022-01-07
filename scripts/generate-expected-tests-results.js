@@ -113,6 +113,20 @@ const scanOptions = [
         opt: {
             sorted: (x, y) => y.localeCompare(x)
         }
+    },
+    {
+        name: 'fifteenth',
+        opt: {
+            descendants: true
+        }
+    },
+    {
+        name: 'sixteenth',
+        opt: {
+            descendants: true,
+            descendantsIgnoreDirectories: true,
+            exclude: [/firebase/]
+        }
     }
 ];
 
