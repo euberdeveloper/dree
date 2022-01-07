@@ -163,28 +163,44 @@ dree.parseAsync('./folder', options)
 
 ## Usage (global module)
 
-### Get an object
+### Get an object and print on stdout
 
 ```bash
-$ dree scan <source> --dest ./output --name result
+$ dree scan <source>
+```
+
+This way the result will be printed on stdout
+
+### Get an object and save in a file
+
+```bash
+$ dree scan <source> --dest ./output/result.json
 ```
 
 This way the result will be saved in `./output/result.json`
 
-### Get a string
+### Get a string and print on stdout
 
 ```bash
-$ dree parse <source> --dest ./output --name result
+$ dree parse <source>
+```
+
+This way the result will be printed on stdout
+
+### Get a string and save in a file
+
+```bash
+$ dree parse <source> --dest ./output/result.txt
 ```
 
 This way the result will be saved in `./output/result.txt`
 
-### Log the result
+### Log the result and save in a file
 
 ```bash
-$ dree scan|parse <source> --dest ./output --name result --show
+$ dree parse <source> --dest ./output/result.txt --show
 ```
-With `--show` option, the result will also be printed with `console.log()`
+With `--show` option, the result will also be printed with on stdout even if also saved in a file
 
 ### See all options
 
