@@ -9,7 +9,12 @@ const dree = require('../dist/lib');
 *******************************************************/
 
 const args = process.argv.slice(2);
-const platform = args[0] || 'linux';
+const platform = args[0];
+
+if (!['linux', 'windows', 'mac'].includes(platform)) {
+    console.error('Invalid platform: ' + platform);
+    console.log("Usage: [SCRIPT_PATH] <platform>\nWhere platform is one of: linux, windows or mac");
+}
 
 /* SCAN and SCAN ASYNC */
 
