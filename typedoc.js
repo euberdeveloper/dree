@@ -1,4 +1,5 @@
 module.exports = {
+    entryPointStrategy: 'expand',
     entryPoints: [
         './source/lib/index.ts'
     ],
@@ -10,5 +11,6 @@ module.exports = {
     excludePrivate: true,
     excludeProtected: true,
     disableSources: true,
+    cleanOutputDir: true,
     out: './docs/documentation/html'
 };
