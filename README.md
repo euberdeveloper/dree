@@ -18,6 +18,12 @@
 # dree
 A nodejs module which helps you handle a directory tree. It provides you an object of a directory tree with custom configuration and optional callback method when a file or dir is scanned. You will also be able to turn the tree into a string representation. With Typescript support and both sync and async support.
 
+## The name
+
+A little explaination of the name **dree**: 
+
+I chose it because it comes from the union of **D**irectory T**ree**.
+
 ## Install
 
 To install dree as a local module:
