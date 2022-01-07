@@ -56,6 +56,9 @@
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
     "@types/node": "^17.0.8",
     "@types/yargs": "^17.0.8",
     "chai": "^4.3.4",
@@ -75,7 +78,6 @@
     "vercel": "^23.1.2",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
-    "webpack-node-externals": "^3.0.0",
-    "yargs": "^17.0.1"
+    "webpack-node-externals": "^3.0.0"
   }
 }
