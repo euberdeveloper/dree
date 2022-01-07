@@ -347,6 +347,8 @@ Given a path, returns an object representing its directory tree. The result coul
 * __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
 * __emptyDirectory__: Default value: `false`. If value is `true`, the `isEmpty` property will be added in all the directory nodes in the result. Its value will be `true` if the directory contains no files and no directories, `false` otherwise.
 * __excludeEmptyDirectories__: Default value: `false`. If value is `true`, all empty directories will be excluded from the result. Even directories which are not empty but all their children are excluded are excluded from the result because of other options will be considered empty.
+* __descendants__: Default value `false`. If true, also the number of descendants of each node will be added to the result.
+* __descendantsIgnoreDirectories__: Default value `false`. If true, only files will be count as descendants of a node. It does not have effect if descendants option is not true.
 * __sorted__: Default value: `undefined`. If specified, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order or a custom sorting function.
 * __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
 
@@ -362,6 +364,7 @@ Given a path, returns an object representing its directory tree. The result coul
 * __hash__: The hash of the node.
 * __extension__: The extension (without dot) of the node. Returned only if the node is a file.
 * __isEmpty__: A boolean with true value if the node is a directory containig no files and no directories.
+* __descendants__: The number of descendants of the node. Returned only if the node is a directory and descendants option is specified.
 * __stat__: The `fs.lstat` or `fs.fstat` of the node.
 * __children__: An array of object structured like this one, containing all the children of the node.
 
@@ -400,6 +403,7 @@ They are exactly the same of the `scan`'s function option parameters.
 * __hash__: The hash of the node.
 * __extension__: The extension (without dot) of the node. Returned only if the node is a file.
 * __isEmpty__: A boolean with true value if the node is a directory containig no files and no directories.
+* __descendants__: The number of descendants of the node. Returned only if the node is a directory and descendants option is specified.
 * __stat__: The `fs.lstat` or `fs.fstat` of the node.
 * __children__: An array of object structured like this one, containing all the children of the node.
 
