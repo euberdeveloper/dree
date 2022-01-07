@@ -29,7 +29,7 @@ yargs
         'parse <source>',
         'Save the directory tree as a text file',
         (yargs: yargs.Argv) => {
-            return yargs.positional('source', {
+            yargs.positional('source', {
                 describe: 'The path of the root of the directory tree',
                 type: 'string'
             });
@@ -62,10 +62,23 @@ yargs
         'scan <source>',
         'Save the directory tree as a json file',
         (yargs: yargs.Argv) => {
-            return yargs.positional('source', {
-                describe: 'The path of the root of the directory tree',
-                type: 'string'
-            });
+            yargs
+                .positional('source', {
+                    describe: 'The path of the root of the directory tree',
+                    type: 'string'
+                })
+                .options({
+                    'tabs': {
+                        describe: 'How many tabs will be used to indent the resulted json',
+                        type: 'number',
+                        default: 0
+                    },
+                    'pretty': {
+                        describe: 'If the resulted json will be pretty printed with 4 tabs. Overwrites the tabs option',
+                        type: 'boolean',
+                        default: false
+                    }
+                });
         },
         argv => {
             const args: any = argv;
@@ -92,7 +105,9 @@ yargs
             const source: string = args.source;
             const dest: string | undefined = args.dest;
             const show: boolean = !args.dest || args.show;
-            const tree = JSON.stringify(dree.scan(source, options));
+            const pretty: boolean = args.pretty;
+            const tabs: number = pretty ? 4 : args.tabs;
+            const tree = JSON.stringify(dree.scan(source, options), null, tabs);
             if (show) {
                 console.log(tree);
             }
