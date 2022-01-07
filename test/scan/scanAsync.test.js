@@ -296,10 +296,6 @@ module.exports = (expect, fs, dree, path) => {
             const result = getResult(await dree.scanAsync(path, options), false);
             const expected = getExpected(`test/scan/${platform}/thirteenth.test.json`, false, false);
 
-            const fs = require('fs');
-            fs.writeFileSync('result.json', result);
-            fs.writeFileSync('expected.json', expected);
-
             expect(result).to.equal(expected);
         });
 
