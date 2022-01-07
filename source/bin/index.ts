@@ -98,6 +98,8 @@ yargs
                 matches: parseRegExp(args.matches),
                 emptyDirectory: args.emptyDirectory,
                 excludeEmptyDirectories: args.excludeEmptyDirectories,
+                descendants: args.descendants,
+                descendantsIgnoreDirectories: args.descendantsIgnoreDirectories,
                 extensions: args.extensions,
                 sorted: parseSorted(args.sorted),
                 skipErrors: args.skipErrors
@@ -229,6 +231,18 @@ yargs
             describe: 'Whether you want the result to contain values sorted in ascending or descending order. If not specified, the result values are not ordered.',
             type: 'string',
             choices: ['ascending', 'descending'],
+            hidden: true,
+        },
+        'descendants': {
+            default: false,
+            describe: 'Whether you want the result to contain the number of descendants for each node',
+            type: 'boolean',
+            hidden: true,
+        },
+        'descendants-ignore-directories': {
+            default: false,
+            describe: 'Whether you want the result directories to be ignored when calculating the number of descendants',
+            type: 'boolean',
             hidden: true,
         },
         'skip-errors': {
