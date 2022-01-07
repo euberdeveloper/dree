@@ -112,6 +112,10 @@ export interface Dree {
      */
     stat?: Stats;
     /**
+     * Optional. The number of descendants of the node. Returned only if the node is a directory and [[descendants]] option is specified
+     */
+    descendants?: number;
+    /**
      * Optional. An array of Dree objects, containing all the children of the node
      */
     children?: Dree[];
@@ -196,6 +200,14 @@ export interface ScanOptions {
      */
     excludeEmptyDirectories?: boolean;
     /**
+     * If true, also the number of descendants of each node will be added to the result.
+     */
+    descendants?: boolean;
+    /**
+     * If true, only files will be count as descendants of a node. It does not have effect if [[descendants]] option is not true.
+     */
+    descendantsIgnoreDirectories?: boolean;
+    /**
      * If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order or a 
      * custom sorting function
      */
@@ -270,6 +282,8 @@ const SCAN_DEFAULT_OPTIONS: ScanOptions = {
     extensions: undefined,
     emptyDirectory: false,
     excludeEmptyDirectories: false,
+    descendants: false,
+    descendantsIgnoreDirectories: false,
     sorted: false,
     skipErrors: true
 };
@@ -452,6 +466,9 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                 const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
                 dirTree.hash = hash.digest(hashEncoding);
             }
+            if (options.descendants) {
+                dirTree.descendants = children.reduce((acc, child) => acc + (options.descendantsIgnoreDirectories ? 0 : 1) + (child.type === Type.FILE && child.descendants ? child.descendants : 0), 0);
+            }
             if (children.length) {
                 dirTree.children = children;
             }
@@ -628,6 +645,9 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
                 });
                 const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
                 dirTree.hash = hash.digest(hashEncoding);
+            }
+            if (options.descendants) {
+                dirTree.descendants = children.reduce((acc, child) => acc + (options.descendantsIgnoreDirectories ? 0 : 1) + (child.type === Type.FILE && child.descendants ? child.descendants : 0), 0);
             }
             if (children.length) {
                 dirTree.children = children;
