@@ -2,8 +2,31 @@ name: Build
 on: [push]
 
 jobs:
-  build:
+  build-ubuntu:
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [10.x, 11.x, 12.x, 14.x, 14.x, 15.x, 16.x, 17.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install node dependencies
+        run: npm install
+        
+      - name: Transpile code
+        run: npm run transpile
+        
+      - name: Bundle code
+        run: npm run bundle
+
+  build-windows:
+    runs-on: windows-latest
     
     strategy:
       matrix:
