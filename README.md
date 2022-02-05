@@ -1,6 +1,5 @@
 ![Test](https://github.com/euberdeveloper/dree/workflows/Test/badge.svg)
 ![Build](https://github.com/euberdeveloper/dree/workflows/Build/badge.svg)
-[![Build Status](https://travis-ci.org/euberdeveloper/dree.svg?branch=main)](https://travis-ci.org/euberdeveloper/dree)
 [![Coverage Status](https://coveralls.io/repos/github/euberdeveloper/dree/badge.svg?branch=main)](https://coveralls.io/github/euberdeveloper/dree?branch=main)
 [![Codecov Status](https://codecov.io/gh/euberdeveloper/dree/branch/main/graph/badge.svg)](https://codecov.io/gh/euberdeveloper/dree)
 [![Known Vulnerabilities](https://snyk.io/test/github/euberdeveloper/dree/badge.svg?targetFile=package.json)](https://snyk.io/test/github/euberdeveloper/dree?targetFile=package.json)
