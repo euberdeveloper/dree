@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
-const DtsBundleWebpack = require('dts-bundle-webpack');
+const BundleDeclarationsWebpackPlugin = require('bundle-declarations-webpack-plugin');
 
 const libConfig = {
     target: 'node',
@@ -27,10 +27,9 @@ const libConfig = {
         ]
     },
     plugins: [
-        new DtsBundleWebpack({
-            name: 'dree',
-            main: 'dist/lib/index.d.ts',
-            out: '../../bundled/lib/index.d.ts'
+        new BundleDeclarationsWebpackPlugin({
+            entry: "./source/lib/index.ts",
+            outFile: "./index.d.ts"
         })
     ],
     externals: [nodeExternals()],
