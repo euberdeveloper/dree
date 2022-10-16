@@ -13,9 +13,9 @@ module.exports = (expect, dree, path) => {
             break;
     }
 
-    describe('Test: parseTreeAsync function', async function() {
+    describe('Test: parseTreeAsync function', async function () {
 
-        it('Should return the exported content of "test/parseTree/first.test.js"', async function() {
+        it('Should return the exported content of "test/parseTree/first.test.js"', async function () {
 
             const result = await dree.parseTreeAsync(dree.scan(path));
             const expected = require(`./${platform}/first.test`);
@@ -23,10 +23,10 @@ module.exports = (expect, dree, path) => {
 
         });
 
-        it('Should return the exported content of "test/parseTree/second.test.js"', async function() {
+        it('Should return the exported content of "test/parseTree/second.test.js"', async function () {
 
             const options = {
-                extensions: [ '', 'ts', 'txt' ],
+                extensions: ['', 'ts', 'txt'],
                 symbolicLinks: false
             };
 
@@ -36,7 +36,7 @@ module.exports = (expect, dree, path) => {
 
         });
 
-        it('Should return the exported content of "test/parseTree/third.test.js"', async function() {
+        it('Should return the exported content of "test/parseTree/third.test.js"', async function () {
 
             const options = {
                 depth: 2,
@@ -49,7 +49,7 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parseTree/fourth.test.js"', async function() {
+        it('Should return the exported content of "test/parseTree/fourth.test.js"', async function () {
 
             const options = {
                 depth: -1
@@ -60,7 +60,7 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parseTree/fifth.test.js"', async function() {
+        it('Should return the exported content of "test/parseTree/fifth.test.js"', async function () {
 
             const options = {
                 depth: 2,
@@ -73,7 +73,7 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parseTree/sixth.test.js"', async function() {
+        it('Should return the exported content of "test/parseTree/sixth.test.js"', async function () {
 
             const options = {
                 followLinks: true
@@ -84,7 +84,7 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parseTree/seventh.test.js"', async function() {
+        it('Should return the exported content of "test/parseTree/seventh.test.js"', async function () {
 
             const options = {
                 sorted: true
@@ -95,7 +95,7 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parseTree/eighth.test.js"', async function() {
+        it('Should return the exported content of "test/parseTree/eighth.test.js"', async function () {
 
             const options = {
                 sorted: (x, y) => y.localeCompare(x)
@@ -104,6 +104,32 @@ module.exports = (expect, dree, path) => {
             const result = await dree.parseTreeAsync(dree.scan(path, options), options);
             const expected = require(`./${platform}/eighth.test`);
             expect(result).to.equal(expected);
+        });
+
+        it(`Should return the content of "test/scan/${platform}/ninth.test.json"`, async function () {
+
+            const options = {
+                exclude: [/firebase/, 'notes']
+            };
+
+            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const expected = require(`./${platform}/ninth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/tenth.test.json"`, async function () {
+
+            const options = {
+                exclude: 'firebase'
+            };
+
+            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const expected = require(`./${platform}/tenth.test`);
+
+            expect(result).to.equal(expected);
+
         });
 
     });

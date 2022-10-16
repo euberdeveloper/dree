@@ -176,14 +176,14 @@ export interface ScanOptions {
      */
     depth?: number;
     /**
-     * It is a regex or array of regex and all the matching paths will not be considered by the algorithm
+     * It is a regex, string or array of them and all the matching paths will not be considered by the algorithm
      */
-    exclude?: RegExp | RegExp[];
+    exclude?: string | RegExp | (RegExp | string)[];
     /**
-     * It is a regex or array of regex and all the non-matching paths will not be considered by the algorithm. Note: All the
+     * It is a regex, string or array of them and all the non-matching paths will not be considered by the algorithm. Note: All the
      * ancestors of a matching node will be added.
      */
-    matches?: RegExp | RegExp[];
+    matches?: string | RegExp | (RegExp | string)[];
     /**
      * It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. 
      * If value is undefined, all file extensions will be considered, if it is [], no files will be included
@@ -243,9 +243,9 @@ export interface ParseOptions {
      */
     depth?: number;
     /**
-     * It is a regex or array of regex and all the matched paths will not be considered by the algorithm
+     * It is a regex, string or array of them and all the matched paths will not be considered by the algorithm
      */
-    exclude?: RegExp | RegExp[];
+    exclude?: string | RegExp | (RegExp | string)[];
     /**
      * It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. 
      * If value is undefined, all file extensions will be considered, if it is [], no files will be included
@@ -301,6 +301,10 @@ const PARSE_DEFAULT_OPTIONS: ParseOptions = {
 
 /* SUPPORT FUNCTIONS */
 
+function purgePatternsIntoArrayOfRegex(patterns: string | RegExp | (RegExp | string)[]): RegExp[] {
+    return (Array.isArray(patterns) ? patterns : [patterns]).map(pattern => pattern instanceof RegExp ? pattern : new RegExp(pattern));
+}
+
 function mergeScanOptions(options?: ScanOptions): ScanOptions {
     let result: ScanOptions = {};
     if (options) {
@@ -349,7 +353,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
     }
 
     if (options.exclude && root !== path) {
-        const excludes = (options.exclude instanceof RegExp) ? [options.exclude] : options.exclude;
+        const excludes = purgePatternsIntoArrayOfRegex(options.exclude);
         if (excludes.some(pattern => pattern.test(path))) {
             return null;
         }
@@ -446,7 +450,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                 }
             }
             if (options.matches && root !== path) {
-                const handledMatches = (options.matches instanceof RegExp) ? [options.matches] : options.matches;
+                const handledMatches = purgePatternsIntoArrayOfRegex(options.matches);
                 if (!children.length && handledMatches.some(pattern => !pattern.test(path))) {
                     return null;
                 }
@@ -479,7 +483,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                 return null;
             }
             if (options.matches && root !== path) {
-                const handledMatches = (options.matches instanceof RegExp) ? [options.matches] : options.matches;
+                const handledMatches = purgePatternsIntoArrayOfRegex(options.matches);
                 if (handledMatches.some(pattern => !pattern.test(path))) {
                     return null;
                 }
@@ -530,7 +534,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
     }
 
     if (options.exclude && root !== path) {
-        const excludes = (options.exclude instanceof RegExp) ? [options.exclude] : options.exclude;
+        const excludes = purgePatternsIntoArrayOfRegex(options.exclude);
         if (excludes.some(pattern => pattern.test(path))) {
             return null;
         }
@@ -626,7 +630,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
                 }
             }
             if (options.matches && root !== path) {
-                const handledMatches = (options.matches instanceof RegExp) ? [options.matches] : options.matches;
+                const handledMatches = purgePatternsIntoArrayOfRegex(options.matches);
                 if (!children.length && handledMatches.some(pattern => !pattern.test(path))) {
                     return null;
                 }
@@ -659,7 +663,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
                 return null;
             }
             if (options.matches && root !== path) {
-                const handledMatches = (options.matches instanceof RegExp) ? [options.matches] : options.matches;
+                const handledMatches = purgePatternsIntoArrayOfRegex(options.matches);
                 if (handledMatches.some(pattern => !pattern.test(path))) {
                     return null;
                 }
@@ -708,8 +712,7 @@ function skip(child: Dree, options: ParseOptions, depth: number): boolean {
         || (!options.showHidden && child.name.charAt(0) === '.')
         || (options.extensions !== undefined && child.type === Type.FILE
             && (options.extensions.indexOf(child.extension as string) === -1))
-        || (options.exclude instanceof RegExp && options.exclude.test(child.path))
-        || (Array.isArray(options.exclude) && options.exclude.some(pattern => pattern.test(child.path)))
+        || (options.exclude && purgePatternsIntoArrayOfRegex(options.exclude).some(pattern => pattern.test(child.path)))
         || (options.depth !== undefined && depth > options.depth);
 }
 
@@ -723,7 +726,7 @@ function _parse(children: string[], prefix: string, options: ParseOptions, depth
         }
 
         if (options.exclude) {
-            const excludes = (options.exclude instanceof RegExp) ? [options.exclude] : options.exclude;
+            const excludes = purgePatternsIntoArrayOfRegex(options.exclude);
             if (excludes.some(pattern => pattern.test(child))) {
                 return '';
             }
@@ -812,7 +815,7 @@ async function _parseAsync(children: string[], prefix: string, options: ParseOpt
         }
 
         if (options.exclude) {
-            const excludes = (options.exclude instanceof RegExp) ? [options.exclude] : options.exclude;
+            const excludes = purgePatternsIntoArrayOfRegex(options.exclude);
             if (excludes.some(pattern => pattern.test(child))) {
                 return '';
             }

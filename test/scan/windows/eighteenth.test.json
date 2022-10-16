@@ -1,0 +1,149 @@
+{
+  "name": "sample",
+  "path": "PATH\\test\\sample",
+  "relativePath": ".",
+  "type": "directory",
+  "isSymbolicLink": false,
+  "sizeInBytes": 1786108,
+  "size": "1.79 MB",
+  "hash": "90b14bb087c3e6b617493eba926b4352",
+  "children": [
+    {
+      "name": ".gitignore",
+      "path": "PATH\\test\\sample\\.gitignore",
+      "relativePath": ".gitignore",
+      "type": "file",
+      "isSymbolicLink": false,
+      "extension": "",
+      "sizeInBytes": 0,
+      "size": "0 B",
+      "hash": "a084b794bc0759e7a6b77810e01874f2"
+    },
+    {
+      "name": "backend",
+      "path": "PATH\\test\\sample\\backend",
+      "relativePath": "backend",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 1786083,
+      "size": "1.79 MB",
+      "hash": "74c2e6ead86ea32b2f921780f9661a61",
+      "children": [
+        {
+          "name": "linked.link",
+          "path": "PATH\\test\\sample\\backend\\linked.link",
+          "relativePath": "backend\\linked.link",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "link",
+          "sizeInBytes": 10,
+          "size": "10 B",
+          "hash": "51a5f5d294d9f70c3166582957b89efd"
+        },
+        {
+          "name": "linkedtxt.link",
+          "path": "PATH\\test\\sample\\backend\\linkedtxt.link",
+          "relativePath": "backend\\linkedtxt.link",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "link",
+          "sizeInBytes": 20,
+          "size": "20 B",
+          "hash": "f949fb5c67f32f3164d165517ec7afce"
+        },
+        {
+          "name": "notes.txt",
+          "path": "PATH\\test\\sample\\backend\\notes.txt",
+          "relativePath": "backend\\notes.txt",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "txt",
+          "sizeInBytes": 5,
+          "size": "5 B",
+          "hash": "3a4033aa4b341d086c0e76d99db8b82d"
+        },
+        {
+          "name": "server",
+          "path": "PATH\\test\\sample\\backend\\server",
+          "relativePath": "backend\\server",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 1786048,
+          "size": "1.79 MB",
+          "hash": "571bf3154c32aa7569e77dfe7b90721c",
+          "children": [
+            {
+              "name": "server.ts",
+              "path": "PATH\\test\\sample\\backend\\server\\server.ts",
+              "relativePath": "backend\\server\\server.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 1786048,
+              "size": "1.79 MB",
+              "hash": "48d3586783d80c1f222b6a62a947e74d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "path": "PATH\\test\\sample\\empty",
+      "relativePath": "empty",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 0,
+      "size": "0 B",
+      "hash": "5395826f5e679ee75097a49101d8af75",
+      "children": [
+        {
+          "name": "tsempty",
+          "path": "PATH\\test\\sample\\empty\\tsempty",
+          "relativePath": "empty\\tsempty",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "01ae4baddc925931f374f0f212896d30",
+          "children": [
+            {
+              "name": "file.ts",
+              "path": "PATH\\test\\sample\\empty\\tsempty\\file.ts",
+              "relativePath": "empty\\tsempty\\file.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 0,
+              "size": "0 B",
+              "hash": "db3e286db4b574d6ebfdca5804df63cf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "linked",
+      "path": "PATH\\test\\sample\\linked",
+      "relativePath": "linked",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 25,
+      "size": "25 B",
+      "hash": "9897b591904f5aaf66a6c538136f3d04",
+      "children": [
+        {
+          "name": "linked.txt",
+          "path": "PATH\\test\\sample\\linked\\linked.txt",
+          "relativePath": "linked\\linked.txt",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "txt",
+          "sizeInBytes": 25,
+          "size": "25 B",
+          "hash": "451d51dfceec7956e60421b6f4dbdd39"
+        }
+      ]
+    }
+  ]
+}

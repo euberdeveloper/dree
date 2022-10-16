@@ -1,15 +1,13 @@
 module.exports =
 `sample
- ├─> linked
- │   └── linked.txt
+ ├── .gitignore
+ ├─> backend
+ │   ├>>linked.link
+ │   ├>>linkedtxt.link
+ │   └─> server
+ │       └── server.ts
  ├─> empty
  │   └─> tsempty
  │       └── file.ts
- ├─> backend
- │   ├─> server
- │   │   └── server.ts
- │   ├── notes.txt
- │   ├>>linkedtxt.link
- │   ├>>linked.link
- │   └── firebase.json
- └── .gitignore`;
+ └─> linked
+     └── linked.txt`;

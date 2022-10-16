@@ -93,6 +93,32 @@ module.exports = (expect, dree, path) => {
             const expected = require(`./${platform}/seventh.test`);
             expect(result).to.equal(expected);
         });
+
+        it(`Should return the content of "test/scan/${platform}/eighth.test.json"`, function () {
+
+            const options = {
+                exclude: [/firebase/, 'notes']
+            };
+
+            const result = dree.parse(path, options);
+            const expected = require(`./${platform}/eighth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/ninth.test.json"`, function () {
+
+            const options = {
+                exclude: 'firebase'
+            };
+
+            const result = dree.parse(path, options);
+            const expected = require(`./${platform}/ninth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
     });
 
 }

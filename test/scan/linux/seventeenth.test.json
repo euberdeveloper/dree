@@ -1,0 +1,137 @@
+{
+  "name": "sample",
+  "path": "PATH/test/sample",
+  "relativePath": ".",
+  "type": "directory",
+  "isSymbolicLink": false,
+  "sizeInBytes": 1714651,
+  "size": "1.71 MB",
+  "hash": "e5a93b62ac69239916fd175ba2a11e5b",
+  "children": [
+    {
+      "name": ".gitignore",
+      "path": "PATH/test/sample/.gitignore",
+      "relativePath": ".gitignore",
+      "type": "file",
+      "isSymbolicLink": false,
+      "extension": "",
+      "sizeInBytes": 0,
+      "size": "0 B",
+      "hash": "a084b794bc0759e7a6b77810e01874f2"
+    },
+    {
+      "name": "backend",
+      "path": "PATH/test/sample/backend",
+      "relativePath": "backend",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 1714627,
+      "size": "1.71 MB",
+      "hash": "8e9d05fa4cf4770e37e47ce20011979a",
+      "children": [
+        {
+          "name": "linked.link",
+          "path": "PATH/test/sample/backend/linked.link",
+          "relativePath": "backend/linked.link",
+          "type": "directory",
+          "isSymbolicLink": true,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "13dfcaee429e99fa969199e7240a597a"
+        },
+        {
+          "name": "linkedtxt.link",
+          "path": "PATH/test/sample/backend/linkedtxt.link",
+          "relativePath": "backend/linkedtxt.link",
+          "type": "file",
+          "isSymbolicLink": true,
+          "extension": "link",
+          "sizeInBytes": 20,
+          "size": "20 B",
+          "hash": "8ac875af9057830ddfb1c7fb9046f680"
+        },
+        {
+          "name": "server",
+          "path": "PATH/test/sample/backend/server",
+          "relativePath": "backend/server",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 1714607,
+          "size": "1.71 MB",
+          "hash": "3878a15abd9a42dd0986c556dd2e5b37",
+          "children": [
+            {
+              "name": "server.ts",
+              "path": "PATH/test/sample/backend/server/server.ts",
+              "relativePath": "backend/server/server.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 1714607,
+              "size": "1.71 MB",
+              "hash": "30a21c7e293056bc3a7f2103cf81c7d4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "path": "PATH/test/sample/empty",
+      "relativePath": "empty",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 0,
+      "size": "0 B",
+      "hash": "5395826f5e679ee75097a49101d8af75",
+      "children": [
+        {
+          "name": "tsempty",
+          "path": "PATH/test/sample/empty/tsempty",
+          "relativePath": "empty/tsempty",
+          "type": "directory",
+          "isSymbolicLink": false,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "01ae4baddc925931f374f0f212896d30",
+          "children": [
+            {
+              "name": "file.ts",
+              "path": "PATH/test/sample/empty/tsempty/file.ts",
+              "relativePath": "empty/tsempty/file.ts",
+              "type": "file",
+              "isSymbolicLink": false,
+              "extension": "ts",
+              "sizeInBytes": 0,
+              "size": "0 B",
+              "hash": "db3e286db4b574d6ebfdca5804df63cf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "linked",
+      "path": "PATH/test/sample/linked",
+      "relativePath": "linked",
+      "type": "directory",
+      "isSymbolicLink": false,
+      "sizeInBytes": 24,
+      "size": "24 B",
+      "hash": "c8d60d99c3f102305a8cbbf55c1519e7",
+      "children": [
+        {
+          "name": "linked.txt",
+          "path": "PATH/test/sample/linked/linked.txt",
+          "relativePath": "linked/linked.txt",
+          "type": "file",
+          "isSymbolicLink": false,
+          "extension": "txt",
+          "sizeInBytes": 24,
+          "size": "24 B",
+          "hash": "23a5f0582f74abfb7f5d3b545a2d59ca"
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,7 @@ module.exports =
  ├─> backend
  │   ├>>linked.link
  │   ├>>linkedtxt.link
+ │   ├── notes.txt
  │   └─> server
  │       └── server.ts
  ├─> empty
