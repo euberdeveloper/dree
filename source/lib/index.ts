@@ -176,11 +176,11 @@ export interface ScanOptions {
      */
     depth?: number;
     /**
-     * It is a regex or array of regex It is a regex, string or array of them and all the matching paths will not be considered by the algorithm
+     * It is a regex, string or array of them and all the matching paths will not be considered by the algorithm
      */
     exclude?: string | RegExp | (RegExp | string)[];
     /**
-     * It is a regex or array of regex It is a regex, string or array of them and all the non-matching paths will not be considered by the algorithm. Note: All the
+     * It is a regex, string or array of them and all the non-matching paths will not be considered by the algorithm. Note: All the
      * ancestors of a matching node will be added.
      */
     matches?: string | RegExp | (RegExp | string)[];
@@ -243,7 +243,7 @@ export interface ParseOptions {
      */
     depth?: number;
     /**
-     * It is a regex or array of regex It is a regex, string or array of them and all the matched paths will not be considered by the algorithm
+     * It is a regex, string or array of them and all the matched paths will not be considered by the algorithm
      */
     exclude?: string | RegExp | (RegExp | string)[];
     /**
