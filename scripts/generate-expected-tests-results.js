@@ -206,6 +206,18 @@ const parseOptions = [
         opt: {
             sorted: (x, y) => y.localeCompare(x)
         }
+    },
+    {
+        name: 'eighth',
+        opt: {
+            exclude: [/firebase/, 'notes']
+        }
+    },
+    {
+        name: 'ninth',
+        opt: {
+            exclude: ['firebase']
+        }
     }
 ];
 function generateParse(option) {
@@ -268,6 +280,18 @@ const parseTreeOptions = [
         name: 'eighth',
         opt: {
             sorted: (x, y) => y.localeCompare(x)
+        }
+    },
+    {
+        name: 'ninth',
+        opt: {
+            exclude: [/firebase/, 'notes']
+        }
+    },
+    {
+        name: 'tenth',
+        opt: {
+            exclude: ['firebase']
         }
     }
 ];
