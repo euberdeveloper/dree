@@ -348,6 +348,34 @@ module.exports = (expect, fs, dree, path) => {
 
         });
 
+
+
+        it(`Should return the content of "test/scan/${platform}/seventeenth.test.json"`, async function () {
+
+            const options = {
+                exclude: [/firebase/, 'notes']
+            };
+
+            const result = getResult(await dree.scanAsync(path, options));
+            const expected = getExpected(`test/scan/${platform}/seventeenth.test.json`);
+
+            expect(result).to.equal(expected);
+            
+        });
+
+        it(`Should return the content of "test/scan/${platform}/eighteenth.test.json"`, async function () {
+
+            const options = {
+                exclude: 'firebase'
+            };
+
+            const result = getResult(await dree.scanAsync(path, options));
+            const expected = getExpected(`test/scan/${platform}/eighteenth.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
         it(`Should throw an error`, async function () {
 
             const wrongPath = 'wrong';

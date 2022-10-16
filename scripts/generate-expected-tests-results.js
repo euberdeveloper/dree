@@ -127,6 +127,20 @@ const scanOptions = [
             descendantsIgnoreDirectories: true,
             exclude: [/firebase/]
         }
+    },
+    {
+        name: 'seventeenth',
+        opt:
+        {
+            exclude: [/firebase/, 'notes']
+        }
+    },
+    {
+        name: 'eighteenth',
+        opt:
+        {
+            exclude: ['firebase']
+        }
     }
 ];
 

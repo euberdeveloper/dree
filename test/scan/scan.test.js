@@ -16,22 +16,22 @@ module.exports = (expect, fs, dree, path) => {
         }
 
         function parsePath(expected, normalize) {
-            if(platform === 'windows') {
-                if(normalize) {
+            if (platform === 'windows') {
+                if (normalize) {
                     expected = expected.replace(/PATH/g, process.cwd().replace(/\\/g, '/'));
                 }
                 else {
                     expected = expected.replace(/PATH/g, process.cwd().replace(/\\/g, '\\\\'));
                 }
-            } 
+            }
             else {
                 expected = expected.replace(/PATH/g, process.cwd()).replace(/\\\\/g, '\\').replace(/\\/g, '/');
             }
             return expected;
-        } 
+        }
 
         function getExpected(path, normalize) {
-            let expected =  fs.readFileSync(path, 'utf8');
+            let expected = fs.readFileSync(path, 'utf8');
             expected = parsePath(expected, normalize);
             if (platform === 'windows') {
                 const tree = JSON.parse(expected);
@@ -279,12 +279,38 @@ module.exports = (expect, fs, dree, path) => {
 
         });
 
+        it(`Should return the content of "test/scan/${platform}/seventeenth.test.json"`, function () {
+
+                const options = {
+                    exclude: [/firebase/, 'notes']
+                };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/seventeenth.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/eighteenth.test.json"`, function () {
+
+            const options = {
+                exclude: 'firebase'
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/eighteenth.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
         it(`Should throw an error`, function () {
 
             const wrongPath = 'wrong';
             const options = {
                 skipErrors: false
-            }; 
+            };
 
             const willThrow = () => dree.scan(wrongPath, options);
 
