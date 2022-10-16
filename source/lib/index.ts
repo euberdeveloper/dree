@@ -712,7 +712,7 @@ function skip(child: Dree, options: ParseOptions, depth: number): boolean {
         || (!options.showHidden && child.name.charAt(0) === '.')
         || (options.extensions !== undefined && child.type === Type.FILE
             && (options.extensions.indexOf(child.extension as string) === -1))
-        || purgePatternsIntoArrayOfRegex(options.exclude).some(pattern => pattern.test(child.path))
+        || (options.exclude && purgePatternsIntoArrayOfRegex(options.exclude).some(pattern => pattern.test(child.path)))
         || (options.depth !== undefined && depth > options.depth);
 }
 
