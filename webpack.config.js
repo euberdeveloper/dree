@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
-const BundleDeclarationsWebpackPlugin = require('bundle-declarations-webpack-plugin');
+const { BundleDeclarationsWebpackPlugin } = require('bundle-declarations-webpack-plugin');
 
 const libConfig = {
     target: 'node',
