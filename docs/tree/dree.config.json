@@ -7,6 +7,9 @@
         "dist/",
         "docs/documentation/html/",
         "docs/documentation/html-dev/",
-        "test/sample/"
+        "test/sample/",
+        "test/parse/",
+        "test/parseTree/",
+        "test/scan/"
     ]
 }
