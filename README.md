@@ -337,7 +337,7 @@ Given a path, returns an object representing its directory tree. The result coul
 * __size__: Default value: `true`. If true, every node in the result will contain `size` property. Same as `sizeInBytes`, but it is a string rounded to the second decimal digit and with an appropriate unit.
 * __hash__: Default value: `true`. If true, every node in the result will contain `hash` property, computed by taking in consideration the name and the content of the node. If the node is a folder, all his considered inner files will be used by the algorithm.
 * __hashAlgorithm__: Values: `md5`(default) and `sha1`. Hash algorithm used by `cryptojs` to return the hash.
-* __hashEncoding__: Values: `hex`(default), `latin1` and `base64`. Hash encoding used by `cryptojs` to return the hash.
+* __hashEncoding__: Values: `hex`(default), `binary`, `base64url` and `base64`. Hash encoding used by `cryptojs` to return the hash.
 * __showHidden__: Default value: `true`. If true, all hidden files and dirs will be included in the result. A hidden file or a directory has a name which starts with a dot and in some systems like Linux are hidden.
 * __depth__: Default value: `undefined`. It is a number which says the max depth the algorithm can reach scanning the given path. All files and dirs which are beyound the max depth will not be considered by the algorithm.
 * __exclude__: Default value: `undefined`. It is a regex, string or array of them and all the matched paths will not be considered by the algorithm.
@@ -555,11 +555,6 @@ dree
  └── webpack.config.js
 ```
 [//]: # (dree - END)
-
-
-
-
-
 
 ## Development
 
