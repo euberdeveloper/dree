@@ -615,18 +615,6 @@ dree
  │   │       ├── tenth.test.js
  │   │       └── third.test.js
  │   ├─> sample
- │   │   ├─> backend
- │   │   │   ├── firebase.json
- │   │   │   ├>>linked.link
- │   │   │   ├>>linkedtxt.link
- │   │   │   ├── notes.txt
- │   │   │   └─> server
- │   │   │       └── server.ts
- │   │   ├─> empty
- │   │   │   └─> tsempty
- │   │   │       └── file.ts
- │   │   └─> linked
- │   │       └── linked.txt
  │   ├─> scan
  │   │   ├─> linux
  │   │   │   ├── eight.test.json
@@ -693,6 +681,7 @@ dree
  └── webpack.config.js
 ```
 [//]: # (dree - END)
+
 
 
 ## Development
