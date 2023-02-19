@@ -146,7 +146,7 @@ export interface ScanOptions {
      */
     depth?: number;
     /**
-     * It is a regex, string or array of them and all the matching paths will not be considered by the algorithm
+     * It is a regex, string (glob patterns) or array of them and all the matching paths will not be considered by the algorithm.
      */
     exclude?: string | RegExp | (RegExp | string)[];
     /**
@@ -213,7 +213,7 @@ export interface ParseOptions {
      */
     depth?: number;
     /**
-     * It is a regex, string or array of them and all the matched paths will not be considered by the algorithm
+     * It is a regex, string (glob patterns) or array of them and all the matched paths will not be considered by the algorithm
      */
     exclude?: string | RegExp | (RegExp | string)[];
     /**
