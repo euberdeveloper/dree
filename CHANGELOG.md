@@ -1,3 +1,12 @@
+# [4.3.0](https://github.com/euberdeveloper/dree/compare/v4.2.0...v4.3.0) (2023-02-19)
+
+
+### Features
+
+* **package.json:** include CHANGELOG ([829cb31](https://github.com/euberdeveloper/dree/commit/829cb319bb58c4af437bcfcfd46f94597f67bfd7))
+
+
+
 # 4.2.0 (2023-02-19)
 
 
