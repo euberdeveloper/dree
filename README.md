@@ -534,6 +534,7 @@ Made with [dree](https://github.com/marketplace/actions/ga-dree)
 
 ```
 dree
+ ├── CHANGELOG.md
  ├── LICENSE
  ├── README.md
  ├─> docs
