@@ -1,13 +1,8 @@
 import { resolve, basename, extname, relative } from 'path';
 import { BinaryToTextEncoding, createHash, Hash } from 'crypto';
-import { statSync, readdirSync, readFileSync, lstatSync, stat, readdir, readFile, lstat, Stats } from 'fs';
-import { promisify } from 'util';
 import { makeRe } from 'minimatch';
-
-const statAsync = promisify(stat);
-const readdirAsync = promisify(readdir);
-const readFileAsync = promisify(readFile);
-const lstatAsync = promisify(lstat);
+import { statSync, readdirSync, readFileSync, lstatSync, Stats } from 'fs';
+import { stat as statAsync, readdir as readdirAsync, readFile as readFileAsync, lstat as lstatAsync } from 'fs/promises';
 
 /* DREE TYPES */
 
