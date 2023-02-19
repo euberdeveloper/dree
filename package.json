@@ -32,7 +32,8 @@
     "docs": "npm run docs:html && npm run docs:html-dev",
     "commit": "git-cz",
     "commit:sign": "git-cz -S",
-    "prepublishOnly": "npm run bundle"
+    "prepublishOnly": "npm run bundle",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "repository": {
     "type": "git",
