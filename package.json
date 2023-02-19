@@ -75,6 +75,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
+    "minimatch": "^6.2.0",
     "yargs": "^17.6.2"
   }
 }

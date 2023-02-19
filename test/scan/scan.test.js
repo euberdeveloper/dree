@@ -282,7 +282,7 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/seventeenth.test.json"`, function () {
 
                 const options = {
-                    exclude: [/firebase/, 'notes']
+                    exclude: [/firebase/, '/**/notes.*']
                 };
 
             const result = getResult(dree.scan(path, options));
@@ -295,7 +295,7 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/eighteenth.test.json"`, function () {
 
             const options = {
-                exclude: 'firebase'
+                exclude: '/**/firebase.*'
             };
 
             const result = getResult(dree.scan(path, options));

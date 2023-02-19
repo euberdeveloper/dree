@@ -132,14 +132,14 @@ const scanOptions = [
         name: 'seventeenth',
         opt:
         {
-            exclude: [/firebase/, 'notes']
+            exclude: [/firebase/, '/**/notes.*']
         }
     },
     {
         name: 'eighteenth',
         opt:
         {
-            exclude: ['firebase']
+            exclude: ['/**/firebase.*']
         }
     }
 ];
@@ -210,13 +210,13 @@ const parseOptions = [
     {
         name: 'eighth',
         opt: {
-            exclude: [/firebase/, 'notes']
+            exclude: [/firebase/, '/**/notes.*']
         }
     },
     {
         name: 'ninth',
         opt: {
-            exclude: ['firebase']
+            exclude: ['/**/firebase.*']
         }
     }
 ];
@@ -285,13 +285,13 @@ const parseTreeOptions = [
     {
         name: 'ninth',
         opt: {
-            exclude: [/firebase/, 'notes']
+            exclude: [/firebase/, '/**/notes.*']
         }
     },
     {
         name: 'tenth',
         opt: {
-            exclude: ['firebase']
+            exclude: ['/**/firebase.*']
         }
     }
 ];

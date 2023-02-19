@@ -109,7 +109,7 @@ module.exports = (expect, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/ninth.test.json"`, async function () {
 
             const options = {
-                exclude: [/firebase/, 'notes']
+                exclude: [/firebase/, '/**/notes.*']
             };
 
             const result = await dree.parseTreeAsync(dree.scan(path, options), options);
@@ -122,7 +122,7 @@ module.exports = (expect, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/tenth.test.json"`, async function () {
 
             const options = {
-                exclude: 'firebase'
+                exclude: '/**/firebase.*'
             };
 
             const result = await dree.parseTreeAsync(dree.scan(path, options), options);

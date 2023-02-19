@@ -2,6 +2,7 @@ import { resolve, basename, extname, relative } from 'path';
 import { BinaryToTextEncoding, createHash, Hash } from 'crypto';
 import { statSync, readdirSync, readFileSync, lstatSync, stat, readdir, readFile, lstat, Stats } from 'fs';
 import { promisify } from 'util';
+import { makeRe } from 'minimatch';
 
 const statAsync = promisify(stat);
 const readdirAsync = promisify(readdir);
@@ -271,7 +272,7 @@ const PARSE_DEFAULT_OPTIONS: ParseOptions = {
 /* SUPPORT FUNCTIONS */
 
 function purgePatternsIntoArrayOfRegex(patterns: string | RegExp | (RegExp | string)[]): RegExp[] {
-    return (Array.isArray(patterns) ? patterns : [patterns]).map(pattern => pattern instanceof RegExp ? pattern : new RegExp(pattern));
+    return (Array.isArray(patterns) ? patterns : [patterns]).map(pattern => pattern instanceof RegExp ? pattern : makeRe(pattern)).filter(pattern => pattern instanceof RegExp) as RegExp[];
 }
 
 function mergeScanOptions(options?: ScanOptions): ScanOptions {
