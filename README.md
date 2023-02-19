@@ -546,141 +546,16 @@ dree
  │   └── tsconfig.json
  ├─> test
  │   ├─> parse
- │   │   ├─> linux
- │   │   │   ├── eighth.test.js
- │   │   │   ├── fifth.test.js
- │   │   │   ├── first.test.js
- │   │   │   ├── fourth.test.js
- │   │   │   ├── ninth.test.js
- │   │   │   ├── second.test.js
- │   │   │   ├── seventh.test.js
- │   │   │   ├── sixth.test.js
- │   │   │   └── third.test.js
- │   │   ├─> mac
- │   │   │   ├── eighth.test.js
- │   │   │   ├── fifth.test.js
- │   │   │   ├── first.test.js
- │   │   │   ├── fourth.test.js
- │   │   │   ├── ninth.test.js
- │   │   │   ├── second.test.js
- │   │   │   ├── seventh.test.js
- │   │   │   ├── sixth.test.js
- │   │   │   └── third.test.js
- │   │   ├── parse.test.js
- │   │   ├── parseAsync.test.js
- │   │   └─> windows
- │   │       ├── eighth.test.js
- │   │       ├── fifth.test.js
- │   │       ├── first.test.js
- │   │       ├── fourth.test.js
- │   │       ├── ninth.test.js
- │   │       ├── second.test.js
- │   │       ├── seventh.test.js
- │   │       ├── sixth.test.js
- │   │       └── third.test.js
  │   ├─> parseTree
- │   │   ├─> linux
- │   │   │   ├── eighth.test.js
- │   │   │   ├── fifth.test.js
- │   │   │   ├── first.test.js
- │   │   │   ├── fourth.test.js
- │   │   │   ├── ninth.test.js
- │   │   │   ├── second.test.js
- │   │   │   ├── seventh.test.js
- │   │   │   ├── sixth.test.js
- │   │   │   ├── tenth.test.js
- │   │   │   └── third.test.js
- │   │   ├─> mac
- │   │   │   ├── eighth.test.js
- │   │   │   ├── fifth.test.js
- │   │   │   ├── first.test.js
- │   │   │   ├── fourth.test.js
- │   │   │   ├── ninth.test.js
- │   │   │   ├── second.test.js
- │   │   │   ├── seventh.test.js
- │   │   │   ├── sixth.test.js
- │   │   │   ├── tenth.test.js
- │   │   │   └── third.test.js
- │   │   ├── parseTree.test.js
- │   │   ├── parseTreeAsync.test.js
- │   │   └─> windows
- │   │       ├── eighth.test.js
- │   │       ├── fifth.test.js
- │   │       ├── first.test.js
- │   │       ├── fourth.test.js
- │   │       ├── ninth.test.js
- │   │       ├── second.test.js
- │   │       ├── seventh.test.js
- │   │       ├── sixth.test.js
- │   │       ├── tenth.test.js
- │   │       └── third.test.js
  │   ├─> sample
  │   ├─> scan
- │   │   ├─> linux
- │   │   │   ├── eight.test.json
- │   │   │   ├── eighteenth.test.json
- │   │   │   ├── eleventh.test.json
- │   │   │   ├── fifteenth.test.json
- │   │   │   ├── fifth.test.json
- │   │   │   ├── first.test.json
- │   │   │   ├── fourteenth.test.json
- │   │   │   ├── fourth.test.json
- │   │   │   ├── ninth.test.json
- │   │   │   ├── second.test.json
- │   │   │   ├── seventeenth.test.json
- │   │   │   ├── seventh.test.json
- │   │   │   ├── sixteenth.test.json
- │   │   │   ├── sixth.test.json
- │   │   │   ├── tenth.test.json
- │   │   │   ├── third.test.json
- │   │   │   ├── thirteenth.test.json
- │   │   │   └── twelfth.test.json
- │   │   ├─> mac
- │   │   │   ├── eight.test.json
- │   │   │   ├── eighteenth.test.json
- │   │   │   ├── eleventh.test.json
- │   │   │   ├── fifteenth.test.json
- │   │   │   ├── fifth.test.json
- │   │   │   ├── first.test.json
- │   │   │   ├── fourteenth.test.json
- │   │   │   ├── fourth.test.json
- │   │   │   ├── ninth.test.json
- │   │   │   ├── second.test.json
- │   │   │   ├── seventeenth.test.json
- │   │   │   ├── seventh.test.json
- │   │   │   ├── sixteenth.test.json
- │   │   │   ├── sixth.test.json
- │   │   │   ├── tenth.test.json
- │   │   │   ├── third.test.json
- │   │   │   ├── thirteenth.test.json
- │   │   │   └── twelfth.test.json
- │   │   ├── scan.test.js
- │   │   ├── scanAsync.test.js
- │   │   └─> windows
- │   │       ├── eight.test.json
- │   │       ├── eighteenth.test.json
- │   │       ├── eleventh.test.json
- │   │       ├── fifteenth.test.json
- │   │       ├── fifth.test.json
- │   │       ├── first.test.json
- │   │       ├── fourteenth.test.json
- │   │       ├── fourth.test.json
- │   │       ├── ninth.test.json
- │   │       ├── second.test.json
- │   │       ├── seventeenth.test.json
- │   │       ├── seventh.test.json
- │   │       ├── sixteenth.test.json
- │   │       ├── sixth.test.json
- │   │       ├── tenth.test.json
- │   │       ├── third.test.json
- │   │       ├── thirteenth.test.json
- │   │       └── twelfth.test.json
  │   └── test.js
  ├── typedoc.dev.js
  ├── typedoc.js
  └── webpack.config.js
 ```
 [//]: # (dree - END)
+
 
 
 
