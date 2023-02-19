@@ -521,6 +521,10 @@ In the **global** usage, if an option is given both in the command **args** and 
 
 Executing the **asynchronous** version of `scan` could return a different object to the one returned by the synchronous one. This is why the asynchronous and synchronous versions read the directory in a **different** order.
 
+## Project structure
+
+[//]: # (dree)
+
 ## Development
 
 Make sure that you have all the dependencies installed

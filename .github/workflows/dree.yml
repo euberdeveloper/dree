@@ -1,0 +1,26 @@
+name: Dree
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dree:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Inject dree
+        uses: 'euberdeveloper/ga-dree@main'
+        with:
+          config: './docs/tree/dree.config.json'
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "docs: inject dree (automated commit)"
+          branch: main

@@ -2,7 +2,7 @@
 /node_modules
 /coverage
 /.nyc_output
-/docs
+/docs/documentation
 coverage.lcov
 generateTestsOutputs.js
 bundled

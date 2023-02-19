@@ -1,0 +1,12 @@
+{
+    "exclude": [ 
+        "node_modules",
+        ".git",
+        "coverage",
+        "bundled/",
+        "dist/",
+        "docs/documentation/html/",
+        "docs/documentation/html-dev/",
+        "test/mock/"
+    ]
+}
