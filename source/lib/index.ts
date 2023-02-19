@@ -1,43 +1,12 @@
 import { resolve, basename, extname, relative } from 'path';
-import { createHash } from 'crypto';
-import { statSync, readdirSync, readFileSync, lstatSync, stat, readdir, readFile, lstat } from 'fs';
+import { BinaryToTextEncoding, createHash, Hash } from 'crypto';
+import { statSync, readdirSync, readFileSync, lstatSync, stat, readdir, readFile, lstat, Stats } from 'fs';
 import { promisify } from 'util';
 
 const statAsync = promisify(stat);
 const readdirAsync = promisify(readdir);
 const readFileAsync = promisify(readFile);
 const lstatAsync = promisify(lstat);
-
-/* DECLARATION OF @types/crypto AND @types/fs NEEDED TO AVOID @types/node DEPENDENCY */
-
-type HexBase64Latin1Encoding = 'latin1' | 'hex' | 'base64';
-interface Stats {
-    isFile(): boolean;
-    isDirectory(): boolean;
-    isBlockDevice(): boolean;
-    isCharacterDevice(): boolean;
-    isSymbolicLink(): boolean;
-    isFIFO(): boolean;
-    isSocket(): boolean;
-    dev: number;
-    ino: number;
-    mode: number;
-    nlink: number;
-    uid: number;
-    gid: number;
-    rdev: number;
-    size: number;
-    blksize: number;
-    blocks: number;
-    atimeMs: number;
-    mtimeMs: number;
-    ctimeMs: number;
-    birthtimeMs: number;
-    atime: Date;
-    mtime: Date;
-    ctime: Date;
-    birthtime: Date;
-}
 
 /* DREE TYPES */
 
@@ -164,7 +133,7 @@ export interface ScanOptions {
     /**
      * Hash encoding used by cryptojs to return the hash
      */
-    hashEncoding?: HexBase64Latin1Encoding;
+    hashEncoding?: BinaryToTextEncoding;
     /**
      * If true, all hidden files and dirs will be included in the result. A hidden file or a directory 
      * has a name which starts with a dot and in some systems like Linux are hidden
@@ -397,7 +366,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
         return null;
     }
 
-    let hash: any;
+    let hash: Hash;
     if (options.hash) {
         const hashAlgorithm = options.hashAlgorithm as string;
         hash = createHash(hashAlgorithm);
@@ -467,7 +436,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                 children.forEach(child => {
                     hash.update(child.hash);
                 });
-                const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
+                const hashEncoding = options.hashEncoding as BinaryToTextEncoding;
                 dirTree.hash = hash.digest(hashEncoding);
             }
             if (options.descendants) {
@@ -508,7 +477,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                     }
                 }
                 hash.update(data);
-                const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
+                const hashEncoding = options.hashEncoding as BinaryToTextEncoding;
                 dirTree.hash = hash.digest(hashEncoding);
             }
             break;
@@ -647,7 +616,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
                 children.forEach(child => {
                     hash.update(child.hash);
                 });
-                const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
+                const hashEncoding = options.hashEncoding as BinaryToTextEncoding;
                 dirTree.hash = hash.digest(hashEncoding);
             }
             if (options.descendants) {
@@ -688,7 +657,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
                     }
                 }
                 hash.update(data);
-                const hashEncoding = options.hashEncoding as HexBase64Latin1Encoding;
+                const hashEncoding = options.hashEncoding as BinaryToTextEncoding;
                 dirTree.hash = hash.digest(hashEncoding);
             }
             break;
