@@ -4,6 +4,12 @@ module.exports = {
         './source/lib/index.ts'
     ],
     name: 'dree',
+    navigationLinks: {
+        'Github': 'https://github.com/euberdeveloper/dree'
+    },
+    sidebarLinks: {
+        'DEV docs': 'https://dree-dev.euber.dev'
+    },
     excludeExternals: true,
     includeVersion: true,
     tsconfig: 'source/tsconfig.json',
