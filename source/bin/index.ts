@@ -5,14 +5,18 @@ import { writeFileSync } from 'fs';
 import * as dree from '../lib/index';
 import { ParseOptions, ScanOptions, SortDiscriminator } from '../lib/index';
 
-function parseRegExp(patterns: string[]): RegExp[] {
-    let result: RegExp[] = [];
-    if (patterns && patterns.length) {
-        for (const pattern of patterns) {
-            result.push(new RegExp(pattern.replace(/\\/g, '\\\\')));
-        }
-    }
-    return result;
+function escapeStringRegexp(string) {
+	return string
+		.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
+		.replace(/-/g, '\\x2d');
+}
+
+function parseRegExp(patterns: string[]): (RegExp | string)[] {
+    const isRegexRegex = /^\/(?<pattern>.*)\/(?<flags>[igm]*)?$/;
+    return patterns ? patterns.map(pattern => {
+        const match = pattern.match(isRegexRegex);
+        return match ? new RegExp(escapeStringRegexp(match.groups!.pattern), match.groups!.flags) : pattern;
+    }) : [];
 }
 
 function parseSorted(sorted?: 'ascending' | 'descending'): SortDiscriminator | boolean | undefined {
@@ -36,6 +40,7 @@ yargs
         },
         argv => {
             const args: any = argv;
+            console.log(parseRegExp(args.exclude));
             const options: ParseOptions = {
                 symbolicLinks: args.symbolicLinks,
                 followLinks: args.followLinks,
@@ -200,12 +205,12 @@ yargs
             hidden: true
         },
         'exclude': {
-            describe: 'An array of regex whose all matched path will not be considered during the elaboration',
+            describe: 'An array of strings (glob patterns) or regex (just write them as you would with js, e.g. /^[a-b]*$/g) whose all matched path will not be considered during the elaboration',
             type: 'array',
             hidden: true
         },
         'matches': {
-            describe: 'It is a regex or array of regex and all the non-matching paths will not be considered by the algorithm. Note: All the ancestors of a matching node will be added',
+            describe: 'An array of strings (glob patterns) or regex (just write them as you would with js, e.g. /^[a-b]*$/g) and all the non-matching paths will not be considered by the algorithm. Note: All the ancestors of a matching node will be added',
             type: 'array',
             hidden: true
         },
