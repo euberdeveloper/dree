@@ -7,6 +7,6 @@
         "dist/",
         "docs/documentation/html/",
         "docs/documentation/html-dev/",
-        "test/mock/"
+        "test/sample/"
     ]
 }
