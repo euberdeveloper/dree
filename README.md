@@ -303,6 +303,11 @@ sample
      └─> server
          └── server.ts
 ```
+
+## Action
+
+Based on this module the is the github action **[ga-dree](https://github.com/euberdeveloper/ga-dree)**, that allows you to keep a markdown representation of your directory tree updated in your repository's README.md file.
+
 ## API
 
 ### Online documentation
