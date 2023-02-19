@@ -11,6 +11,7 @@
     "package.json",
     "bundled",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "scripts": {
