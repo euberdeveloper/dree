@@ -3,7 +3,7 @@ import * as yargs from 'yargs';
 import { writeFileSync } from 'fs';
 
 import * as dree from '../lib/index';
-import { ParseOptions, ScanOptions, SortDiscriminator } from '../lib/index';
+import { ParseOptions, ScanOptions, SortDiscriminator, SortMethodPredefined } from '../lib/index';
 
 function escapeStringRegexp(string) {
 	return string
@@ -19,12 +19,19 @@ function parseRegExp(patterns: string[]): (RegExp | string)[] {
     }) : [];
 }
 
-function parseSorted(sorted?: 'ascending' | 'descending'): SortDiscriminator | boolean | undefined {
+function parseSorted(sorted?: SortMethodPredefined | 'ascending' | 'descending'): SortDiscriminator | SortMethodPredefined | boolean | undefined {
     if (!sorted) {
         return undefined;
     }
 
-    return sorted === 'ascending' ? true : (x, y) => y.localeCompare(x);
+    switch (sorted) {
+        case 'ascending':
+            return SortMethodPredefined.ALPHABETICAL;
+        case 'descending':
+            return SortMethodPredefined.ALPHABETICAL_REVERSE;
+        default:
+            return sorted;
+    }
 }
 
 yargs
@@ -233,9 +240,9 @@ yargs
         },
         'sorted': {
             default: undefined,
-            describe: 'Whether you want the result to contain values sorted in ascending or descending order. If not specified, the result values are not ordered.',
+            describe: 'Whether you want the result to contain values sorted with a dree pre-defined sorting method. \'ascending\' or \'descending\' are kept for retrocompatibility. If not specified, the result values are not ordered.',
             type: 'string',
-            choices: ['ascending', 'descending'],
+            choices: [...Object.values(SortMethodPredefined), 'ascending', 'descending'],
             hidden: true,
         },
         'descendants': {
