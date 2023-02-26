@@ -577,8 +577,8 @@ dree
  │   ├─> objects
  │   │   ├─> info
  │   │   └─> pack
- │   │       ├── pack-d3667e7a1d019e7c04ed77bee6bd638a2b91f37a.idx
- │   │       └── pack-d3667e7a1d019e7c04ed77bee6bd638a2b91f37a.pack
+ │   │       ├── pack-8fc864a7d45aab5463a8e253a8cd9b77b07626da.idx
+ │   │       └── pack-8fc864a7d45aab5463a8e253a8cd9b77b07626da.pack
  │   ├─> refs
  │   │   ├─> heads
  │   │   │   └── main
@@ -615,6 +615,7 @@ dree
  │   ├─> parse
  │   │   ├─> linux
  │   │   │   ├── eighth.test.js
+ │   │   │   ├── eleventh.test.js
  │   │   │   ├── fifth.test.js
  │   │   │   ├── first.test.js
  │   │   │   ├── fourth.test.js
@@ -622,9 +623,13 @@ dree
  │   │   │   ├── second.test.js
  │   │   │   ├── seventh.test.js
  │   │   │   ├── sixth.test.js
- │   │   │   └── third.test.js
+ │   │   │   ├── tenth.test.js
+ │   │   │   ├── third.test.js
+ │   │   │   ├── thirteenth.test.js
+ │   │   │   └── twelfth.test.js
  │   │   ├─> mac
  │   │   │   ├── eighth.test.js
+ │   │   │   ├── eleventh.test.js
  │   │   │   ├── fifth.test.js
  │   │   │   ├── first.test.js
  │   │   │   ├── fourth.test.js
@@ -632,7 +637,10 @@ dree
  │   │   │   ├── second.test.js
  │   │   │   ├── seventh.test.js
  │   │   │   ├── sixth.test.js
- │   │   │   └── third.test.js
+ │   │   │   ├── tenth.test.js
+ │   │   │   ├── third.test.js
+ │   │   │   ├── thirteenth.test.js
+ │   │   │   └── twelfth.test.js
  │   │   ├── parse.test.js
  │   │   ├── parseAsync.test.js
  │   │   └─> windows
@@ -648,26 +656,34 @@ dree
  │   ├─> parseTree
  │   │   ├─> linux
  │   │   │   ├── eighth.test.js
+ │   │   │   ├── eleventh.test.js
  │   │   │   ├── fifth.test.js
  │   │   │   ├── first.test.js
+ │   │   │   ├── fourteenth.test.js
  │   │   │   ├── fourth.test.js
  │   │   │   ├── ninth.test.js
  │   │   │   ├── second.test.js
  │   │   │   ├── seventh.test.js
  │   │   │   ├── sixth.test.js
  │   │   │   ├── tenth.test.js
- │   │   │   └── third.test.js
+ │   │   │   ├── third.test.js
+ │   │   │   ├── thirteenth.test.js
+ │   │   │   └── twelfth.test.js
  │   │   ├─> mac
  │   │   │   ├── eighth.test.js
+ │   │   │   ├── eleventh.test.js
  │   │   │   ├── fifth.test.js
  │   │   │   ├── first.test.js
+ │   │   │   ├── fourteenth.test.js
  │   │   │   ├── fourth.test.js
  │   │   │   ├── ninth.test.js
  │   │   │   ├── second.test.js
  │   │   │   ├── seventh.test.js
  │   │   │   ├── sixth.test.js
  │   │   │   ├── tenth.test.js
- │   │   │   └── third.test.js
+ │   │   │   ├── third.test.js
+ │   │   │   ├── thirteenth.test.js
+ │   │   │   └── twelfth.test.js
  │   │   ├── parseTree.test.js
  │   │   ├── parseTreeAsync.test.js
  │   │   └─> windows
