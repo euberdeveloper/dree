@@ -134,7 +134,7 @@ module.exports = (expect, dree, path) => {
 
         it(`Should return the content of "test/scan/${platform}/eleventh.test.json"`, function () {
             const options = {
-                sorted: 'alphabetical'
+                sorted: 'alpha'
             };
 
             const result = dree.parseTree(dree.scan(path, options), options);
@@ -146,7 +146,7 @@ module.exports = (expect, dree, path) => {
 
         it(`Should return the content of "test/scan/${platform}/twelfth.test.json"`, function () {
             const options = {
-                sorted: 'alphabetical-reverse'
+                sorted: 'antialpha'
             };
 
             const result = dree.parseTree(dree.scan(path, options), options);
@@ -158,7 +158,7 @@ module.exports = (expect, dree, path) => {
 
         it(`Should return the content of "test/scan/${platform}/thirteenth.test.json"`, function () {
             const options = {
-                sorted: 'alphabetical-insensitive'
+                sorted: 'alpha-insensitive'
             };
 
             const result = dree.parseTree(dree.scan(path, options), options);
@@ -170,7 +170,7 @@ module.exports = (expect, dree, path) => {
 
         it(`Should return the content of "test/scan/${platform}/fourteenth.test.json"`, function () {
             const options = {
-                sorted: 'alphabetical-insensitive-reverse'
+                sorted: 'antialpha-insensitive'
             };
 
             const result = dree.parseTree(dree.scan(path, options), options);

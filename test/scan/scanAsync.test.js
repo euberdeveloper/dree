@@ -377,7 +377,7 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/nineteenth.test.json"`, async function () {
 
             const options = {
-                sort: 'alphabetical'
+                sort: 'alpha'
             };
 
             const result = getResult(await dree.scanAsync(path, options));
@@ -390,7 +390,7 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/twentieth.test.json"`, async function () {
 
             const options = {
-                sort: 'alphabetical-reverse'
+                sort: 'antialpha'
             };
 
             const result = getResult(await dree.scanAsync(path, options));
@@ -403,7 +403,7 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/twentyfirst.test.json"`, async function () {
 
             const options = {
-                sort: 'alphabetical-insensitive',
+                sort: 'alpha-insensitive',
             };
 
             const result = getResult(await dree.scanAsync(path, options));
@@ -416,7 +416,7 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/twentysecond.test.json"`, async function () {
 
             const options = {
-                sort: 'alphabetical-insensitive-reverse',
+                sort: 'antialpha-insensitive',
             };
 
             const result = getResult(await dree.scanAsync(path, options));

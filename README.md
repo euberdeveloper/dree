@@ -352,7 +352,7 @@ Given a path, returns an object representing its directory tree. The result coul
 * __excludeEmptyDirectories__: Default value: `false`. If value is `true`, all empty directories will be excluded from the result. Even directories which are not empty but all their children are excluded are excluded from the result because of other options will be considered empty.
 * __descendants__: Default value `false`. If true, also the number of descendants of each node will be added to the result.
 * __descendantsIgnoreDirectories__: Default value `false`. If true, only files will be count as descendants of a node. It does not have effect if descendants option is not true.
-* __sorted__: Default value: `undefined`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
+* __sorted__: Default value: `undefined`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alpha order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
 * __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
 
 **SortMethodPredefined enum:**
@@ -445,7 +445,7 @@ Given a path, returns a string representing its directory tree. The result could
 * __depth__: Default value: `undefined`. It is a number which says the max depth the algorithm can reach scanning the given path. All files and dirs which are beyound the max depth will not be considered by the algorithm.
 * __exclude__: Default value: `undefined`. It is a regex, string (glob patterns) or array of them and all the matched paths will not be considered by the algorithm.
 * __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
-* __sorted__: Default value: `undefined`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
+* __sorted__: Default value: `undefined`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alpha order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
 * __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
 
 **Result string:**
@@ -577,8 +577,8 @@ dree
  │   ├─> objects
  │   │   ├─> info
  │   │   └─> pack
- │   │       ├── pack-8fc864a7d45aab5463a8e253a8cd9b77b07626da.idx
- │   │       └── pack-8fc864a7d45aab5463a8e253a8cd9b77b07626da.pack
+ │   │       ├── pack-d3667e7a1d019e7c04ed77bee6bd638a2b91f37a.idx
+ │   │       └── pack-d3667e7a1d019e7c04ed77bee6bd638a2b91f37a.pack
  │   ├─> refs
  │   │   ├─> heads
  │   │   │   └── main
@@ -615,7 +615,6 @@ dree
  │   ├─> parse
  │   │   ├─> linux
  │   │   │   ├── eighth.test.js
- │   │   │   ├── eleventh.test.js
  │   │   │   ├── fifth.test.js
  │   │   │   ├── first.test.js
  │   │   │   ├── fourth.test.js
@@ -623,13 +622,9 @@ dree
  │   │   │   ├── second.test.js
  │   │   │   ├── seventh.test.js
  │   │   │   ├── sixth.test.js
- │   │   │   ├── tenth.test.js
- │   │   │   ├── third.test.js
- │   │   │   ├── thirteenth.test.js
- │   │   │   └── twelfth.test.js
+ │   │   │   └── third.test.js
  │   │   ├─> mac
  │   │   │   ├── eighth.test.js
- │   │   │   ├── eleventh.test.js
  │   │   │   ├── fifth.test.js
  │   │   │   ├── first.test.js
  │   │   │   ├── fourth.test.js
@@ -637,10 +632,7 @@ dree
  │   │   │   ├── second.test.js
  │   │   │   ├── seventh.test.js
  │   │   │   ├── sixth.test.js
- │   │   │   ├── tenth.test.js
- │   │   │   ├── third.test.js
- │   │   │   ├── thirteenth.test.js
- │   │   │   └── twelfth.test.js
+ │   │   │   └── third.test.js
  │   │   ├── parse.test.js
  │   │   ├── parseAsync.test.js
  │   │   └─> windows
@@ -656,34 +648,26 @@ dree
  │   ├─> parseTree
  │   │   ├─> linux
  │   │   │   ├── eighth.test.js
- │   │   │   ├── eleventh.test.js
  │   │   │   ├── fifth.test.js
  │   │   │   ├── first.test.js
- │   │   │   ├── fourteenth.test.js
  │   │   │   ├── fourth.test.js
  │   │   │   ├── ninth.test.js
  │   │   │   ├── second.test.js
  │   │   │   ├── seventh.test.js
  │   │   │   ├── sixth.test.js
  │   │   │   ├── tenth.test.js
- │   │   │   ├── third.test.js
- │   │   │   ├── thirteenth.test.js
- │   │   │   └── twelfth.test.js
+ │   │   │   └── third.test.js
  │   │   ├─> mac
  │   │   │   ├── eighth.test.js
- │   │   │   ├── eleventh.test.js
  │   │   │   ├── fifth.test.js
  │   │   │   ├── first.test.js
- │   │   │   ├── fourteenth.test.js
  │   │   │   ├── fourth.test.js
  │   │   │   ├── ninth.test.js
  │   │   │   ├── second.test.js
  │   │   │   ├── seventh.test.js
  │   │   │   ├── sixth.test.js
  │   │   │   ├── tenth.test.js
- │   │   │   ├── third.test.js
- │   │   │   ├── thirteenth.test.js
- │   │   │   └── twelfth.test.js
+ │   │   │   └── third.test.js
  │   │   ├── parseTree.test.js
  │   │   ├── parseTreeAsync.test.js
  │   │   └─> windows

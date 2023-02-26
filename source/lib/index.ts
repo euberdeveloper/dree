@@ -187,7 +187,7 @@ export interface ScanOptions {
      */
     descendantsIgnoreDirectories?: boolean;
     /**
-     * If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order, a 
+     * If true, directories and files will be scanned ordered by path. The value can be both boolean for default alpha order, a 
      * custom sorting function or a predefined sorting method in [[SortMethodPredefined]].
      */
     sorted?: boolean | SortMethodPredefined | SortDiscriminator;
@@ -231,7 +231,7 @@ export interface ParseOptions {
      */
     extensions?: string[];
     /**
-     * If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order, a 
+     * If true, directories and files will be scanned ordered by path. The value can be both boolean for default alpha order, a 
      * custom sorting function or a predefined sorting method in [[SortMethodPredefined]].
      */
     sorted?: boolean | SortMethodPredefined | SortDiscriminator;
