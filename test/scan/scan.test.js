@@ -281,9 +281,9 @@ module.exports = (expect, fs, dree, path) => {
 
         it(`Should return the content of "test/scan/${platform}/seventeenth.test.json"`, function () {
 
-                const options = {
-                    exclude: [/firebase/, '/**/notes.*']
-                };
+            const options = {
+                exclude: [/firebase/, '/**/notes.*']
+            };
 
             const result = getResult(dree.scan(path, options));
             const expected = getExpected(`test/scan/${platform}/seventeenth.test.json`);
@@ -315,6 +315,58 @@ module.exports = (expect, fs, dree, path) => {
             const willThrow = () => dree.scan(wrongPath, options);
 
             expect(willThrow).to.throw();
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/nineteenth.test.json"`, function () {
+
+            const options = {
+                sort: 'alphabetical'
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/nineteenth.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twentieth.test.json"`, function () {
+
+            const options = {
+                sort: 'alphabetical-reverse'
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/twentieth.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twentyfirst.test.json"`, function () {
+
+            const options = {
+                sort: 'alphabetical-insensitive',
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/twentyfirst.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twentysecond.test.json"`, function () {
+
+            const options = {
+                sort: 'alphabetical-insensitive-reverse',
+            };
+
+            const result = getResult(dree.scan(path, options));
+            const expected = getExpected(`test/scan/${platform}/twentysecond.test.json`);
+
+            expect(result).to.equal(expected);
 
         });
 

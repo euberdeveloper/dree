@@ -130,18 +130,40 @@ const scanOptions = [
     },
     {
         name: 'seventeenth',
-        opt:
-        {
+        opt: {
             exclude: [/firebase/, '/**/notes.*']
         }
     },
     {
         name: 'eighteenth',
-        opt:
-        {
+        opt: {
             exclude: ['/**/firebase.*']
         }
-    }
+    },
+    {
+        name: 'nineteenth',
+        opt: {
+            sort: 'alphabetical'
+        }
+    },
+    {
+        name: 'twentieth',
+        opt: {
+            sort: 'alphabetical-reverse'
+        }
+    },
+    {
+        name: 'twentyfirst',
+        opt: {
+            sort: 'alphabetical-insensitive'
+        }
+    },
+    {
+        name: 'twentysecond',
+        opt: {
+            sort: 'alphabetical-insensitive-reverse'
+        }
+    },
 ];
 
 function purgePath(data) {
