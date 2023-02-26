@@ -305,23 +305,10 @@ module.exports = (expect, fs, dree, path) => {
 
         });
 
-        it(`Should throw an error`, function () {
-
-            const wrongPath = 'wrong';
-            const options = {
-                skipErrors: false
-            };
-
-            const willThrow = () => dree.scan(wrongPath, options);
-
-            expect(willThrow).to.throw();
-
-        });
-
         it(`Should return the content of "test/scan/${platform}/nineteenth.test.json"`, function () {
 
             const options = {
-                sort: 'alpha'
+                sorted: 'alpha'
             };
 
             const result = getResult(dree.scan(path, options));
@@ -334,7 +321,7 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/twentieth.test.json"`, function () {
 
             const options = {
-                sort: 'antialpha'
+                sorted: 'antialpha'
             };
 
             const result = getResult(dree.scan(path, options));
@@ -347,7 +334,7 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/twentyfirst.test.json"`, function () {
 
             const options = {
-                sort: 'alpha-insensitive',
+                sorted: 'alpha-insensitive',
             };
 
             const result = getResult(dree.scan(path, options));
@@ -360,13 +347,26 @@ module.exports = (expect, fs, dree, path) => {
         it(`Should return the content of "test/scan/${platform}/twentysecond.test.json"`, function () {
 
             const options = {
-                sort: 'antialpha-insensitive',
+                sorted: 'antialpha-insensitive',
             };
 
             const result = getResult(dree.scan(path, options));
             const expected = getExpected(`test/scan/${platform}/twentysecond.test.json`);
 
             expect(result).to.equal(expected);
+
+        });
+
+        it(`Should throw an error`, function () {
+
+            const wrongPath = 'wrong';
+            const options = {
+                skipErrors: false
+            };
+
+            const willThrow = () => dree.scan(wrongPath, options);
+
+            expect(willThrow).to.throw();
 
         });
 

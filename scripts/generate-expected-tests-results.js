@@ -143,25 +143,25 @@ const scanOptions = [
     {
         name: 'nineteenth',
         opt: {
-            sort: 'alpha'
+            sorted: 'alpha'
         }
     },
     {
         name: 'twentieth',
         opt: {
-            sort: 'antialpha'
+            sorted: 'antialpha'
         }
     },
     {
         name: 'twentyfirst',
         opt: {
-            sort: 'alpha-insensitive'
+            sorted: 'alpha-insensitive'
         }
     },
     {
         name: 'twentysecond',
         opt: {
-            sort: 'antialpha-insensitive'
+            sorted: 'antialpha-insensitive'
         }
     },
 ];
@@ -244,25 +244,25 @@ const parseOptions = [
     {
         name: 'tenth',
         opt: {
-            sort: 'alpha'
+            sorted: 'alpha'
         }
     },
     {
         name: 'eleventh',
         opt: {
-            sort: 'antialpha'
+            sorted: 'antialpha'
         }
     },
     {
         name: 'twelfth',
         opt: {
-            sort: 'alpha-insensitive'
+            sorted: 'alpha-insensitive'
         }
     },
     {
         name: 'thirteenth',
         opt: {
-            sort: 'antialpha-insensitive'
+            sorted: 'antialpha-insensitive'
         }
     }
 ];
@@ -343,25 +343,25 @@ const parseTreeOptions = [
     {
         name: 'eleventh',
         opt: {
-            sort: 'alpha'
+            sorted: 'alpha'
         }
     },
     {
         name: 'twelfth',
         opt: {
-            sort: 'antialpha'
+            sorted: 'antialpha'
         }
     },
     {
         name: 'thirteenth',
         opt: {
-            sort: 'alpha-insensitive'
+            sorted: 'alpha-insensitive'
         }
     },
     {
         name: 'fourteenth',
         opt: {
-            sort: 'antialpha-insensitive'
+            sorted: 'antialpha-insensitive'
         }
     }
 ];

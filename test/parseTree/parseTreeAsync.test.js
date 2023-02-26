@@ -132,6 +132,58 @@ module.exports = (expect, dree, path) => {
 
         });
 
+        it(`Should return the content of "test/scan/${platform}/eleventh.test.json"`, async function () {
+
+            const options = {
+                sorted: 'alpha'
+            };
+
+            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const expected = require(`./${platform}/eleventh.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twelfth.test.json"`, async function () {
+
+            const options = {
+                sorted: 'antialpha'
+            };
+
+            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const expected = require(`./${platform}/twelfth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/thirteenth.test.json"`, async function () {
+
+            const options = {
+                sorted: 'alpha-insensitive'
+            };
+
+            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const expected = require(`./${platform}/thirteenth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/fourteenth.test.json"`, async function () {
+
+            const options = {
+                sorted: 'antialpha-insensitive'
+            };
+
+            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const expected = require(`./${platform}/fourteenth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
     });
 
 }
