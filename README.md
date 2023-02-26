@@ -352,8 +352,17 @@ Given a path, returns an object representing its directory tree. The result coul
 * __excludeEmptyDirectories__: Default value: `false`. If value is `true`, all empty directories will be excluded from the result. Even directories which are not empty but all their children are excluded are excluded from the result because of other options will be considered empty.
 * __descendants__: Default value `false`. If true, also the number of descendants of each node will be added to the result.
 * __descendantsIgnoreDirectories__: Default value `false`. If true, only files will be count as descendants of a node. It does not have effect if descendants option is not true.
-* __sorted__: Default value: `undefined`. If specified, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order or a custom sorting function.
+* __sorted__: Default value: `undefined`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
 * __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
+
+**SortMethodPredefined enum:**
+
+In Javascript it is an object, in Typescript an enum, whose values are used to determine how the paths should be sorted.
+
+* __ALPHABETICAL__: Alphabetical order.
+* __ALPHABETICAL_REVERSE__: Alphabetical order, reversed.
+* __ALPHABETICAL_INSENSITIVE__: Alphabetical order, case insensitive.
+* __ALPHABETICAL_INSENSITIVE_REVERSE__: Alphabetical order, reversed, case insensitive.
 
 **Result object parameters:**
 
@@ -436,7 +445,7 @@ Given a path, returns a string representing its directory tree. The result could
 * __depth__: Default value: `undefined`. It is a number which says the max depth the algorithm can reach scanning the given path. All files and dirs which are beyound the max depth will not be considered by the algorithm.
 * __exclude__: Default value: `undefined`. It is a regex, string (glob patterns) or array of them and all the matched paths will not be considered by the algorithm.
 * __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
-* __sorted__: Default value: `undefined`. If specified, directories and files will be parsed ordered by path. The value can be both boolean for default alphabetical order or a custom sorting function.
+* __sorted__: Default value: `undefined`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
 * __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
 
 **Result string:**
@@ -534,56 +543,6 @@ Made with [dree](https://github.com/marketplace/actions/ga-dree)
 
 ```
 dree
- ├─> .git
- │   ├── FETCH_HEAD
- │   ├── HEAD
- │   ├─> branches
- │   ├── config
- │   ├── description
- │   ├─> hooks
- │   │   ├── applypatch-msg.sample
- │   │   ├── commit-msg.sample
- │   │   ├── fsmonitor-watchman.sample
- │   │   ├── post-update.sample
- │   │   ├── pre-applypatch.sample
- │   │   ├── pre-commit.sample
- │   │   ├── pre-merge-commit.sample
- │   │   ├── pre-push.sample
- │   │   ├── pre-rebase.sample
- │   │   ├── pre-receive.sample
- │   │   ├── prepare-commit-msg.sample
- │   │   ├── push-to-checkout.sample
- │   │   └── update.sample
- │   ├── index
- │   ├─> info
- │   │   └── exclude
- │   ├─> logs
- │   │   ├── HEAD
- │   │   └─> refs
- │   │       ├─> heads
- │   │       │   └── main
- │   │       └─> remotes
- │   │           └─> origin
- │   │               └── main
- │   ├─> objects
- │   │   ├─> info
- │   │   └─> pack
- │   │       ├── pack-0a8439f286e9b29b33a72e846c425fe6e580dd00.idx
- │   │       └── pack-0a8439f286e9b29b33a72e846c425fe6e580dd00.pack
- │   ├─> refs
- │   │   ├─> heads
- │   │   │   └── main
- │   │   ├─> remotes
- │   │   │   └─> origin
- │   │   │       └── main
- │   │   └─> tags
- │   └── shallow
- ├─> .github
- │   └─> workflows
- │       ├── build.yml
- │       ├── dree.yml
- │       └── test.yml
- ├── .gitignore
  ├── .npmrc
  ├── CHANGELOG.md
  ├── LICENSE
@@ -602,150 +561,10 @@ dree
  │   │   └── index.ts
  │   └── tsconfig.json
  ├─> test
- │   ├── .gitignore
  │   ├─> parse
- │   │   ├─> linux
- │   │   │   ├── eighth.test.js
- │   │   │   ├── fifth.test.js
- │   │   │   ├── first.test.js
- │   │   │   ├── fourth.test.js
- │   │   │   ├── ninth.test.js
- │   │   │   ├── second.test.js
- │   │   │   ├── seventh.test.js
- │   │   │   ├── sixth.test.js
- │   │   │   └── third.test.js
- │   │   ├─> mac
- │   │   │   ├── eighth.test.js
- │   │   │   ├── fifth.test.js
- │   │   │   ├── first.test.js
- │   │   │   ├── fourth.test.js
- │   │   │   ├── ninth.test.js
- │   │   │   ├── second.test.js
- │   │   │   ├── seventh.test.js
- │   │   │   ├── sixth.test.js
- │   │   │   └── third.test.js
- │   │   ├── parse.test.js
- │   │   ├── parseAsync.test.js
- │   │   └─> windows
- │   │       ├── eighth.test.js
- │   │       ├── fifth.test.js
- │   │       ├── first.test.js
- │   │       ├── fourth.test.js
- │   │       ├── ninth.test.js
- │   │       ├── second.test.js
- │   │       ├── seventh.test.js
- │   │       ├── sixth.test.js
- │   │       └── third.test.js
  │   ├─> parseTree
- │   │   ├─> linux
- │   │   │   ├── eighth.test.js
- │   │   │   ├── fifth.test.js
- │   │   │   ├── first.test.js
- │   │   │   ├── fourth.test.js
- │   │   │   ├── ninth.test.js
- │   │   │   ├── second.test.js
- │   │   │   ├── seventh.test.js
- │   │   │   ├── sixth.test.js
- │   │   │   ├── tenth.test.js
- │   │   │   └── third.test.js
- │   │   ├─> mac
- │   │   │   ├── eighth.test.js
- │   │   │   ├── fifth.test.js
- │   │   │   ├── first.test.js
- │   │   │   ├── fourth.test.js
- │   │   │   ├── ninth.test.js
- │   │   │   ├── second.test.js
- │   │   │   ├── seventh.test.js
- │   │   │   ├── sixth.test.js
- │   │   │   ├── tenth.test.js
- │   │   │   └── third.test.js
- │   │   ├── parseTree.test.js
- │   │   ├── parseTreeAsync.test.js
- │   │   └─> windows
- │   │       ├── eighth.test.js
- │   │       ├── fifth.test.js
- │   │       ├── first.test.js
- │   │       ├── fourth.test.js
- │   │       ├── ninth.test.js
- │   │       ├── second.test.js
- │   │       ├── seventh.test.js
- │   │       ├── sixth.test.js
- │   │       ├── tenth.test.js
- │   │       └── third.test.js
  │   ├─> sample
- │   │   ├── .gitignore
- │   │   ├─> backend
- │   │   │   ├── firebase.json
- │   │   │   ├>>linked.link
- │   │   │   ├>>linkedtxt.link
- │   │   │   ├── notes.txt
- │   │   │   └─> server
- │   │   │       └── server.ts
- │   │   ├─> empty
- │   │   │   └─> tsempty
- │   │   │       └── file.ts
- │   │   └─> linked
- │   │       └── linked.txt
  │   ├─> scan
- │   │   ├─> linux
- │   │   │   ├── eight.test.json
- │   │   │   ├── eighteenth.test.json
- │   │   │   ├── eleventh.test.json
- │   │   │   ├── fifteenth.test.json
- │   │   │   ├── fifth.test.json
- │   │   │   ├── first.test.json
- │   │   │   ├── fourteenth.test.json
- │   │   │   ├── fourth.test.json
- │   │   │   ├── ninth.test.json
- │   │   │   ├── second.test.json
- │   │   │   ├── seventeenth.test.json
- │   │   │   ├── seventh.test.json
- │   │   │   ├── sixteenth.test.json
- │   │   │   ├── sixth.test.json
- │   │   │   ├── tenth.test.json
- │   │   │   ├── third.test.json
- │   │   │   ├── thirteenth.test.json
- │   │   │   └── twelfth.test.json
- │   │   ├─> mac
- │   │   │   ├── eight.test.json
- │   │   │   ├── eighteenth.test.json
- │   │   │   ├── eleventh.test.json
- │   │   │   ├── fifteenth.test.json
- │   │   │   ├── fifth.test.json
- │   │   │   ├── first.test.json
- │   │   │   ├── fourteenth.test.json
- │   │   │   ├── fourth.test.json
- │   │   │   ├── ninth.test.json
- │   │   │   ├── second.test.json
- │   │   │   ├── seventeenth.test.json
- │   │   │   ├── seventh.test.json
- │   │   │   ├── sixteenth.test.json
- │   │   │   ├── sixth.test.json
- │   │   │   ├── tenth.test.json
- │   │   │   ├── third.test.json
- │   │   │   ├── thirteenth.test.json
- │   │   │   └── twelfth.test.json
- │   │   ├── scan.test.js
- │   │   ├── scanAsync.test.js
- │   │   └─> windows
- │   │       ├── eight.test.json
- │   │       ├── eighteenth.test.json
- │   │       ├── eleventh.test.json
- │   │       ├── fifteenth.test.json
- │   │       ├── fifth.test.json
- │   │       ├── first.test.json
- │   │       ├── fourteenth.test.json
- │   │       ├── fourth.test.json
- │   │       ├── ninth.test.json
- │   │       ├── second.test.json
- │   │       ├── seventeenth.test.json
- │   │       ├── seventh.test.json
- │   │       ├── sixteenth.test.json
- │   │       ├── sixth.test.json
- │   │       ├── tenth.test.json
- │   │       ├── third.test.json
- │   │       ├── thirteenth.test.json
- │   │       └── twelfth.test.json
  │   └── test.js
  ├── typedoc.dev.js
  ├── typedoc.js
