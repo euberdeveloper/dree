@@ -1,15 +1,15 @@
 {
     "exclude": [ 
-        "node_modules",
-        ".git",
-        "coverage",
-        "bundled/",
-        "dist/",
-        "docs/documentation/html/",
-        "docs/documentation/html-dev/",
-        "test/sample/",
-        "test/parse/",
-        "test/parseTree/",
-        "test/scan/"
+        "node_modules/**",
+        ".git/**",
+        "coverage/**",
+        "bundled/**",
+        "dist/**",
+        "docs/documentation/html/**",
+        "docs/documentation/html-dev/**",
+        "test/sample/**",
+        "test/parse/**",
+        "test/parseTree/**",
+        "test/scan/**"
     ]
 }
