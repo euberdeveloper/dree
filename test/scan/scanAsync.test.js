@@ -374,6 +374,58 @@ module.exports = (expect, fs, dree, path) => {
 
         });
 
+        it(`Should return the content of "test/scan/${platform}/nineteenth.test.json"`, async function () {
+
+            const options = {
+                sort: 'alphabetical'
+            };
+
+            const result = getResult(await dree.scanAsync(path, options));
+            const expected = getExpected(`test/scan/${platform}/nineteenth.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twentieth.test.json"`, async function () {
+
+            const options = {
+                sort: 'alphabetical-reverse'
+            };
+
+            const result = getResult(await dree.scanAsync(path, options));
+            const expected = getExpected(`test/scan/${platform}/twentieth.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twentyfirst.test.json"`, async function () {
+
+            const options = {
+                sort: 'alphabetical-insensitive',
+            };
+
+            const result = getResult(await dree.scanAsync(path, options));
+            const expected = getExpected(`test/scan/${platform}/twentyfirst.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twentysecond.test.json"`, async function () {
+
+            const options = {
+                sort: 'alphabetical-insensitive-reverse',
+            };
+
+            const result = getResult(await dree.scanAsync(path, options));
+            const expected = getExpected(`test/scan/${platform}/twentysecond.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
         it(`Should throw an error`, async function () {
 
             const wrongPath = 'wrong';

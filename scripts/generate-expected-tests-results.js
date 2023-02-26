@@ -240,6 +240,30 @@ const parseOptions = [
         opt: {
             exclude: ['/**/firebase.*']
         }
+    },
+    {
+        name: 'tenth',
+        opt: {
+            sort: 'alphabetical'
+        }
+    },
+    {
+        name: 'eleventh',
+        opt: {
+            sort: 'alphabetical-reverse'
+        }
+    },
+    {
+        name: 'twelfth',
+        opt: {
+            sort: 'alphabetical-insensitive'
+        }
+    },
+    {
+        name: 'thirteenth',
+        opt: {
+            sort: 'alphabetical-insensitive-reverse'
+        }
     }
 ];
 function generateParse(option) {
@@ -314,6 +338,30 @@ const parseTreeOptions = [
         name: 'tenth',
         opt: {
             exclude: ['/**/firebase.*']
+        }
+    },
+    {
+        name: 'eleventh',
+        opt: {
+            sort: 'alphabetical'
+        }
+    },
+    {
+        name: 'twelfth',
+        opt: {
+            sort: 'alphabetical-reverse'
+        }
+    },
+    {
+        name: 'thirteenth',
+        opt: {
+            sort: 'alphabetical-insensitive'
+        }
+    },
+    {
+        name: 'fourteenth',
+        opt: {
+            sort: 'alphabetical-insensitive-reverse'
         }
     }
 ];

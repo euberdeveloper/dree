@@ -13,9 +13,9 @@ module.exports = (expect, dree, path) => {
             break;
     }
 
-    describe('Test: parse function', function() {
+    describe('Test: parse function', function () {
 
-        it('Should return the exported content of "test/parse/first.test.js"', function() {
+        it('Should return the exported content of "test/parse/first.test.js"', function () {
 
             const result = dree.parse(path);
             const expected = require(`./${platform}/first.test`);
@@ -23,10 +23,10 @@ module.exports = (expect, dree, path) => {
 
         });
 
-        it('Should return the exported content of "test/parse/second.test.js"', function() {
+        it('Should return the exported content of "test/parse/second.test.js"', function () {
 
             const options = {
-                extensions: [ '', 'ts', 'txt' ],
+                extensions: ['', 'ts', 'txt'],
                 symbolicLinks: false
             };
 
@@ -36,7 +36,7 @@ module.exports = (expect, dree, path) => {
 
         });
 
-        it('Should return the exported content of "test/parse/third.test.js"', function() {
+        it('Should return the exported content of "test/parse/third.test.js"', function () {
 
             const options = {
                 depth: 2,
@@ -49,7 +49,7 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parse/fourth.test.js"', function() {
+        it('Should return the exported content of "test/parse/fourth.test.js"', function () {
 
             const options = {
                 depth: -1,
@@ -61,7 +61,7 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parse/fifth.test.js"', function() {
+        it('Should return the exported content of "test/parse/fifth.test.js"', function () {
 
             const options = {
                 followLinks: true
@@ -72,8 +72,8 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parse/sixth.test.js"', function() {
-            
+        it('Should return the exported content of "test/parse/sixth.test.js"', function () {
+
             const options = {
                 sorted: true
             };
@@ -83,8 +83,8 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
         });
 
-        it('Should return the exported content of "test/parse/seventh.test.js"', function() {
-            
+        it('Should return the exported content of "test/parse/seventh.test.js"', function () {
+
             const options = {
                 sorted: (x, y) => y.localeCompare(x)
             };
@@ -119,6 +119,59 @@ module.exports = (expect, dree, path) => {
             expect(result).to.equal(expected);
 
         });
+
+        it(`Should return the content of "test/scan/${platform}/tenth.test.json"`, function () {
+
+            const options = {
+                sorted: 'alphabetical'
+            };
+
+            const result = dree.parse(path, options);
+            const expected = require(`./${platform}/tenth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/eleventh.test.json"`, function () {
+
+            const options = {
+                sorted: 'alphabetical-reverse'
+            };
+
+            const result = dree.parse(path, options);
+            const expected = require(`./${platform}/eleventh.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twelfth.test.json"`, function () {
+
+            const options = {
+                sorted: 'alphabetical-insensitive'
+            };
+
+            const result = dree.parse(path, options);
+            const expected = require(`./${platform}/twelfth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/thirteenth.test.json"`, function () {
+
+            const options = {
+                sorted: 'alphabetical-insensitive-reverse'
+            };
+
+            const result = dree.parse(path, options);
+            const expected = require(`./${platform}/thirteenth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
     });
 
 }

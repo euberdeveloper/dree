@@ -132,6 +132,55 @@ module.exports = (expect, dree, path) => {
 
         });
 
+        it(`Should return the content of "test/scan/${platform}/eleventh.test.json"`, function () {
+            const options = {
+                sorted: 'alphabetical'
+            };
+
+            const result = dree.parseTree(dree.scan(path, options), options);
+            const expected = require(`./${platform}/eleventh.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/twelfth.test.json"`, function () {
+            const options = {
+                sorted: 'alphabetical-reverse'
+            };
+
+            const result = dree.parseTree(dree.scan(path, options), options);
+            const expected = require(`./${platform}/twelfth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/thirteenth.test.json"`, function () {
+            const options = {
+                sorted: 'alphabetical-insensitive'
+            };
+
+            const result = dree.parseTree(dree.scan(path, options), options);
+            const expected = require(`./${platform}/thirteenth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+        it(`Should return the content of "test/scan/${platform}/fourteenth.test.json"`, function () {
+            const options = {
+                sorted: 'alphabetical-insensitive-reverse'
+            };
+
+            const result = dree.parseTree(dree.scan(path, options), options);
+            const expected = require(`./${platform}/fourteenth.test`);
+
+            expect(result).to.equal(expected);
+
+        });
+
+
     });
 
 }
