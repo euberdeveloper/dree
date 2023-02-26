@@ -543,6 +543,56 @@ Made with [dree](https://github.com/marketplace/actions/ga-dree)
 
 ```
 dree
+ ├─> .git
+ │   ├── FETCH_HEAD
+ │   ├── HEAD
+ │   ├─> branches
+ │   ├── config
+ │   ├── description
+ │   ├─> hooks
+ │   │   ├── applypatch-msg.sample
+ │   │   ├── commit-msg.sample
+ │   │   ├── fsmonitor-watchman.sample
+ │   │   ├── post-update.sample
+ │   │   ├── pre-applypatch.sample
+ │   │   ├── pre-commit.sample
+ │   │   ├── pre-merge-commit.sample
+ │   │   ├── pre-push.sample
+ │   │   ├── pre-rebase.sample
+ │   │   ├── pre-receive.sample
+ │   │   ├── prepare-commit-msg.sample
+ │   │   ├── push-to-checkout.sample
+ │   │   └── update.sample
+ │   ├── index
+ │   ├─> info
+ │   │   └── exclude
+ │   ├─> logs
+ │   │   ├── HEAD
+ │   │   └─> refs
+ │   │       ├─> heads
+ │   │       │   └── main
+ │   │       └─> remotes
+ │   │           └─> origin
+ │   │               └── main
+ │   ├─> objects
+ │   │   ├─> info
+ │   │   └─> pack
+ │   │       ├── pack-3879396a439530e6e274dfe4700a1be25183b3be.idx
+ │   │       └── pack-3879396a439530e6e274dfe4700a1be25183b3be.pack
+ │   ├─> refs
+ │   │   ├─> heads
+ │   │   │   └── main
+ │   │   ├─> remotes
+ │   │   │   └─> origin
+ │   │   │       └── main
+ │   │   └─> tags
+ │   └── shallow
+ ├─> .github
+ │   └─> workflows
+ │       ├── build.yml
+ │       ├── dree.yml
+ │       └── test.yml
+ ├── .gitignore
  ├── .npmrc
  ├── CHANGELOG.md
  ├── LICENSE
@@ -561,10 +611,150 @@ dree
  │   │   └── index.ts
  │   └── tsconfig.json
  ├─> test
+ │   ├── .gitignore
  │   ├─> parse
+ │   │   ├─> linux
+ │   │   │   ├── eighth.test.js
+ │   │   │   ├── fifth.test.js
+ │   │   │   ├── first.test.js
+ │   │   │   ├── fourth.test.js
+ │   │   │   ├── ninth.test.js
+ │   │   │   ├── second.test.js
+ │   │   │   ├── seventh.test.js
+ │   │   │   ├── sixth.test.js
+ │   │   │   └── third.test.js
+ │   │   ├─> mac
+ │   │   │   ├── eighth.test.js
+ │   │   │   ├── fifth.test.js
+ │   │   │   ├── first.test.js
+ │   │   │   ├── fourth.test.js
+ │   │   │   ├── ninth.test.js
+ │   │   │   ├── second.test.js
+ │   │   │   ├── seventh.test.js
+ │   │   │   ├── sixth.test.js
+ │   │   │   └── third.test.js
+ │   │   ├── parse.test.js
+ │   │   ├── parseAsync.test.js
+ │   │   └─> windows
+ │   │       ├── eighth.test.js
+ │   │       ├── fifth.test.js
+ │   │       ├── first.test.js
+ │   │       ├── fourth.test.js
+ │   │       ├── ninth.test.js
+ │   │       ├── second.test.js
+ │   │       ├── seventh.test.js
+ │   │       ├── sixth.test.js
+ │   │       └── third.test.js
  │   ├─> parseTree
+ │   │   ├─> linux
+ │   │   │   ├── eighth.test.js
+ │   │   │   ├── fifth.test.js
+ │   │   │   ├── first.test.js
+ │   │   │   ├── fourth.test.js
+ │   │   │   ├── ninth.test.js
+ │   │   │   ├── second.test.js
+ │   │   │   ├── seventh.test.js
+ │   │   │   ├── sixth.test.js
+ │   │   │   ├── tenth.test.js
+ │   │   │   └── third.test.js
+ │   │   ├─> mac
+ │   │   │   ├── eighth.test.js
+ │   │   │   ├── fifth.test.js
+ │   │   │   ├── first.test.js
+ │   │   │   ├── fourth.test.js
+ │   │   │   ├── ninth.test.js
+ │   │   │   ├── second.test.js
+ │   │   │   ├── seventh.test.js
+ │   │   │   ├── sixth.test.js
+ │   │   │   ├── tenth.test.js
+ │   │   │   └── third.test.js
+ │   │   ├── parseTree.test.js
+ │   │   ├── parseTreeAsync.test.js
+ │   │   └─> windows
+ │   │       ├── eighth.test.js
+ │   │       ├── fifth.test.js
+ │   │       ├── first.test.js
+ │   │       ├── fourth.test.js
+ │   │       ├── ninth.test.js
+ │   │       ├── second.test.js
+ │   │       ├── seventh.test.js
+ │   │       ├── sixth.test.js
+ │   │       ├── tenth.test.js
+ │   │       └── third.test.js
  │   ├─> sample
+ │   │   ├── .gitignore
+ │   │   ├─> backend
+ │   │   │   ├── firebase.json
+ │   │   │   ├>>linked.link
+ │   │   │   ├>>linkedtxt.link
+ │   │   │   ├── notes.txt
+ │   │   │   └─> server
+ │   │   │       └── server.ts
+ │   │   ├─> empty
+ │   │   │   └─> tsempty
+ │   │   │       └── file.ts
+ │   │   └─> linked
+ │   │       └── linked.txt
  │   ├─> scan
+ │   │   ├─> linux
+ │   │   │   ├── eight.test.json
+ │   │   │   ├── eighteenth.test.json
+ │   │   │   ├── eleventh.test.json
+ │   │   │   ├── fifteenth.test.json
+ │   │   │   ├── fifth.test.json
+ │   │   │   ├── first.test.json
+ │   │   │   ├── fourteenth.test.json
+ │   │   │   ├── fourth.test.json
+ │   │   │   ├── ninth.test.json
+ │   │   │   ├── second.test.json
+ │   │   │   ├── seventeenth.test.json
+ │   │   │   ├── seventh.test.json
+ │   │   │   ├── sixteenth.test.json
+ │   │   │   ├── sixth.test.json
+ │   │   │   ├── tenth.test.json
+ │   │   │   ├── third.test.json
+ │   │   │   ├── thirteenth.test.json
+ │   │   │   └── twelfth.test.json
+ │   │   ├─> mac
+ │   │   │   ├── eight.test.json
+ │   │   │   ├── eighteenth.test.json
+ │   │   │   ├── eleventh.test.json
+ │   │   │   ├── fifteenth.test.json
+ │   │   │   ├── fifth.test.json
+ │   │   │   ├── first.test.json
+ │   │   │   ├── fourteenth.test.json
+ │   │   │   ├── fourth.test.json
+ │   │   │   ├── ninth.test.json
+ │   │   │   ├── second.test.json
+ │   │   │   ├── seventeenth.test.json
+ │   │   │   ├── seventh.test.json
+ │   │   │   ├── sixteenth.test.json
+ │   │   │   ├── sixth.test.json
+ │   │   │   ├── tenth.test.json
+ │   │   │   ├── third.test.json
+ │   │   │   ├── thirteenth.test.json
+ │   │   │   └── twelfth.test.json
+ │   │   ├── scan.test.js
+ │   │   ├── scanAsync.test.js
+ │   │   └─> windows
+ │   │       ├── eight.test.json
+ │   │       ├── eighteenth.test.json
+ │   │       ├── eleventh.test.json
+ │   │       ├── fifteenth.test.json
+ │   │       ├── fifth.test.json
+ │   │       ├── first.test.json
+ │   │       ├── fourteenth.test.json
+ │   │       ├── fourth.test.json
+ │   │       ├── ninth.test.json
+ │   │       ├── second.test.json
+ │   │       ├── seventeenth.test.json
+ │   │       ├── seventh.test.json
+ │   │       ├── sixteenth.test.json
+ │   │       ├── sixth.test.json
+ │   │       ├── tenth.test.json
+ │   │       ├── third.test.json
+ │   │       ├── thirteenth.test.json
+ │   │       └── twelfth.test.json
  │   └── test.js
  ├── typedoc.dev.js
  ├── typedoc.js
