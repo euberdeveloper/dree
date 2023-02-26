@@ -464,9 +464,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
             if (options.followLinks || !symbolicLink) {
                 try {
                     files = readdirSync(path);
-                    if (options.sorted) {
-                        files = sortFiles(files, options.sorted);
-                    }
+                    files = sortFiles(files, options.sorted);
                 }
                 catch (exception) {
                     /* istanbul ignore next */
@@ -645,9 +643,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
             if (options.followLinks || !symbolicLink) {
                 try {
                     files = await readdirAsync(path);
-                    if (options.sorted) {
-                        files = sortFiles(files, options.sorted);
-                    }
+                    files = sortFiles(files, options.sorted);
                 }
                 catch (exception) {
                     /* istanbul ignore next */
@@ -822,9 +818,7 @@ function _parse(children: string[], prefix: string, options: ParseOptions, depth
             let children: string[];
             try {
                 children = readdirSync(child).map(file => resolve(child, file));
-                if (options.sorted) {
-                    children = sortFiles(children, options.sorted);
-                }
+                children = sortFiles(children, options.sorted);
             }
             catch (exception) {
                 /* istanbul ignore next */
@@ -911,9 +905,7 @@ async function _parseAsync(children: string[], prefix: string, options: ParseOpt
             let children: string[];
             try {
                 children = (await readdirAsync(child)).map(file => resolve(child, file));
-                if (options.sorted) {
-                    children = sortFiles(children, options.sorted);
-                }
+                children = sortFiles(children, options.sorted);
             }
             catch (exception) {
                 /* istanbul ignore next */
@@ -937,9 +929,7 @@ async function _parseAsync(children: string[], prefix: string, options: ParseOpt
 
 function _parseTree(children: Dree[], prefix: string, options: ParseOptions, depth: number): string {
     let result = '';
-    if (options.sorted) {
-        children = sortDreeNodes(children, options.sorted);
-    }
+    children = sortDreeNodes(children, options.sorted);
     children
         .filter(child => !skip(child, options, depth))
         .forEach((child, index, children) => {
@@ -954,9 +944,7 @@ function _parseTree(children: Dree[], prefix: string, options: ParseOptions, dep
 
 async function _parseTreeAsync(children: Dree[], prefix: string, options: ParseOptions, depth: number): Promise<string> {
     let result = '';
-    if (options.sorted) {
-        children = sortDreeNodes(children, options.sorted);
-    }
+    children = sortDreeNodes(children, options.sorted);
     const filteredChildren = children.filter(child => !skip(child, options, depth));
     for (let index = 0; index < filteredChildren.length; index++) {
         const child = filteredChildren[index];
@@ -1053,9 +1041,7 @@ export function parse(path: string, options?: ParseOptions): string {
         let children: string[];
         try {
             children = readdirSync(root).map(file => resolve(root, file));
-            if (opt.sorted) {
-                children = sortFiles(children, opt.sorted);
-            }
+            children = sortFiles(children, opt.sorted);
         }
         catch (exception) {
             /* istanbul ignore next */
@@ -1118,9 +1104,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
         let children: string[];
         try {
             children = (await readdirAsync(root)).map(file => resolve(root, file));
-            if (opt.sorted) {
-                children = sortFiles(children, opt.sorted);
-            }
+            children = sortFiles(children, opt.sorted);
         }
         catch (exception) {
             /* istanbul ignore next */
