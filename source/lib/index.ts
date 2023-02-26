@@ -23,6 +23,20 @@ export type Callback = (dirTree: Dree, stat: Stats) => void;
  */
 export type CallbackAsync = (dirTree: Dree, stat: Stats) => void | Promise<void>;
 
+
+/**
+ * Enum whose values are used to determine how the paths should be sorted
+ */
+export enum SortMethodPredefined {
+    /** Alphabetical order */
+    ALPHABETICAL = 'alpha',
+    /** Alphabetical order, reversed */
+    ALPHABETICAL_REVERSE = 'antialpha',
+    /** Alphabetical order, case insensitive */
+    ALPHABETICAL_INSENSITIVE = 'alpha-insensitive',
+    /** Alphabetical order, reversed, case insensitive */
+    ALPHABETICAL_INSENSITIVE_REVERSE = 'antialpha-insensitive'
+};
 /**
  * Function used to sort paths
  */
@@ -173,10 +187,10 @@ export interface ScanOptions {
      */
     descendantsIgnoreDirectories?: boolean;
     /**
-     * If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order or a 
-     * custom sorting function
+     * If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order, a 
+     * custom sorting function or a predefined sorting method in [[SortMethodPredefined]].
      */
-    sorted?: boolean | SortDiscriminator;
+    sorted?: boolean | SortMethodPredefined | SortDiscriminator;
     /**
      * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
      * error thrown by fs calls will be ignored
@@ -217,10 +231,10 @@ export interface ParseOptions {
      */
     extensions?: string[];
     /**
-     * If true, directories and files will be parsed ordered by path. The value can be both boolean for default alphabetical order or a 
-     * custom sorting function
+     * If true, directories and files will be scanned ordered by path. The value can be both boolean for default alphabetical order, a 
+     * custom sorting function or a predefined sorting method in [[SortMethodPredefined]].
      */
-    sorted?: boolean | SortDiscriminator;
+    sorted?: boolean | SortMethodPredefined | SortDiscriminator;
     /**
      * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
      * error thrown by fs calls will be ignored
@@ -311,6 +325,68 @@ function parseSize(size: number): string {
     return Math.round(size * 100) / 100 + ' ' + units[i];
 }
 
+function sortAlphabetical(a: string, b: string): number {
+    return a.localeCompare(b);
+}
+
+function sortAlphabeticalInsensitive(a: string, b: string): number {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+}
+
+function sortFiles(files: string[], sortOption: boolean | SortMethodPredefined | SortDiscriminator): string[] {
+    if (!sortOption) {
+        return files;
+    }
+
+    if (sortOption === true) {
+        return files.sort(sortAlphabetical);
+    }
+    else if (typeof sortOption === 'string') {
+        switch (sortOption) {
+            case SortMethodPredefined.ALPHABETICAL:
+                return files.sort(sortAlphabetical);
+            case SortMethodPredefined.ALPHABETICAL_REVERSE:
+                return files.sort(sortAlphabetical).reverse();
+            case SortMethodPredefined.ALPHABETICAL_INSENSITIVE:
+                return files.sort(sortAlphabeticalInsensitive);
+            case SortMethodPredefined.ALPHABETICAL_INSENSITIVE_REVERSE:
+                return files.sort(sortAlphabeticalInsensitive).reverse();
+            default:
+                return files;
+        }
+    }
+    else if (typeof sortOption === 'function') {
+        return files.sort(sortOption);
+    }
+}
+
+function sortDreeNodes(dreeNodes: Dree[], sortOption: boolean | SortMethodPredefined | SortDiscriminator): Dree[] {
+    if (!sortOption) {
+        return dreeNodes;
+    }
+
+    if (sortOption === true) {
+        return dreeNodes.sort((x, y) => sortAlphabetical(x.relativePath, y.relativePath));
+    }
+    else if (typeof sortOption === 'string') {
+        switch (sortOption) {
+            case SortMethodPredefined.ALPHABETICAL:
+                return dreeNodes.sort((x, y) => sortAlphabetical(x.relativePath, y.relativePath));
+            case SortMethodPredefined.ALPHABETICAL_REVERSE:
+                return dreeNodes.sort((x, y) => sortAlphabetical(x.relativePath, y.relativePath)).reverse();
+            case SortMethodPredefined.ALPHABETICAL_INSENSITIVE:
+                return dreeNodes.sort((x, y) => sortAlphabeticalInsensitive(x.relativePath, y.relativePath));
+            case SortMethodPredefined.ALPHABETICAL_INSENSITIVE_REVERSE:
+                return dreeNodes.sort((x, y) => sortAlphabeticalInsensitive(x.relativePath, y.relativePath)).reverse();
+            default:
+                return dreeNodes;
+        }
+    }
+    else if (typeof sortOption === 'function') {
+        return dreeNodes.sort((x, y) => sortOption(x.relativePath, y.relativePath));
+    }
+}
+
 function _scan(root: string, path: string, depth: number, options: ScanOptions, onFile?: Callback, onDir?: Callback): Dree | null {
 
     if (options.depth !== undefined && depth > options.depth) {
@@ -389,7 +465,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                 try {
                     files = readdirSync(path);
                     if (options.sorted) {
-                        files = typeof options.sorted === 'boolean' ? files.sort() : files.sort(options.sorted);
+                        files = sortFiles(files, options.sorted);
                     }
                 }
                 catch (exception) {
@@ -570,7 +646,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
                 try {
                     files = await readdirAsync(path);
                     if (options.sorted) {
-                        files = typeof options.sorted === 'boolean' ? files.sort() : files.sort(options.sorted);
+                        files = sortFiles(files, options.sorted);
                     }
                 }
                 catch (exception) {
@@ -747,7 +823,7 @@ function _parse(children: string[], prefix: string, options: ParseOptions, depth
             try {
                 children = readdirSync(child).map(file => resolve(child, file));
                 if (options.sorted) {
-                    children = typeof options.sorted === 'boolean' ? children.sort() : children.sort(options.sorted);
+                    children = sortFiles(children, options.sorted);
                 }
             }
             catch (exception) {
@@ -836,7 +912,7 @@ async function _parseAsync(children: string[], prefix: string, options: ParseOpt
             try {
                 children = (await readdirAsync(child)).map(file => resolve(child, file));
                 if (options.sorted) {
-                    children = typeof options.sorted === 'boolean' ? children.sort() : children.sort(options.sorted);
+                    children = sortFiles(children, options.sorted);
                 }
             }
             catch (exception) {
@@ -862,7 +938,7 @@ async function _parseAsync(children: string[], prefix: string, options: ParseOpt
 function _parseTree(children: Dree[], prefix: string, options: ParseOptions, depth: number): string {
     let result = '';
     if (options.sorted) {
-        children = children.sort((x, y) => typeof options.sorted === 'boolean' ? x.relativePath.localeCompare(y.relativePath) : options.sorted(x.relativePath, y.relativePath));
+        children = sortDreeNodes(children, options.sorted);
     }
     children
         .filter(child => !skip(child, options, depth))
@@ -879,7 +955,7 @@ function _parseTree(children: Dree[], prefix: string, options: ParseOptions, dep
 async function _parseTreeAsync(children: Dree[], prefix: string, options: ParseOptions, depth: number): Promise<string> {
     let result = '';
     if (options.sorted) {
-        children = children.sort((x, y) => typeof options.sorted === 'boolean' ? x.relativePath.localeCompare(y.relativePath) : options.sorted(x.relativePath, y.relativePath));
+        children = sortDreeNodes(children, options.sorted);
     }
     const filteredChildren = children.filter(child => !skip(child, options, depth));
     for (let index = 0; index < filteredChildren.length; index++) {
@@ -978,7 +1054,7 @@ export function parse(path: string, options?: ParseOptions): string {
         try {
             children = readdirSync(root).map(file => resolve(root, file));
             if (opt.sorted) {
-                children = typeof opt.sorted === 'boolean' ? children.sort() : children.sort(opt.sorted);
+                children = sortFiles(children, opt.sorted);
             }
         }
         catch (exception) {
@@ -998,9 +1074,9 @@ export function parse(path: string, options?: ParseOptions): string {
 
 /**
  * Returns a promise to a string representation of a Directory Tree given a path to a directory or file
- * @param  {string} dirTree The path which you want to inspect
+ * @param  {string} path The path which you want to inspect
  * @param  {object} options An object used as options of the function
- * @return {Promise<string}> A promise to a string representing the Directory Tree of the given path
+ * @return {Promise<string>} A promise to a string representing the Directory Tree of the given path
  */
 export async function parseAsync(path: string, options?: ParseOptions): Promise<string> {
     let result = '';
@@ -1043,7 +1119,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
         try {
             children = (await readdirAsync(root)).map(file => resolve(root, file));
             if (opt.sorted) {
-                children = typeof opt.sorted === 'boolean' ? children.sort() : children.sort(opt.sorted);
+                children = sortFiles(children, opt.sorted);
             }
         }
         catch (exception) {
