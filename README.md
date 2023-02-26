@@ -577,8 +577,8 @@ dree
  │   ├─> objects
  │   │   ├─> info
  │   │   └─> pack
- │   │       ├── pack-3879396a439530e6e274dfe4700a1be25183b3be.idx
- │   │       └── pack-3879396a439530e6e274dfe4700a1be25183b3be.pack
+ │   │       ├── pack-d3667e7a1d019e7c04ed77bee6bd638a2b91f37a.idx
+ │   │       └── pack-d3667e7a1d019e7c04ed77bee6bd638a2b91f37a.pack
  │   ├─> refs
  │   │   ├─> heads
  │   │   │   └── main
@@ -705,6 +705,7 @@ dree
  │   │   │   ├── first.test.json
  │   │   │   ├── fourteenth.test.json
  │   │   │   ├── fourth.test.json
+ │   │   │   ├── nineteenth.test.json
  │   │   │   ├── ninth.test.json
  │   │   │   ├── second.test.json
  │   │   │   ├── seventeenth.test.json
@@ -714,7 +715,10 @@ dree
  │   │   │   ├── tenth.test.json
  │   │   │   ├── third.test.json
  │   │   │   ├── thirteenth.test.json
- │   │   │   └── twelfth.test.json
+ │   │   │   ├── twelfth.test.json
+ │   │   │   ├── twentieth.test.json
+ │   │   │   ├── twentyfirst.test.json
+ │   │   │   └── twentysecond.test.json
  │   │   ├─> mac
  │   │   │   ├── eight.test.json
  │   │   │   ├── eighteenth.test.json
@@ -724,6 +728,7 @@ dree
  │   │   │   ├── first.test.json
  │   │   │   ├── fourteenth.test.json
  │   │   │   ├── fourth.test.json
+ │   │   │   ├── nineteenth.test.json
  │   │   │   ├── ninth.test.json
  │   │   │   ├── second.test.json
  │   │   │   ├── seventeenth.test.json
@@ -733,7 +738,10 @@ dree
  │   │   │   ├── tenth.test.json
  │   │   │   ├── third.test.json
  │   │   │   ├── thirteenth.test.json
- │   │   │   └── twelfth.test.json
+ │   │   │   ├── twelfth.test.json
+ │   │   │   ├── twentieth.test.json
+ │   │   │   ├── twentyfirst.test.json
+ │   │   │   └── twentysecond.test.json
  │   │   ├── scan.test.js
  │   │   ├── scanAsync.test.js
  │   │   └─> windows
