@@ -47,7 +47,6 @@ yargs
         },
         argv => {
             const args: any = argv;
-            console.log(parseRegExp(args.exclude));
             const options: ParseOptions = {
                 symbolicLinks: args.symbolicLinks,
                 followLinks: args.followLinks,
