@@ -1,3 +1,20 @@
+## [4.3.2](https://github.com/euberdeveloper/dree/compare/4.3.1...4.3.2) (2023-02-28)
+
+
+### Bug Fixes
+
+* **bin:** remove unused console.log ([b4646d0](https://github.com/euberdeveloper/dree/commit/b4646d0b933f6758f1ac8761066569a8817d840b))
+* fix names of sort predefined functions ([b1b0f52](https://github.com/euberdeveloper/dree/commit/b1b0f528d6d0342602fefe53dfd78db2827b7301))
+* **lib:** fix glob check ([14a9b7b](https://github.com/euberdeveloper/dree/commit/14a9b7b0c4205dcb4dae0a2e2b4518b9e9bc2753))
+
+
+### Features
+
+* **bin:** add default sorting methods ([d05b8d4](https://github.com/euberdeveloper/dree/commit/d05b8d485a9f2a98a7090c7877c7151c9d8e6c18))
+* **lib:** add predefined sorting methods ([de15c35](https://github.com/euberdeveloper/dree/commit/de15c35ebdb6caf168f6be7274c719c7398618a7))
+
+
+
 ## [4.3.1](https://github.com/euberdeveloper/dree/compare/v4.3.0...v4.3.1) (2023-02-19)
 
 
