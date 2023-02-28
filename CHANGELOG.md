@@ -1,3 +1,7 @@
+
+
+## [4.4.2](https://github.com/euberdeveloper/dree/compare/4.4.1...4.4.2) (2023-02-28)
+
 # [4.4.0](https://github.com/euberdeveloper/dree/compare/4.3.2...4.4.0) (2023-02-28)
 
 
@@ -96,6 +100,3 @@
 * Now exclude behaves differently
 * **index.ts:** Type of hashEncoding is changed
 * **Now can also be a global module:** Now you can also use it as a global module. npm yargs was added as dependency
-
-
-
