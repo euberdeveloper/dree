@@ -562,6 +562,10 @@ dree
  │   └── tsconfig.json
  ├─> test
  │   ├── .gitignore
+ │   ├─> parse
+ │   ├─> parseTree
+ │   ├─> sample
+ │   ├─> scan
  │   └── test.js
  ├── typedoc.dev.js
  ├── typedoc.js
