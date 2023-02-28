@@ -1,0 +1,9 @@
+{
+    "git": {
+      "commitMessage": "chore(release): release v${version} :tada:",
+      "requireBranch": "main"
+    },
+    "github": {
+      "release": true
+    }
+  }
