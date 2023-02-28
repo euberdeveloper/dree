@@ -577,8 +577,8 @@ dree
  │   ├─> objects
  │   │   ├─> info
  │   │   └─> pack
- │   │       ├── pack-606d63ebbc1dfd52f96e50c2712c6cd52ae27d7e.idx
- │   │       └── pack-606d63ebbc1dfd52f96e50c2712c6cd52ae27d7e.pack
+ │   │       ├── pack-f0f90e4c608d910aede749ba49f1e3c64268e0a0.idx
+ │   │       └── pack-f0f90e4c608d910aede749ba49f1e3c64268e0a0.pack
  │   ├─> refs
  │   │   ├─> heads
  │   │   │   └── main
