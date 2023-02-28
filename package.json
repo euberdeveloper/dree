@@ -34,8 +34,7 @@
     "commit": "git-cz",
     "commit:sign": "git-cz -S",
     "prepublishOnly": "npm run bundle",
-    "release": "release-it",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -65,7 +64,6 @@
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "codecov": "^3.8.3",
-    "conventional-changelog": "^3.1.25",
     "coveralls": "^3.1.1",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
