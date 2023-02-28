@@ -58,6 +58,7 @@
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@release-it/conventional-changelog": "^5.1.1",
     "@types/node": "^18.14.0",
     "@types/yargs": "^17.0.20",
     "bundle-declarations-webpack-plugin": "^4.0.1",
