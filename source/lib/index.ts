@@ -281,7 +281,10 @@ const PARSE_DEFAULT_OPTIONS: ParseOptions = {
 /* SUPPORT FUNCTIONS */
 
 function purgePatternsIntoArrayOfRegex(patterns: string | RegExp | (RegExp | string)[]): RegExp[] {
-    return (Array.isArray(patterns) ? patterns : [patterns]).map(pattern => pattern instanceof RegExp ? pattern : makeRe(pattern)).filter(pattern => pattern instanceof RegExp) as RegExp[];
+    return (Array.isArray(patterns) ? patterns : [patterns]).map(pattern => pattern instanceof RegExp ? pattern : makeRe(pattern, {
+        dot: true,
+
+    })).filter(pattern => pattern instanceof RegExp) as RegExp[];
 }
 
 function mergeScanOptions(options?: ScanOptions): ScanOptions {
@@ -393,14 +396,15 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
         return null;
     }
 
+    const relativePath = (root === path) ? '.' : relative(root, path);
+
     if (options.exclude && root !== path) {
         const excludes = purgePatternsIntoArrayOfRegex(options.exclude);
-        if (excludes.some(pattern => pattern.test(path))) {
+        if (excludes.some(pattern => pattern.test(`/${relativePath}`))) {
             return null;
         }
     }
 
-    const relativePath = (root === path) ? '.' : relative(root, path);
     const name = basename(path);
     let stat: Stats;
     try {
@@ -490,7 +494,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
             }
             if (options.matches && root !== path) {
                 const handledMatches = purgePatternsIntoArrayOfRegex(options.matches);
-                if (!children.length && handledMatches.some(pattern => !pattern.test(path))) {
+                if (!children.length && handledMatches.some(pattern => !pattern.test(`/${relativePath}`))) {
                     return null;
                 }
             }
@@ -523,7 +527,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
             }
             if (options.matches && root !== path) {
                 const handledMatches = purgePatternsIntoArrayOfRegex(options.matches);
-                if (handledMatches.some(pattern => !pattern.test(path))) {
+                if (handledMatches.some(pattern => !pattern.test(`/${relativePath}`))) {
                     return null;
                 }
             }
@@ -572,14 +576,15 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
         return null;
     }
 
+    const relativePath = (root === path) ? '.' : relative(root, path);
+
     if (options.exclude && root !== path) {
         const excludes = purgePatternsIntoArrayOfRegex(options.exclude);
-        if (excludes.some(pattern => pattern.test(path))) {
+        if (excludes.some(pattern => pattern.test(`/${relativePath}`))) {
             return null;
         }
     }
 
-    const relativePath = (root === path) ? '.' : relative(root, path);
     const name = basename(path);
     let stat: Stats;
     try {
@@ -668,7 +673,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
             }
             if (options.matches && root !== path) {
                 const handledMatches = purgePatternsIntoArrayOfRegex(options.matches);
-                if (!children.length && handledMatches.some(pattern => !pattern.test(path))) {
+                if (!children.length && handledMatches.some(pattern => !pattern.test(`/${relativePath}`))) {
                     return null;
                 }
             }
@@ -701,7 +706,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
             }
             if (options.matches && root !== path) {
                 const handledMatches = purgePatternsIntoArrayOfRegex(options.matches);
-                if (handledMatches.some(pattern => !pattern.test(path))) {
+                if (handledMatches.some(pattern => !pattern.test(`/${relativePath}`))) {
                     return null;
                 }
             }
@@ -749,11 +754,11 @@ function skip(child: Dree, options: ParseOptions, depth: number): boolean {
         || (!options.showHidden && child.name.charAt(0) === '.')
         || (options.extensions !== undefined && child.type === Type.FILE
             && (options.extensions.indexOf(child.extension as string) === -1))
-        || (options.exclude && purgePatternsIntoArrayOfRegex(options.exclude).some(pattern => pattern.test(child.path)))
+        || (options.exclude && purgePatternsIntoArrayOfRegex(options.exclude).some(pattern => pattern.test(`/${child.relativePath}`)))
         || (options.depth !== undefined && depth > options.depth);
 }
 
-function _parse(children: string[], prefix: string, options: ParseOptions, depth: number): string {
+function _parse(root: string, children: string[], prefix: string, options: ParseOptions, depth: number): string {
     let result = '';
     const lines = children.map((child, index) => {
         let result = '';
@@ -764,7 +769,7 @@ function _parse(children: string[], prefix: string, options: ParseOptions, depth
 
         if (options.exclude) {
             const excludes = purgePatternsIntoArrayOfRegex(options.exclude);
-            if (excludes.some(pattern => pattern.test(child))) {
+            if (excludes.some(pattern => pattern.test(`/${relative(root, child)}`))) {
                 return '';
             }
         }
@@ -829,7 +834,7 @@ function _parse(children: string[], prefix: string, options: ParseOptions, depth
                     throw exception;
                 }
             }
-            result += children.length ? _parse(children, newPrefix, options, depth + 1) : '';
+            result += children.length ? _parse(root, children, newPrefix, options, depth + 1) : '';
         }
 
         return result;
@@ -840,7 +845,7 @@ function _parse(children: string[], prefix: string, options: ParseOptions, depth
     return result;
 }
 
-async function _parseAsync(children: string[], prefix: string, options: ParseOptions, depth: number): Promise<string> {
+async function _parseAsync(root: string, children: string[], prefix: string, options: ParseOptions, depth: number): Promise<string> {
     let result = '';
     const lines = await Promise.all(children.map(async (child, index) => {
         let result = '';
@@ -851,7 +856,7 @@ async function _parseAsync(children: string[], prefix: string, options: ParseOpt
 
         if (options.exclude) {
             const excludes = purgePatternsIntoArrayOfRegex(options.exclude);
-            if (excludes.some(pattern => pattern.test(child))) {
+            if (excludes.some(pattern => pattern.test(`/${relative(root, child)}`))) {
                 return '';
             }
         }
@@ -916,7 +921,7 @@ async function _parseAsync(children: string[], prefix: string, options: ParseOpt
                     throw exception;
                 }
             }
-            result += children.length ? (await _parseAsync(children, newPrefix, options, depth + 1)) : '';
+            result += children.length ? (await _parseAsync(root, children, newPrefix, options, depth + 1)) : '';
         }
 
         return result;
@@ -1052,7 +1057,7 @@ export function parse(path: string, options?: ParseOptions): string {
                 throw exception;
             }
         }
-        result += children.length ? _parse(children, '\n ', opt, 1) : '';
+        result += children.length ? _parse(path, children, '\n ', opt, 1) : '';
     }
 
     return result;
@@ -1115,7 +1120,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
                 throw exception;
             }
         }
-        result += children.length ? (await _parseAsync(children, '\n ', opt, 1)) : '';
+        result += children.length ? (await _parseAsync(path, children, '\n ', opt, 1)) : '';
     }
 
     return result;
