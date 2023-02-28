@@ -544,6 +544,7 @@ Made with [dree](https://github.com/marketplace/actions/ga-dree)
 ```
 dree
  ├── .npmrc
+ ├── .release-it.json
  ├── CHANGELOG.md
  ├── LICENSE
  ├── README.md
