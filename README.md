@@ -214,6 +214,16 @@ With `--show` option, the result will also be printed with on stdout even if als
 $ dree --help --all-options
 ```
 
+### Code completion
+
+In case you wanted to add the code completion for cli commands, you can use the following command:
+
+```bash
+$ dree completion
+```
+
+It will output the code completion for your shell. You can then add it to your `.bashrc` or `.zshrc` file.
+
 ## Result
 
 Given a directory structured like this:
