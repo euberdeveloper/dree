@@ -1,5 +1,12 @@
 
 
+# [4.5.0](https://github.com/euberdeveloper/dree/compare/4.4.3...4.5.0) (2023-03-07)
+
+
+### Features
+
+* **bin:** add code completion ([52a5264](https://github.com/euberdeveloper/dree/commit/52a5264c90f4a1ddea805f2e930d4024dde968b1))
+
 ## [4.4.3](https://github.com/euberdeveloper/dree/compare/4.4.2...4.4.3) (2023-02-28)
 
 ## [4.4.2](https://github.com/euberdeveloper/dree/compare/4.4.1...4.4.2) (2023-02-28)
