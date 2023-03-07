@@ -129,7 +129,6 @@ yargs
             }
         }
     )
-    .demandCommand(1, 'You must use either parse of scan command')
     .options({
         'dest': {
             alias: 'd',
@@ -269,5 +268,11 @@ yargs
         }
     })
     .showHidden('all-options')
+    .completion(
+        'completion',
+        'Creates the completion bash script to add o your .bashrc in order to have the tab autocompletion for this cli service'
+    )
+    .demandCommand(1, 'You must specify a command')
+    .strict()
     .epilogue('For more information, find our manual at https://github.com/euberdeveloper/dree#readme')
     .argv;
