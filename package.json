@@ -31,8 +31,6 @@
     "docs:html-dev": "typedoc --options typedoc.dev.js",
     "predocs": "shx rm -rf docs/documentation",
     "docs": "npm run docs:html && npm run docs:html-dev",
-    "commit": "git-cz",
-    "commit:sign": "git-cz -S",
     "prepublishOnly": "npm run bundle",
     "release": "release-it"
   },
