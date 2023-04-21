@@ -57,7 +57,7 @@
   "license": "MIT",
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.1.1",
-    "@types/node": "^18.15.10",
+    "@types/node": "^18.15.13",
     "@types/yargs": "^17.0.24",
     "bundle-declarations-webpack-plugin": "^4.0.1",
     "chai": "^4.3.7",
@@ -66,18 +66,18 @@
     "coveralls": "^3.1.1",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
-    "release-it": "^15.9.3",
+    "release-it": "^15.10.1",
     "shebang-loader": "^0.0.1",
     "shx": "^0.3.4",
     "ts-loader": "^9.4.2",
-    "typedoc": "^0.23.28",
-    "typescript": "^5.0.2",
-    "webpack": "^5.76.3",
-    "webpack-cli": "^5.0.1",
+    "typedoc": "^0.24.4",
+    "typescript": "^5.0.4",
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.0.2",
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
-    "minimatch": "^7.4.3",
+    "minimatch": "^9.0.0",
     "yargs": "^17.7.1"
   }
 }
