@@ -15,11 +15,15 @@ export enum Type {
 }
 
 /**
- * Callback used by [[scan]] when a file or dir is encountered
+ * Callback used by [[scan]] when a file or dir is encountered. 
+ * Note that it can extend the node that will be returned in the directory tree.
+ * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
 export type Callback<Node extends Dree = Dree> = (dirTree: Node, stat: Stats) => void;
 /**
- * Callback used by [[scanAsync]] when a file or dir is encountered
+ * Callback used by [[scanAsync]] when a file or dir is encountered.
+ * Note that it can extend the node that will be returned in the directory tree.
+ * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
 export type CallbackAsync<Node extends Dree = Dree> = (dirTree: Node, stat: Stats) => void | Promise<void>;
 
@@ -967,9 +971,10 @@ async function _parseTreeAsync(children: Dree[], prefix: string, options: ParseO
  * Returns the Directory Tree of a given path. This function in synchronous.
  * @param  {string} path The path which you want to inspect
  * @param  {object} options An object used as options of the function
- * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
- * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
+ * @param  {function} onFile A function called when a file is added. It has the tree object and its stat as parameters. The object can me changed and extended here, on typescript there the function uses indeed generics.
+ * @param  {function} onDir A function called when a dir is added. It has the tree object and its stat as parameters. The object can me changed and extended here, on typescript there the function uses indeed generics.
  * @return {object} The directory tree as a Dree object
+ * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
 export function scan<Node extends Dree = Dree>(path: string, options?: ScanOptions, onFile?: Callback<Node>, onDir?: Callback<Node>): Node {
     const root = resolve(path);
@@ -988,6 +993,7 @@ export function scan<Node extends Dree = Dree>(path: string, options?: ScanOptio
  * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
  * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
  * @return {Promise<object>} A promise to the directory tree as a Dree object
+ * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
 export async function scanAsync<Node extends Dree = Dree>(path: string, options?: ScanOptions, onFile?: CallbackAsync<Node>, onDir?: CallbackAsync<Node>): Promise<Node> {
     const root = resolve(path);
