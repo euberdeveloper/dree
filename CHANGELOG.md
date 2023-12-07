@@ -1,5 +1,12 @@
 
 
+# [4.6.0](https://github.com/euberdeveloper/dree/compare/4.5.8...4.6.0) (2023-12-07)
+
+
+### Features
+
+* add typings to extend nodes on file or dir ([3e4418f](https://github.com/euberdeveloper/dree/commit/3e4418fac0e86da6126cc19afc306b8ec6b22b20))
+
 ## [4.5.8](https://github.com/euberdeveloper/dree/compare/4.5.7...4.5.8) (2023-12-07)
 
 ## [4.5.7](https://github.com/euberdeveloper/dree/compare/4.5.6...4.5.7) (2023-12-07)
