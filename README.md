@@ -559,6 +559,7 @@ Made with [dree](https://github.com/marketplace/actions/ga-dree)
 
 ```
 dree
+ ├── .env.example
  ├── .release-it.json
  ├── CHANGELOG.md
  ├── LICENSE
