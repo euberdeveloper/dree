@@ -1001,7 +1001,7 @@ export async function scanAsync<Node extends Dree = Dree>(path: string, options?
 
 /**
  * Returns a string representation of a Directory Tree given a path to a directory or file
- * @param  {string} dirTree The path which you want to inspect
+ * @param  {string} path The path which you want to inspect
  * @param  {object} options An object used as options of the function
  * @return {string} A string representing the Directory Tree of the given path
  */
