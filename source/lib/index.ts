@@ -15,13 +15,17 @@ export enum Type {
 }
 
 /**
- * Callback used by [[scan]] when a file or dir is encountered
+ * Callback used by [[scan]] when a file or dir is encountered. 
+ * Note that it can extend the node that will be returned in the directory tree.
+ * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
-export type Callback = (dirTree: Dree, stat: Stats) => void;
+export type Callback<Node extends Dree = Dree> = (dirTree: Node, stat: Stats) => void;
 /**
- * Callback used by [[scanAsync]] when a file or dir is encountered
+ * Callback used by [[scanAsync]] when a file or dir is encountered.
+ * Note that it can extend the node that will be returned in the directory tree.
+ * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
-export type CallbackAsync = (dirTree: Dree, stat: Stats) => void | Promise<void>;
+export type CallbackAsync<Node extends Dree = Dree> = (dirTree: Node, stat: Stats) => void | Promise<void>;
 
 
 /**
@@ -390,7 +394,7 @@ function sortDreeNodes(dreeNodes: Dree[], sortOption: boolean | SortMethodPredef
     }
 }
 
-function _scan(root: string, path: string, depth: number, options: ScanOptions, onFile?: Callback, onDir?: Callback): Dree | null {
+function _scan<Node extends Dree = Dree>(root: string, path: string, depth: number, options: ScanOptions, onFile?: Callback<Node>, onDir?: Callback<Node>): Node | null {
     if (options.depth !== undefined && depth > options.depth) {
         return null;
     }
@@ -448,21 +452,21 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
         hash.update(name);
     }
 
-    const dirTree: Dree = {
+    const dirTree = {
         name: name,
         path: options.normalize ? path.replace(/\\/g, '/') : path,
         relativePath: options.normalize ? relativePath.replace(/\\/g, '/') : relativePath,
         type: type,
         isSymbolicLink: symbolicLink,
         stat: options.followLinks ? stat : lstat
-    };
+    } as Node;
     if (!options.stat) {
         delete dirTree.stat;
     }
 
     switch (type) {
         case Type.DIRECTORY:
-            const children: Dree[] = [];
+            const children: Node[] = [];
             let files: string[];
             if (options.followLinks || !symbolicLink) {
                 try {
@@ -482,7 +486,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
                     dirTree.isEmpty = !files.length
                 }
                 files.forEach(file => {
-                    const child: Dree | null = _scan(root, resolve(path, file), depth + 1, options, onFile, onDir);
+                    const child: Node | null = _scan<Node>(root, resolve(path, file), depth + 1, options, onFile, onDir);
                     if (child !== null) {
                         children.push(child);
                     }
@@ -569,7 +573,7 @@ function _scan(root: string, path: string, depth: number, options: ScanOptions, 
     return dirTree;
 }
 
-async function _scanAsync(root: string, path: string, depth: number, options: ScanOptions, onFile?: CallbackAsync, onDir?: CallbackAsync): Promise<Dree | null> {
+async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, depth: number, options: ScanOptions, onFile?: CallbackAsync<Node>, onDir?: CallbackAsync<Node>): Promise<Node | null> {
 
     if (options.depth !== undefined && depth > options.depth) {
         return null;
@@ -628,14 +632,14 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
         hash.update(name);
     }
 
-    const dirTree: Dree = {
+    const dirTree = {
         name: name,
         path: options.normalize ? path.replace(/\\/g, '/') : path,
         relativePath: options.normalize ? relativePath.replace(/\\/g, '/') : relativePath,
         type: type,
         isSymbolicLink: symbolicLink,
         stat: options.followLinks ? stat : lstat
-    };
+    } as Node;
     if (!options.stat) {
         delete dirTree.stat;
     }
@@ -662,7 +666,7 @@ async function _scanAsync(root: string, path: string, depth: number, options: Sc
                     dirTree.isEmpty = !files.length
                 }
                 children = await Promise.all(files.map(async file => {
-                    const child: Dree | null = await _scanAsync(root, resolve(path, file), depth + 1, options, onFile, onDir);
+                    const child: Node | null = await _scanAsync<Node>(root, resolve(path, file), depth + 1, options, onFile, onDir);
                     return child;
                 }));
                 children = children.filter(ch => ch !== null);
@@ -967,14 +971,15 @@ async function _parseTreeAsync(children: Dree[], prefix: string, options: ParseO
  * Returns the Directory Tree of a given path. This function in synchronous.
  * @param  {string} path The path which you want to inspect
  * @param  {object} options An object used as options of the function
- * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
- * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
+ * @param  {function} onFile A function called when a file is added. It has the tree object and its stat as parameters. The object can me changed and extended here, on typescript there the function uses indeed generics.
+ * @param  {function} onDir A function called when a dir is added. It has the tree object and its stat as parameters. The object can me changed and extended here, on typescript there the function uses indeed generics.
  * @return {object} The directory tree as a Dree object
+ * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
-export function scan(path: string, options?: ScanOptions, onFile?: Callback, onDir?: Callback): Dree {
+export function scan<Node extends Dree = Dree>(path: string, options?: ScanOptions, onFile?: Callback<Node>, onDir?: Callback<Node>): Node {
     const root = resolve(path);
     const opt = mergeScanOptions(options);
-    const result = _scan(root, root, 0, opt, onFile, onDir) as Dree;
+    const result = _scan<Node>(root, root, 0, opt, onFile, onDir);
     if (result) {
         result.sizeInBytes = opt.sizeInBytes ? result.sizeInBytes : undefined;
     }
@@ -988,11 +993,12 @@ export function scan(path: string, options?: ScanOptions, onFile?: Callback, onD
  * @param  {function} onFile A function called when a file is added - has the tree object and its stat as parameters
  * @param  {function} onDir A function called when a dir is added - has the tree object and its stat as parameters
  * @return {Promise<object>} A promise to the directory tree as a Dree object
+ * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
-export async function scanAsync(path: string, options?: ScanOptions, onFile?: CallbackAsync, onDir?: CallbackAsync): Promise<Dree> {
+export async function scanAsync<Node extends Dree = Dree>(path: string, options?: ScanOptions, onFile?: CallbackAsync<Node>, onDir?: CallbackAsync<Node>): Promise<Node> {
     const root = resolve(path);
     const opt = mergeScanOptions(options);
-    const result = await _scanAsync(root, root, 0, opt, onFile, onDir) as Dree;
+    const result = await _scanAsync<Node>(root, root, 0, opt, onFile, onDir);
     if (result) {
         result.sizeInBytes = opt.sizeInBytes ? result.sizeInBytes : undefined;
     }
@@ -1001,7 +1007,7 @@ export async function scanAsync(path: string, options?: ScanOptions, onFile?: Ca
 
 /**
  * Returns a string representation of a Directory Tree given a path to a directory or file
- * @param  {string} dirTree The path which you want to inspect
+ * @param  {string} path The path which you want to inspect
  * @param  {object} options An object used as options of the function
  * @return {string} A string representing the Directory Tree of the given path
  */

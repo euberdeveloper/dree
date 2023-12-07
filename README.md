@@ -107,6 +107,30 @@ dree.scanAsync('./folder', options)
   });
 ```
 
+With typescript and by changing the objects onDir and onFile:
+
+```ts
+import * as dree from 'dree';
+
+interface CustomResult extends dree.Dree {
+  description: string;
+}
+
+const options: dree.Options = {
+  stat: false
+};
+
+const fileCallback: dree.Callback<CustomResult> = function (node, stat) {
+  node.description = `${node.name} (${node.size})`;
+};
+
+const dirCallback: dree.Callback<CustomResult> = function (node, stat) {
+  node.description = `${node.name} (${node.size})`;
+};
+
+const tree: CustomResult = dree.scan<CustomResult>('./folder', options, fileCallback, dirCallback);
+```
+
 ### Get a string
 
 Simple:
@@ -345,8 +369,8 @@ Given a path, returns an object representing its directory tree. The result coul
 
 * __path__: Is of type `string`, and is the relative or absolute path the file or directory that you want to scan
 * __options__: Optional. Is of type `object` and allows you to customize the function behaviour.
-* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled).
-* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled).
+* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, which **reflects** the given options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled). Note that it can be used also to modify the node (only by extending it) and that there are generics typings for it.
+* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, which **reflects** the given options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled). Note that it can be used also to modify the node (only by extending it) and that there are generics typings for it.
 
 **Options parameters:**
 
@@ -412,8 +436,8 @@ Given a path, returns a promise to an object representing its directory tree. Th
 
 * __path__: Is of type `string`, and is the relative or absolute path the file or directory that you want to scan
 * __options__: Optional. Is of type `object` and allows you to customize the function behaviour.
-* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled). The callback can be an **async function**.
-* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, which **reflects** the fiven options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled). The callback can be an **async function**.
+* __fileCallback__: Optional. Called each time a file is added to the tree. It provides you the node, which **reflects** the given options, and its status returned by fs.stat (fs.lstat if `followLinks` option is enabled). The callback can be an **async function**. Note that it can be used also to modify the node (only by extending it) and that there are generics typings for it.
+* __dirCallback__: Optional. Called each time a directory is added to the tree. It provides you the node, which **reflects** the given options, and its status returned by fs.lstat (fs.stat if `followLinks` option is enabled). The callback can be an **async function**. Note that it can be used also to modify the node (only by extending it) and that there are generics typings for it.
 
 **Options parameters:**
 
