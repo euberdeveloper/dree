@@ -391,7 +391,6 @@ function sortDreeNodes(dreeNodes: Dree[], sortOption: boolean | SortMethodPredef
 }
 
 function _scan(root: string, path: string, depth: number, options: ScanOptions, onFile?: Callback, onDir?: Callback): Dree | null {
-
     if (options.depth !== undefined && depth > options.depth) {
         return null;
     }
