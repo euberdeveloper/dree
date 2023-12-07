@@ -426,6 +426,23 @@ module.exports = (expect, fs, dree, path) => {
 
         });
 
+        it(`Should change nodes onFile and onDir`, async function () {
+
+            const callback = (node) => {
+                node.uppercaseName = node.name.toUpperCase();
+            };
+            const result = await dree.scanAsync(path, null, callback, callback);
+            
+            function checkNode(node) {
+                expect(node.uppercaseName).to.equal(node.name.toUpperCase());
+                if (node.children) {
+                    node.children.forEach(checkNode);
+                }
+            }
+
+            checkNode(result);
+        });
+
         it(`Should throw an error`, async function () {
 
             const wrongPath = 'wrong';
