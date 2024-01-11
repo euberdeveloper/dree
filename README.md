@@ -591,8 +591,8 @@ dree
  ├─> docs
  │   └─> tree
  │       └── dree.config.json
- ├── package-lock.json
  ├── package.json
+ ├── pnpm-lock.yaml
  ├─> scripts
  │   └── generate-expected-tests-results.js
  ├─> source
