@@ -6,25 +6,30 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [16.x, 17.x, 18.x]
+        node-version: [20.x]
+        pnpm-version: [8.x]
 
     runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v3
+      - name: Use pnpm ${{ matrix.pnpm-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ matrix.pnpm-version }}
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Install node dependencies
-        run: npm install
+        run: pnpm install
         
       - name: Transpile code
-        run: npm run transpile
+        run: pnpm run transpile
         
       - name: Run tests and generate coverage report
-        run: npm run nyc
+        run: pnpm run nyc
        
       - name: Send coverage report to Coveralls
         uses: coverallsapp/github-action@master
@@ -32,7 +37,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Send coverage report to Codecov
-        uses: Atrox/codecov-action@v0.1.2
+        uses: Atrox/codecov-action@v0.1.3
         env: 
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}  
        
