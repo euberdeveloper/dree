@@ -1036,7 +1036,7 @@ export function parse(path: string, options?: ParseOptions): string {
 
     let stat: Stats;
     try {
-        stat = statSync(path);
+        stat = statSync(root);
     }
     catch (exception) {
         /* istanbul ignore next */
@@ -1049,7 +1049,7 @@ export function parse(path: string, options?: ParseOptions): string {
     }
     let lstat: Stats;
     try {
-        lstat = lstatSync(path);
+        lstat = lstatSync(root);
     }
     catch (exception) {
         /* istanbul ignore next */
@@ -1077,7 +1077,7 @@ export function parse(path: string, options?: ParseOptions): string {
                 throw exception;
             }
         }
-        result += children.length ? _parse(path, children, '\n ', opt, 1) : '';
+        result += children.length ? _parse(root, children, '\n ', opt, 1) : '';
     }
 
     return result;
@@ -1099,7 +1099,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
 
     let stat: Stats;
     try {
-        stat = await statAsync(path);
+        stat = await statAsync(root);
     }
     catch (exception) {
         /* istanbul ignore next */
@@ -1112,7 +1112,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
     }
     let lstat: Stats;
     try {
-        lstat = await lstatAsync(path);
+        lstat = await lstatAsync(root);
     }
     catch (exception) {
         /* istanbul ignore next */
@@ -1140,7 +1140,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
                 throw exception;
             }
         }
-        result += children.length ? (await _parseAsync(path, children, '\n ', opt, 1)) : '';
+        result += children.length ? (await _parseAsync(root, children, '\n ', opt, 1)) : '';
     }
 
     return result;
