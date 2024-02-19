@@ -393,6 +393,7 @@ Given a path, returns an object representing its directory tree. The result coul
 * __descendants__: Default value `false`. If true, also the number of descendants of each node will be added to the result.
 * __descendantsIgnoreDirectories__: Default value `false`. If true, only files will be count as descendants of a node. It does not have effect if descendants option is not true.
 * __sorted__: Default value: `undefined`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alpha order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
+* __homeShortcut__: Default value: `false`. If true, the unix homedir shortcut ~ will be expanded to the user home directory.
 * __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
 
 **SortMethodPredefined enum:**
@@ -486,6 +487,7 @@ Given a path, returns a string representing its directory tree. The result could
 * __exclude__: Default value: `undefined`. It is a regex, string (glob patterns) or array of them and all the matched paths will not be considered by the algorithm.
 * __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
 * __sorted__: Default value: `undefined`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alpha order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
+* __homeShortcut__: Default value: `false`. If true, the unix homedir shortcut ~ will be expanded to the user home directory.
 * __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
 
 **Result string:**
