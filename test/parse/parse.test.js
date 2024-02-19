@@ -159,6 +159,21 @@ module.exports = (expect, dree, path) => {
 
         });
 
+        it(`Should work with ~ and homeShortcut`, function () {
+
+            const options = {
+                depth: 1
+            };
+
+            const errResult = dree.parse('~', options);
+            expect(errResult).to.equal(null);
+
+            options.homeShortcut = true;
+            const result = dree.parse('~', options);
+            expect(result).to.not.equal(null);
+
+        });
+
         it(`Should return the content of "test/scan/${platform}/thirteenth.test.json"`, function () {
 
             const options = {

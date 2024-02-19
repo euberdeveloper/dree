@@ -1,4 +1,4 @@
-module.exports = (expect, fs, dree, path) => {
+module.exports = (expect, fs, os, dree, path) => {
 
     describe('Test: scan function', function () {
 
@@ -355,6 +355,19 @@ module.exports = (expect, fs, dree, path) => {
 
             expect(result).to.equal(expected);
 
+        });
+
+        it(`Should work with ~ and homeShortcut`, function () {
+            const options = {
+                depth: 1
+            };
+
+            const errResult = dree.scan('~', options);
+            expect(errResult).to.equal(null);
+
+            options.homeShortcut = true;
+            const result = dree.scan('~', options);
+            expect(result.path).to.equal(os.homedir());
         });
 
         it(`Should change nodes onFile and onDir`, function () {

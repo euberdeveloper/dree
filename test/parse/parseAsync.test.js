@@ -172,6 +172,21 @@ module.exports = (expect, dree, path) => {
 
         });
 
+        it(`Should work with ~ and homeShortcut`, async function () {
+
+            const options = {
+                depth: 1
+            };
+
+            const errResult = await dree.parseAsync('~', options);
+            expect(errResult).to.equal(null);
+
+            options.homeShortcut = true;
+            const result = await dree.parseAsync('~', options);
+            expect(result).to.not.equal(null);
+
+        });
+
     });
 
 }
