@@ -1,4 +1,5 @@
 import { resolve, basename, extname, relative } from 'path';
+import { homedir } from 'os';
 import { BinaryToTextEncoding, createHash, Hash } from 'crypto';
 import { makeRe } from 'minimatch';
 import { statSync, readdirSync, readFileSync, lstatSync, Stats } from 'fs';
@@ -196,6 +197,10 @@ export interface ScanOptions {
      */
     sorted?: boolean | SortMethodPredefined | SortDiscriminator;
     /**
+     * If true, the unix homedir shortcut ~ will be expanded to the user home directory
+     */
+    homeShortcut?: boolean;
+    /**
      * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
      * error thrown by fs calls will be ignored
      */
@@ -240,6 +245,10 @@ export interface ParseOptions {
      */
     sorted?: boolean | SortMethodPredefined | SortDiscriminator;
     /**
+     * If true, the unix homedir shortcut ~ will be expanded to the user home directory
+     */
+    homeShortcut?: boolean;
+    /**
      * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
      * error thrown by fs calls will be ignored
      */
@@ -248,7 +257,7 @@ export interface ParseOptions {
 
 /* DEFAULT OPTIONS */
 
-const SCAN_DEFAULT_OPTIONS: ScanOptions = {
+const SCAN_DEFAULT_OPTIONS: Required<ScanOptions> = {
     stat: false,
     normalize: false,
     symbolicLinks: true,
@@ -268,10 +277,11 @@ const SCAN_DEFAULT_OPTIONS: ScanOptions = {
     descendants: false,
     descendantsIgnoreDirectories: false,
     sorted: false,
+    homeShortcut: false,
     skipErrors: true
 };
 
-const PARSE_DEFAULT_OPTIONS: ParseOptions = {
+const PARSE_DEFAULT_OPTIONS: Required<ParseOptions> = {
     symbolicLinks: true,
     followLinks: false,
     showHidden: true,
@@ -279,10 +289,15 @@ const PARSE_DEFAULT_OPTIONS: ParseOptions = {
     exclude: undefined,
     extensions: undefined,
     sorted: false,
+    homeShortcut: false,
     skipErrors: true
 };
 
 /* SUPPORT FUNCTIONS */
+
+function resolvePath(path: string, options: ScanOptions | ParseOptions): string {
+    return resolve(options.homeShortcut ? path.replace(/^~($|\/|\\)/, homedir() + '$1') : path);
+}
 
 function purgePatternsIntoArrayOfRegex(patterns: string | RegExp | (RegExp | string)[]): RegExp[] {
     return (Array.isArray(patterns) ? patterns : [patterns]).map(pattern => pattern instanceof RegExp ? pattern : makeRe(pattern, {
@@ -977,8 +992,8 @@ async function _parseTreeAsync(children: Dree[], prefix: string, options: ParseO
  * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
 export function scan<Node extends Dree = Dree>(path: string, options?: ScanOptions, onFile?: Callback<Node>, onDir?: Callback<Node>): Node {
-    const root = resolve(path);
     const opt = mergeScanOptions(options);
+    const root = resolvePath(path, opt);
     const result = _scan<Node>(root, root, 0, opt, onFile, onDir);
     if (result) {
         result.sizeInBytes = opt.sizeInBytes ? result.sizeInBytes : undefined;
@@ -996,8 +1011,8 @@ export function scan<Node extends Dree = Dree>(path: string, options?: ScanOptio
  * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
 export async function scanAsync<Node extends Dree = Dree>(path: string, options?: ScanOptions, onFile?: CallbackAsync<Node>, onDir?: CallbackAsync<Node>): Promise<Node> {
-    const root = resolve(path);
     const opt = mergeScanOptions(options);
+    const root = resolvePath(path, opt);
     const result = await _scanAsync<Node>(root, root, 0, opt, onFile, onDir);
     if (result) {
         result.sizeInBytes = opt.sizeInBytes ? result.sizeInBytes : undefined;
@@ -1014,8 +1029,8 @@ export async function scanAsync<Node extends Dree = Dree>(path: string, options?
 export function parse(path: string, options?: ParseOptions): string {
     let result = '';
 
-    const root = resolve(path);
     const opt = mergeParseOptions(options);
+    const root = resolvePath(path, opt);
     const name = basename(root);
     result += name;
 
@@ -1077,8 +1092,8 @@ export function parse(path: string, options?: ParseOptions): string {
 export async function parseAsync(path: string, options?: ParseOptions): Promise<string> {
     let result = '';
 
-    const root = resolve(path);
     const opt = mergeParseOptions(options);
+    const root = resolvePath(path, opt);
     const name = basename(root);
     result += name;
 
