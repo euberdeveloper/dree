@@ -55,6 +55,7 @@ yargs
                 exclude: parseRegExp(args.exclude),
                 extensions: args.extensions,
                 sorted: parseSorted(args.sorted),
+                homeShortcut: args.homeShortcut,
                 skipErrors: args.skipErrors
             }
             const source: string = args.source;
@@ -113,6 +114,7 @@ yargs
                 descendantsIgnoreDirectories: args.descendantsIgnoreDirectories,
                 extensions: args.extensions,
                 sorted: parseSorted(args.sorted),
+                homeShortcut: args.homeShortcut,
                 skipErrors: args.skipErrors
             }
             const source: string = args.source;
@@ -254,6 +256,12 @@ yargs
             describe: 'Whether you want the result directories to be ignored when calculating the number of descendants',
             type: 'boolean',
             hidden: true,
+        },
+        'home-shortcut': {
+            default: false,
+            describe: 'Whether you want the unix homedir shortcut ~ to be expanded to the user home directory',
+            type: 'boolean',
+            hidden: true
         },
         'skip-errors': {
             default: true,
