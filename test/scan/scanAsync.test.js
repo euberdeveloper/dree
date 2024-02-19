@@ -1,4 +1,4 @@
-module.exports = (expect, fs, dree, path) => {
+module.exports = (expect, fs, os, dree, path) => {
 
     describe('Test: scanAsync function', async function () {
 
@@ -424,6 +424,19 @@ module.exports = (expect, fs, dree, path) => {
 
             expect(result).to.equal(expected);
 
+        });
+
+        it(`Should work with ~ and homeShortcut`, async function () {
+            const options = {
+                depth: 1
+            };
+
+            const errResult = await dree.scanAsync('~', options);
+            expect(errResult).to.equal(null);
+
+            options.homeShortcut = true;
+            const result = await dree.scanAsync('~', options);
+            expect(result.path).to.equal(os.homedir());
         });
 
         it(`Should change nodes onFile and onDir`, async function () {
