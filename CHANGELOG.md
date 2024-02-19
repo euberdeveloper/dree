@@ -1,5 +1,18 @@
 
 
+# [4.7.0](https://github.com/euberdeveloper/dree/compare/4.6.4...4.7.0) (2024-02-19)
+
+
+### Bug Fixes
+
+* **lib:** fix homeShortcut for parse ([cc7f817](https://github.com/euberdeveloper/dree/commit/cc7f8178d426751d34f5a81705b568f2e36ca04a))
+
+
+### Features
+
+* **bin:** add homehortcut ([5a34963](https://github.com/euberdeveloper/dree/commit/5a349639fd81be9ad1a71ba6a2aa42646ce8cad1))
+* **lib:** add homeShortcut option ([2e8adf6](https://github.com/euberdeveloper/dree/commit/2e8adf63adcf3ced978f8ead3e11f40b80c9b678))
+
 ## [4.6.4](https://github.com/euberdeveloper/dree/compare/4.6.3...4.6.4) (2024-02-19)
 
 ## [4.6.3](https://github.com/euberdeveloper/dree/compare/4.6.2...4.6.3) (2024-02-06)
