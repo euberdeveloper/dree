@@ -3,7 +3,7 @@ import * as yargs from 'yargs';
 import { writeFileSync } from 'fs';
 
 import * as dree from '../lib/index';
-import { ParseOptions, ScanOptions, SortDiscriminator, SortMethodPredefined } from '../lib/index';
+import { ParseOptions, PostSortDiscriminator, PostSortMethodPredefined, ScanOptions, SortDiscriminator, SortMethodPredefined } from '../lib/index';
 
 function escapeStringRegexp(string) {
 	return string
@@ -31,6 +31,21 @@ function parseSorted(sorted?: SortMethodPredefined | 'ascending' | 'descending')
             return SortMethodPredefined.ALPHABETICAL_REVERSE;
         default:
             return sorted;
+    }
+}
+
+function parsePostSorted(postSorted?: PostSortMethodPredefined | 'ascending' | 'descending'): PostSortDiscriminator | PostSortMethodPredefined | boolean | undefined {
+    if (!postSorted) {
+        return undefined;
+    }
+
+    switch (postSorted) {
+        case 'ascending':
+            return PostSortMethodPredefined.ALPHABETICAL;
+        case 'descending':
+            return PostSortMethodPredefined.ALPHABETICAL_REVERSE;
+        default:
+            return postSorted;
     }
 }
 
@@ -114,6 +129,7 @@ yargs
                 descendantsIgnoreDirectories: args.descendantsIgnoreDirectories,
                 extensions: args.extensions,
                 sorted: parseSorted(args.sorted),
+                postSorted: parsePostSorted(args.postSorted),
                 homeShortcut: args.homeShortcut,
                 skipErrors: args.skipErrors
             }
@@ -240,9 +256,16 @@ yargs
         },
         'sorted': {
             default: undefined,
-            describe: 'Whether you want the result to contain values sorted with a dree pre-defined sorting method. \'ascending\' or \'descending\' are kept for retrocompatibility. If not specified, the result values are not ordered.',
+            describe: 'Whether you want the result to contain values sorted with a dree pre-defined sorting method. \'ascending\' or \'descending\' are kept for retrocompatibility. The sort is done before the scanning for the scan command. If not specified, the result values are not ordered.',
             type: 'string',
             choices: [...Object.values(SortMethodPredefined), 'ascending', 'descending'],
+            hidden: true,
+        },
+        'postSorted': {
+            default: undefined,
+            describe: 'Whether you want the result to contain values sorted with a dree pre-defined sorting method. \'ascending\' or \'descending\' are kept for retrocompatibility. The sort is done after the scanning for the scan command. If not specified, the result values are not ordered.',
+            type: 'string',
+            choices: [...Object.values(PostSortMethodPredefined), 'ascending', 'descending'],
             hidden: true,
         },
         'descendants': {
