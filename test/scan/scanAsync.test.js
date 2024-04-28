@@ -426,6 +426,19 @@ module.exports = (expect, fs, os, dree, path) => {
 
         });
 
+        it(`Should return the content of "test/scan/${platform}/twentythird.test.json"`, async function () {
+
+            const options = {
+                postSorted: 'files-first',
+            };
+
+            const result = getResult(await dree.scanAsync(path, options));
+            const expected = getExpected(`test/scan/${platform}/twentythird.test.json`);
+
+            expect(result).to.equal(expected);
+
+        });
+
         it(`Should work with ~ and homeShortcut`, async function () {
             const options = {
                 depth: 1
