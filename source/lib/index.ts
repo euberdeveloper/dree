@@ -48,6 +48,29 @@ export enum SortMethodPredefined {
 export type SortDiscriminator = (x: string, y: string) => number;
 
 /**
+ * Enum whose values are used to determine how the nodes should be sorted. Differently from [[SortMethodPredefined]], 
+ * it specifies the behavior of the sorting after all the children of a folder are scanned.
+ */
+export enum PostSortMethodPredefined {
+    /** Alphabetical order */
+    ALPHABETICAL = 'alpha',
+    /** Alphabetical order, reversed */
+    ALPHABETICAL_REVERSE = 'antialpha',
+    /** Alphabetical order, case insensitive */
+    ALPHABETICAL_INSENSITIVE = 'alpha-insensitive',
+    /** Alphabetical order, reversed, case insensitive */
+    ALPHABETICAL_INSENSITIVE_REVERSE = 'antialpha-insensitive',
+    /** Folders first, files after */
+    FOLDERS_FIRST = 'folders-first',
+    /** Files first, folders after */
+    FILES_FIRST = 'files-first'
+};
+/**
+ * Function used to sort nodes
+ */
+export type PostSortDiscriminator = (x: Dree, y: Dree) => number;
+
+/**
  * Interface of an object representing a Directory Tree
  */
 export interface Dree {
@@ -197,6 +220,11 @@ export interface ScanOptions {
      */
     sorted?: boolean | SortMethodPredefined | SortDiscriminator;
     /**
+     * If true, the child nodes of a node will be ordered. The value can be both boolean for default alpha order, a 
+     * custom sorting function or a predefined sorting method in [[PostSortMethodPredefined]].
+     */
+    postSorted?: boolean | PostSortMethodPredefined | PostSortDiscriminator;
+    /**
      * If true, the unix homedir shortcut ~ will be expanded to the user home directory
      */
     homeShortcut?: boolean;
@@ -245,6 +273,11 @@ export interface ParseOptions {
      */
     sorted?: boolean | SortMethodPredefined | SortDiscriminator;
     /**
+     * If true, the child nodes of a node will be ordered. The value can be both boolean for default alpha order, a 
+     * custom sorting function or a predefined sorting method in [[PostSortMethodPredefined]].
+     */
+    postSorted?: boolean | PostSortMethodPredefined | PostSortDiscriminator;
+    /**
      * If true, the unix homedir shortcut ~ will be expanded to the user home directory
      */
     homeShortcut?: boolean;
@@ -277,6 +310,7 @@ const SCAN_DEFAULT_OPTIONS: Required<ScanOptions> = {
     descendants: false,
     descendantsIgnoreDirectories: false,
     sorted: false,
+    postSorted: false,
     homeShortcut: false,
     skipErrors: true
 };
@@ -289,6 +323,7 @@ const PARSE_DEFAULT_OPTIONS: Required<ParseOptions> = {
     exclude: undefined,
     extensions: undefined,
     sorted: false,
+    postSorted: false,
     homeShortcut: false,
     skipErrors: true
 };
@@ -379,6 +414,68 @@ function sortFiles(files: string[], sortOption: boolean | SortMethodPredefined |
     }
     else if (typeof sortOption === 'function') {
         return files.sort(sortOption);
+    }
+}
+
+function postSortAlphabetical(x: Dree, y: Dree): number {
+    return sortAlphabetical(x.name, y.name);
+}
+
+function postSortAlphabeticalInsensitive(x: Dree, y: Dree): number {
+    return sortAlphabeticalInsensitive(x.name, y.name);
+}
+
+function postSortFoldersFirst(x: Dree, y: Dree): number {
+    if (x.type === Type.DIRECTORY && y.type === Type.FILE) {
+        return -1;
+    }
+    if (x.type === Type.FILE && y.type === Type.DIRECTORY) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+function postSortFilesFirst(x: Dree, y: Dree): number {
+    if (x.type === Type.FILE && y.type === Type.DIRECTORY) {
+        return -1;
+    }
+    if (x.type === Type.DIRECTORY && y.type === Type.FILE) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+function postSortFiles(nodes: Dree[], postSortOption: boolean | PostSortMethodPredefined | PostSortDiscriminator): Dree[] {
+    if (!postSortOption) {
+        return nodes;
+    }
+
+    if (postSortOption === true) {
+        return nodes.sort(postSortAlphabetical);
+    }
+    else if (typeof postSortOption === 'string') {
+        switch (postSortOption) {
+            case PostSortMethodPredefined.ALPHABETICAL:
+                return nodes.sort(postSortAlphabetical);
+            case PostSortMethodPredefined.ALPHABETICAL_REVERSE:
+                return nodes.sort(postSortAlphabetical).reverse();
+            case PostSortMethodPredefined.ALPHABETICAL_INSENSITIVE:
+                return nodes.sort(postSortAlphabeticalInsensitive);
+            case PostSortMethodPredefined.ALPHABETICAL_INSENSITIVE_REVERSE:
+                return nodes.sort(postSortAlphabeticalInsensitive).reverse();
+            case PostSortMethodPredefined.FOLDERS_FIRST:
+                return nodes.sort(postSortFoldersFirst);
+            case PostSortMethodPredefined.FILES_FIRST:
+                return nodes.sort(postSortFilesFirst);
+            default:
+                return nodes;
+        }
+    }
+    else if (typeof postSortOption === 'function') {
+        return nodes.sort(postSortOption);
     }
 }
 
@@ -535,7 +632,7 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
                 dirTree.descendants = children.reduce((acc, child) => acc + (child.type === Type.DIRECTORY && options.descendantsIgnoreDirectories ? 0 : 1) + (child.descendants ?? 0), 0);
             }
             if (children.length) {
-                dirTree.children = children;
+                dirTree.children = options.postSorted ? postSortFiles(children, options.postSorted) : children;
             }
             break;
         case Type.FILE:
@@ -714,7 +811,7 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
                 dirTree.descendants = children.reduce((acc, child) => acc + (child.type === Type.DIRECTORY && options.descendantsIgnoreDirectories ? 0 : 1) + (child.descendants ?? 0), 0);
             }
             if (children.length) {
-                dirTree.children = children;
+                dirTree.children = options.postSorted ? postSortFiles(children, options.postSorted) : children;
             }
             break;
         case Type.FILE:

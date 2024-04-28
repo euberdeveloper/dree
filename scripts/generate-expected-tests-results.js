@@ -164,6 +164,12 @@ const scanOptions = [
             sorted: 'antialpha-insensitive'
         }
     },
+    {
+        name: 'twentythird',
+        opt: {
+            postSorted: 'files-first'
+        }
+    }
 ];
 
 function purgePath(data) {

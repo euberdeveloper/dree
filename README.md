@@ -392,7 +392,8 @@ Given a path, returns an object representing its directory tree. The result coul
 * __excludeEmptyDirectories__: Default value: `false`. If value is `true`, all empty directories will be excluded from the result. Even directories which are not empty but all their children are excluded are excluded from the result because of other options will be considered empty.
 * __descendants__: Default value `false`. If true, also the number of descendants of each node will be added to the result.
 * __descendantsIgnoreDirectories__: Default value `false`. If true, only files will be count as descendants of a node. It does not have effect if descendants option is not true.
-* __sorted__: Default value: `undefined`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alpha order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
+* __sorted__: Default value: `false`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alpha order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
+* __postSorted__: Default value: `false`. If true, the child nodes of a node will be ordered. The value can be both boolean for default alpha order, a custom sorting function or a predefined sorting method in PostSortMethodPredefined.
 * __homeShortcut__: Default value: `false`. If true, the unix homedir shortcut ~ will be expanded to the user home directory.
 * __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
 
