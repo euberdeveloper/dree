@@ -1,5 +1,13 @@
 
 
+# [4.8.0](https://github.com/euberdeveloper/dree/compare/4.7.0...4.8.0) (2024-04-28)
+
+
+### Features
+
+* **bin:** add the post sort param ([1b0e72c](https://github.com/euberdeveloper/dree/commit/1b0e72c71956e6741eb0a5721a403a53112acdd2))
+* **lib:** add post sort ([8e9c4a4](https://github.com/euberdeveloper/dree/commit/8e9c4a44b4129a21611aecbf0941513948a3f711))
+
 # [4.7.0](https://github.com/euberdeveloper/dree/compare/4.6.4...4.7.0) (2024-02-19)
 
 
