@@ -610,7 +610,7 @@ dree
  │   ├─> parseTree
  │   ├─> sample
  │   ├─> scan
- │   └── test.js
+ │   └── test.mjs
  ├── typedoc.dev.js
  ├── typedoc.js
  └── webpack.config.js
