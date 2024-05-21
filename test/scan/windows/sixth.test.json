@@ -1,6 +1,6 @@
 {
   "name": "sample",
-  "path": "PATH\\test\\sample",
+  "path": "PATH/test/sample",
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,

@@ -1,70 +1,10 @@
 {
   "name": "sample",
-  "path": "PATH\\test\\sample",
+  "path": "PATH/test/sample",
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
-  "sizeInBytes": 29,
-  "size": "29 B",
-  "hash": "4378988f75598e5274bfbeac372e9742",
-  "children": [
-    {
-      "name": "backend",
-      "path": "PATH\\test\\sample\\backend",
-      "relativePath": "backend",
-      "type": "directory",
-      "isSymbolicLink": false,
-      "sizeInBytes": 29,
-      "size": "29 B",
-      "hash": "89f487027f2c07f3f75bbd82457cd5c2",
-      "children": [
-        {
-          "name": "firebase.json",
-          "path": "PATH\\test\\sample\\backend\\firebase.json",
-          "relativePath": "backend\\firebase.json",
-          "type": "file",
-          "isSymbolicLink": false,
-          "extension": "json",
-          "sizeInBytes": 29,
-          "size": "29 B",
-          "hash": "c1e70f77340f3cc187a58193805eb86a"
-        }
-      ]
-    },
-    {
-      "name": "empty",
-      "path": "PATH\\test\\sample\\empty",
-      "relativePath": "empty",
-      "type": "directory",
-      "isSymbolicLink": false,
-      "sizeInBytes": 0,
-      "size": "0 B",
-      "hash": "5395826f5e679ee75097a49101d8af75",
-      "children": [
-        {
-          "name": "tsempty",
-          "path": "PATH\\test\\sample\\empty\\tsempty",
-          "relativePath": "empty\\tsempty",
-          "type": "directory",
-          "isSymbolicLink": false,
-          "sizeInBytes": 0,
-          "size": "0 B",
-          "hash": "01ae4baddc925931f374f0f212896d30",
-          "children": [
-            {
-              "name": "file.ts",
-              "path": "PATH\\test\\sample\\empty\\tsempty\\file.ts",
-              "relativePath": "empty\\tsempty\\file.ts",
-              "type": "file",
-              "isSymbolicLink": false,
-              "extension": "ts",
-              "sizeInBytes": 0,
-              "size": "0 B",
-              "hash": "db3e286db4b574d6ebfdca5804df63cf"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  "sizeInBytes": 0,
+  "size": "0 B",
+  "hash": "5e8ff9bf55ba3508199d22e984129be6"
 }

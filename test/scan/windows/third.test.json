@@ -1,16 +1,16 @@
 {
   "name": "sample",
-  "path": "PATH\\test\\sample",
+  "path": "PATH/test/sample",
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
-  "sizeInBytes": 1786077,
-  "size": "1.79 MB",
-  "hash": "e4b26d31df0f5d1fbebe69519e570c94",
+  "sizeInBytes": 1714634,
+  "size": "1.71 MB",
+  "hash": "0aa58ede1e1f0b54bd412a75368ae25c",
   "children": [
     {
       "name": ".gitignore",
-      "path": "PATH\\test\\sample\\.gitignore",
+      "path": "PATH/test/sample/.gitignore",
       "relativePath": ".gitignore",
       "type": "file",
       "isSymbolicLink": false,
@@ -21,45 +21,45 @@
     },
     {
       "name": "backend",
-      "path": "PATH\\test\\sample\\backend",
+      "path": "PATH/test/sample/backend",
       "relativePath": "backend",
       "type": "directory",
       "isSymbolicLink": false,
-      "sizeInBytes": 1786077,
-      "size": "1.79 MB",
-      "hash": "8d5cee96602af2de5e1faa2aa59dea27",
+      "sizeInBytes": 1714634,
+      "size": "1.71 MB",
+      "hash": "3d7be60e1040728292610c557c20feb4",
       "children": [
         {
           "name": "firebase.json",
-          "path": "PATH\\test\\sample\\backend\\firebase.json",
-          "relativePath": "backend\\firebase.json",
+          "path": "PATH/test/sample/backend/firebase.json",
+          "relativePath": "backend/firebase.json",
           "type": "file",
           "isSymbolicLink": false,
           "extension": "json",
-          "sizeInBytes": 29,
-          "size": "29 B",
-          "hash": "c1e70f77340f3cc187a58193805eb86a"
+          "sizeInBytes": 27,
+          "size": "27 B",
+          "hash": "bafc664309b11a828c0adf99ed9e8516"
         },
         {
           "name": "server",
-          "path": "PATH\\test\\sample\\backend\\server",
-          "relativePath": "backend\\server",
+          "path": "PATH/test/sample/backend/server",
+          "relativePath": "backend/server",
           "type": "directory",
           "isSymbolicLink": false,
-          "sizeInBytes": 1786048,
-          "size": "1.79 MB",
-          "hash": "571bf3154c32aa7569e77dfe7b90721c",
+          "sizeInBytes": 1714607,
+          "size": "1.71 MB",
+          "hash": "3878a15abd9a42dd0986c556dd2e5b37",
           "children": [
             {
               "name": "server.ts",
-              "path": "PATH\\test\\sample\\backend\\server\\server.ts",
-              "relativePath": "backend\\server\\server.ts",
+              "path": "PATH/test/sample/backend/server/server.ts",
+              "relativePath": "backend/server/server.ts",
               "type": "file",
               "isSymbolicLink": false,
               "extension": "ts",
-              "sizeInBytes": 1786048,
-              "size": "1.79 MB",
-              "hash": "48d3586783d80c1f222b6a62a947e74d"
+              "sizeInBytes": 1714607,
+              "size": "1.71 MB",
+              "hash": "30a21c7e293056bc3a7f2103cf81c7d4"
             }
           ]
         }
@@ -67,7 +67,7 @@
     },
     {
       "name": "empty",
-      "path": "PATH\\test\\sample\\empty",
+      "path": "PATH/test/sample/empty",
       "relativePath": "empty",
       "type": "directory",
       "isSymbolicLink": false,
@@ -77,8 +77,8 @@
       "children": [
         {
           "name": "tsempty",
-          "path": "PATH\\test\\sample\\empty\\tsempty",
-          "relativePath": "empty\\tsempty",
+          "path": "PATH/test/sample/empty/tsempty",
+          "relativePath": "empty/tsempty",
           "type": "directory",
           "isSymbolicLink": false,
           "sizeInBytes": 0,
@@ -87,8 +87,8 @@
           "children": [
             {
               "name": "file.ts",
-              "path": "PATH\\test\\sample\\empty\\tsempty\\file.ts",
-              "relativePath": "empty\\tsempty\\file.ts",
+              "path": "PATH/test/sample/empty/tsempty/file.ts",
+              "relativePath": "empty/tsempty/file.ts",
               "type": "file",
               "isSymbolicLink": false,
               "extension": "ts",
@@ -102,7 +102,7 @@
     },
     {
       "name": "linked",
-      "path": "PATH\\test\\sample\\linked",
+      "path": "PATH/test/sample/linked",
       "relativePath": "linked",
       "type": "directory",
       "isSymbolicLink": false,

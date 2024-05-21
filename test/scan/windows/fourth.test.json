@@ -4,9 +4,9 @@
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
-  "sizeInBytes": 1786137,
-  "size": "1.79 MB",
-  "hash": "Fq2J7PQcv/6Qlp4VSTMuueiy9Rw=",
+  "sizeInBytes": 1714683,
+  "size": "1.71 MB",
+  "hash": "18JX3XDnlJmljZzpm+YZo6Tys6s=",
   "children": [
     {
       "name": "backend",
@@ -14,9 +14,9 @@
       "relativePath": "backend",
       "type": "directory",
       "isSymbolicLink": false,
-      "sizeInBytes": 1786112,
-      "size": "1.79 MB",
-      "hash": "gho9vf4d5O4pAEramdoH1piMURQ=",
+      "sizeInBytes": 1714659,
+      "size": "1.71 MB",
+      "hash": "DHUCYTrvZgz5cccjU89mVyFt7TI=",
       "children": [
         {
           "name": "firebase.json",
@@ -25,31 +25,30 @@
           "type": "file",
           "isSymbolicLink": false,
           "extension": "json",
-          "sizeInBytes": 29,
-          "size": "29 B",
-          "hash": "v7rEZ87JBJzqmGUkcwZv76tFyLc="
+          "sizeInBytes": 27,
+          "size": "27 B",
+          "hash": "yp5sqsL0ABNmvwHg9ElA+4mmXNE="
         },
         {
           "name": "linked.link",
           "path": "PATH/test/sample/backend/linked.link",
           "relativePath": "backend/linked.link",
-          "type": "file",
-          "isSymbolicLink": false,
-          "extension": "link",
-          "sizeInBytes": 10,
-          "size": "10 B",
-          "hash": "TMXmL1q9lctCTE0JERbE8OmRfpE="
+          "type": "directory",
+          "isSymbolicLink": true,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "4g5cYV6lKK8fiVZ1Zb5vnO0PRho="
         },
         {
           "name": "linkedtxt.link",
           "path": "PATH/test/sample/backend/linkedtxt.link",
           "relativePath": "backend/linkedtxt.link",
           "type": "file",
-          "isSymbolicLink": false,
+          "isSymbolicLink": true,
           "extension": "link",
           "sizeInBytes": 20,
           "size": "20 B",
-          "hash": "4D2+iAg3KWswHzP4gfHy8VHgny4="
+          "hash": "ybvmfbKq28yfjlgRKeRd1TgOXMU="
         },
         {
           "name": "notes.txt",
@@ -68,9 +67,9 @@
           "relativePath": "backend/server",
           "type": "directory",
           "isSymbolicLink": false,
-          "sizeInBytes": 1786048,
-          "size": "1.79 MB",
-          "hash": "hUodNxXxesgdK0ntg1FJOAT2OXw=",
+          "sizeInBytes": 1714607,
+          "size": "1.71 MB",
+          "hash": "aWyBQBDovHWniMEAIdXWfleTHr0=",
           "children": [
             {
               "name": "server.ts",
@@ -79,9 +78,9 @@
               "type": "file",
               "isSymbolicLink": false,
               "extension": "ts",
-              "sizeInBytes": 1786048,
-              "size": "1.79 MB",
-              "hash": "YxQ0Bt+xOGEmYVD0uKsFETr7Zvc="
+              "sizeInBytes": 1714607,
+              "size": "1.71 MB",
+              "hash": "j6VTQJlViOoTR8u3zWrUGBzM/9s="
             }
           ]
         }
@@ -128,9 +127,9 @@
       "relativePath": "linked",
       "type": "directory",
       "isSymbolicLink": false,
-      "sizeInBytes": 25,
-      "size": "25 B",
-      "hash": "XLsNPe0/ILfg8qovBpMmgczxe5E=",
+      "sizeInBytes": 24,
+      "size": "24 B",
+      "hash": "nUOs7i/VNPkiFSTuIaS1TWxWfQ0=",
       "children": [
         {
           "name": "linked.txt",
@@ -139,9 +138,9 @@
           "type": "file",
           "isSymbolicLink": false,
           "extension": "txt",
-          "sizeInBytes": 25,
-          "size": "25 B",
-          "hash": "l7RWfSPez8FJui7eKWD7Oot4jic="
+          "sizeInBytes": 24,
+          "size": "24 B",
+          "hash": "NFDL/u63fh1k5SsVfxHvWKAEUII="
         }
       ]
     }
