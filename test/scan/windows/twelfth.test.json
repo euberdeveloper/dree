@@ -1,35 +1,10 @@
 {
   "name": "sample",
-  "path": "PATH\\test\\sample",
+  "path": "PATH/test/sample",
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
-  "sizeInBytes": 29,
-  "size": "29 B",
-  "hash": "77697afa628145349bcea9eef09b2d97",
-  "children": [
-    {
-      "name": "backend",
-      "path": "PATH\\test\\sample\\backend",
-      "relativePath": "backend",
-      "type": "directory",
-      "isSymbolicLink": false,
-      "sizeInBytes": 29,
-      "size": "29 B",
-      "hash": "89f487027f2c07f3f75bbd82457cd5c2",
-      "children": [
-        {
-          "name": "firebase.json",
-          "path": "PATH\\test\\sample\\backend\\firebase.json",
-          "relativePath": "backend\\firebase.json",
-          "type": "file",
-          "isSymbolicLink": false,
-          "extension": "json",
-          "sizeInBytes": 29,
-          "size": "29 B",
-          "hash": "c1e70f77340f3cc187a58193805eb86a"
-        }
-      ]
-    }
-  ]
+  "sizeInBytes": 0,
+  "size": "0 B",
+  "hash": "5e8ff9bf55ba3508199d22e984129be6"
 }

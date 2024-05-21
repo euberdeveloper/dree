@@ -1,17 +1,17 @@
 {
   "name": "sample",
-  "path": "PATH\\test\\sample",
+  "path": "PATH/test/sample",
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
   "isEmpty": false,
-  "sizeInBytes": 89,
-  "size": "89 B",
-  "hash": "9578da49101b98f6dc8915b105f2b221",
+  "sizeInBytes": 76,
+  "size": "76 B",
+  "hash": "2ee42f8e4e250ef344b806e990d3c8f9",
   "children": [
     {
       "name": ".gitignore",
-      "path": "PATH\\test\\sample\\.gitignore",
+      "path": "PATH/test/sample/.gitignore",
       "relativePath": ".gitignore",
       "type": "file",
       "isSymbolicLink": false,
@@ -22,52 +22,51 @@
     },
     {
       "name": "backend",
-      "path": "PATH\\test\\sample\\backend",
+      "path": "PATH/test/sample/backend",
       "relativePath": "backend",
       "type": "directory",
       "isSymbolicLink": false,
       "isEmpty": false,
-      "sizeInBytes": 64,
-      "size": "64 B",
-      "hash": "8d51a6f47937c1e4e8d2c51b7826baed",
+      "sizeInBytes": 52,
+      "size": "52 B",
+      "hash": "6f3a1e2d41b245d5ce265ede42fcc8b5",
       "children": [
         {
           "name": "firebase.json",
-          "path": "PATH\\test\\sample\\backend\\firebase.json",
-          "relativePath": "backend\\firebase.json",
+          "path": "PATH/test/sample/backend/firebase.json",
+          "relativePath": "backend/firebase.json",
           "type": "file",
           "isSymbolicLink": false,
           "extension": "json",
-          "sizeInBytes": 29,
-          "size": "29 B",
-          "hash": "c1e70f77340f3cc187a58193805eb86a"
+          "sizeInBytes": 27,
+          "size": "27 B",
+          "hash": "bafc664309b11a828c0adf99ed9e8516"
         },
         {
           "name": "linked.link",
-          "path": "PATH\\test\\sample\\backend\\linked.link",
-          "relativePath": "backend\\linked.link",
-          "type": "file",
-          "isSymbolicLink": false,
-          "extension": "link",
-          "sizeInBytes": 10,
-          "size": "10 B",
-          "hash": "51a5f5d294d9f70c3166582957b89efd"
+          "path": "PATH/test/sample/backend/linked.link",
+          "relativePath": "backend/linked.link",
+          "type": "directory",
+          "isSymbolicLink": true,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "13dfcaee429e99fa969199e7240a597a"
         },
         {
           "name": "linkedtxt.link",
-          "path": "PATH\\test\\sample\\backend\\linkedtxt.link",
-          "relativePath": "backend\\linkedtxt.link",
+          "path": "PATH/test/sample/backend/linkedtxt.link",
+          "relativePath": "backend/linkedtxt.link",
           "type": "file",
-          "isSymbolicLink": false,
+          "isSymbolicLink": true,
           "extension": "link",
           "sizeInBytes": 20,
           "size": "20 B",
-          "hash": "f949fb5c67f32f3164d165517ec7afce"
+          "hash": "8ac875af9057830ddfb1c7fb9046f680"
         },
         {
           "name": "notes.txt",
-          "path": "PATH\\test\\sample\\backend\\notes.txt",
-          "relativePath": "backend\\notes.txt",
+          "path": "PATH/test/sample/backend/notes.txt",
+          "relativePath": "backend/notes.txt",
           "type": "file",
           "isSymbolicLink": false,
           "extension": "txt",
@@ -79,25 +78,25 @@
     },
     {
       "name": "linked",
-      "path": "PATH\\test\\sample\\linked",
+      "path": "PATH/test/sample/linked",
       "relativePath": "linked",
       "type": "directory",
       "isSymbolicLink": false,
       "isEmpty": false,
-      "sizeInBytes": 25,
-      "size": "25 B",
-      "hash": "9897b591904f5aaf66a6c538136f3d04",
+      "sizeInBytes": 24,
+      "size": "24 B",
+      "hash": "c8d60d99c3f102305a8cbbf55c1519e7",
       "children": [
         {
           "name": "linked.txt",
-          "path": "PATH\\test\\sample\\linked\\linked.txt",
-          "relativePath": "linked\\linked.txt",
+          "path": "PATH/test/sample/linked/linked.txt",
+          "relativePath": "linked/linked.txt",
           "type": "file",
           "isSymbolicLink": false,
           "extension": "txt",
-          "sizeInBytes": 25,
-          "size": "25 B",
-          "hash": "451d51dfceec7956e60421b6f4dbdd39"
+          "sizeInBytes": 24,
+          "size": "24 B",
+          "hash": "23a5f0582f74abfb7f5d3b545a2d59ca"
         }
       ]
     }

@@ -1,16 +1,16 @@
 {
   "name": "sample",
-  "path": "PATH\\test\\sample",
+  "path": "PATH/test/sample",
   "relativePath": ".",
   "type": "directory",
   "isSymbolicLink": false,
-  "sizeInBytes": 60,
-  "size": "60 B",
-  "hash": "1c846c6b785f624b9dab19b3ba40ada1",
+  "sizeInBytes": 49,
+  "size": "49 B",
+  "hash": "9e814d7cb14e149364a46cb33ab48f28",
   "children": [
     {
       "name": ".gitignore",
-      "path": "PATH\\test\\sample\\.gitignore",
+      "path": "PATH/test/sample/.gitignore",
       "relativePath": ".gitignore",
       "type": "file",
       "isSymbolicLink": false,
@@ -21,40 +21,39 @@
     },
     {
       "name": "backend",
-      "path": "PATH\\test\\sample\\backend",
+      "path": "PATH/test/sample/backend",
       "relativePath": "backend",
       "type": "directory",
       "isSymbolicLink": false,
-      "sizeInBytes": 35,
-      "size": "35 B",
-      "hash": "d755e8585846227ad49e6c0d0bc0f917",
+      "sizeInBytes": 25,
+      "size": "25 B",
+      "hash": "2f438cee14fb57840234f1e472606710",
       "children": [
         {
           "name": "linked.link",
-          "path": "PATH\\test\\sample\\backend\\linked.link",
-          "relativePath": "backend\\linked.link",
-          "type": "file",
-          "isSymbolicLink": false,
-          "extension": "link",
-          "sizeInBytes": 10,
-          "size": "10 B",
-          "hash": "51a5f5d294d9f70c3166582957b89efd"
+          "path": "PATH/test/sample/backend/linked.link",
+          "relativePath": "backend/linked.link",
+          "type": "directory",
+          "isSymbolicLink": true,
+          "sizeInBytes": 0,
+          "size": "0 B",
+          "hash": "13dfcaee429e99fa969199e7240a597a"
         },
         {
           "name": "linkedtxt.link",
-          "path": "PATH\\test\\sample\\backend\\linkedtxt.link",
-          "relativePath": "backend\\linkedtxt.link",
+          "path": "PATH/test/sample/backend/linkedtxt.link",
+          "relativePath": "backend/linkedtxt.link",
           "type": "file",
-          "isSymbolicLink": false,
+          "isSymbolicLink": true,
           "extension": "link",
           "sizeInBytes": 20,
           "size": "20 B",
-          "hash": "f949fb5c67f32f3164d165517ec7afce"
+          "hash": "8ac875af9057830ddfb1c7fb9046f680"
         },
         {
           "name": "notes.txt",
-          "path": "PATH\\test\\sample\\backend\\notes.txt",
-          "relativePath": "backend\\notes.txt",
+          "path": "PATH/test/sample/backend/notes.txt",
+          "relativePath": "backend/notes.txt",
           "type": "file",
           "isSymbolicLink": false,
           "extension": "txt",
@@ -64,8 +63,8 @@
         },
         {
           "name": "server",
-          "path": "PATH\\test\\sample\\backend\\server",
-          "relativePath": "backend\\server",
+          "path": "PATH/test/sample/backend/server",
+          "relativePath": "backend/server",
           "type": "directory",
           "isSymbolicLink": false,
           "sizeInBytes": 0,
@@ -76,7 +75,7 @@
     },
     {
       "name": "empty",
-      "path": "PATH\\test\\sample\\empty",
+      "path": "PATH/test/sample/empty",
       "relativePath": "empty",
       "type": "directory",
       "isSymbolicLink": false,
@@ -86,8 +85,8 @@
       "children": [
         {
           "name": "tsempty",
-          "path": "PATH\\test\\sample\\empty\\tsempty",
-          "relativePath": "empty\\tsempty",
+          "path": "PATH/test/sample/empty/tsempty",
+          "relativePath": "empty/tsempty",
           "type": "directory",
           "isSymbolicLink": false,
           "sizeInBytes": 0,
@@ -98,24 +97,24 @@
     },
     {
       "name": "linked",
-      "path": "PATH\\test\\sample\\linked",
+      "path": "PATH/test/sample/linked",
       "relativePath": "linked",
       "type": "directory",
       "isSymbolicLink": false,
-      "sizeInBytes": 25,
-      "size": "25 B",
-      "hash": "9897b591904f5aaf66a6c538136f3d04",
+      "sizeInBytes": 24,
+      "size": "24 B",
+      "hash": "c8d60d99c3f102305a8cbbf55c1519e7",
       "children": [
         {
           "name": "linked.txt",
-          "path": "PATH\\test\\sample\\linked\\linked.txt",
-          "relativePath": "linked\\linked.txt",
+          "path": "PATH/test/sample/linked/linked.txt",
+          "relativePath": "linked/linked.txt",
           "type": "file",
           "isSymbolicLink": false,
           "extension": "txt",
-          "sizeInBytes": 25,
-          "size": "25 B",
-          "hash": "451d51dfceec7956e60421b6f4dbdd39"
+          "sizeInBytes": 24,
+          "size": "24 B",
+          "hash": "23a5f0582f74abfb7f5d3b545a2d59ca"
         }
       ]
     }
