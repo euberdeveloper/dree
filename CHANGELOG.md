@@ -1,5 +1,7 @@
 
 
+## [4.8.6](https://github.com/euberdeveloper/dree/compare/4.8.5...4.8.6) (2024-06-11)
+
 ## [4.8.5](https://github.com/euberdeveloper/dree/compare/4.8.4...4.8.5) (2024-05-27)
 
 ## [4.8.4](https://github.com/euberdeveloper/dree/compare/4.8.2...4.8.4) (2024-05-21)
