@@ -12,13 +12,13 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use pnpm ${{ matrix.pnpm-version }}
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: ${{ matrix.pnpm-version }}
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -29,20 +29,20 @@ jobs:
         run: pnpm run transpile
         
       - name: Run tests and generate coverage report
-        run: pnpm run nyc
+        run: pnpm run test:cover
        
       - name: Send coverage report to Coveralls
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Send coverage report to Codecov
-        uses: Atrox/codecov-action@v0.1.3
+        uses: codecov/codecov-action@v4
         env: 
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}  
        
       - name: Send coverage report to Code Climate
-        uses: paambaati/codeclimate-action@v2.7.5
+        uses: paambaati/codeclimate-action@v8
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }} 
 
