@@ -1,5 +1,22 @@
 
 
+# [5.0.0](https://github.com/euberdeveloper/dree/compare/4.8.6...5.0.0) (2024-06-12)
+
+
+### Bug Fixes
+
+* **build.mjs:** fix cli import ([7e7b947](https://github.com/euberdeveloper/dree/commit/7e7b947eb468eaf42240cbceedd09df678265d92))
+
+
+### Features
+
+* fix esm build and provide esm/cjs bundle ([1f4db9a](https://github.com/euberdeveloper/dree/commit/1f4db9a2e612f4d8dace8a2871646a5bd8cf95eb))
+
+
+### BREAKING CHANGES
+
+* The ESM introduction could have unexpected changes in behaviour
+
 ## [4.8.6](https://github.com/euberdeveloper/dree/compare/4.8.5...4.8.6) (2024-06-11)
 
 ## [4.8.5](https://github.com/euberdeveloper/dree/compare/4.8.4...4.8.5) (2024-05-27)
