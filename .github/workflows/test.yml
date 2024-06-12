@@ -29,7 +29,7 @@ jobs:
         run: pnpm run transpile
         
       - name: Run tests and generate coverage report
-        run: pnpm run nyc
+        run: pnpm run test:cover
        
       - name: Send coverage report to Coveralls
         uses: coverallsapp/github-action@master
