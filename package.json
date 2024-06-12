@@ -39,7 +39,7 @@
     "script:getr:linux": "node scripts/generate-expected-tests-results linux",
     "script:getr:mac": "node scripts/generate-expected-tests-results mac",
     "script:getr:windows": "node scripts/generate-expected-tests-results windows",
-    "test": "mocha --reporter spec test/test.mjs",
+    "test": "mocha --reporter spec test/test.js",
     "nyc": "nyc --extension=ts --reporter=html --reporter=text --reporter=lcov npm run test",
     "cover:coveralls": "nyc report --extension=ts --reporter=text-lcov | coveralls",
     "cover:codecov": "nyc report --extension=ts --reporter=text-lcov > coverage.lcov && codecov",

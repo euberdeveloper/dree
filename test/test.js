@@ -7,12 +7,12 @@ import chaiAsPromised from 'chai-as-promised';
 
 import * as dree from '../dist/lib/index.js';
 
-import testScan from './scan/scan.test.mjs';
-import testScanAsync from './scan/scanAsync.test.mjs';
-import testParse from './parse/parse.test.mjs';
-import testParseAsync from './parse/parseAsync.test.mjs';
-import testParseTree from './parseTree/parseTree.test.mjs';
-import testParseTreeAsync from './parseTree/parseTreeAsync.test.mjs';
+import testScan from './scan/scan.test.js';
+import testScanAsync from './scan/scanAsync.test.js';
+import testParse from './parse/parse.test.js';
+import testParseAsync from './parse/parseAsync.test.js';
+import testParseTree from './parseTree/parseTree.test.js';
+import testParseTreeAsync from './parseTree/parseTreeAsync.test.js';
 
 chai.use(chaiAsPromised);
 const { expect } = chai;
