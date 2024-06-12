@@ -635,7 +635,7 @@ The transpiled code will be in the `dist` folder.
 
 ### Bundle
 
-To bundle the library with webpack:
+To bundle the library with esbuild:
 
 ```bash
 $ npm run bundle
