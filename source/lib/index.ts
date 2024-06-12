@@ -527,7 +527,7 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
         stat = statSync(path);
     }
     catch (exception) {
-        /* istanbul ignore next */
+        /* c8 ignore next */
         if (options.skipErrors) {
             return null;
         }
@@ -540,7 +540,7 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
         lstat = lstatSync(path);
     }
     catch (exception) {
-        /* istanbul ignore next */
+        /* c8 ignore next */
         if (options.skipErrors) {
             return null;
         }
@@ -587,7 +587,7 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
                     files = sortFiles(files, options.sorted);
                 }
                 catch (exception) {
-                    /* istanbul ignore next */
+                    /* c8 ignore next */
                     if (options.skipErrors) {
                         return null;
                     }
@@ -658,7 +658,7 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
                     data = readFileSync(path);
                 }
                 catch (exception) {
-                    /* istanbul ignore next */
+                    /* c8 ignore next */
                     if (options.skipErrors) {
                         return null;
                     }
@@ -672,7 +672,7 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
             }
             break;
         default:
-            /* istanbul ignore next */
+            /* c8 ignore next */
             return null;
     }
 
@@ -707,7 +707,7 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
         stat = await statAsync(path);
     }
     catch (exception) {
-        /* istanbul ignore next */
+        /* c8 ignore next */
         if (options.skipErrors) {
             return null;
         }
@@ -720,7 +720,7 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
         lstat = await lstatAsync(path);
     }
     catch (exception) {
-        /* istanbul ignore next */
+        /* c8 ignore next */
         if (options.skipErrors) {
             return null;
         }
@@ -767,7 +767,7 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
                     files = sortFiles(files, options.sorted);
                 }
                 catch (exception) {
-                    /* istanbul ignore next */
+                    /* c8 ignore next */
                     if (options.skipErrors) {
                         return null;
                     }
@@ -837,7 +837,7 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
                     data = await readFileAsync(path);
                 }
                 catch (exception) {
-                    /* istanbul ignore next */
+                    /* c8 ignore next */
                     if (options.skipErrors) {
                         return null;
                     }
@@ -851,7 +851,7 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
             }
             break;
         default:
-            /* istanbul ignore next */
+            /* c8 ignore next */
             return null;
     }
 
@@ -896,7 +896,7 @@ function _parse(root: string, children: string[], prefix: string, options: Parse
             stat = statSync(child);
         }
         catch (exception) {
-            /* istanbul ignore next */
+            /* c8 ignore next */
             if (options.skipErrors) {
                 return null;
             }
@@ -909,7 +909,7 @@ function _parse(root: string, children: string[], prefix: string, options: Parse
             lstat = lstatSync(child);
         }
         catch (exception) {
-            /* istanbul ignore next */
+            /* c8 ignore next */
             if (options.skipErrors) {
                 return null;
             }
@@ -942,7 +942,7 @@ function _parse(root: string, children: string[], prefix: string, options: Parse
                 children = sortFiles(children, options.sorted);
             }
             catch (exception) {
-                /* istanbul ignore next */
+                /* c8 ignore next */
                 if (options.skipErrors) {
                     return null;
                 }
@@ -983,7 +983,7 @@ async function _parseAsync(root: string, children: string[], prefix: string, opt
             stat = await statAsync(child);
         }
         catch (exception) {
-            /* istanbul ignore next */
+            /* c8 ignore next */
             if (options.skipErrors) {
                 return null;
             }
@@ -996,7 +996,7 @@ async function _parseAsync(root: string, children: string[], prefix: string, opt
             lstat = await lstatAsync(child);
         }
         catch (exception) {
-            /* istanbul ignore next */
+            /* c8 ignore next */
             if (options.skipErrors) {
                 return null;
             }
@@ -1029,7 +1029,7 @@ async function _parseAsync(root: string, children: string[], prefix: string, opt
                 children = sortFiles(children, options.sorted);
             }
             catch (exception) {
-                /* istanbul ignore next */
+                /* c8 ignore next */
                 if (options.skipErrors) {
                     return null;
                 }
@@ -1137,7 +1137,7 @@ export function parse(path: string, options?: ParseOptions): string {
         stat = statSync(root);
     }
     catch (exception) {
-        /* istanbul ignore next */
+        /* c8 ignore next */
         if (opt.skipErrors) {
             return null;
         }
@@ -1150,7 +1150,7 @@ export function parse(path: string, options?: ParseOptions): string {
         lstat = lstatSync(root);
     }
     catch (exception) {
-        /* istanbul ignore next */
+        /* c8 ignore next */
         if (opt.skipErrors) {
             return null;
         }
@@ -1167,7 +1167,7 @@ export function parse(path: string, options?: ParseOptions): string {
             children = sortFiles(children, opt.sorted);
         }
         catch (exception) {
-            /* istanbul ignore next */
+            /* c8 ignore next */
             if (opt.skipErrors) {
                 return null;
             }
@@ -1200,7 +1200,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
         stat = await statAsync(root);
     }
     catch (exception) {
-        /* istanbul ignore next */
+        /* c8 ignore next */
         if (opt.skipErrors) {
             return null;
         }
@@ -1213,7 +1213,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
         lstat = await lstatAsync(root);
     }
     catch (exception) {
-        /* istanbul ignore next */
+        /* c8 ignore next */
         if (opt.skipErrors) {
             return null;
         }
@@ -1230,7 +1230,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
             children = sortFiles(children, opt.sorted);
         }
         catch (exception) {
-            /* istanbul ignore next */
+            /* c8 ignore next */
             if (opt.skipErrors) {
                 return null;
             }
