@@ -1,9 +1,10 @@
-import { resolve, basename, extname, relative } from 'path';
-import { homedir } from 'os';
-import { BinaryToTextEncoding, createHash, Hash } from 'crypto';
+import { resolve, basename, extname, relative } from 'node:path';
+import { homedir } from 'node:os';
+import { BinaryToTextEncoding, createHash, Hash } from 'node:crypto';
+import { statSync, readdirSync, readFileSync, lstatSync, Stats } from 'node:fs';
+import { stat as statAsync, readdir as readdirAsync, readFile as readFileAsync, lstat as lstatAsync } from 'node:fs/promises';
+
 import { makeRe } from 'minimatch';
-import { statSync, readdirSync, readFileSync, lstatSync, Stats } from 'fs';
-import { stat as statAsync, readdir as readdirAsync, readFile as readFileAsync, lstat as lstatAsync } from 'fs/promises';
 
 /* DREE TYPES */
 

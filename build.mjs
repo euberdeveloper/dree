@@ -6,7 +6,7 @@ import packageJson from './package.json' assert { type: 'json' };
 
 importMap.load({
     imports: {
-        '../lib/index': '../lib/esm/index.esm.js'
+        '../lib/index.js': '../lib/esm/index.esm.js'
     }
 });
 
