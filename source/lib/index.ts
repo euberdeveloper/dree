@@ -1,9 +1,10 @@
-import { resolve, basename, extname, relative } from 'path';
-import { homedir } from 'os';
-import { BinaryToTextEncoding, createHash, Hash } from 'crypto';
+import { resolve, basename, extname, relative } from 'node:path';
+import { homedir } from 'node:os';
+import { BinaryToTextEncoding, createHash, Hash } from 'node:crypto';
+import { statSync, readdirSync, readFileSync, lstatSync, Stats } from 'node:fs';
+import { stat as statAsync, readdir as readdirAsync, readFile as readFileAsync, lstat as lstatAsync } from 'node:fs/promises';
+
 import { makeRe } from 'minimatch';
-import { statSync, readdirSync, readFileSync, lstatSync, Stats } from 'fs';
-import { stat as statAsync, readdir as readdirAsync, readFile as readFileAsync, lstat as lstatAsync } from 'fs/promises';
 
 /* DREE TYPES */
 
@@ -450,6 +451,7 @@ function postSortFilesFirst(x: Dree, y: Dree): number {
 
 function postSortFiles(nodes: Dree[], postSortOption: boolean | PostSortMethodPredefined | PostSortDiscriminator): Dree[] {
     if (!postSortOption) {
+        /* c8 ignore next */
         return nodes;
     }
 
@@ -526,7 +528,6 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
         stat = statSync(path);
     }
     catch (exception) {
-        /* istanbul ignore next */
         if (options.skipErrors) {
             return null;
         }
@@ -538,8 +539,8 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
     try {
         lstat = lstatSync(path);
     }
+    /* c8 ignore start */
     catch (exception) {
-        /* istanbul ignore next */
         if (options.skipErrors) {
             return null;
         }
@@ -547,6 +548,7 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
             throw exception;
         }
     }
+    /* c8 ignore stop */
     const symbolicLink = lstat.isSymbolicLink();
     const type = stat.isFile() ? Type.FILE : Type.DIRECTORY;
 
@@ -585,8 +587,8 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
                     files = readdirSync(path);
                     files = sortFiles(files, options.sorted);
                 }
+                /* c8 ignore start */
                 catch (exception) {
-                    /* istanbul ignore next */
                     if (options.skipErrors) {
                         return null;
                     }
@@ -594,6 +596,7 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
                         throw exception;
                     }
                 }
+                /* c8 ignore stop */
                 if (options.emptyDirectory) {
                     dirTree.isEmpty = !files.length
                 }
@@ -656,8 +659,8 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
                 try {
                     data = readFileSync(path);
                 }
+                /* c8 ignore start */
                 catch (exception) {
-                    /* istanbul ignore next */
                     if (options.skipErrors) {
                         return null;
                     }
@@ -665,14 +668,16 @@ function _scan<Node extends Dree = Dree>(root: string, path: string, depth: numb
                         throw exception;
                     }
                 }
+                /* c8 ignore end */
                 hash.update(data);
                 const hashEncoding = options.hashEncoding as BinaryToTextEncoding;
                 dirTree.hash = hash.digest(hashEncoding);
             }
             break;
+        /* c8 ignore start */
         default:
-            /* istanbul ignore next */
             return null;
+        /* c8 ignore end */
     }
 
     if (onFile && type === Type.FILE) {
@@ -705,8 +710,8 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
     try {
         stat = await statAsync(path);
     }
+    /* c8 ignore start */
     catch (exception) {
-        /* istanbul ignore next */
         if (options.skipErrors) {
             return null;
         }
@@ -714,12 +719,13 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
             throw exception;
         }
     }
+    /* c8 ignore end */
     let lstat: Stats;
     try {
         lstat = await lstatAsync(path);
     }
+    /* c8 ignore start */
     catch (exception) {
-        /* istanbul ignore next */
         if (options.skipErrors) {
             return null;
         }
@@ -727,6 +733,7 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
             throw exception;
         }
     }
+    /* c8 ignore end */
     const symbolicLink = lstat.isSymbolicLink();
     const type = stat.isFile() ? Type.FILE : Type.DIRECTORY;
 
@@ -765,8 +772,8 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
                     files = await readdirAsync(path);
                     files = sortFiles(files, options.sorted);
                 }
+                /* c8 ignore start */
                 catch (exception) {
-                    /* istanbul ignore next */
                     if (options.skipErrors) {
                         return null;
                     }
@@ -774,6 +781,7 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
                         throw exception;
                     }
                 }
+                /* c8 ignore end */
                 if (options.emptyDirectory) {
                     dirTree.isEmpty = !files.length
                 }
@@ -835,8 +843,8 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
                 try {
                     data = await readFileAsync(path);
                 }
+                /* c8 ignore start */
                 catch (exception) {
-                    /* istanbul ignore next */
                     if (options.skipErrors) {
                         return null;
                     }
@@ -844,14 +852,16 @@ async function _scanAsync<Node extends Dree = Dree>(root: string, path: string, 
                         throw exception;
                     }
                 }
+                /* c8 ignore end */
                 hash.update(data);
                 const hashEncoding = options.hashEncoding as BinaryToTextEncoding;
                 dirTree.hash = hash.digest(hashEncoding);
             }
             break;
+        /* c8 ignore start */
         default:
-            /* istanbul ignore next */
             return null;
+        /* c8 ignore end */
     }
 
     if (onFile && type === Type.FILE) {
@@ -894,8 +904,8 @@ function _parse(root: string, children: string[], prefix: string, options: Parse
         try {
             stat = statSync(child);
         }
+        /* c8 ignore start */
         catch (exception) {
-            /* istanbul ignore next */
             if (options.skipErrors) {
                 return null;
             }
@@ -903,12 +913,13 @@ function _parse(root: string, children: string[], prefix: string, options: Parse
                 throw exception;
             }
         }
+        /* c8 ignore end */
         let lstat: Stats;
         try {
             lstat = lstatSync(child);
         }
+        /* c8 ignore start */
         catch (exception) {
-            /* istanbul ignore next */
             if (options.skipErrors) {
                 return null;
             }
@@ -916,6 +927,7 @@ function _parse(root: string, children: string[], prefix: string, options: Parse
                 throw exception;
             }
         }
+        /* c8 ignore end */
         const symbolicLink = lstat.isSymbolicLink();
         const type = stat.isFile() ? Type.FILE : Type.DIRECTORY;
 
@@ -940,8 +952,8 @@ function _parse(root: string, children: string[], prefix: string, options: Parse
                 children = readdirSync(child).map(file => resolve(child, file));
                 children = sortFiles(children, options.sorted);
             }
+            /* c8 ignore start */
             catch (exception) {
-                /* istanbul ignore next */
                 if (options.skipErrors) {
                     return null;
                 }
@@ -949,6 +961,7 @@ function _parse(root: string, children: string[], prefix: string, options: Parse
                     throw exception;
                 }
             }
+            /* c8 ignore end */
             result += children.length ? _parse(root, children, newPrefix, options, depth + 1) : '';
         }
 
@@ -981,8 +994,8 @@ async function _parseAsync(root: string, children: string[], prefix: string, opt
         try {
             stat = await statAsync(child);
         }
+        /* c8 ignore start */
         catch (exception) {
-            /* istanbul ignore next */
             if (options.skipErrors) {
                 return null;
             }
@@ -990,12 +1003,13 @@ async function _parseAsync(root: string, children: string[], prefix: string, opt
                 throw exception;
             }
         }
+        /* c8 ignore end */
         let lstat: Stats;
         try {
             lstat = await lstatAsync(child);
         }
+        /* c8 ignore start */
         catch (exception) {
-            /* istanbul ignore next */
             if (options.skipErrors) {
                 return null;
             }
@@ -1003,6 +1017,7 @@ async function _parseAsync(root: string, children: string[], prefix: string, opt
                 throw exception;
             }
         }
+        /* c8 ignore end */
         const symbolicLink = lstat.isSymbolicLink();
         const type = stat.isFile() ? Type.FILE : Type.DIRECTORY;
 
@@ -1027,8 +1042,8 @@ async function _parseAsync(root: string, children: string[], prefix: string, opt
                 children = (await readdirAsync(child)).map(file => resolve(child, file));
                 children = sortFiles(children, options.sorted);
             }
+            /* c8 ignore start */
             catch (exception) {
-                /* istanbul ignore next */
                 if (options.skipErrors) {
                     return null;
                 }
@@ -1036,6 +1051,7 @@ async function _parseAsync(root: string, children: string[], prefix: string, opt
                     throw exception;
                 }
             }
+            /* c8 ignore end */
             result += children.length ? (await _parseAsync(root, children, newPrefix, options, depth + 1)) : '';
         }
 
@@ -1135,8 +1151,8 @@ export function parse(path: string, options?: ParseOptions): string {
     try {
         stat = statSync(root);
     }
+    /* c8 ignore start */
     catch (exception) {
-        /* istanbul ignore next */
         if (opt.skipErrors) {
             return null;
         }
@@ -1144,12 +1160,13 @@ export function parse(path: string, options?: ParseOptions): string {
             throw exception;
         }
     }
+    /* c8 ignore end */
     let lstat: Stats;
     try {
         lstat = lstatSync(root);
     }
+    /* c8 ignore start */
     catch (exception) {
-        /* istanbul ignore next */
         if (opt.skipErrors) {
             return null;
         }
@@ -1157,6 +1174,7 @@ export function parse(path: string, options?: ParseOptions): string {
             throw exception;
         }
     }
+    /* c8 ignore end */
     const symbolicLink = lstat.isSymbolicLink();
 
     if ((opt.followLinks || !symbolicLink) && stat.isDirectory()) {
@@ -1165,8 +1183,8 @@ export function parse(path: string, options?: ParseOptions): string {
             children = readdirSync(root).map(file => resolve(root, file));
             children = sortFiles(children, opt.sorted);
         }
+        /* c8 ignore start */
         catch (exception) {
-            /* istanbul ignore next */
             if (opt.skipErrors) {
                 return null;
             }
@@ -1174,6 +1192,7 @@ export function parse(path: string, options?: ParseOptions): string {
                 throw exception;
             }
         }
+        /* c8 ignore end */
         result += children.length ? _parse(root, children, '\n ', opt, 1) : '';
     }
 
@@ -1198,8 +1217,8 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
     try {
         stat = await statAsync(root);
     }
+    /* c8 ignore start */
     catch (exception) {
-        /* istanbul ignore next */
         if (opt.skipErrors) {
             return null;
         }
@@ -1207,12 +1226,13 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
             throw exception;
         }
     }
+    /* c8 ignore end */
     let lstat: Stats;
     try {
         lstat = await lstatAsync(root);
     }
+    /* c8 ignore start */
     catch (exception) {
-        /* istanbul ignore next */
         if (opt.skipErrors) {
             return null;
         }
@@ -1220,6 +1240,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
             throw exception;
         }
     }
+    /* c8 ignore end */
     const symbolicLink = lstat.isSymbolicLink();
 
     if ((opt.followLinks || !symbolicLink) && stat.isDirectory()) {
@@ -1228,8 +1249,8 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
             children = (await readdirAsync(root)).map(file => resolve(root, file));
             children = sortFiles(children, opt.sorted);
         }
+        /* c8 ignore start */
         catch (exception) {
-            /* istanbul ignore next */
             if (opt.skipErrors) {
                 return null;
             }
@@ -1237,6 +1258,7 @@ export async function parseAsync(path: string, options?: ParseOptions): Promise<
                 throw exception;
             }
         }
+        /* c8 ignore end */
         result += children.length ? (await _parseAsync(root, children, '\n ', opt, 1)) : '';
     }
 

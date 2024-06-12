@@ -274,7 +274,7 @@ const parseOptions = [
 ];
 function generateParse(option) {
     const text = 'export default\n`' + dree.parse(path.join(process.cwd(), 'test', 'sample'), option.opt) + '`;';
-    fs.writeFileSync(path.join(process.cwd(), 'test', 'parse', platform, `${option.name}.test.mjs`), text);
+    fs.writeFileSync(path.join(process.cwd(), 'test', 'parse', platform, `${option.name}.test.js`), text);
 }
 parseOptions.forEach(option => {
     generateParse(option);
@@ -373,7 +373,7 @@ const parseTreeOptions = [
 ];
 function generateParseTree(option) {
     const text = 'export default\n`' + dree.parseTree(dree.scan(path.join(process.cwd(), 'test', 'sample'), option.opt), option.opt) + '`;';
-    fs.writeFileSync(path.join(process.cwd(), 'test', 'parseTree', platform, `${option.name}.test.mjs`), text);
+    fs.writeFileSync(path.join(process.cwd(), 'test', 'parseTree', platform, `${option.name}.test.js`), text);
 }
 parseTreeOptions.forEach(option => {
     generateParseTree(option);

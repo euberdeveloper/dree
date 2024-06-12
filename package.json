@@ -2,10 +2,23 @@
   "name": "dree",
   "version": "4.8.6",
   "description": "A nodejs module wich helps you handle a directory tree providing you its abstraction through tested functions and a custom configuration.",
-  "main": "bundled/lib/index.js",
-  "types": "bundled/lib/index.d.ts",
+  "main": "bundled/lib/commonjs/index.js",
+  "types": "bundled/lib/commonjs/index.d.ts",
+  "module": "./bundled/lib/esm/index.esm.js",
   "bin": {
     "dree": "bundled/bin/index.js"
+  },
+  "exports": {
+    ".": {
+      "require": {
+        "default": "./bundled/lib/commonjs/index.js",
+        "types": "./bundled/lib/commonjs/index.d.ts"
+      },
+      "import": {
+        "default": "./bundled/lib/esm/index.esm.js",
+        "types": "./bundled/lib/esm/index.d.ts"
+      }
+    }
   },
   "files": [
     "package.json",
@@ -14,24 +27,28 @@
     "CHANGELOG.md",
     "LICENSE"
   ],
+  "type": "module",
   "scripts": {
     "pretranspile": "shx rm -rf dist",
     "transpile": "tsc -p source",
     "prebundle": "shx rm -rf dist bundled",
-    "bundle": "webpack",
+    "bundle:esm": "node build.mjs",
+    "bundle:dts": "dts-bundle-generator -o bundled/lib/commonjs/index.d.ts --project source/tsconfig.json source/lib/index.ts",
+    "bundle": "pnpm bundle:esm && pnpm bundle:dts",
+    "postbundle:dts": "cp bundled/lib/commonjs/index.d.ts bundled/lib/esm/index.d.ts",
     "script:getr:linux": "node scripts/generate-expected-tests-results linux",
     "script:getr:mac": "node scripts/generate-expected-tests-results mac",
     "script:getr:windows": "node scripts/generate-expected-tests-results windows",
-    "test": "mocha --reporter spec test/test.mjs",
-    "nyc": "nyc --extension=ts --reporter=html --reporter=text --reporter=lcov npm run test",
-    "cover:coveralls": "nyc report --extension=ts --reporter=text-lcov | coveralls",
-    "cover:codecov": "nyc report --extension=ts --reporter=text-lcov > coverage.lcov && codecov",
-    "cover": "npm run cover:coveralls && npm run cover:codecov",
+    "test": "mocha --reporter spec test/test.js",
+    "test:cover": "c8 --reporter=html --reporter=text --reporter=lcov pnpm test",
+    "cover:coveralls": "c8 report --reporter=text-lcov | coveralls",
+    "cover:codecov": "c8 report --reporter=text-lcov > coverage.lcov && codecov",
+    "cover": "pnpm cover:coveralls && pnpm cover:codecov",
     "docs:html": "typedoc",
-    "docs:html-dev": "typedoc --options typedoc.dev.js",
+    "docs:html-dev": "typedoc --options typedoc.dev.cjs",
     "predocs": "shx rm -rf docs/documentation",
-    "docs": "npm run docs:html && npm run docs:html-dev",
-    "prepublishOnly": "npm run bundle",
+    "docs": "pnpm docs:html && pnpm docs:html-dev",
+    "prepublishOnly": "pnpm bundle",
     "release": "dotenv release-it"
   },
   "repository": {
@@ -68,22 +85,19 @@
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/node": "^20.14.2",
     "@types/yargs": "^17.0.32",
-    "bundle-declarations-webpack-plugin": "^5.1.1",
+    "c8": "^10.1.1",
     "chai": "^5.1.1",
     "chai-as-promised": "^8.0.0",
     "codecov": "^3.8.3",
     "coveralls": "^3.1.1",
     "dotenv-cli": "^7.4.2",
+    "dts-bundle-generator": "^9.5.1",
+    "esbuild": "^0.21.5",
+    "esbuild-plugin-import-map": "^2.1.0",
     "mocha": "^10.4.0",
-    "nyc": "^17.0.0",
     "release-it": "^17.3.0",
-    "shebang-loader": "^0.0.1",
     "shx": "^0.3.4",
-    "ts-loader": "^9.5.1",
     "typedoc": "^0.25.13",
-    "typescript": "^5.4.5",
-    "webpack": "^5.92.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-node-externals": "^3.0.0"
+    "typescript": "^5.4.5"
   }
 }

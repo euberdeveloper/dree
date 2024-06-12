@@ -22,7 +22,7 @@ export default function  (expect, dree, path) {
         it('Should return the exported content of "test/parse/first.test.js"', async function () {
 
             const result = await dree.parseAsync(path);
-            const expected = await importSample(`./${platform}/first.test.mjs`);
+            const expected = await importSample(`./${platform}/first.test.js`);
             expect(result).to.equal(expected);
 
         });
@@ -35,7 +35,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/second.test.mjs`);
+            const expected = await importSample(`./${platform}/second.test.js`);
             expect(result).to.equal(expected);
 
         });
@@ -49,7 +49,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/third.test.mjs`);
+            const expected = await importSample(`./${platform}/third.test.js`);
             expect(result).to.equal(expected);
         });
 
@@ -61,7 +61,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/fourth.test.mjs`);
+            const expected = await importSample(`./${platform}/fourth.test.js`);
             expect(result).to.equal(expected);
         });
 
@@ -72,7 +72,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/fifth.test.mjs`);
+            const expected = await importSample(`./${platform}/fifth.test.js`);
             expect(result).to.equal(expected);
         });
 
@@ -83,7 +83,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/sixth.test.mjs`);
+            const expected = await importSample(`./${platform}/sixth.test.js`);
             expect(result).to.equal(expected);
         });
 
@@ -94,7 +94,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/seventh.test.mjs`);
+            const expected = await importSample(`./${platform}/seventh.test.js`);
             expect(result).to.equal(expected);
         });
 
@@ -105,7 +105,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/eighth.test.mjs`);
+            const expected = await importSample(`./${platform}/eighth.test.js`);
 
             expect(result).to.equal(expected);
 
@@ -118,7 +118,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/ninth.test.mjs`);
+            const expected = await importSample(`./${platform}/ninth.test.js`);
 
             expect(result).to.equal(expected);
 
@@ -131,7 +131,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/tenth.test.mjs`);
+            const expected = await importSample(`./${platform}/tenth.test.js`);
 
             expect(result).to.equal(expected);
 
@@ -144,7 +144,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/eleventh.test.mjs`);
+            const expected = await importSample(`./${platform}/eleventh.test.js`);
 
             expect(result).to.equal(expected);
 
@@ -157,7 +157,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/twelfth.test.mjs`);
+            const expected = await importSample(`./${platform}/twelfth.test.js`);
 
             expect(result).to.equal(expected);
 
@@ -170,7 +170,7 @@ export default function  (expect, dree, path) {
             };
 
             const result = await dree.parseAsync(path, options);
-            const expected = await importSample(`./${platform}/thirteenth.test.mjs`);
+            const expected = await importSample(`./${platform}/thirteenth.test.js`);
 
             expect(result).to.equal(expected);
 
