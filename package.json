@@ -45,7 +45,7 @@
     "cover:codecov": "c8 report --reporter=text-lcov > coverage.lcov && codecov",
     "cover": "pnpm cover:coveralls && pnpm cover:codecov",
     "docs:html": "typedoc",
-    "docs:html-dev": "typedoc --options typedoc.dev.js",
+    "docs:html-dev": "typedoc --options typedoc.dev.cjs",
     "predocs": "shx rm -rf docs/documentation",
     "docs": "pnpm docs:html && pnpm docs:html-dev",
     "prepublishOnly": "pnpm bundle",
