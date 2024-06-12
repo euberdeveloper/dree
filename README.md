@@ -591,6 +591,7 @@ dree
  ├── CHANGELOG.md
  ├── LICENSE
  ├── README.md
+ ├── build.mjs
  ├─> docs
  │   └─> tree
  │       └── dree.config.json
@@ -600,7 +601,8 @@ dree
  │   └── generate-expected-tests-results.js
  ├─> source
  │   ├─> bin
- │   │   └── index.ts
+ │   │   ├── index.ts
+ │   │   └── shims.d.ts
  │   ├─> lib
  │   │   └── index.ts
  │   └── tsconfig.json
@@ -610,10 +612,9 @@ dree
  │   ├─> parseTree
  │   ├─> sample
  │   ├─> scan
- │   └── test.mjs
- ├── typedoc.dev.js
- ├── typedoc.js
- └── webpack.config.js
+ │   └── test.js
+ ├── typedoc.cjs
+ └── typedoc.dev.cjs
 ```
 [//]: # (dree - END)
 
