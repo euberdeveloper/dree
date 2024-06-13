@@ -589,6 +589,8 @@ dree
  ├── .env.example
  ├── .release-it.json
  ├── CHANGELOG.md
+ ├── CODE_OF_CONDUCT.md
+ ├── CONTRIBUTING.md
  ├── LICENSE
  ├── README.md
  ├── build.mjs
