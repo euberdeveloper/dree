@@ -32,6 +32,7 @@
     "pretranspile": "shx rm -rf dist",
     "transpile": "tsc -p source",
     "prebundle": "shx rm -rf dist bundled",
+    "bundle:test": "node build.test.mjs",
     "bundle:esm": "node build.mjs",
     "bundle:dts": "dts-bundle-generator -o bundled/lib/commonjs/index.d.ts --project source/tsconfig.json source/lib/index.ts",
     "bundle": "pnpm bundle:esm && pnpm bundle:dts",
