@@ -80,9 +80,9 @@
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^8.0.1",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.5",
     "@types/yargs": "^17.0.32",
-    "c8": "^10.1.1",
+    "c8": "^10.1.2",
     "chai": "^5.1.1",
     "chai-as-promised": "^8.0.0",
     "dotenv-cli": "^7.4.2",
