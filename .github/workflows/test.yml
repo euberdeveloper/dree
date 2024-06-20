@@ -25,10 +25,7 @@ jobs:
       - name: Install node dependencies
         run: pnpm install
         
-      - name: Transpile code
-        run: pnpm run transpile
-        
-      - name: Run tests and generate coverage report
+      - name: Test code and generate coverage report
         run: pnpm run test:cover
        
       - name: Send coverage report to Coveralls

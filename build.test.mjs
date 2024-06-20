@@ -4,11 +4,14 @@ import * as importMap from "esbuild-plugin-import-map";
 
 import packageJson from './package.json' assert { type: 'json' };
 
-importMap.load({
-    imports: {
-        '../lib/index.js': '../lib/esm/index.esm.js'
-    }
-});
+async function loadImportMapForBundle(bundledPath) {
+    importMap.clear();
+    await importMap.load({
+        imports: {
+            '../dist/lib/index.js': bundledPath
+        }
+    });
+}
 
 function getExternalDependencies(allow = []) {
     const deps = packageJson.dependencies ? Object.keys(packageJson.dependencies).filter(dep => !allow.includes(dep)) : [];
@@ -19,43 +22,38 @@ function getExternalDependencies(allow = []) {
 async function buildModule() {
     const shared = {
         platform: 'node',
-        entryPoints: ['source/lib/index.ts'],
+        entryPoints: ['test/test.js'],
         bundle: true,
-        minify: true,
-        treeShaking: true,
-        sourcemap: false
+        minify: false,
+        treeShaking: false,
+        sourcemap: true,
+        external: getExternalDependencies(),
+        define: {
+            'process.env.__PARSE_TEST_RELATIVE_PATH__': `'../../../test/parse'`,
+            'process.env.__PARSE_TREE_TEST_RELATIVE_PATH__': `'../../../test/parseTree'`,
+        }
     };
 
+    loadImportMapForBundle('../../../bundled/lib/commonjs/index.js');
     await build({
         ...shared,
-        outfile: 'bundled/lib/commonjs/index.js',
+        outfile: 'bundled/test/commonjs/index.js',
         format: 'cjs',
-        external: getExternalDependencies()
+        plugins: [importMap.plugin()]
     });
 
+    loadImportMapForBundle('../../../bundled/lib/esm/index.esm.js');
     await build({
         ...shared,
-        outfile: 'bundled/lib/esm/index.esm.js',
+        outfile: 'bundled/test/esm/index.esm.js',
         format: 'esm',
-        external: getExternalDependencies()
-    });
-
-    await build({
-        ...shared,
-        entryPoints: ['source/bin/index.ts'],
-        outfile: 'bundled/bin/index.js',
-        format: 'esm',
-        external: getExternalDependencies(),
-        plugins: [importMap.plugin()],
-        define: {
-            '__VERSION__': `"${packageJson.version}"`
-        }
+        plugins: [importMap.plugin()]
     });
 }
 
 function generateCommonjsPackageJson() {
     const packageJsonCommonJs = JSON.stringify({ ...packageJson, type: undefined }, null, 2);
-    fs.writeFileSync('./bundled/lib/commonjs/package.json', packageJsonCommonJs);
+    fs.writeFileSync('./bundled/test/commonjs/package.json', packageJsonCommonJs);
 }
 
 await buildModule();

@@ -1,4 +1,4 @@
-export default function (expect, dree, path) {
+export default function (expect, dree, path, samplePath) {
 
     let platform = null;
     switch (process.platform) {
@@ -14,14 +14,16 @@ export default function (expect, dree, path) {
     }
 
     async function importSample(filePath) {
-        return (await import (filePath)).default
+        const pathPrefix = process.env.__PARSE_TREE_TEST_RELATIVE_PATH__;
+        const pathToImport = pathPrefix ? path.join(pathPrefix, filePath) : filePath;
+        return (await import (pathToImport)).default
     }
 
     describe('Test: parseTreeAsync function', async function () {
 
         it('Should return the exported content of "test/parseTree/first.test.js"', async function () {
 
-            const result = await dree.parseTreeAsync(dree.scan(path));
+            const result = await dree.parseTreeAsync(dree.scan(samplePath));
             const expected = await importSample(`./${platform}/first.test.js`);
             expect(result).to.equal(expected);
 
@@ -34,7 +36,7 @@ export default function (expect, dree, path) {
                 symbolicLinks: false
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath), options);
             const expected = await importSample(`./${platform}/second.test.js`);
             expect(result).to.equal(expected);
 
@@ -48,7 +50,7 @@ export default function (expect, dree, path) {
                 showHidden: false
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath), options);
             const expected = await importSample(`./${platform}/third.test.js`);
             expect(result).to.equal(expected);
         });
@@ -59,7 +61,7 @@ export default function (expect, dree, path) {
                 depth: -1
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath), options);
             const expected = await importSample(`./${platform}/fourth.test.js`);
             expect(result).to.equal(expected);
         });
@@ -72,7 +74,7 @@ export default function (expect, dree, path) {
                 showHidden: false
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath), options);
             const expected = await importSample(`./${platform}/fifth.test.js`);
             expect(result).to.equal(expected);
         });
@@ -83,7 +85,7 @@ export default function (expect, dree, path) {
                 followLinks: true
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath, options), options);
             const expected = await importSample(`./${platform}/sixth.test.js`);
             expect(result).to.equal(expected);
         });
@@ -94,7 +96,7 @@ export default function (expect, dree, path) {
                 sorted: true
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath, options), options);
             const expected = await importSample(`./${platform}/seventh.test.js`);
             expect(result).to.equal(expected);
         });
@@ -105,7 +107,7 @@ export default function (expect, dree, path) {
                 sorted: (x, y) => y.localeCompare(x)
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath, options), options);
             const expected = await importSample(`./${platform}/eighth.test.js`);
             expect(result).to.equal(expected);
         });
@@ -116,7 +118,7 @@ export default function (expect, dree, path) {
                 exclude: [/firebase/, '/**/notes.*']
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath, options), options);
             const expected = await importSample(`./${platform}/ninth.test.js`);
 
             expect(result).to.equal(expected);
@@ -129,7 +131,7 @@ export default function (expect, dree, path) {
                 exclude: '/**/firebase.*'
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath, options), options);
             const expected = await importSample(`./${platform}/tenth.test.js`);
 
             expect(result).to.equal(expected);
@@ -142,7 +144,7 @@ export default function (expect, dree, path) {
                 sorted: 'alpha'
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath, options), options);
             const expected = await importSample(`./${platform}/eleventh.test.js`);
 
             expect(result).to.equal(expected);
@@ -155,7 +157,7 @@ export default function (expect, dree, path) {
                 sorted: 'antialpha'
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath, options), options);
             const expected = await importSample(`./${platform}/twelfth.test.js`);
 
             expect(result).to.equal(expected);
@@ -168,7 +170,7 @@ export default function (expect, dree, path) {
                 sorted: 'alpha-insensitive'
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath, options), options);
             const expected = await importSample(`./${platform}/thirteenth.test.js`);
 
             expect(result).to.equal(expected);
@@ -181,7 +183,7 @@ export default function (expect, dree, path) {
                 sorted: 'antialpha-insensitive'
             };
 
-            const result = await dree.parseTreeAsync(dree.scan(path, options), options);
+            const result = await dree.parseTreeAsync(dree.scan(samplePath, options), options);
             const expected = await importSample(`./${platform}/fourteenth.test.js`);
 
             expect(result).to.equal(expected);
