@@ -594,6 +594,7 @@ dree
  ├── LICENSE
  ├── README.md
  ├── build.mjs
+ ├── build.test.mjs
  ├─> docs
  │   └─> tree
  │       └── dree.config.json
