@@ -11,12 +11,12 @@
   "exports": {
     ".": {
       "require": {
-        "default": "./bundled/lib/commonjs/index.js",
-        "types": "./bundled/lib/commonjs/index.d.ts"
+        "types": "./bundled/lib/commonjs/index.d.ts",
+        "default": "./bundled/lib/commonjs/index.js"
       },
       "import": {
-        "default": "./bundled/lib/esm/index.esm.js",
-        "types": "./bundled/lib/esm/index.d.ts"
+        "types": "./bundled/lib/esm/index.d.ts",
+        "default": "./bundled/lib/esm/index.esm.js"
       }
     }
   },
