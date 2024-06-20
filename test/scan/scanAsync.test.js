@@ -1,4 +1,4 @@
-export default function (expect, fs, os, dree, path) {
+export default function (expect, fs, os, dree, samplePath) {
 
     describe('Test: scanAsync function', async function () {
 
@@ -87,7 +87,7 @@ export default function (expect, fs, os, dree, path) {
         }
 
         it(`Should return the content of "test/scan/${platform}/first.test.json"`, async function () {
-            const result = getResult(await dree.scanAsync(path));
+            const result = getResult(await dree.scanAsync(samplePath));
             const expected = getExpected(`test/scan/${platform}/first.test.json`);
             expect(result).to.equal(expected);
 
@@ -99,7 +99,7 @@ export default function (expect, fs, os, dree, path) {
                 extensions: ['', 'ts', 'json']
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/second.test.json`);
             expect(result).to.equal(expected);
 
@@ -112,7 +112,7 @@ export default function (expect, fs, os, dree, path) {
                 symbolicLinks: false
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/third.test.json`);
             expect(result).to.equal(expected);
 
@@ -131,7 +131,7 @@ export default function (expect, fs, os, dree, path) {
                 showHidden: false
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/fourth.test.json`, true);
             expect(result).to.equal(expected);
 
@@ -152,7 +152,7 @@ export default function (expect, fs, os, dree, path) {
                 foldersSize += stat.size;
             }
 
-            const result = getResult(await dree.scanAsync(path, options, filesCallback, foldersCallback));
+            const result = getResult(await dree.scanAsync(samplePath, options, filesCallback, foldersCallback));
             const expected = getExpected(`test/scan/${platform}/fifth.test.json`);
             expect(result).to.equal(expected);
             switch (platform) {
@@ -184,7 +184,7 @@ export default function (expect, fs, os, dree, path) {
                 setTimeout(resolve(), 10);
             });
 
-            const result = getResult(await dree.scanAsync(path, options, filesCallback, foldersCallback));
+            const result = getResult(await dree.scanAsync(samplePath, options, filesCallback, foldersCallback));
             const expected = getExpected(`test/scan/${platform}/fifth.test.json`);
             expect(result).to.equal(expected);
             switch (platform) {
@@ -205,7 +205,7 @@ export default function (expect, fs, os, dree, path) {
                 depth: -1
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/sixth.test.json`);
 
             expect(result).to.equal(expected);
@@ -218,7 +218,7 @@ export default function (expect, fs, os, dree, path) {
                 exclude: [/firebase/]
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/seventh.test.json`);
 
             expect(result).to.equal(expected);
@@ -232,7 +232,7 @@ export default function (expect, fs, os, dree, path) {
                 exclude: /.ts/
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/eight.test.json`);
 
             expect(result).to.equal(expected);
@@ -245,7 +245,7 @@ export default function (expect, fs, os, dree, path) {
                 size: true
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/ninth.test.json`);
 
             expect(result).to.equal(expected);
@@ -257,7 +257,7 @@ export default function (expect, fs, os, dree, path) {
                 followLinks: true
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/tenth.test.json`);
 
             expect(result).to.equal(expected);
@@ -269,7 +269,7 @@ export default function (expect, fs, os, dree, path) {
                 matches: process.platform === 'win32' ? /^.*\\f\w+(\.\w+)?$/ : /^.*\/f\w+(\.\w+)?$/
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/eleventh.test.json`);
 
             expect(result).to.equal(expected);
@@ -281,7 +281,7 @@ export default function (expect, fs, os, dree, path) {
                 matches: process.platform === 'win32' ? [/^.*\\f\w+(\.\w+)?$/, /^.*\\\w+s\w(\.\w+)?$/] : [/^.*\/f\w+(\.\w+)?$/, /^.*\/\w+s\w(\.\w+)?$/]
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/twelfth.test.json`);
 
             expect(result).to.equal(expected);
@@ -293,7 +293,7 @@ export default function (expect, fs, os, dree, path) {
                 sorted: true
             };
 
-            const result = getResult(await dree.scanAsync(path, options), false);
+            const result = getResult(await dree.scanAsync(samplePath, options), false);
             const expected = getExpected(`test/scan/${platform}/thirteenth.test.json`, false, false);
 
             expect(result).to.equal(expected);
@@ -305,7 +305,7 @@ export default function (expect, fs, os, dree, path) {
                 sorted: (x, y) => y.localeCompare(x)
             };
 
-            const result = getResult(await dree.scanAsync(path, options), false);
+            const result = getResult(await dree.scanAsync(samplePath, options), false);
             const expected = getExpected(`test/scan/${platform}/fourteenth.test.json`, false, false);
 
             expect(result).to.equal(expected);
@@ -317,7 +317,7 @@ export default function (expect, fs, os, dree, path) {
                 descendants: true
             };
 
-            const result = getResult(await dree.scanAsync(path, options), false);
+            const result = getResult(await dree.scanAsync(samplePath, options), false);
             const expected = getExpected(`test/scan/${platform}/fifteenth.test.json`, false, false);
 
             expect(result).to.equal(expected);
@@ -331,7 +331,7 @@ export default function (expect, fs, os, dree, path) {
                 exclude: [/firebase/]
             };
 
-            const result = getResult(await dree.scanAsync(path, options), false);
+            const result = getResult(await dree.scanAsync(samplePath, options), false);
             const expected = getExpected(`test/scan/${platform}/sixteenth.test.json`, false, false);
 
             expect(result).to.equal(expected);
@@ -354,7 +354,7 @@ export default function (expect, fs, os, dree, path) {
                 exclude: [/firebase/, '/**/notes.*']
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/seventeenth.test.json`);
 
             expect(result).to.equal(expected);
@@ -367,7 +367,7 @@ export default function (expect, fs, os, dree, path) {
                 exclude: '/**/firebase.*'
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/eighteenth.test.json`);
 
             expect(result).to.equal(expected);
@@ -380,7 +380,7 @@ export default function (expect, fs, os, dree, path) {
                 sorted: 'alpha'
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/nineteenth.test.json`);
 
             expect(result).to.equal(expected);
@@ -393,7 +393,7 @@ export default function (expect, fs, os, dree, path) {
                 sorted: 'antialpha'
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/twentieth.test.json`);
 
             expect(result).to.equal(expected);
@@ -406,7 +406,7 @@ export default function (expect, fs, os, dree, path) {
                 sorted: 'alpha-insensitive',
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/twentyfirst.test.json`);
 
             expect(result).to.equal(expected);
@@ -419,7 +419,7 @@ export default function (expect, fs, os, dree, path) {
                 sorted: 'antialpha-insensitive',
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/twentysecond.test.json`);
 
             expect(result).to.equal(expected);
@@ -432,7 +432,7 @@ export default function (expect, fs, os, dree, path) {
                 postSorted: 'files-first',
             };
 
-            const result = getResult(await dree.scanAsync(path, options));
+            const result = getResult(await dree.scanAsync(samplePath, options));
             const expected = getExpected(`test/scan/${platform}/twentythird.test.json`);
 
             expect(result).to.equal(expected);
@@ -457,7 +457,7 @@ export default function (expect, fs, os, dree, path) {
             const callback = (node) => {
                 node.uppercaseName = node.name.toUpperCase();
             };
-            const result = await dree.scanAsync(path, null, callback, callback);
+            const result = await dree.scanAsync(samplePath, null, callback, callback);
             
             function checkNode(node) {
                 expect(node.uppercaseName).to.equal(node.name.toUpperCase());

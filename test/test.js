@@ -1,6 +1,7 @@
 'use strict';
 import fs from 'node:fs';
 import os from 'node:os';
+import path from 'node:path';
 
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
@@ -18,11 +19,11 @@ chai.use(chaiAsPromised);
 const { expect } = chai;
 
 describe('Dree module tests', async function() {
-    const path = 'test/sample';
-    testScan(expect, fs, os, dree, path);
-    testScanAsync(expect, fs, os, dree, path);
-    testParse(expect, dree, path);
-    testParseAsync(expect, dree, path);
-    testParseTree(expect, dree, path);
-    testParseTreeAsync(expect, dree, path);
+    const samplePath = 'test/sample';
+    testScan(expect, fs, os, dree, samplePath);
+    testScanAsync(expect, fs, os, dree, samplePath);
+    testParse(expect, dree, path, samplePath);
+    testParseAsync(expect, dree, path, samplePath);
+    testParseTree(expect, dree, path, samplePath);
+    testParseTreeAsync(expect, dree, path, samplePath);
 });

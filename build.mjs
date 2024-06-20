@@ -49,7 +49,7 @@ async function buildModule() {
         plugins: [importMap.plugin()],
         define: {
             '__VERSION__': `"${packageJson.version}"`
-          }
+        }
     });
 }
 
