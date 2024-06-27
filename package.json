@@ -84,12 +84,12 @@
     }
   },
   "dependencies": {
-    "minimatch": "^9.0.4",
+    "minimatch": "^9.0.5",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^8.0.1",
-    "@types/node": "^20.14.8",
+    "@types/node": "^20.14.9",
     "@types/yargs": "^17.0.32",
     "c8": "^10.1.2",
     "chai": "^5.1.1",
@@ -98,10 +98,10 @@
     "dts-bundle-generator": "^9.5.1",
     "esbuild": "^0.21.5",
     "esbuild-plugin-import-map": "^2.1.0",
-    "mocha": "^10.4.0",
+    "mocha": "^10.5.2",
     "release-it": "^17.4.0",
     "shx": "^0.3.4",
-    "typedoc": "^0.26.1",
+    "typedoc": "^0.26.2",
     "typescript": "^5.5.2"
   }
 }
