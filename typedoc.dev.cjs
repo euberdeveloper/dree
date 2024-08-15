@@ -10,6 +10,7 @@ module.exports = {
     sidebarLinks: {
         'Module docs': 'https://dree.euber.dev'
     },
+    plugin: ['typedoc-plugin-ga'],
     tsconfig: 'source/tsconfig.json',
     gaID: process.env.GA_TOKEN,
     out: './docs/documentation/html-dev',

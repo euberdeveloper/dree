@@ -85,12 +85,13 @@
   },
   "dependencies": {
     "minimatch": "^10.0.1",
+    "typedoc-plugin-ga": "^1.0.1",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^8.0.1",
-    "@types/node": "^20.14.10",
-    "@types/yargs": "^17.0.32",
+    "@types/node": "^22.3.0",
+    "@types/yargs": "^17.0.33",
     "c8": "^10.1.2",
     "chai": "^5.1.1",
     "chai-as-promised": "^8.0.0",
@@ -98,10 +99,10 @@
     "dts-bundle-generator": "^9.5.1",
     "esbuild": "^0.23.0",
     "esbuild-plugin-import-map": "^2.1.0",
-    "mocha": "^10.6.0",
-    "release-it": "^17.5.0",
+    "mocha": "^10.7.3",
+    "release-it": "^17.6.0",
     "shx": "^0.3.4",
-    "typedoc": "^0.26.3",
-    "typescript": "^5.5.3"
+    "typedoc": "^0.26.5",
+    "typescript": "^5.5.4"
   }
 }
