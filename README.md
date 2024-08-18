@@ -149,7 +149,8 @@ const options = {
   followLinks: true,
   depth: 5,
   exclude: /dir_to_exclude/,
-  extensions: [ 'txt', 'jpg' ]
+  extensions: [ 'txt', 'jpg' ],
+  symbols: dree.ASCII_SYMBOLS
 };
 
 const string = dree.parse('./folder', options);
@@ -489,7 +490,36 @@ Given a path, returns a string representing its directory tree. The result could
 * __extensions__: Default value: `undefined`. It is an array of strings and all the files whose extension is not included in that array will be skipped by the algorithm. If value is `undefined`, all file extensions will be considered, if it is `[]`, no files will be included.
 * __sorted__: Default value: `undefined`. If true, directories and files will be scanned ordered by path. The value can be both boolean for default alpha order, a custom sorting function or a predefined sorting method in SortMethodPredefined.
 * __homeShortcut__: Default value: `false`. If true, the unix homedir shortcut ~ will be expanded to the user home directory.
+* __symbols__: Default value: `DEFAULT_SYMBOLS`. Symbols used to represent the tree in a string.
 * __skipErrors__: Default value: `true`. If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every error thrown by `fs` calls will be ignored.
+
+**DEFAULT_SYMBOLS object:**
+
+```typescript
+{
+    dirChild: '─> ',
+    fileChild: '── ',
+    forkChild: '├',
+    lastChild: '└',
+    linkChild: '>>',
+    tabIndent: '    ',
+    pipeIndent: '│   '
+}
+```
+
+**ASCII_SYMBOLS object:**
+
+```typescript
+{
+    dirChild: '-\\ ',
+    fileChild: '-- ',
+    forkChild: '|',
+    lastChild: '`',
+    linkChild: '->',
+    tabIndent: '    ',
+    pipeIndent: '|   '
+}
+```
 
 **Result string:**
 
