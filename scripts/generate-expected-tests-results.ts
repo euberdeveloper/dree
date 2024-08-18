@@ -209,6 +209,10 @@ scanTestsDetails.forEach(testDetails => {
 
 type ParseTestDetails = TestDetails<ParseOptions>;
 
+function purgeBacktickAndBackSlash(text: string): string {
+    return text.replaceAll('\\', '\\\\').replaceAll('`', '\\`');
+}
+
 const parseTestsDetails: ParseTestDetails[] = [
     {
         name: 'first',
@@ -299,7 +303,7 @@ const parseTestsDetails: ParseTestDetails[] = [
 ];
 function generateParse(testDetails: ParseTestDetails) {
     const tree = parse(path.join(process.cwd(), 'test', 'sample'), testDetails.opt);
-    const text = 'export default\n`' + tree.replaceAll('\\', '\\\\').replaceAll('`', '\\`') + '`;';
+    const text = 'export default\n`' + purgeBacktickAndBackSlash(tree) + '`;';
     fs.writeFileSync(path.join(process.cwd(), 'test', 'parse', platform, `${testDetails.name}.test.js`), text);
 }
 parseTestsDetails.forEach(testDetails => {
@@ -404,7 +408,8 @@ const parseTreeTestsDetails: ParseTestDetails[] = [
     }
 ];
 function generateParseTree(testDetails: ParseTestDetails) {
-    const text = 'export default\n`' + parseTree(scan(path.join(process.cwd(), 'test', 'sample'), testDetails.opt), testDetails.opt) + '`;';
+    const tree = parseTree(scan(path.join(process.cwd(), 'test', 'sample'), testDetails.opt), testDetails.opt);
+    const text = 'export default\n`' + purgeBacktickAndBackSlash(tree) + '`;';
     fs.writeFileSync(path.join(process.cwd(), 'test', 'parseTree', platform, `${testDetails.name}.test.js`), text);
 }
 parseTreeTestsDetails.forEach(testDetails => {
