@@ -237,6 +237,20 @@ export interface ScanOptions {
 }
 
 /**
+ * Interface of the symbols used to represent the tree in a string. 
+ * See [[DEFAULT_SYMBOLS]] for an example with the default values
+ */
+export interface TreeSymbols {
+    dirChild: string;
+    fileChild: string;
+    forkChild: string;
+    lastChild: string;
+    linkChild: string;
+    tabIndent: string;
+    pipeIndent: string;
+}
+
+/**
  * Interface of the options object used with "parse" or "parseTree" functions
  */
 export interface ParseOptions {
@@ -283,6 +297,10 @@ export interface ParseOptions {
      */
     homeShortcut?: boolean;
     /**
+     * Symbols used to represent the tree in a string
+     */
+    symbols?: TreeSymbols;
+    /**
      * If true, folders whose user has not permissions will be skipped. An error will be thrown otherwise. Note: in fact every
      * error thrown by fs calls will be ignored
      */
@@ -316,6 +334,19 @@ const SCAN_DEFAULT_OPTIONS: Required<ScanOptions> = {
     skipErrors: true
 };
 
+/**
+ * The default symbols used to represent the tree in a string
+ */
+export const DEFAULT_SYMBOLS: TreeSymbols = {
+    dirChild: '─> ',
+    fileChild: '── ',
+    forkChild: '├',
+    lastChild: '└',
+    linkChild: '>>',
+    tabIndent: '    ',
+    pipeIndent: '│   ',
+};
+
 const PARSE_DEFAULT_OPTIONS: Required<ParseOptions> = {
     symbolicLinks: true,
     followLinks: false,
@@ -326,6 +357,7 @@ const PARSE_DEFAULT_OPTIONS: Required<ParseOptions> = {
     sorted: false,
     postSorted: false,
     homeShortcut: false,
+    symbols: DEFAULT_SYMBOLS,
     skipErrors: true
 };
 
@@ -942,8 +974,8 @@ function _parse(root: string, children: string[], prefix: string, options: Parse
             return '';
         }
 
-        const last = symbolicLink ? '>>' : (type === Type.DIRECTORY ? '─> ' : '── ');
-        const newPrefix = prefix + (index === children.length - 1 ? '    ' : '│   ');
+        const last = symbolicLink ? options.symbols.linkChild : (type === Type.DIRECTORY ? options.symbols.dirChild : options.symbols.fileChild);
+        const newPrefix = prefix + (index === children.length - 1 ? options.symbols.tabIndent : options.symbols.pipeIndent);
         result += last + name;
 
         if ((options.followLinks || !symbolicLink) && type === Type.DIRECTORY) {
@@ -968,7 +1000,7 @@ function _parse(root: string, children: string[], prefix: string, options: Parse
         return result;
     });
     lines.filter(line => !!line).forEach((line, index, lines) => {
-        result += prefix + (index === lines.length - 1 ? '└' + line : '├' + line);
+        result += prefix + (index === lines.length - 1 ? options.symbols.lastChild + line : options.symbols.forkChild + line);
     });
     return result;
 }
@@ -1032,8 +1064,8 @@ async function _parseAsync(root: string, children: string[], prefix: string, opt
             return '';
         }
 
-        const last = symbolicLink ? '>>' : (type === Type.DIRECTORY ? '─> ' : '── ');
-        const newPrefix = prefix + (index === children.length - 1 ? '    ' : '│   ');
+        const last = symbolicLink ? options.symbols.linkChild : (type === Type.DIRECTORY ? options.symbols.dirChild : options.symbols.fileChild);
+        const newPrefix = prefix + (index === children.length - 1 ? options.symbols.tabIndent : options.symbols.pipeIndent);
         result += last + name;
 
         if ((options.followLinks || !symbolicLink) && type === Type.DIRECTORY) {
@@ -1058,7 +1090,7 @@ async function _parseAsync(root: string, children: string[], prefix: string, opt
         return result;
     }));
     lines.filter(line => !!line).forEach((line, index, lines) => {
-        result += prefix + (index === lines.length - 1 ? '└' + line : '├' + line);
+        result += prefix + (index === lines.length - 1 ? options.symbols.lastChild + line : options.symbols.forkChild + line);
     });
     return result;
 }
@@ -1069,9 +1101,9 @@ function _parseTree(children: Dree[], prefix: string, options: ParseOptions, dep
     children
         .filter(child => !skip(child, options, depth))
         .forEach((child, index, children) => {
-            const last = child.isSymbolicLink ? '>>' : (child.type === Type.DIRECTORY ? '─> ' : '── ');
-            const line = (index === children.length - 1) ? '└' + last : '├' + last;
-            const newPrefix = prefix + (index === children.length - 1 ? '    ' : '│   ');
+            const last = child.isSymbolicLink ? options.symbols.linkChild : (child.type === Type.DIRECTORY ? options.symbols.dirChild : options.symbols.fileChild);
+            const line = (index === children.length - 1) ? options.symbols.lastChild + last : options.symbols.forkChild + last;
+            const newPrefix = prefix + (index === children.length - 1 ? options.symbols.tabIndent : options.symbols.pipeIndent);
             result += prefix + line + child.name;
             result += (child.children && (options.followLinks || !child.isSymbolicLink) ? _parseTree(child.children, newPrefix, options, depth + 1) : '');
         });
@@ -1084,9 +1116,9 @@ async function _parseTreeAsync(children: Dree[], prefix: string, options: ParseO
     const filteredChildren = children.filter(child => !skip(child, options, depth));
     for (let index = 0; index < filteredChildren.length; index++) {
         const child = filteredChildren[index];
-        const last = child.isSymbolicLink ? '>>' : (child.type === Type.DIRECTORY ? '─> ' : '── ');
-        const line = (index === filteredChildren.length - 1) ? '└' + last : '├' + last;
-        const newPrefix = prefix + (index === filteredChildren.length - 1 ? '    ' : '│   ');
+        const last = child.isSymbolicLink ? options.symbols.linkChild : (child.type === Type.DIRECTORY ? options.symbols.dirChild : options.symbols.fileChild);
+        const line = (index === filteredChildren.length - 1) ? options.symbols.lastChild + last : options.symbols.forkChild + last;
+        const newPrefix = prefix + (index === filteredChildren.length - 1 ? options.symbols.tabIndent : options.symbols.pipeIndent);
         result += prefix + line + child.name;
         result += (child.children && (options.followLinks || !child.isSymbolicLink) ? (await _parseTreeAsync(child.children, newPrefix, options, depth + 1)) : '');
     }
