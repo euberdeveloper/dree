@@ -2,11 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { 
     scan,
-    scanAsync,
     parse,
-    parseAsync,
     parseTree,
-    parseTreeAsync,
     SortMethodPredefined,
     type ScanOptions,
     type ParseOptions, 
