@@ -299,7 +299,7 @@ const parseTestsDetails: ParseTestDetails[] = [
 ];
 function generateParse(testDetails: ParseTestDetails) {
     const tree = parse(path.join(process.cwd(), 'test', 'sample'), testDetails.opt);
-    const text = 'export default\n`' + tree.replaceAll('`', '\\`')  + '`;';
+    const text = 'export default\n`' + tree.replaceAll('\\', '\\\\').replaceAll('`', '\\`') + '`;';
     fs.writeFileSync(path.join(process.cwd(), 'test', 'parse', platform, `${testDetails.name}.test.js`), text);
 }
 parseTestsDetails.forEach(testDetails => {
