@@ -58,10 +58,19 @@ async function main() {
             'parse <source>',
             'Save the directory tree as a text file',
             (yargs: Argv) => {
-                yargs.positional('source', {
-                    describe: 'The path of the root of the directory tree',
-                    type: 'string'
-                });
+                yargs
+                    .positional('source', {
+                        describe: 'The path of the root of the directory tree',
+                        type: 'string'
+                    })
+                    .options({
+                        'ascii': {
+                            default: false,
+                            describe: 'Whether you want the result to be in ascii format',
+                            type: 'boolean',
+                            hidden: true
+                        }
+                    });
             },
             argv => {
                 const args: any = argv;
@@ -74,6 +83,7 @@ async function main() {
                     extensions: args.extensions,
                     sorted: parseSorted(args.sorted),
                     homeShortcut: args.homeShortcut,
+                    symbols: args.ascii ? dree.ASCII_SYMBOLS : dree.DEFAULT_SYMBOLS,
                     skipErrors: args.skipErrors
                 }
                 const source: string = args.source;
