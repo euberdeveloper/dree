@@ -1,18 +1,7 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
-    "target": "ES2020",
-    "lib": [
-      "ES2023",
-      "DOM"
-    ],
     "outDir": "../dist",
-    "sourceMap": true,
-    "declaration": true,
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true
   },
   "include": [
     "bin",

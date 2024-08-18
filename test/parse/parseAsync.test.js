@@ -178,6 +178,19 @@ export default function  (expect, dree, path, samplePath) {
 
         });
 
+        it(`Should return the content of "test/scan/${platform}/fourteenth.test.json"`, async function () {
+
+            const options = {
+                symbols: dree.ASCII_SYMBOLS
+            };
+
+            const result = await dree.parseAsync(samplePath, options);
+            const expected = await importSample(`./${platform}/fourteenth.test.js`);
+
+            expect(result).to.equal(expected);
+
+        });
+        
         it(`Should work with ~ and homeShortcut`, async function () {
 
             const options = {

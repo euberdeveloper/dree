@@ -1,6 +1,16 @@
-const fs = require('fs');
-const path = require('path');
-const dree = require('../dist/lib');
+import fs from 'node:fs';
+import path from 'node:path';
+import { 
+    scan,
+    parse,
+    parseTree,
+    SortMethodPredefined,
+    type ScanOptions,
+    type ParseOptions, 
+    type Dree,
+    PostSortMethodPredefined,
+    ASCII_SYMBOLS
+} from '../source/lib/index.js';
 
 /*******************************************************
 ** Generates the expected test results reflecting the **
@@ -16,9 +26,16 @@ if (!['linux', 'windows', 'mac'].includes(platform)) {
     console.log("Usage: [SCRIPT_PATH] <platform>\nWhere platform is one of: linux, windows or mac");
 }
 
+interface TestDetails<T> {
+    name: string;
+    opt: T;
+}
+
 /* SCAN and SCAN ASYNC */
 
-const scanOptions = [
+type ScanTestDetails = TestDetails<ScanOptions>;
+
+const scanTestsDetails: ScanTestDetails[] = [
     {
         name: 'first',
         opt: {}
@@ -143,36 +160,36 @@ const scanOptions = [
     {
         name: 'nineteenth',
         opt: {
-            sorted: 'alpha'
+            sorted: SortMethodPredefined.ALPHABETICAL
         }
     },
     {
         name: 'twentieth',
         opt: {
-            sorted: 'antialpha'
+            sorted: SortMethodPredefined.ALPHABETICAL_REVERSE
         }
     },
     {
         name: 'twentyfirst',
         opt: {
-            sorted: 'alpha-insensitive'
+            sorted: SortMethodPredefined.ALPHABETICAL_INSENSITIVE
         }
     },
     {
         name: 'twentysecond',
         opt: {
-            sorted: 'antialpha-insensitive'
+            sorted: SortMethodPredefined.ALPHABETICAL_INSENSITIVE_REVERSE
         }
     },
     {
         name: 'twentythird',
         opt: {
-            postSorted: 'files-first'
+            postSorted: PostSortMethodPredefined.FILES_FIRST
         }
     }
 ];
 
-function purgePath(data) {
+function purgePath(data: Dree): Dree {
     data.path = 'PATH' + data.path.slice(process.cwd().length);
     if (data.type === 'directory' && data.children) {
         data.children.forEach(child => purgePath(child));
@@ -180,17 +197,23 @@ function purgePath(data) {
     return data;
 }
 
-function generateScan(option) {
-    const text = JSON.stringify(purgePath(dree.scan(path.join(process.cwd(), 'test', 'sample'), option.opt)), null, 2);
-    fs.writeFileSync(path.join(process.cwd(), 'test', 'scan', platform, `${option.name}.test.json`), text);
+function generateScan(testDetails: ScanTestDetails) {
+    const text = JSON.stringify(purgePath(scan(path.join(process.cwd(), 'test', 'sample'), testDetails.opt)), null, 2);
+    fs.writeFileSync(path.join(process.cwd(), 'test', 'scan', platform, `${testDetails.name}.test.json`), text);
 }
-scanOptions.forEach(option => {
-    generateScan(option);
+scanTestsDetails.forEach(testDetails => {
+    generateScan(testDetails);
 });
 
 /* PARSE and PARSE ASYNC */
 
-const parseOptions = [
+type ParseTestDetails = TestDetails<ParseOptions>;
+
+function purgeBacktickAndBackSlash(text: string): string {
+    return text.replaceAll('\\', '\\\\').replaceAll('`', '\\`');
+}
+
+const parseTestsDetails: ParseTestDetails[] = [
     {
         name: 'first',
         opt: {}
@@ -250,39 +273,46 @@ const parseOptions = [
     {
         name: 'tenth',
         opt: {
-            sorted: 'alpha'
+            sorted: SortMethodPredefined.ALPHABETICAL
         }
     },
     {
         name: 'eleventh',
         opt: {
-            sorted: 'antialpha'
+            sorted: SortMethodPredefined.ALPHABETICAL_REVERSE
         }
     },
     {
         name: 'twelfth',
         opt: {
-            sorted: 'alpha-insensitive'
+            sorted: SortMethodPredefined.ALPHABETICAL_INSENSITIVE
         }
     },
     {
         name: 'thirteenth',
         opt: {
-            sorted: 'antialpha-insensitive'
+            sorted: SortMethodPredefined.ALPHABETICAL_INSENSITIVE_REVERSE
+        }
+    },
+    {
+        name: 'fourteenth',
+        opt: {
+            symbols: ASCII_SYMBOLS
         }
     }
 ];
-function generateParse(option) {
-    const text = 'export default\n`' + dree.parse(path.join(process.cwd(), 'test', 'sample'), option.opt) + '`;';
-    fs.writeFileSync(path.join(process.cwd(), 'test', 'parse', platform, `${option.name}.test.js`), text);
+function generateParse(testDetails: ParseTestDetails) {
+    const tree = parse(path.join(process.cwd(), 'test', 'sample'), testDetails.opt);
+    const text = 'export default\n`' + purgeBacktickAndBackSlash(tree) + '`;';
+    fs.writeFileSync(path.join(process.cwd(), 'test', 'parse', platform, `${testDetails.name}.test.js`), text);
 }
-parseOptions.forEach(option => {
-    generateParse(option);
+parseTestsDetails.forEach(testDetails => {
+    generateParse(testDetails);
 });
 
 /* PARSE TREE */
 
-const parseTreeOptions = [
+const parseTreeTestsDetails: ParseTestDetails[] = [
     {
         name: 'first',
         opt: {}
@@ -349,32 +379,39 @@ const parseTreeOptions = [
     {
         name: 'eleventh',
         opt: {
-            sorted: 'alpha'
+            sorted: SortMethodPredefined.ALPHABETICAL
         }
     },
     {
         name: 'twelfth',
         opt: {
-            sorted: 'antialpha'
+            sorted: SortMethodPredefined.ALPHABETICAL_REVERSE
         }
     },
     {
         name: 'thirteenth',
         opt: {
-            sorted: 'alpha-insensitive'
+            sorted: SortMethodPredefined.ALPHABETICAL_INSENSITIVE
         }
     },
     {
         name: 'fourteenth',
         opt: {
-            sorted: 'antialpha-insensitive'
+            sorted: SortMethodPredefined.ALPHABETICAL_INSENSITIVE_REVERSE
+        }
+    },
+    {
+        name: 'fifteenth',
+        opt: {
+            symbols: ASCII_SYMBOLS
         }
     }
 ];
-function generateParseTree(option) {
-    const text = 'export default\n`' + dree.parseTree(dree.scan(path.join(process.cwd(), 'test', 'sample'), option.opt), option.opt) + '`;';
-    fs.writeFileSync(path.join(process.cwd(), 'test', 'parseTree', platform, `${option.name}.test.js`), text);
+function generateParseTree(testDetails: ParseTestDetails) {
+    const tree = parseTree(scan(path.join(process.cwd(), 'test', 'sample'), testDetails.opt), testDetails.opt);
+    const text = 'export default\n`' + purgeBacktickAndBackSlash(tree) + '`;';
+    fs.writeFileSync(path.join(process.cwd(), 'test', 'parseTree', platform, `${testDetails.name}.test.js`), text);
 }
-parseTreeOptions.forEach(option => {
-    generateParseTree(option);
+parseTreeTestsDetails.forEach(testDetails => {
+    generateParseTree(testDetails);
 });
