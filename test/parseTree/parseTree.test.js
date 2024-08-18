@@ -186,7 +186,17 @@ export default function (expect, dree, path, samplePath) {
 
         });
 
+        it(`Should return the content of "test/scan/${platform}/fifteenth.test.js"`, async function () {
+            const options = {
+                symbols: dree.ASCII_SYMBOLS
+            };
 
+            const result = dree.parseTree(dree.scan(samplePath, options), options);
+            const expected = await importSample(`./${platform}/fifteenth.test.js`);
+
+            expect(result).to.equal(expected);
+
+        });
     });
 
 }

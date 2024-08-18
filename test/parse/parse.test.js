@@ -191,6 +191,19 @@ export default function  (expect, dree, path, samplePath) {
 
         });
 
+        it(`Should return the content of "test/scan/${platform}/fourteenth.test.js"`, async function () {
+
+            const options = {
+                symbols: dree.ASCII_SYMBOLS
+            };
+
+            const result = dree.parse(samplePath, options);
+            const expected = await importSample(`./${platform}/fourteenth.test.js`);
+
+            expect(result).to.equal(expected);
+
+        });
+
     });
 
 }
