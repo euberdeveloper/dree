@@ -347,6 +347,20 @@ export const DEFAULT_SYMBOLS: TreeSymbols = {
     pipeIndent: '│   ',
 };
 
+/**
+ * The ascii symbols used to represent the tree in a string.
+ * Note: Inspiration was taken from the bash command: `tree --charset=ascii`
+ */
+export const ASCII_SYMBOLS: TreeSymbols = {
+    dirChild: '-\\ ',
+    fileChild: '-- ',
+    forkChild: '|',
+    lastChild: '`',
+    linkChild: '->',
+    tabIndent: '    ',
+    pipeIndent: '|   ',
+};
+
 const PARSE_DEFAULT_OPTIONS: Required<ParseOptions> = {
     symbolicLinks: true,
     followLinks: false,
