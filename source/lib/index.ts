@@ -344,7 +344,7 @@ export const DEFAULT_SYMBOLS: TreeSymbols = {
     lastChild: '└',
     linkChild: '>>',
     tabIndent: '    ',
-    pipeIndent: '│   ',
+    pipeIndent: '│   '
 };
 
 /**
@@ -358,7 +358,7 @@ export const ASCII_SYMBOLS: TreeSymbols = {
     lastChild: '`',
     linkChild: '->',
     tabIndent: '    ',
-    pipeIndent: '|   ',
+    pipeIndent: '|   '
 };
 
 const PARSE_DEFAULT_OPTIONS: Required<ParseOptions> = {
