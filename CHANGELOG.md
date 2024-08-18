@@ -1,5 +1,20 @@
 
 
+# [5.1.0](https://github.com/euberdeveloper/dree/compare/5.0.9...5.1.0) (2024-08-18)
+
+
+### Bug Fixes
+
+* **scripts:** fix generation of expected parsed ([7364aad](https://github.com/euberdeveloper/dree/commit/7364aadbcf7976c0f6eafcd7ff4ab03e7d18813f))
+* **scripts:** fix generation of parse-tree expecteds ([75785a9](https://github.com/euberdeveloper/dree/commit/75785a9b9138a0ffa0c56dec01774c1e3612b12e))
+
+
+### Features
+
+* **bin:** add --ascii option ([0dbdc60](https://github.com/euberdeveloper/dree/commit/0dbdc60b326430fde4cbbbada5643114d36dbb60))
+* **lib:** add customizable symbols for parse tree ([d1033ef](https://github.com/euberdeveloper/dree/commit/d1033eff539e2d4250e74a3669e277d1d8f883fa))
+* **lib:** add default ascii symbols for parse ([df42f8e](https://github.com/euberdeveloper/dree/commit/df42f8e8a3d7ec34872392a3da3c02e7c4b1c62b))
+
 ## [5.0.9](https://github.com/euberdeveloper/dree/compare/5.0.8...5.0.9) (2024-08-15)
 
 ## [5.0.8](https://github.com/euberdeveloper/dree/compare/5.0.7...5.0.8) (2024-07-09)
