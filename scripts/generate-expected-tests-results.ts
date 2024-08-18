@@ -395,6 +395,12 @@ const parseTreeTestsDetails: ParseTestDetails[] = [
         opt: {
             sorted: SortMethodPredefined.ALPHABETICAL_INSENSITIVE_REVERSE
         }
+    },
+    {
+        name: 'fifteenth',
+        opt: {
+            symbols: ASCII_SYMBOLS
+        }
     }
 ];
 function generateParseTree(testDetails: ParseTestDetails) {
