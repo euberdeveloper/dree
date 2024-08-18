@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "minimatch": "^10.0.1",
-    "typedoc-plugin-ga": "^1.0.1",
+    "typedoc-plugin-ga": "^1.0.2",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
