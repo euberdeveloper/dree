@@ -631,7 +631,7 @@ dree
  ├── package.json
  ├── pnpm-lock.yaml
  ├─> scripts
- │   └── generate-expected-tests-results.js
+ │   └── generate-expected-tests-results.ts
  ├─> source
  │   ├─> bin
  │   │   ├── index.ts
@@ -646,6 +646,7 @@ dree
  │   ├─> sample
  │   ├─> scan
  │   └── test.js
+ ├── tsconfig.json
  ├── typedoc.cjs
  └── typedoc.dev.cjs
 ```
