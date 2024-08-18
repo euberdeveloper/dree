@@ -38,9 +38,9 @@
     "bundle": "pnpm bundle:esm && pnpm bundle:dts",
     "prebundle:test": "pnpm bundle",
     "bundle:test": "node build.test.mjs",
-    "script:getr:linux": "node scripts/generate-expected-tests-results linux",
-    "script:getr:mac": "node scripts/generate-expected-tests-results mac",
-    "script:getr:windows": "node scripts/generate-expected-tests-results windows",
+    "script:getr:linux": "tsx scripts/generate-expected-tests-results linux",
+    "script:getr:mac": "tsx scripts/generate-expected-tests-results mac",
+    "script:getr:windows": "tsx scripts/generate-expected-tests-results windows",
     "pretest:source": "pnpm transpile",
     "test:source": "mocha --reporter spec test/test.js",
     "test:bundle:esm": "mocha --reporter spec bundled/test/esm/index.esm.js",
@@ -102,6 +102,7 @@
     "mocha": "^10.7.3",
     "release-it": "^17.6.0",
     "shx": "^0.3.4",
+    "tsx": "^4.17.0",
     "typedoc": "^0.26.5",
     "typescript": "^5.5.4"
   }
