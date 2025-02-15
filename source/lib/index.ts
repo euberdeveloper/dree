@@ -1150,7 +1150,7 @@ async function _parseTreeAsync(children: Dree[], prefix: string, options: ParseO
  * @return {object} The directory tree as a Dree object
  * @template Node The type of the tree object, which can be extended and changed by the onFile and onDir functions.
  */
-export function scan<Node extends Dree = Dree>(path: string, options?: ScanOptions, onFile?: Callback<Node>, onDir?: Callback<Node>): Node {
+export function scan<Node extends Dree = Dree>(path: string, options?: ScanOptions, onFile?: Callback<Node>, onDir?: Callback<Node>): Node | null {
     const opt = mergeScanOptions(options);
     const root = resolvePath(path, opt);
     const result = _scan<Node>(root, root, 0, opt, onFile, onDir);
